@@ -1,119 +1,36 @@
 # Milestones
 
-Record here the milestones of the project. A **milestone** is an event in time that shows the project is on track: a significant point or achievement, often a decision gate or a move from one phase to the next. A milestone is not a deliverable and not a task. By the end of the project, this table serves as the high-level project schedule.
+**Project:** Traffic rules and penalties assistant · **Team:** Chunky
 
-Write each milestone as a **state that becomes true on a date**, not as work to do. Write "Baseline RAG answers the full evaluation set (18/11/2026)", not "Model training" (examples illustrative only).
-
-## Milestone, deliverable or task?
-Keep the three apart. Each one goes to a different page.
-| | Milestone | Deliverable | Task |
-|---|---|---|---|
-| **What it is** | An event in time that marks status | A tangible artifact produced as a direct output of work | A piece of work someone does |
-| **Question it answers** | What is true on this date? | What do we hand over? | What do we do? |
-| **Example** | "Prototype features are integrated and testable locally (18/11/2026)" | "Chatbot prototype (18/11/2026)" | "Connect the retriever to the language model" |
-| **Where it goes** | This page | [Deliverables](03-project-canvas_v2/05-deliverables.md) | [Major Activities](03-project-canvas_v2/04-major-activities.md) and the Jira backlog |
-
-The deliverable is the output that **satisfies the milestone's condition**. Progress on a milestone is shown through its associated deliverables.
-
-### Checkpoints
-
-A **checkpoint** is a milestone that falls **between two sprints**. Consider adding checkpoints to the timeline. The gaps between sprints are listed in 10-release-plan.md.
-
-## How to fill in each milestone
-
-| Field | What it means | When it applies | Question it answers |
-|---|---|---|---|
-| **#** | A running number (M1, M2, …) | Every row | Which milestone is this? |
-| **Project Milestone** | A short name for the event, written as a state reached ("… approved", "… runs", "… in pilot users' hands") | Every row | What will be true? |
-| **Description** | The condition someone can check to say the milestone is reached | Every row | How will we know it is reached? |
-| **Expected Date** | A calendar date (dd/mm/yyyy) inside the project timeline. For a checkpoint, a date between two sprints. | Every row | When? |
-| **Associated Deliverable** | One or more deliverables from [Deliverables](03-project-canvas_v2/05-deliverables.md), given by number and name | Every row | Which artifact proves it? |
-
-Dates may be changed slightly later on, but make no drastic changes in Sprint 2.
-
-## Rules
-
-Each rule is a condition you can check with yes or no.
-
-1. Every milestone is an event or state, not an artifact and not a task.
-2. Every milestone has at least one associated deliverable.
-3. Every associated deliverable appears in [Deliverables](03-project-canvas_v2/05-deliverables.md) under the same number and name.
-4. Deliverable deadlines are aligned with milestones: the associated deliverable is due in the same sprint as the milestone and not later than the milestone's Expected Date. For a checkpoint, the deliverable is due by the end of the sprint before it.
-5. Every Expected Date is a calendar date between 07/10/2026 and 30/12/2026.
-6. Every milestone named as a checkpoint has a date that falls between the end of one sprint and the start of the next.
-7. If an objective in [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) sets a target that is measured later (for example user satisfaction), a milestone shows when it is measured and a deliverable holds the result.
-8. Milestones and deliverables do not force a waterfall approach. For example, evaluation does not appear only once, at the end of the project.
-
-## Test: the three alignment questions
-
-Ask these three questions of every milestone.
-
-1. **Is it an event?** Can you write "On [date], [X] is true"? If you can only write "We will do X", it is a task and belongs in 04-major-activities.md.
-2. **What proves it?** Name the deliverable. If nobody can point to an artifact, the milestone has no evidence.
-3. **Do the dates agree?** Compare the Expected Date with the deliverable's Due Date in [Deliverables](03-project-canvas_v2/05-deliverables.md) and with the sprint dates in [Release Plan](03-project-canvas_v2/10-release-plan.md).
-
-| Not this | This | Defect |
-|---|---|---|
-| A checkpoint set at 11/11/2026, linked to a deliverable due 18/11/2026 | The checkpoint dated 11/11/2026 is linked to a deliverable that exists before 11/11/2026 | Deadlines not aligned with milestones |
-| "Prototype tested" due by 16/12/2026, linked to an evaluation report due on 02/12/2026 | The report's due date moved into Sprint 4, after the test it reports on | Deadlines not aligned with milestones |
-| Milestone dates given only as "Mid-Sprint 2" or "End of Week 1" | The same milestones with calendar dates, e.g., "18/11/2026" | Expected Date is not a calendar date |
-| An Associated Deliverable cell that lists a deliverable plus "API tests + latency tests + unit logs" | "D2: Functional core chat application". The test logs go into that deliverable's acceptance criteria in [Deliverables](03-project-canvas_v2/05-deliverables.md). | The cell must name a deliverable; test logs are evidence, not deliverables |
-| An objective in [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md): "Deploy MVP and conduct demo" | A milestone on this page: "MVP demo held and approved by the customer (30/12/2026)" | This is a milestone, not an objective |
-| "Model training" | "Baseline RAG answers the full evaluation set (18/11/2026)" | A task, not an event |
-
-## Patterns to use if stuck
-
-- **Decision gate:** a stakeholder decides go or no-go. ISO/IEC 5338 describes such points as "gates" for governance decisions [1]. Example: "Alpha reviewed; Product Owner approves move to beta."
-- **Phase transition:** the work moves from one ISO/IEC 5338 life cycle stage to the next, such as Design and development → Verification and validation → Deployment [1].
-- **Release reached:** an alpha, beta or release candidate from [Release Plan](03-project-canvas_v2/10-release-plan.md) is in the hands of its intended users.
-- **Measurement point:** the date when a target from [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) is measured.
-- **Checkpoint review:** between two sprints, results are reviewed before the next sprint starts.
-
-## What doesn't belong on this page
-
-| Item | Where it belongs |
-|---|---|
-| Artifacts, their acceptance criteria and their approvers | [Deliverables](03-project-canvas_v2/05-deliverables.md) |
-| Work items and activities | [Major Activities](03-project-canvas_v2/04-major-activities.md) |
-| Sprint start and end dates, and releases | [Release Plan](03-project-canvas_v2/10-release-plan.md) |
-| Objectives and success criteria | [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) |
-| "Milestones will be achieved on time" | This is a goal, not an assumption. If a milestone may slip, record that as a risk in [Risks](03-project-canvas_v2/11-risks.md). |
+Each milestone below is a state that is true on its date. The deliverables that prove it are listed by number and name as they appear in [Deliverables](05-deliverables.md). Sprint dates are in [Release Plan](10-release-plan.md).
 
 ## Milestone table
 
-Add rows as needed.
-
 | # | Project Milestone | Description | Expected Date | Associated Deliverable |
 |---|---|---|---|---|
-| 1 |   |   |   |   |
-| 2 |   |   |   |   |
-| 3 |   |   |   |   |
+| M1 | Document set finalised | The list of legal texts the assistant draws on is fixed: the Highway Traffic Law No. 2918, the Highway Traffic Regulation and the four regulations added to widen the document set (driver courses, health requirements for drivers, vehicle inspection, electric scooters). Each text is taken from its official source and stored in the repository with its source, retrieval date, article count and token count. Product Owner approves the list, and the Scope Definition in [Project Executive Summary](01-project-executive-summary.md) names the same texts. | 21/10/2026 | D1 Document set and Dataset Report |
+| M2 | Default state measured on question set v1 | Question set v1 is frozen: 30 in-scope and 10 out-of-scope questions, drawn from real user questions (institutional FAQ pages, forums) and input from target users, tagged by question type, with an answer key written from the legal texts. 10 participants have each answered 3 comparable questions with the official texts and a web search. The median time and the number of places consulted are recorded, and the default-state value of Objective 1 is fixed. | 26/10/2026 | D2 Q&A Generation-Dataset v1; D3 Default-state measurement report |
+| M3 | Charter v1 approved | All charter pages are filled in and refer to each other by number. Product Owner signs off the charter after the Sprint 1 review. | 28/10/2026 | D4 Project Charter v1 |
+| M4 | Long-context baseline measured on the full question set | A long-context model that receives the full document set (D1), with no retrieval, has answered all 40 questions of D2. Correctness, article citation, refusal of out-of-scope questions, cost per question and response time are logged by question type in an experiment card. | 11/11/2026 | D5 Long-context baseline experiment card |
+| M5 | Alpha answers the full question set end to end | A question typed in Turkish into the web interface returns an answer with its article reference. The RAG pipeline (one chunk per article) has run on all 40 questions of D2, and its results stand next to the long-context baseline (D5) in an experiment card. The 80% levels of Objective 2 are confirmed or corrected from these runs. | 18/11/2026 | D6 RAG baseline experiment card; D7 Alpha prototype |
+| M6 | Charter v2 approved | The charter is updated with the feedback from the Sprint 1 review and with the Objective 2 levels confirmed in M5. Product Owner signs off. | 18/11/2026 | D8 Project Charter v2 |
+| M7 | Checkpoint: go/no-go for beta | Product Owner reviews the alpha, its comparison with the long-context baseline and the Quality Team's Sprint 2 review, and records the decision on what changes before Sprint 3 starts. | 23/11/2026 | D6 RAG baseline experiment card; D7 Alpha prototype (both due 18/11/2026) |
+| M8 | MVP validated: Objective 2 measured | The beta has answered the fixed set of 30 in-scope questions. The share of correct answers and the share of answers that name a supporting article are scored against the answer key (target: at least 80% each) and reported by question type next to both baselines. | 09/12/2026 | D9 MVP validation experiment card; D10 Beta release |
+| M9 | Checkpoint: go/no-go for pilot | Product Owner and Domain Expert review the Objective 2 results and decide whether the beta goes to the pilot participants as it is. | 14/12/2026 | D9 MVP validation experiment card; D10 Beta release (both due 09/12/2026) |
+| M10 | Pilot completed: Objectives 1, 3 and 4 measured | 10 participants have completed the timed usability test (3 questions each) and the post-test survey. The 10 out-of-scope questions have been run and reviewed against the expected response. Median time to a correct answer, survey scores and refusal rate are recorded against their targets. | 23/12/2026 | D11 Pilot test report |
+| M11 | Release candidate accepted | The release candidate has been evaluated on a question set the team has not seen and runs in the live demo. The Project Review Committee, acting for the AI customer, accepts it. | 30/12/2026 | D12 Release candidate; D13 Final report |
 
-## Example
+## Where each objective is measured
 
-The project, names, dates and deliverable numbers below are invented. They match the examples in [Deliverables](03-project-canvas_v2/05-deliverables.md) and [Release Plan](03-project-canvas_v2/10-release-plan.md). The project is a RAG assistant that answers students' questions about a university's course regulations.
+Each target in [Project Executive Summary](01-project-executive-summary.md) that is measured later has a milestone that dates the measurement and a deliverable that holds the result.
 
-| # | Project Milestone | Description | Expected Date | Associated Deliverable |
-|---|---|---|---|---|
-| M1 | Charter v1 approved | Product Owner signs off the charter; marked cells complete | 28/10/2026 | D1 Project Charter v1 |
-| M2 | Baseline answers the full evaluation set | Baseline pipeline runs on all evaluation questions; results logged in an experiment card | 18/11/2026 | D2 Q&A Generation-Dataset v1; D3 Baseline experiment card |
-| M3 | Charter v2 approved | Charter updated after Sprint 2 review; Product Owner signs off | 18/11/2026 | D5 Project Charter v2 |
-| M4 | Checkpoint: go/no-go for beta | Product Owner reviews the alpha and decides whether to start the beta | 20/11/2026 | D4 Alpha prototype (due 18/11/2026) |
-| M5 | Beta in pilot users' hands | Five pilot users can log in and ask questions | 09/12/2026 | D6 Beta release |
-| M6 | Release candidate accepted | Customer accepts the release candidate at the final demo | 30/12/2026 | D7 Pilot feedback report; D8 Release candidate; D9 Final report |
+| Objective | What is measured | Milestone | Deliverable that holds the result |
+|---|---|---|---|
+| 1 | Default state: median time and number of places consulted without the assistant | M2 (26/10/2026) | D3 Default-state measurement report |
+| 1 | Median time to a correct answer with the assistant (target: under 2 minutes) | M10 (23/12/2026) | D11 Pilot test report |
+| 2 | First trial runs; the 80% levels confirmed or corrected | M5 (18/11/2026) | D6 RAG baseline experiment card |
+| 2 | Correct answers and supported article references on 30 questions (target: at least 80% each) | M8 (09/12/2026) | D9 MVP validation experiment card |
+| 3 | Would use again and clarity rating (target: at least 7 of 10 participants each) | M10 (23/12/2026) | D11 Pilot test report |
+| 4 | Refusal on 10 out-of-scope questions | M10 (23/12/2026) | D11 Pilot test report |
 
-## Checklist before submitting
-
-- [ ] Every milestone is an event or state, not an artifact or task (Rule 1)
-- [ ] Every milestone has at least one associated deliverable (Rule 2)
-- [ ] Every associated deliverable exists in [Deliverables](03-project-canvas_v2/05-deliverables.md) under the same number and name (Rule 3)
-- [ ] Every associated deliverable is due in the milestone's sprint and not after its Expected Date (Rule 4)
-- [ ] Every Expected Date is a calendar date between 07/10/2026 and 30/12/2026 (Rule 5)
-- [ ] Every checkpoint falls between two sprints (Rule 6)
-- [ ] Every target in [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) that is measured later has a matching milestone and deliverable (Rule 7)
-- [ ] Evaluation does not appear only once, at the end of the project (Rule 8)
-- [ ] The table is complete in the first version of the canvas (red cell)
-
-## References
-
-[1] International Organization for Standardization & International Electrotechnical Commission. (2023). *Information technology — Artificial intelligence — AI system life cycle processes* (ISO/IEC 5338:2023, 1st ed.). Prepared by ISO/IEC JTC 1/SC 42, Artificial intelligence. Edition used: British Standards Institution. (2024). *BS ISO/IEC 5338:2023* (published 29 February 2024). BSI Standards Limited. ISBN 978 0 539 15220 3.
+Evaluation takes place in every sprint: M2 in Sprint 1, M4 and M5 in Sprint 2, M8 in Sprint 3, M10 and M11 in Sprint 4.

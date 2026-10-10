@@ -1,160 +1,137 @@
 # Deliverables
 
-Identify and define the high-level deliverables required to achieve the project's objectives. A **deliverable** is a tangible artifact, product or result produced as a direct output of work. It fulfils a requirement.
+**Project:** Traffic rules and penalties assistant · **Team:** Chunky
 
-Because this project follows Scrum, the charter itself is updated iteratively. Treat each version as a separate deliverable (e.g., "Project Charter v1" as Deliverable 1, "Project Charter v2" as Deliverable 2, and so on).
+The deliverables below are the artifacts that prove the milestones in [Milestones](02-milestones.md). Each one carries the same number and name on both pages. The product is delivered in three builds: alpha (D7), beta (D10) and release candidate (D12).
 
-A weak deliverable cannot be checked. A strong one can. Write "Acceptance criteria: Recall@5 ≥ 0.70 on the 200-question test set", not "The model works well" (examples illustrative only).
+The team writes no model card and no datasheet. No model is trained or fine-tuned, and the legal texts are used as published by their official sources. D1 records those sources.
 
-## Two kinds of deliverable
+## Overview
 
-Include both kinds.
+| # | Deliverable | Kind | Due Date | Milestone it supports |
+|---|---|---|---|---|
+| D1 | Document set and Dataset Report | Solution | 21/10/2026 | M1 |
+| D2 | Q&A Generation-Dataset v1 | Solution | 26/10/2026 | M2 |
+| D3 | Default-state measurement report | Project management | 26/10/2026 | M2 |
+| D4 | Project Charter v1 | Project management | 28/10/2026 | M3 |
+| D5 | Long-context baseline experiment card | Solution | 11/11/2026 | M4 |
+| D6 | RAG baseline experiment card | Solution | 18/11/2026 | M5, M7 |
+| D7 | Alpha prototype | Solution | 18/11/2026 | M5, M7 |
+| D8 | Project Charter v2 | Project management | 18/11/2026 | M6 |
+| D9 | MVP validation experiment card | Solution | 09/12/2026 | M8, M9 |
+| D10 | Beta release | Solution | 09/12/2026 | M8, M9 |
+| D11 | Pilot test report | Project management | 23/12/2026 | M10 |
+| D12 | Release candidate | Solution | 30/12/2026 | M11 |
+| D13 | Final report | Project management | 30/12/2026 | M11 |
 
-| Kind | What it is | Examples |
-|---|---|---|
-| **Solution deliverable** | Part of the product or its technical documentation | Features, data dictionary, solution architecture report, Q&A Generation-Dataset, and the alpha, beta and release candidate builds (see [Release Plan](03-project-canvas_v2/10-release-plan.md)) |
-| **Project-management deliverable** | Needed for review and approval | Charter document (each version), lessons learned register, data quality report, status dashboard, final report, exit report |
+## Sprint 1
 
-### Deliverables the course expects
-
-- **Each charter version** as its own deliverable.
-- **A Q&A Generation-Dataset** for evaluating the system. Say how you will make the generated questions diverse and representative. You can use an existing Q&A dataset from your domain if one exists.
-- **Datasheets and model cards**, if you plan to deliver them, follow Mitchell et al. [1] and Gebru et al. [2], not Hugging Face or other formats.
-  - Write a model card yourself only when you train or fine-tune a model. For a model used as-is, import the model card from its source or document the model in the AI SBOM.
-  - If a dataset already has a datasheet at its source and you do no further preprocessing, a separate datasheet is not needed. A data quality report or a preprocessing report can be useful instead.
-
-## How to fill in each deliverable
-
-| Field | What it means | When it applies | Question it answers |
-|---|---|---|---|
-| **Project Deliverable #** | Number and name, e.g., "D3: Q&A Generation-Dataset v1" | Every block | Which deliverable is this? |
-| **Description** | What the artifact is and what it contains | Every block | What do we hand over? |
-| **Acceptance Criteria** | How quality and completion will be assessed. Each criterion must be measurable. | Every block | How do we know it is done and good enough? |
-| **Due Date** | A calendar date (dd/mm/yyyy) inside a sprint (see [Release Plan](03-project-canvas_v2/10-release-plan.md)), aligned with the milestone it supports (see [Milestones](03-project-canvas_v2/02-milestones.md)) | Every block | When? |
-| **Stakeholders** | Who the deliverable is **for**: the people or roles who will use or receive it | Every block | For whom? |
-| **Approving Stakeholder(s)** | Who **signs off** on it. Use a named person or a role from [Project Organization](03-project-canvas_v2/08-project-organization.md), e.g., Product Owner or Project Review Committee. | Every block | Who says it is accepted? |
-
-**Stakeholders and approvers are different fields.** Assign them carefully. For example, the MVP is developed for the customer, not for the project team. The customer may also be the approver: ISO/IEC 5339 describes the AI customer as consulted during verification and validation and during deployment [3], and ISO/IEC 5338 states that validation is ratified by stakeholders [4].
-
-## Rules
-
-Each rule is a condition you can check with yes or no.
-
-1. The page includes both solution deliverables and project-management deliverables.
-2. Each iteration of a document is a separate deliverable. (e.g. Project Charter, Question & Answer Dataset, Model Cards and so on)
-3. Every block has all six fields filled.
-4. Every acceptance criterion is measurable. It names what is checked and the pass condition: a number with a threshold, or a check with a single yes/no outcome.
-5. No acceptance criterion uses an adjective without a number ("fast", "good", "clear", "complete").
-6. The Stakeholders field names who the deliverable is for. A customer-facing deliverable, such as the MVP, does not list only the project team.
-7. The Approving Stakeholder(s) field names a person or role who signs off.
-8. Every due date is aligned with the milestone it supports in [Milestones](03-project-canvas_v2/02-milestones.md).
-9. There is a Q&A Generation-Dataset deliverable whose acceptance criteria cover the diversity and representation of the questions.
-10. Any model card written by the team is for a model the team trained or fine-tuned.
-11. If an objective in [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) sets a target that is measured later (e.g., user satisfaction), a deliverable holds the result (e.g., the survey result).
-12. Deliverables do not force a waterfall approach. For example, the product is delivered in several versions across sprints, not once at the end.
-
-## Test: three questions for every acceptance criterion
-
-1. **Could two people check it and agree?** If they could disagree, it is not measurable.
-2. **Is there a number or a yes/no check instead of an adjective?** "Responses are fast" fails; "p95 latency ≤ 3 s on the test set" passes (illustrative).
-3. **Has the approving stakeholder agreed to it?** ISO/IEC 5338 asks for explicit agreement on stakeholder requirements, including critical performance measures [4]. If the approver has not seen the criterion, it is not agreed.
-
-## Not this / this
-
-Each corrected entry fixes only the named defect. All examples are illustrative.
-
-| Not this | This | Defect |
-|---|---|---|
-| MVP deliverable, Stakeholders: "Project team" | Stakeholders: "AI customer: the office that would use the assistant; AI users: its staff" | The MVP is developed for the customer, not the team |
-| Final demo deliverable: "Quality meets goals (e.g., good accuracy and fast responses)" | "Accuracy and p95 latency meet the thresholds of objective 1 in [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) (e.g., accuracy ≥ 70%, p95 ≤ 10 s on the test set)" | Adjectives instead of measurable criteria |
-| Documentation-card deliverables: "Each card must provide complete, clear, and reproducible documentation" | "Every section of the Mitchell et al. [1] template is filled; every reported metric links to an experiment card" | Not measurable |
-| No Q&A dataset deliverable | Add "Q&A Generation-Dataset v1", with criteria on topic coverage and question types | A separate Q&A dataset deliverable is required |
-| "Datasheet and Data Quality Report" for an external dataset used as-is that already has a datasheet at its source | "Data Quality Report v1" only, linking to the source's datasheet | A separate datasheet is not needed |
-| One "Project Charter" deliverable and no later versions | "Project Charter v1" (Sprint 1) and "Project Charter v2" (Sprint 2) as separate deliverables | Each charter version is a separate deliverable |
-| Version 1 and version 2 of the same deliverable with identical description and acceptance criteria | Version 2's criteria state what is new, e.g., "covers 20 indexed items instead of 10" | Deliverables not clearly defined |
-
-## Patterns to use if stuck
-
-- **Version it.** Plan v1, v2, … of a deliverable across sprints, as with the charter. Each version's criteria say what is new.
-- **One deliverable per milestone condition.** Ask what artifact proves the milestone in [Milestones](03-project-canvas_v2/02-milestones.md).
-- **Release builds as deliverables.** Make each alpha, beta and release candidate in [Release Plan](03-project-canvas_v2/10-release-plan.md) a deliverable.
-- **Borrow thresholds from [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md).** Reuse the success-criteria numbers of the objective the deliverable serves. This also means referring to metrics by name. (e.g. Recall@k, MRR, Faithfullness)
-- **Documentation set.** Typical documentation deliverables are the Dataset Report, Q&A Data Report or Third-party Dataset Register, the AI SBOM, model cards (training or fine-tuning only) and experiment cards.
-
-## What doesn't belong on this page
-
-| Item | Where it belongs |
+| Project Deliverable #: | D1: Document set and Dataset Report |
 |---|---|
-| Events and checkpoints, and the alignment rule | [Milestones](03-project-canvas_v2/02-milestones.md) |
-| Sprint dates and releases | [Release Plan](03-project-canvas_v2/10-release-plan.md) |
-| Objective success criteria | [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) |
-| Deliverables needed from, or required by, other projects | [Dependencies](03-project-canvas_v2/06-dependencies.md) |
-| Costs | [Cost & Funding](03-project-canvas_v2/07-cost-and-funding.md) |
-| Roles and who holds them | [Project Organization](03-project-canvas_v2/08-project-organization.md) |
-| The content of datasheets, model cards and experiment cards | Their own pages |
-
-## Deliverable block
-
-Copy and paste the block below as needed for each deliverable.
-
-| Project Deliverable #: | [Deliverable Name] |
-|---|---|
-| Description: |   |
-| Acceptance Criteria: |   |
-| Due Date: |   |
-| Stakeholders: |   |
-| Approving Stakeholder(s): |   |
-
-## Example (illustrative only)
-
-The project, names, numbers and dates are invented. They match the examples in [Milestones](03-project-canvas_v2/02-milestones.md) and [Release Plan](03-project-canvas_v2/10-release-plan.md). The project is a RAG assistant that answers students' questions about a university's course regulations.
-
-| Project Deliverable #: | D1: Project Charter v1 |
-|---|---|
-| Description: | First version of the Project Canvas pages |
-| Acceptance Criteria: | 1. All cells marked with * are filled. 2. Every objective has at least one numeric success criterion. 3. Every milestone in [Milestones](03-project-canvas_v2/02-milestones.md) has an associated deliverable on this page. |
-| Due Date: | 28/10/2026 |
-| Stakeholders: | Project Review Committee; project team |
+| Description: | The final list of legal texts the assistant draws on (the Highway Traffic Law No. 2918, the Highway Traffic Regulation and the four regulations added to widen the document set (driver courses, health requirements for drivers, vehicle inspection, electric scooters)), the text of each stored as a file in the Git repository, and a report that records the source and size of each text. |
+| Acceptance Criteria: | 1. Every text in the list is taken from its official source (the consolidated text on mevzuat.gov.tr or the Resmî Gazete), and its URL and retrieval date are recorded. 2. Every text is stored in the repository as one plain-text file. 3. The report states the number of articles and the token count of each text. 4. A check of 20 articles, chosen at random across the texts, against the official source finds 20 of 20 identical. 5. The list of texts in the report is the same as the list in the Scope Definition of [Project Executive Summary](01-project-executive-summary.md). |
+| Due Date: | 21/10/2026 |
+| Stakeholders: | Project team (AI developer role); Data provider: EGM Legal Department, which would keep these texts up to date after deployment |
 | Approving Stakeholder(s): | Product Owner |
 
 | Project Deliverable #: | D2: Q&A Generation-Dataset v1 |
 |---|---|
-| Description: | Question–answer pairs generated from the regulations corpus, used to evaluate retrieval and answers. Stored as a file in the Git repository. |
-| Acceptance Criteria: | 1. At least 200 pairs. 2. Every regulation chapter has at least 10 questions. 3. At least 20% of questions need two or more passages to answer. 4. A sample of 40 pairs is checked by hand, with at least 90% judged correct. 5. The generator model and prompt are recorded. |
-| Due Date: | 18/11/2026 |
-| Stakeholders: | Project team (AI developer role) |
+| Description: | 40 questions with an answer key, used to evaluate retrieval and answers in every sprint: 30 questions the document set can answer and 10 it cannot. The questions are collected from real user questions (institutional FAQ pages, forums) and from target users, not generated by a model. The answer key is written from the legal texts before any system is tested. Each question carries one type tag: answered from a single article; needs two or more articles of one text; needs articles from two or more texts; a violation described in the user's own words; out of scope. Stored as a file in the Git repository. |
+| Acceptance Criteria: | 1. The file holds 30 in-scope and 10 out-of-scope questions, each with one type tag. 2. Diversity: each of the four in-scope types has at least 5 questions. 3. Representation: every text in D1 is the source of at least 3 questions, and at least 15 of the 30 in-scope questions are traced to a real user question whose source is recorded. 4. Every in-scope question has an answer key entry that names the supporting article or articles, and a second team member has checked 30 of 30 entries against the legal text. 5. Every out-of-scope question has the expected response "declines" recorded. |
+| Due Date: | 26/10/2026 |
+| Stakeholders: | Project team (AI developer role); Quality Team |
+| Approving Stakeholder(s): | Domain Expert |
+
+| Project Deliverable #: | D3: Default-state measurement report |
+|---|---|
+| Description: | Results of the timed test in which participants answer questions with the official texts and a web search, without the assistant. It fixes the default-state value of Objective 1. |
+| Acceptance Criteria: | 1. 10 participants took part, each a licensed driver or a driving-licence candidate. 2. Each participant answered 3 questions from D2, and the time of all 30 attempts is recorded. 3. Each attempt is marked correct or incorrect against the D2 answer key. 4. The report states the median time to a correct answer and the median number of places consulted. 5. The default-state value written under Objective 1 in [Project Executive Summary](01-project-executive-summary.md) equals the median time in this report. |
+| Due Date: | 26/10/2026 |
+| Stakeholders: | Project Review Committee; project team |
 | Approving Stakeholder(s): | Product Owner |
 
-| Project Deliverable #: | D6: Beta release |
+| Project Deliverable #: | D4: Project Charter v1 |
 |---|---|
-| Description: | Assistant deployed for five pilot students, with a feedback button |
-| Acceptance Criteria: | 1. All five pilot users can log in and receive an answer. 2. Recall@5 ≥ 0.70 and p95 latency ≤ 3 s on the D2 test questions. 3. Every answer shows at least one source link. |
+| Description: | First version of all Project Canvas pages. |
+| Acceptance Criteria: | 1. Every cell marked as required in the canvas templates is filled. 2. Every objective has at least one numeric success criterion. 3. Every milestone in [Milestones](02-milestones.md) has an associated deliverable on this page under the same number and name. 4. The feedback given at the Sprint 0 pitch is listed item by item, each with the page that addresses it or the reason it is not addressed. |
+| Due Date: | 28/10/2026 |
+| Stakeholders: | Project Review Committee; project team |
+| Approving Stakeholder(s): | Product Owner |
+
+## Sprint 2
+
+| Project Deliverable #: | D5: Long-context baseline experiment card |
+|---|---|
+| Description: | Results of a long-context model that receives the full document set (D1), with no retrieval, on all 40 questions of D2. It is the comparison point for the RAG results in D6 and D9. |
+| Acceptance Criteria: | 1. All 40 questions are run, and the model name, model version, prompt and settings are recorded. 2. Each in-scope answer is scored correct or incorrect against the D2 answer key, and each named article is scored as supporting or not supporting the answer. 3. The card reports, by question type: share of correct answers, share of answers that name a supporting article, number of out-of-scope questions declined (of 10), mean cost per question in USD and median response time in seconds. |
+| Due Date: | 11/11/2026 |
+| Stakeholders: | Project team (AI developer role); Project Review Committee |
+| Approving Stakeholder(s): | Domain Expert |
+
+| Project Deliverable #: | D6: RAG baseline experiment card |
+|---|---|
+| Description: | Results of the first RAG pipeline (one chunk per article) on all 40 questions of D2, set side by side with D5. It holds the first trial runs from which the Objective 2 levels are confirmed or corrected. |
+| Acceptance Criteria: | 1. All 40 questions are run through the pipeline of D7, and the generation model, embedding model, number of retrieved chunks (k) and prompt are recorded. 2. The card reports the five measures of D5, by question type, in one table with the D5 values. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks. 4. At least one run uses the same generation model as D5. 5. For each of the two 80% levels of Objective 2, the card states the measured value and whether the level is confirmed or corrected. |
+| Due Date: | 18/11/2026 |
+| Stakeholders: | Project team (AI developer role); Project Review Committee; Quality Team |
+| Approving Stakeholder(s): | Domain Expert |
+
+| Project Deliverable #: | D7: Alpha prototype |
+|---|---|
+| Description: | First integrated build of the assistant: a web chat interface connected to the RAG pipeline over the document set of D1. It runs on a team laptop. |
+| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The number of articles in the index equals the number of articles reported in D1. 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
+| Due Date: | 18/11/2026 |
+| Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
+| Approving Stakeholder(s): | Product Owner |
+
+| Project Deliverable #: | D8: Project Charter v2 |
+|---|---|
+| Description: | Second version of the Project Canvas pages, updated after the Sprint 1 review and the first trial runs of Sprint 2. |
+| Acceptance Criteria: | 1. Each feedback item from the Sprint 1 review is listed with the change made or the reason for no change. 2. The Objective 2 levels in [Project Executive Summary](01-project-executive-summary.md) equal the levels stated in D6. 3. Every page changed since D4 has a change-log entry with the date and the reason. 4. Every due date on this page is not later than the Expected Date of its milestone in [Milestones](02-milestones.md). |
+| Due Date: | 18/11/2026 |
+| Stakeholders: | Project Review Committee; Quality Team; project team |
+| Approving Stakeholder(s): | Product Owner |
+
+## Sprint 3
+
+| Project Deliverable #: | D9: MVP validation experiment card |
+|---|---|
+| Description: | Results of the beta (D10) on the fixed set of 30 in-scope questions and the 10 out-of-scope questions of D2. It holds the measurement of Objective 2. |
+| Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D10, and the settings are recorded. 2. Domain Expert scores each in-scope answer against the D2 answer key. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. |
 | Due Date: | 09/12/2026 |
-| Stakeholders: | AI customer: student affairs office; AI users: pilot students |
-| Approving Stakeholder(s): | Product Owner; student affairs contact |
+| Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee; Quality Team |
+| Approving Stakeholder(s): | Domain Expert |
 
-## Checklist before submitting
+| Project Deliverable #: | D10: Beta release |
+|---|---|
+| Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. |
+| Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D9). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M7 is closed or has a recorded reason for staying open. |
+| Due Date: | 09/12/2026 |
+| Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: pilot participants (drivers and driving-licence candidates) |
+| Approving Stakeholder(s): | Product Owner; Domain Expert |
 
-- [ ] Both solution and project-management deliverables are listed (Rule 1)
-- [ ] Each charter version is a separate deliverable (Rule 2)
-- [ ] Every block has all six fields filled (Rule 3)
-- [ ] Every acceptance criterion is measurable (Rule 4)
-- [ ] No acceptance criterion relies on an adjective without a number (Rule 5)
-- [ ] Customer-facing deliverables list the customer or users as Stakeholders, not only the team (Rule 6)
-- [ ] Every block names an Approving Stakeholder (Rule 7)
-- [ ] Every due date is aligned with its milestone in [Milestones](03-project-canvas_v2/02-milestones.md) (Rule 8)
-- [ ] A Q&A Generation-Dataset deliverable exists, with diversity and representation criteria (Rule 9)
-- [ ] Any team-written model card is for a trained or fine-tuned model (Rule 10)
-- [ ] Every later-measured target in [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md) has a deliverable that holds the result (Rule 11)
-- [ ] The product is delivered in more than one version across sprints (Rule 12)
-- [ ] The page is complete in the first version of the canvas (red cell)
+## Sprint 4
 
-## References
+| Project Deliverable #: | D11: Pilot test report |
+|---|---|
+| Description: | Results of the timed usability test and the post-test survey with the pilot participants, and of the out-of-scope test. It holds the measurements of Objectives 1, 3 and 4 and the survey counts for the business outcomes. |
+| Acceptance Criteria: | 1. 10 participants completed 3 timed questions each with the beta (30 attempts) and the post-test survey, and the report states how many of them also took part in D3. 2. The report states the median time to a correct answer, next to the default-state value of D3 and the target of under 2 minutes (Objective 1). 3. The report states how many participants would use the assistant again and how many rate the answers 4 or 5 for clarity on the 5-point scale, each next to the target of 7 of 10 (Objective 3). 4. The report states how many of the 10 out-of-scope questions were declined with the expected response, as reviewed by Domain Expert (Objective 4). 5. The report gives the survey count for each business outcome of Objectives 1 to 4. 6. Every survey question cites the published instrument or source it is taken from. |
+| Due Date: | 23/12/2026 |
+| Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee |
+| Approving Stakeholder(s): | Product Owner |
 
-[1] Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D., & Gebru, T. (2019). Model cards for model reporting. In *Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT\* '19)* (pp. 220–229). Association for Computing Machinery. https://doi.org/10.1145/3287560.3287596
+| Project Deliverable #: | D12: Release candidate |
+|---|---|
+| Description: | Final build of the assistant, with the changes made after the pilot. It is the build shown in the live demo. |
+| Acceptance Criteria: | 1. Re-run after the last change, on the 30 in-scope questions of D2: at least 80% of answers are correct and at least 80% name an article that supports the answer. 2. 10 of 10 out-of-scope questions of D2 are declined with a statement that the document set does not cover the topic (Objective 4). 3. The question set supplied by the Project Review Committee, not seen by the team before, is run in full and every answer is recorded. 4. In the live demo, every question of the demo script returns a response without an error. |
+| Due Date: | 30/12/2026 |
+| Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
+| Approving Stakeholder(s): | Project Review Committee, acting for the AI customer; Product Owner |
 
-[2] Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). Datasheets for datasets. *Communications of the ACM, 64*(12), 86–92. https://doi.org/10.1145/3458723
-
-[3] International Organization for Standardization & International Electrotechnical Commission. (2024). *Information technology — Artificial intelligence — Guidance for AI applications* (ISO/IEC 5339:2024, 1st ed.). Prepared by ISO/IEC JTC 1/SC 42, Artificial intelligence. Edition used: British Standards Institution. (2024). *BS ISO/IEC 5339:2024* (published 31 January 2024). BSI Standards Limited. ISBN 978 0 539 15221 0.
-
-[4] International Organization for Standardization & International Electrotechnical Commission. (2023). *Information technology — Artificial intelligence — AI system life cycle processes* (ISO/IEC 5338:2023, 1st ed.). Prepared by ISO/IEC JTC 1/SC 42, Artificial intelligence. Edition used: British Standards Institution. (2024). *BS ISO/IEC 5338:2023* (published 29 February 2024). BSI Standards Limited. ISBN 978 0 539 15220 3.
+| Project Deliverable #: | D13: Final report |
+|---|---|
+| Description: | Report of the project's results against its objectives, with the lessons learned. |
+| Acceptance Criteria: | 1. For each of the four objectives, the report states the target, the measured value and the deliverable that holds the measurement (D3, D9, D11 or D12). 2. Every metric in the report links to an experiment card (D5, D6 or D9) or to D11. 3. The lessons learned section has at least one entry for each of the four sprints. |
+| Due Date: | 30/12/2026 |
+| Stakeholders: | Project Review Committee; AI customer: General Directorate of Security (EGM) |
+| Approving Stakeholder(s): | Project Review Committee |
