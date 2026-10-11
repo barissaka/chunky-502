@@ -109,7 +109,19 @@ Add rows as needed. Rows with a score of 10 or more also need a detail block (ne
 
 | # | Layer | Risk (event) | When / where | Probability | Impact | Score | Owner | Linked to |
 |---|---|---|---|---|---|---|---|---|
-| R-01 | | | | | | | | |
+| R-01 | Data | At least one of the four added regulations cannot be extracted with its article boundaries (scanned or unconsolidated text) by M1 | Sprint 1; development | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | A-01, C-01 |
+| R-02 | Data | FAQ pages and forums yield fewer than 30 in-scope questions, or fewer than 5 in a question type, by M2 | Sprint 1; development | 3 | 4 | 12 | Business Analyst (Ekin Deniz Öztürk) | A-02 |
+| R-03 | People / process | Fewer than 10 participants complete the default-state session (M2) or the pilot session (M10) | Sprints 1 and 4; development | 3 | 4 | 12 | Product Owner (Zehranur Kaymaz Kutluyer) | A-03 |
+| R-04 | Model | The document set exceeds the context window of the long-context model, so the baseline cannot run on the full set at M4 | Sprints 1–2; development | 2 | 3 | 6 | Data Scientist (Barış Saka) | A-04, C-04 |
+| R-05 | Data | An amendment changes an article used in the answer key between 26/10/2026 and 30/12/2026 | Sprints 1–4; development. After deployment the same event makes answers outdated and triggers maintenance | 3 | 3 | 9 | Business Analyst (Ekin Deniz Öztürk) | A-05, C-02 |
+| R-06 | People / process | The terms of use of a chosen forum prohibit collecting or storing its content, and its questions must be dropped | Sprint 1; development | 2 | 2 | 4 | Business Analyst (Ekin Deniz Öztürk) | A-06 |
+| R-07 | Model | The assistant answers an out-of-scope question or gives advice on an individual case instead of declining | Sprints 3–4; development and after deployment | 3 | 4 | 12 | Data Scientist (Barış Saka) | C-01, C-05, C-11 |
+| R-08 | Infrastructure | Google Cloud credit spend reaches $100 before 30/12/2026 | Sprints 2–4; development | 2 | 4 | 8 | Data Scientist (Özge Çalışkan) | C-06, C-08 |
+| R-09 | People / process | A team member cannot work on the project for more than 2 consecutive weeks | Sprints 1–4; development | 2 | 2 | 4 | Product Owner (Zehranur Kaymaz Kutluyer) | C-10 |
+| R-10 | Data | A user types personal data (name, national ID number, licence plate) into a question and it is written to a log unmasked | Sprints 3–4; development and after deployment | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | C-12 |
+| R-11 | Model | The share of correct answers or of supported article references on the 30 in-scope questions is below 80% at M8 | Sprints 2–3; development | 3 | 4 | 12 | Product Owner (Zehranur Kaymaz Kutluyer) | C-04 |
+| R-12 | Model | At M5 the RAG pipeline scores no higher than the long-context baseline on correctness and on article citation | Sprint 2; development | 4 | 2 | 8 | Data Scientist (Barış Saka) | C-04 |
+| R-13 | Integration | The hosted model API on Google Cloud changes its model version or quota, or is unavailable for more than 1 day, during an evaluation or pilot week | Sprints 2–4; development | 2 | 2 | 4 | Data Scientist (Özge Çalışkan) | C-06; Dependencies row [TODO] |
 
 "When / where" gives the sprint(s) and whether the risk arises during development or after deployment. "Linked to" gives the IDs of the assumption (A-xx) or constraint (C-xx) in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md), or the row number in [Dependencies](03-project-canvas_v2/06-dependencies.md), that the risk comes from.
 
@@ -117,7 +129,7 @@ Add rows as needed. Rows with a score of 10 or more also need a detail block (ne
 
 Copy this block for each risk.
 
-### Risk R-01: short name>
+### Template block
 
 | Field | Content |
 |---|---|
@@ -133,6 +145,90 @@ Copy this block for each risk.
 | **Contingency plan (B plan)** | What is done if the trigger fires |
 | **Owner** | Named person and the role they hold in [Project Organization](03-project-canvas_v2/08-project-organization.md) |
 | **Schedule effect** | Expected delay if the contingency plan is used |
+
+### Mitigation and basis for risks scoring below 10
+
+| # | Mitigation | Probability basis | Impact basis |
+|---|---|---|---|
+| R-01 | Major Activities row 4: each text is downloaded and its article count checked in Sprint 1, before any index is built | The Law and the Regulation are published as text on mevzuat.gov.tr; the four added regulations are not yet checked | A smaller document set leaves a technical requirement (M1) partly unmet |
+| R-04 | Major Activities row 4: token count per text recorded in D1 before the baseline model is chosen | The two main texts hold about 250 articles; token counts are not yet measured | The baseline comparison (M4) would run on part of the set only |
+| R-05 | Major Activities row 5: amendment dates checked at each sprint start; retrieval date shown with answers | The Law was amended in 2026; follow-up changes to regulations are typical after such an amendment | The document set and the answer key stay as retrieved (C-02), so answers that rest on an amended article no longer match the law in force: a technical requirement is partly unmet. The questions affected are listed as a limitation in the final report (D13); no rework |
+| R-06 | Major Activities row 6: terms of use read before collecting from each source | Questions come from several sources, so losing one does not empty a question type | A secondary source is lost; under 2 weeks of extra collection |
+| R-08 | Major Activities row 16: weekly spend tracking with alerts at 50% and 75% | No cost is measured yet; the question set is 40 questions per run | Running out of credit before M11 would stop the live demo, an acceptance step |
+| R-09 | Major Activities row 18: work is planned per sprint and every deliverable has a second named member who can take it over | Team experience from earlier course projects: [TODO: confirm] | One deliverable slips by up to one sprint (2–4 weeks) |
+| R-10 | Major Activities rows 10 and 17: masking before logging; logs keep anonymised data only | Masking patterns cover the formats of national ID numbers and licence plates; free-text names can be missed | A constraint (C-12) is partly unmet until the log is cleaned |
+| R-12 | Major Activities row 13: results are reported by question type together with cost per question and response time, so the comparison does not rest on correctness alone | The document set is small enough that a long-context model may read all of it; no trial run yet | A secondary metric is affected; RAG remains the solution because of C-04 |
+| R-13 | Major Activities row 13: the model version is pinned in the configuration; evaluation runs are scheduled at least 3 days before each milestone | Third-party dependency; no outage observed so far | An evaluation run slips by under 2 weeks; if the model version changes between M5 and M8, the two results are not comparable (a secondary metric is affected) |
+
+Probability values without a pilot measurement are team estimates and are revised after the Sprint 1 review. No risk scores 15 or more.
+
+### Risk R-02: too few usable questions from real sources
+
+| Field | Content |
+|---|---|
+| **Risk (event)** | FAQ pages and forums yield fewer than 30 in-scope questions, or fewer than 5 in a question type, by M2 |
+| **Linked to** | A-02 |
+| **Cause** | Most questions on the EGM FAQ page concern procedures (queries, applications) that the six texts do not answer; forum questions often ask for an opinion on an individual case |
+| **When / where** | Sprint 1; during development |
+| **Mitigation** | Major Activities row 6: questions are collected from several sources and searched topic by topic (alcohol, speed, parking, inspection, driving without a licence, candidate drivers, penalty points) |
+| **Probability (basis)** | 3: the first page of the EGM FAQ shows 10 questions, most of them procedural; a first forum search found 12 questions, of which about half can be answered from the six texts; 4 of the 12 were selected for question set v1 |
+| **Impact (basis)** | 4: the question set is the basis of the Objective 2 success criterion |
+| **Score** | 12 (High) |
+| **Trigger** | On 23/10/2026 the tagged set holds fewer than 30 in-scope questions, or any question type holds fewer than 5 |
+| **Contingency plan (B plan)** | The missing types are filled with team-written questions, labelled as such and limited to 10 of the 30; results are reported separately for sourced and team-written questions, and the Product Owner records the change in the charter |
+| **Owner** | Ekin Deniz Öztürk, Business Analyst |
+| **Schedule effect** | Under 1 week; M2 stays on 26/10/2026 |
+
+### Risk R-03: too few test participants
+
+| Field | Content |
+|---|---|
+| **Risk (event)** | Fewer than 10 participants complete the default-state session (M2) or the pilot session (M10) |
+| **Linked to** | A-03 |
+| **Cause** | Participants are unpaid volunteers and the two sessions are two months apart |
+| **When / where** | Sprints 1 and 4; during development |
+| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M9 (14/12/2026) |
+| **Probability (basis)** | 3: no written confirmation has been received yet; [TODO: update after 19/10/2026] |
+| **Impact (basis)** | 4: the success criteria of Objectives 1 and 3 are defined on 10 participants |
+| **Score** | 12 (High) |
+| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 14/12/2026 (M9) |
+| **Contingency plan (B plan)** | The test runs with the participants available (at least 6); the thresholds of Objectives 1 and 3 are restated as shares (70% instead of 7 of 10), only participants who completed both sessions are compared for Objective 1, and the Project Review Committee is informed in writing |
+| **Owner** | Zehranur Kaymaz Kutluyer, Product Owner |
+| **Schedule effect** | None; the result is reported on fewer participants |
+
+### Risk R-07: the assistant answers what it should decline
+
+| Field | Content |
+|---|---|
+| **Risk (event)** | The assistant answers an out-of-scope question or gives advice on an individual case instead of declining |
+| **Linked to** | C-01, C-05, C-11 |
+| **Cause** | Language models tend to produce an answer when a retrieved article looks related; questions about contesting a penalty are close in wording to in-scope questions about the procedure |
+| **When / where** | Sprints 3–4; during development and after deployment |
+| **Mitigation** | Major Activities row 9: out-of-scope handling, tested on the 10 out-of-scope questions of question set v1 from the alpha onwards |
+| **Probability (basis)** | 3: no trial run yet; the out-of-scope questions collected so far (insurance, individual objections) are close to in-scope topics |
+| **Impact (basis)** | 4: Objective 4 requires the assistant to decline all 10 out-of-scope questions |
+| **Score** | 12 (High) |
+| **Trigger** | The beta answers 1 or more of the 10 out-of-scope questions in the run of 09/12/2026 |
+| **Contingency plan (B plan)** | Degrade gracefully: below a retrieval-similarity threshold the assistant shows only the retrieved articles with no generated answer, and questions asking about the outcome of the user's own case receive a fixed refusal text |
+| **Owner** | Barış Saka, Data Scientist |
+| **Schedule effect** | About 1 week, inside Sprint 4 |
+
+### Risk R-11: Objective 2 levels not met
+
+| Field | Content |
+|---|---|
+| **Risk (event)** | The share of correct answers or of supported article references on the 30 in-scope questions is below 80% at M8 |
+| **Linked to** | C-04; Objective 2 in Project Executive Summary |
+| **Cause** | Retrieval misses the right article for questions in everyday language; some answers need several articles; the 2026 amendment changed provisions the language model may remember in their old form |
+| **When / where** | Sprints 2–3; during development |
+| **Mitigation** | Major Activities row 13: the RAG baseline is measured by question type at M5, which leaves Sprint 3 for the weakest types |
+| **Probability (basis)** | 3: no trial run yet; the levels are a team estimate until M5 |
+| **Impact (basis)** | 4: the 80% levels are the success criterion of Objective 2 |
+| **Score** | 12 (High) |
+| **Trigger** | Either share is below 70% at M5 (18/11/2026) or below 80% at M8 (09/12/2026) |
+| **Contingency plan (B plan)** | Narrow the scope: generated answers are released only for the question types that reach 80%; for the other types the assistant shows the retrieved articles with no generated answer, and the Product Owner records the revised Objective 2 with the Project Review Committee at M9 |
+| **Owner** | Zehranur Kaymaz Kutluyer, Product Owner |
+| **Schedule effect** | About 1 week, inside Sprint 4 |
 
 ### Example (illustrative only)
 

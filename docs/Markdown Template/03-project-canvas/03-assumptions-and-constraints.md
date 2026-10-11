@@ -174,9 +174,12 @@ Add rows as needed.
 
 | # | Assumption | Basis | Validation (how, by when) | Owner | Linked risk |
 |---|---|---|---|---|---|
-| A-01 | | | | | |
-| A-02 | | | | | |
-| A-03 | | | | | |
+| A-01 | All six texts of the document set are available as consolidated text on their official source, in a form from which article boundaries can be extracted without manual retyping. | The Law and the Regulation are published this way on mevzuat.gov.tr; the four added regulations are not yet checked. | Download each text and compare the extracted article count with the official text, by M1 (21/10/2026). | Data Scientist (Özge Çalışkan) | R-01 |
+| A-02 | Institutional FAQ pages and public forums yield at least 30 questions that can be answered from the six texts, with at least 5 questions in each question type. | The first page of the EGM FAQ (trafik.gov.tr/sss0) shows 10 questions, most of which concern procedures (queries, applications), not rules or penalties; a first search of public forums found 12 questions, of which about half can be answered from the six texts; 4 of the 12 were selected for question set v1. | Tag every collected question by type and by answering article; count per type, by M2 (26/10/2026). | Business Analyst (Ekin Deniz Öztürk) | R-02 |
+| A-03 | 10 people from the target groups (licensed drivers and licence candidates) take part in both test sessions: the default-state measurement by 26/10/2026 and the pilot by 23/12/2026. | [TODO: where the participants come from, e.g. classmates, a driving school] | Written confirmation from each participant by 19/10/2026; reconfirmed by M9 (14/12/2026). | Product Owner (Zehranur Kaymaz Kutluyer) | R-03 |
+| A-04 | The full document set fits in the context window of the model used for the long-context baseline ([TODO: X] tokens). | Token counts of the Law and the Regulation: [TODO: Sprint 1 measurement]; the four added regulations are not yet counted. | Token count per text in the Dataset Report (D1), by M1 (21/10/2026). | Data Scientist (Barış Saka) | R-04 |
+| A-05 | No amendment changes an article used in the answer key between the freeze of question set v1 (26/10/2026) and the final evaluation (30/12/2026). | The document set is the text in force on the retrieval date recorded in D1. The Law was amended in 2026, so further amendments cannot be ruled out and have no fixed calendar. | Compare the last-amendment date of each text on its official source with the retrieval date in D1, at the start of each sprint. | Business Analyst (Ekin Deniz Öztürk) | R-05 |
+| A-06 | Collecting questions from the chosen FAQ pages and forums and storing them with their source is permitted by those sites' terms of use. | FAQ pages are public institutional pages; the forums' terms of use have not yet been read. | Read the terms of each source before collecting from it, by M2 (26/10/2026). | Business Analyst (Ekin Deniz Öztürk) | R-06 |
 
 ## 2. Constraints
 
@@ -184,9 +187,18 @@ Group constraints by category. Add rows as needed.
 
 | # | Category | Constraints | Linked activities / risks |
 |---|---|---|---|
-| C-01 | | | |
-| C-02 | | | |
-| C-03 | | | |
+| C-01 | Data | The assistant draws only on the six texts fixed at M1: the Highway Traffic Law No. 2918, the Highway Traffic Regulation and the four added regulations (driver courses, health requirements for drivers, vehicle inspection, electric scooters). | Major Activities rows 4 and 9 (in scope: build document set, out-of-scope handling) and 19 (out of scope: other legislation); Risks R-01, R-07 |
+| C-02 | Data | The document set is a snapshot taken on the retrieval date recorded in D1, not a live feed. The document set and the answer key are not updated during the project, even if a text is amended. | Major Activities rows 5 (in scope: record and show retrieval date) and 27 (out of scope: updating the document set and the answer key after an amendment); Risks R-05 |
+| C-03 | Data | Questions and answers are in Turkish only. | Major Activities rows 11 (in scope: Turkish web interface) and 20 (out of scope: other languages) |
+| C-04 | Model | The solution is retrieval-augmented generation (RAG), as set by the Project Review Committee. A long-context model without retrieval is used as a baseline only. | Major Activities rows 7, 8 and 12 (in scope: retrieval index, RAG pipeline, long-context baseline) and 22 (out of scope: training or fine-tuning a model); Risks R-04, R-11, R-12 |
+| C-05 | Model | The assistant handles single-turn questions about the indexed texts and answers only from retrieved articles, naming the article each answer rests on. [TODO: confirm single-turn] | Major Activities rows 8 and 9 (in scope: RAG pipeline, out-of-scope handling) and 21 (out of scope: multi-turn conversation); Risks R-07 |
+| C-06 | Infrastructure | All compute and hosted model calls run on Google Cloud. [TODO: confirm, or remove if another provider is used] | Major Activities rows 13 and 16 (in scope: pinned model version for evaluation runs, deploy on Google Cloud); Facilities & Resources row [TODO]; Risks R-08, R-13 |
+| C-07 | Integration | The assistant has no connection to EGM systems or e-Devlet; it cannot look up a user's own penalties, licence or vehicle records. | Major Activities rows 23 (out of scope: personal penalty and record queries) and 26 (out of scope: public release on the EGM web page) |
+| C-08 | People / process | Budget: $100 of Google Cloud credits. | Major Activities rows 16 (in scope: track credit spend) and 22 (out of scope: training or fine-tuning a model); Cost & Funding; Risks R-08 |
+| C-09 | People / process | The project runs for 4 sprints, from 7 October 2026 to 30 December 2026; the release candidate is submitted for acceptance on 30/12/2026. | Milestones M1–M11; Major Activities rows 18 (in scope: project management), 26 (out of scope: public release on the EGM web page) and 27 (out of scope: work after the project ends) |
+| C-10 | People / process | The team has four students (one Business Analyst, one Product Owner, two Data Scientists); no additional recruitment is possible; each member works at most [TODO: x] hours per week. | Major Activities row 18 (in scope: project management); Risks R-09 |
+| C-11 | People / process | The assistant states what the texts say and gives no advice on an individual case. | Major Activities rows 9 (in scope: out-of-scope handling) and 24 (out of scope: advice on contesting a penalty); Risks R-07 |
+| C-12 | People / process | The system does not store personal data (names, national ID numbers, licence plates) in any log, database or index. [TODO: confirm] | Major Activities rows 10 and 17 (in scope: masking before logging, anonymised logs) and 25 (out of scope: user accounts, saved history); Risks R-10 |
 
 ## Example (illustrative only)
 

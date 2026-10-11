@@ -75,9 +75,33 @@ Once a constraint is in the charter, a user story that contradicts it is an inco
  
 | # | Stage | Activity | Description | Status | Jira Task |
 |---|---|---|---|---|---|
-| 1 | Inception | Define chatbot purpose, users, and success criteria | Completed as part of project chartering. (See Project Executive Summary above) | In Scope | |
-| 2 | Inception | Market/competitive analysis of existing chatbot products | Not needed for an academic proof-of-concept | Out of Scope | |
-| 3 | | | | | |
+| 1 | Inception | Define the assistant's purpose, users and success criteria | Completed as part of project chartering (see Project Executive Summary). | In Scope | |
+| 2 | Inception | Market/competitive analysis of existing traffic-information products | Not needed for an academic proof-of-concept. | Out of Scope | |
+| 3 | Inception | Measure the default state for Objective 1 | 10 participants each answer 3 comparable questions with the official texts and a web search; median time and number of places consulted are recorded (M2, D3). 12 people are invited so that 2 are in reserve. Mitigation for R-03. | In Scope | |
+| 4 | Design and development | Build the document set from official sources | Because of C-01. The six texts are taken from their official consolidated versions and stored with source, retrieval date, article count and token count (M1, D1). Checks A-01 and A-04. Mitigation for R-01 and R-04. | In Scope | |
+| 5 | Design and development | Record the retrieval date of each text, show it with every answer, and check amendment dates at each sprint start | Because of C-02. The document set and the answer key are not updated when a text is amended; the questions affected are listed as a limitation in the final report (D13). Mitigation for R-05. | In Scope | |
+| 6 | Design and development | Collect and tag question set v1 and write its answer key | 30 in-scope and 10 out-of-scope questions from institutional FAQ pages and public forums, kept in their original wording with source, URL, access date and question type; the terms of use of each source are read before collecting. The answer key is written from the legal texts (M2, D2). Checks A-02 and A-06. Mitigation for R-02 and R-06. | In Scope | |
+| 7 | Design and development | Split the texts into one chunk per article and build the retrieval index | Because of C-04. | In Scope | |
+| 8 | Design and development | Build the RAG answer pipeline with article reference and quoted provision | Because of C-04 and C-05. Answers are generated only from retrieved articles and name the article they rest on (Features 1–3). | In Scope | |
+| 9 | Design and development | Out-of-scope handling | Because of C-01, C-05 and C-11. The assistant declines questions outside the document set and requests for advice on an individual case (Feature 4). Mitigation for R-07. | In Scope | |
+| 10 | Design and development | Mask personal data in user inputs before logging | Because of C-12. Names, national ID numbers and licence plates are detected and masked before any log write. Mitigation for R-10. | In Scope | |
+| 11 | Design and development | Build the Turkish web interface | Because of C-03. A question typed in Turkish returns an answer in Turkish with its article reference (D7). | In Scope | |
+| 12 | Verification and validation | Run the long-context baseline on the full question set | Because of C-04. A long-context model receives the full document set with no retrieval; correctness, article citation, refusal, cost per question and response time are logged by question type (M4, D5). | In Scope | |
+| 13 | Verification and validation | Evaluate the RAG pipeline against the answer key | Results by question type, next to the long-context baseline (M5, D6; M8, D9). Measures Objective 2. Because of C-06, the hosted model version is pinned in the configuration for the runs in rows 12 and 13, and each run is scheduled at least 3 days before its milestone. Mitigation for R-11, R-12 and R-13. | In Scope | |
+| 14 | Verification and validation | Run the pilot: timed usability test, post-test survey and out-of-scope test | 10 participants, 3 questions each; 10 out-of-scope questions reviewed against the expected response (M10, D11). Measures Objectives 1, 3 and 4. | In Scope | |
+| 15 | Verification and validation | Evaluate the release candidate on a question set the team has not seen | M11, D12, D13. | In Scope | |
+| 16 | Deployment | Deploy the prototype on Google Cloud for the live demo and track credit spend weekly | Because of C-06 and C-08. Budget alerts are set at 50% and 75% of the credit. Mitigation for R-08. | In Scope | |
+| 17 | Deployment | Configure logs to keep only anonymised interaction data | Because of C-12. Mitigation for R-10. | In Scope | |
+| 18 | All stages | Project management: sprint planning, charter updates, reviews and risk tracking | Charter v1 and v2 (M3, M6), go/no-go checkpoints (M7, M9), risk register reviewed at each sprint start; every deliverable has a second named member who can take it over. Because of C-09 and C-10. Mitigation for R-09. | In Scope | |
+| 19 | Design and development | Coverage of other legislation (compulsory insurance, motor vehicle tax, customs) | Because of C-01: the document set is limited to the six texts. | Out of Scope | |
+| 20 | Design and development | Languages other than Turkish | Because of C-03. | Out of Scope | |
+| 21 | Design and development | Multi-turn conversation memory | Because of C-05: the assistant handles single-turn questions only. | Out of Scope | |
+| 22 | Design and development | Training or fine-tuning a language model | Because of C-04 (the solution is RAG) and C-08 (the budget does not cover training). | Out of Scope | |
+| 23 | Design and development | Personal penalty, licence and vehicle record queries | Because of C-07: the assistant has no connection to EGM systems or e-Devlet. | Out of Scope | |
+| 24 | Design and development | Advice on contesting an individual penalty | Because of C-11: the assistant states what the texts say and gives no advice on an individual case. | Out of Scope | |
+| 25 | Design and development | User accounts, authentication and saved conversation history | Because of C-12: these would require storing personal data. | Out of Scope | |
+| 26 | Deployment | Public release on the official EGM web page | Because of C-07 and C-09: the project delivers a release candidate shown in a live demo; public release would be done by the AI application provider. | Out of Scope | |
+| 27 | Operation and monitoring | Updating the document set and the answer key after an amendment, and monitoring the assistant after the project ends | Because of C-02 and C-09: the document set is a fixed snapshot for the whole project. After deployment, updates would be done by the data provider (EGM Legal Department); an amendment published in the Resmî Gazete would be the maintenance trigger. | Out of Scope | |
  
 ## Example (illustrative only)
  
