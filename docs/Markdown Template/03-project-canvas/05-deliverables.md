@@ -39,7 +39,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Acceptance Criteria: | 1. The file holds 30 in-scope and 10 out-of-scope questions, each with one type tag. 2. Diversity: each of the four in-scope types has at least 5 questions. 3. Representation: every text in D1 is the source of at least 3 questions, and at least 15 of the 30 in-scope questions are traced to a real user question whose source is recorded. 4. Every in-scope question has an answer key entry that names the supporting article or articles, and a second team member has checked 30 of 30 entries against the legal text. 5. Every out-of-scope question has the expected response "declines" recorded. |
 | Due Date: | 26/10/2026 |
 | Stakeholders: | Project team (AI developer role); Quality Team |
-| Approving Stakeholder(s): | Domain Expert |
+| Approving Stakeholder(s): | Business Analyst |
 
 | Project Deliverable #: | D3: Default-state measurement report |
 |---|---|
@@ -51,7 +51,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 
 | Project Deliverable #: | D4: Project Charter v1 |
 |---|---|
-| Description: | First version of all Project Canvas pages. |
+| Description: | Final version of all Project Canvas pages. |
 | Acceptance Criteria: | 1. Every cell marked as required in the canvas templates is filled. 2. Every objective has at least one numeric success criterion. 3. Every milestone in [Milestones](02-milestones.md) has an associated deliverable on this page under the same number and name. 4. The feedback given at the Sprint 0 pitch is listed item by item, each with the page that addresses it or the reason it is not addressed. |
 | Due Date: | 28/10/2026 |
 | Stakeholders: | Project Review Committee; project team |
@@ -65,7 +65,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Acceptance Criteria: | 1. All 40 questions are run, and the model name, model version, prompt and settings are recorded. 2. Each in-scope answer is scored correct or incorrect against the D2 answer key, and each named article is scored as supporting or not supporting the answer. 3. The card reports, by question type: share of correct answers, share of answers that name a supporting article, number of out-of-scope questions declined (of 10), mean cost per question in USD and median response time in seconds. |
 | Due Date: | 11/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee |
-| Approving Stakeholder(s): | Domain Expert |
+| Approving Stakeholder(s): | Business Analyst |
 
 | Project Deliverable #: | D6: RAG baseline experiment card |
 |---|---|
@@ -73,7 +73,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Acceptance Criteria: | 1. All 40 questions are run through the pipeline of D7, and the generation model, embedding model, number of retrieved chunks (k) and prompt are recorded. 2. The card reports the five measures of D5, by question type, in one table with the D5 values. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks. 4. At least one run uses the same generation model as D5. 5. For each of the two 80% levels of Objective 2, the card states the measured value and whether the level is confirmed or corrected. |
 | Due Date: | 18/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee; Quality Team |
-| Approving Stakeholder(s): | Domain Expert |
+| Approving Stakeholder(s): | Business Analyst |
 
 | Project Deliverable #: | D7: Alpha prototype |
 |---|---|
@@ -91,22 +91,22 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D9, and the settings are recorded. 2. Business Analyst scores each in-scope answer against the D2 answer key. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. |
 | Due Date: | 09/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee; Quality Team |
-| Approving Stakeholder(s): | Domain Expert |
+| Approving Stakeholder(s): | Business Analyst |
 
 | Project Deliverable #: | D9: Beta release |
 |---|---|
 | Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. |
-| Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D9). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M6 is closed or has a recorded reason for staying open. |
+| Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D8). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M6 is closed or has a recorded reason for staying open. |
 | Due Date: | 09/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: pilot participants (drivers and driving-licence candidates) |
-| Approving Stakeholder(s): | Product Owner; Domain Expert |
+| Approving Stakeholder(s): | Product Owner; Business Analyst |
 
 ## Sprint 4
 
 | Project Deliverable #: | D10: Pilot test report |
 |---|---|
 | Description: | Results of the timed usability test and the post-test survey with the pilot participants, and of the out-of-scope test. It holds the measurements of Objectives 1, 3 and 4 and the survey counts for the business outcomes. |
-| Acceptance Criteria: | 1. 10 participants completed 3 timed questions each with the beta (30 attempts) and the post-test survey, and the report states how many of them also took part in D3. 2. The report states the median time to a correct answer, next to the default-state value of D3 and the target of under 2 minutes (Objective 1). 3. The report states how many participants would use the assistant again and how many rate the answers 4 or 5 for clarity on the 5-point scale, each next to the target of 7 of 10 (Objective 3). 4. The report states how many of the 10 out-of-scope questions were declined with the expected response, as reviewed by Domain Expert (Objective 4). 5. The report gives the survey count for each business outcome of Objectives 1 to 4. 6. Every survey question cites the published instrument or source it is taken from. |
+| Acceptance Criteria: | 1. 10 participants completed 3 timed questions each with the beta (30 attempts) and the post-test survey, and the report states how many of them also took part in D3. 2. The report states the median time to a correct answer, next to the default-state value of D3 and the target of under 2 minutes (Objective 1). 3. The report states how many participants would use the assistant again and how many rate the answers 4 or 5 for clarity on the 5-point scale, each next to the target of 7 of 10 (Objective 3). 4. The report states how many of the 10 out-of-scope questions were declined with the expected response, as reviewed by Business Analyst (Objective 4). 5. The report gives the survey count for each business outcome of Objectives 1 to 4. 6. Every survey question cites the published instrument or source it is taken from. |
 | Due Date: | 23/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee |
 | Approving Stakeholder(s): | Product Owner |
