@@ -17,11 +17,11 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | D5 | Long-context baseline experiment card | Solution | 11/11/2026 | M4 |
 | D6 | RAG baseline experiment card | Solution | 18/11/2026 | M5, M6 |
 | D7 | Alpha prototype | Solution | 18/11/2026 | M5, M6 |
-| D9 | MVP validation experiment card | Solution | 09/12/2026 | M7, M8 |
-| D10 | Beta release | Solution | 09/12/2026 | M7, M8 |
-| D11 | Pilot test report | Project management | 23/12/2026 | M9 |
-| D12 | Release candidate | Solution | 30/12/2026 | M10 |
-| D13 | Final report | Project management | 30/12/2026 | M10 |
+| D8 | MVP validation experiment card | Solution | 09/12/2026 | M7, M8 |
+| D9 | Beta release | Solution | 09/12/2026 | M7, M8 |
+| D10 | Pilot test report | Project management | 23/12/2026 | M9 |
+| D11 | Release candidate | Solution | 30/12/2026 | M10 |
+| D12 | Final report | Project management | 30/12/2026 | M10 |
 
 ## Sprint 1
 
