@@ -32,4 +32,4 @@ Each target in [Project Executive Summary](01-project-executive-summary.md) that
 | 3 | Would use again and clarity rating (target: at least 7 of 10 participants each) | M9 (23/12/2026) | D10 Pilot test report |
 | 4 | Refusal on 10 out-of-scope questions | M9 (23/12/2026) | D10 Pilot test report |
 
-Evaluation takes place in every sprint: M2 in Sprint 1, M4 and M5 in Sprint 2, M8 in Sprint 3, M10 and M11 in Sprint 4.
+Evaluation takes place in every sprint: M2 in Sprint 1, M4 and M5 in Sprint 2, M7 in Sprint 3, M9 and M10 in Sprint 4.
