@@ -61,7 +61,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 
 | Project Deliverable #: | D5: Long-context baseline experiment card |
 |---|---|
-| Description: | Results of a long-context model that receives the full document set (D1), with no retrieval, on all 40 questions of D2. It is the comparison point for the RAG results in D6 and D9. |
+| Description: | Results of a long-context model that receives the full document set (D1), with no retrieval, on all 40 questions of D2. It is the comparison point for the RAG results in D6 and D8. |
 | Acceptance Criteria: | 1. All 40 questions are run, and the model name, model version, prompt and settings are recorded. 2. Each in-scope answer is scored correct or incorrect against the D2 answer key, and each named article is scored as supporting or not supporting the answer. 3. The card reports, by question type: share of correct answers, share of answers that name a supporting article, number of out-of-scope questions declined (of 10), mean cost per question in USD and median response time in seconds. |
 | Due Date: | 11/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee |
@@ -87,8 +87,8 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 
 | Project Deliverable #: | D8: MVP validation experiment card |
 |---|---|
-| Description: | Results of the beta (D10) on the fixed set of 30 in-scope questions and the 10 out-of-scope questions of D2. It holds the measurement of Objective 2. |
-| Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D10, and the settings are recorded. 2. Domain Expert scores each in-scope answer against the D2 answer key. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. |
+| Description: | Results of the beta (D9) on the fixed set of 30 in-scope questions and the 10 out-of-scope questions of D2. It holds the measurement of Objective 2. |
+| Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D9, and the settings are recorded. 2. Business Analyst scores each in-scope answer against the D2 answer key. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. |
 | Due Date: | 09/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee; Quality Team |
 | Approving Stakeholder(s): | Domain Expert |
@@ -96,7 +96,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Project Deliverable #: | D9: Beta release |
 |---|---|
 | Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. |
-| Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D9). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M7 is closed or has a recorded reason for staying open. |
+| Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D9). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M6 is closed or has a recorded reason for staying open. |
 | Due Date: | 09/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: pilot participants (drivers and driving-licence candidates) |
 | Approving Stakeholder(s): | Product Owner; Domain Expert |
@@ -122,7 +122,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Project Deliverable #: | D12: Final report |
 |---|---|
 | Description: | Report of the project's results against its objectives, with the lessons learned. |
-| Acceptance Criteria: | 1. For each of the four objectives, the report states the target, the measured value and the deliverable that holds the measurement (D3, D9, D11 or D12). 2. Every metric in the report links to an experiment card (D5, D6 or D9) or to D11. 3. The lessons learned section has at least one entry for each of the four sprints. |
+| Acceptance Criteria: | 1. For each of the four objectives, the report states the target, the measured value and the deliverable that holds the measurement (D3, D8, D10 or D11). 2. Every metric in the report links to an experiment card (D5, D6 or D8) or to D10. 3. The lessons learned section has at least one entry for each of the four sprints. |
 | Due Date: | 30/12/2026 |
 | Stakeholders: | Project Review Committee; AI customer: General Directorate of Security (EGM) |
 | Approving Stakeholder(s): | Project Review Committee |
