@@ -26,10 +26,10 @@ Each target in [Project Executive Summary](01-project-executive-summary.md) that
 | Objective | What is measured | Milestone | Deliverable that holds the result |
 |---|---|---|---|
 | 1 | Default state: median time and number of places consulted without the assistant | M2 (26/10/2026) | D3 Default-state measurement report |
-| 1 | Median time to a correct answer with the assistant (target: under 2 minutes) | M10 (23/12/2026) | D11 Pilot test report |
+| 1 | Median time to a correct answer with the assistant (target: under 2 minutes) | M9 (23/12/2026) | D10 Pilot test report |
 | 2 | First trial runs; the 80% levels confirmed or corrected | M5 (18/11/2026) | D6 RAG baseline experiment card |
-| 2 | Correct answers and supported article references on 30 questions (target: at least 80% each) | M8 (09/12/2026) | D9 MVP validation experiment card |
-| 3 | Would use again and clarity rating (target: at least 7 of 10 participants each) | M10 (23/12/2026) | D11 Pilot test report |
-| 4 | Refusal on 10 out-of-scope questions | M10 (23/12/2026) | D11 Pilot test report |
+| 2 | Correct answers and supported article references on 30 questions (target: at least 80% each) | M7 (09/12/2026) | D8 MVP validation experiment card |
+| 3 | Would use again and clarity rating (target: at least 7 of 10 participants each) | M9 (23/12/2026) | D10 Pilot test report |
+| 4 | Refusal on 10 out-of-scope questions | M9 (23/12/2026) | D10 Pilot test report |
 
 Evaluation takes place in every sprint: M2 in Sprint 1, M4 and M5 in Sprint 2, M8 in Sprint 3, M10 and M11 in Sprint 4.
