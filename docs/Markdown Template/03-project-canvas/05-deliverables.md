@@ -15,14 +15,13 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | D3 | Default-state measurement report | Project management | 26/10/2026 | M2 |
 | D4 | Project Charter v1 | Project management | 28/10/2026 | M3 |
 | D5 | Long-context baseline experiment card | Solution | 11/11/2026 | M4 |
-| D6 | RAG baseline experiment card | Solution | 18/11/2026 | M5, M7 |
-| D7 | Alpha prototype | Solution | 18/11/2026 | M5, M7 |
-| D8 | Project Charter v2 | Project management | 18/11/2026 | M6 |
-| D9 | MVP validation experiment card | Solution | 09/12/2026 | M8, M9 |
-| D10 | Beta release | Solution | 09/12/2026 | M8, M9 |
-| D11 | Pilot test report | Project management | 23/12/2026 | M10 |
-| D12 | Release candidate | Solution | 30/12/2026 | M11 |
-| D13 | Final report | Project management | 30/12/2026 | M11 |
+| D6 | RAG baseline experiment card | Solution | 18/11/2026 | M5, M6 |
+| D7 | Alpha prototype | Solution | 18/11/2026 | M5, M6 |
+| D9 | MVP validation experiment card | Solution | 09/12/2026 | M7, M8 |
+| D10 | Beta release | Solution | 09/12/2026 | M7, M8 |
+| D11 | Pilot test report | Project management | 23/12/2026 | M9 |
+| D12 | Release candidate | Solution | 30/12/2026 | M10 |
+| D13 | Final report | Project management | 30/12/2026 | M10 |
 
 ## Sprint 1
 
@@ -84,17 +83,9 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Product Owner |
 
-| Project Deliverable #: | D8: Project Charter v2 |
-|---|---|
-| Description: | Second version of the Project Canvas pages, updated after the Sprint 1 review and the first trial runs of Sprint 2. |
-| Acceptance Criteria: | 1. Each feedback item from the Sprint 1 review is listed with the change made or the reason for no change. 2. The Objective 2 levels in [Project Executive Summary](01-project-executive-summary.md) equal the levels stated in D6. 3. Every page changed since D4 has a change-log entry with the date and the reason. 4. Every due date on this page is not later than the Expected Date of its milestone in [Milestones](02-milestones.md). |
-| Due Date: | 18/11/2026 |
-| Stakeholders: | Project Review Committee; Quality Team; project team |
-| Approving Stakeholder(s): | Product Owner |
-
 ## Sprint 3
 
-| Project Deliverable #: | D9: MVP validation experiment card |
+| Project Deliverable #: | D8: MVP validation experiment card |
 |---|---|
 | Description: | Results of the beta (D10) on the fixed set of 30 in-scope questions and the 10 out-of-scope questions of D2. It holds the measurement of Objective 2. |
 | Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D10, and the settings are recorded. 2. Domain Expert scores each in-scope answer against the D2 answer key. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. |
@@ -102,7 +93,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee; Quality Team |
 | Approving Stakeholder(s): | Domain Expert |
 
-| Project Deliverable #: | D10: Beta release |
+| Project Deliverable #: | D9: Beta release |
 |---|---|
 | Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. |
 | Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D9). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M7 is closed or has a recorded reason for staying open. |
@@ -112,7 +103,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 
 ## Sprint 4
 
-| Project Deliverable #: | D11: Pilot test report |
+| Project Deliverable #: | D10: Pilot test report |
 |---|---|
 | Description: | Results of the timed usability test and the post-test survey with the pilot participants, and of the out-of-scope test. It holds the measurements of Objectives 1, 3 and 4 and the survey counts for the business outcomes. |
 | Acceptance Criteria: | 1. 10 participants completed 3 timed questions each with the beta (30 attempts) and the post-test survey, and the report states how many of them also took part in D3. 2. The report states the median time to a correct answer, next to the default-state value of D3 and the target of under 2 minutes (Objective 1). 3. The report states how many participants would use the assistant again and how many rate the answers 4 or 5 for clarity on the 5-point scale, each next to the target of 7 of 10 (Objective 3). 4. The report states how many of the 10 out-of-scope questions were declined with the expected response, as reviewed by Domain Expert (Objective 4). 5. The report gives the survey count for each business outcome of Objectives 1 to 4. 6. Every survey question cites the published instrument or source it is taken from. |
@@ -120,7 +111,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee |
 | Approving Stakeholder(s): | Product Owner |
 
-| Project Deliverable #: | D12: Release candidate |
+| Project Deliverable #: | D11: Release candidate |
 |---|---|
 | Description: | Final build of the assistant, with the changes made after the pilot. It is the build shown in the live demo. |
 | Acceptance Criteria: | 1. Re-run after the last change, on the 30 in-scope questions of D2: at least 80% of answers are correct and at least 80% name an article that supports the answer. 2. 10 of 10 out-of-scope questions of D2 are declined with a statement that the document set does not cover the topic (Objective 4). 3. The question set supplied by the Project Review Committee, not seen by the team before, is run in full and every answer is recorded. 4. In the live demo, every question of the demo script returns a response without an error. |
@@ -128,7 +119,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Project Review Committee, acting for the AI customer; Product Owner |
 
-| Project Deliverable #: | D13: Final report |
+| Project Deliverable #: | D12: Final report |
 |---|---|
 | Description: | Report of the project's results against its objectives, with the lessons learned. |
 | Acceptance Criteria: | 1. For each of the four objectives, the report states the target, the measured value and the deliverable that holds the measurement (D3, D9, D11 or D12). 2. Every metric in the report links to an experiment card (D5, D6 or D9) or to D11. 3. The lessons learned section has at least one entry for each of the four sprints. |
