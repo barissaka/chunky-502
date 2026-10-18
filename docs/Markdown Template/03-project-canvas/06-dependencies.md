@@ -82,7 +82,17 @@ Why the dates matter: dependencies cause wait times. A Critical Date gives you a
 
 | # | Dependency Description | Critical Date | Contact |
 |---|---|---|---|
-| 1 | | | |
+| 1 | Index building (Major Activities row 7) cannot start until the six texts are downloaded from the Presidency Legislation Information System (mevzuat.gov.tr) and the document set (D1) is fixed. | 21/10/2026 | Barış Saka (Data Scientist) |
+| 2 | The default-state measurement (D3) cannot start until question set v1 and its answer key (D2) are tagged and checked. | 23/10/2026 | Ekin Deniz Öztürk (Business Analyst) |
+| 3 | The default-state measurement (D3) and the pilot (D10) cannot start until 10 volunteer participants have confirmed in writing. | 19/10/2026 and 14/12/2026 | Zehranur Aymaz Kutluyer (Product Owner) |
+| 4 | The long-context baseline (D5) and the RAG runs (D6) cannot start until the Google Cloud project with the $100 credit and access to the hosted models is set up (supplier: Google Cloud). | 04/11/2026 | Özge Çalışkan (Data Scientist) |
+| 5 | Sprint 2 work cannot start until Project Charter v1 (D4) is approved by the Product Owner after the Sprint 1 review. | 28/10/2026 | Zehranur Aymaz Kutluyer (Product Owner) |
+| 6 | The RAG baseline run (D6) cannot start until the retrieval index (Major Activities row 7) is built. | 11/11/2026 | Özge Çalışkan (Data Scientist) |
+| 7 | Sprint 3 work on the beta (D9) cannot start until the go/no-go decision for beta (M6) is recorded. | 23/11/2026 | Zehranur Aymaz Kutluyer (Product Owner) |
+| 8 | The pilot (D10) cannot start until the go/no-go decision for pilot (M8) is recorded. | 14/12/2026 | Zehranur Aymaz Kutluyer (Product Owner) |
+| 9 | The evaluation of the release candidate on an unseen question set (D11) cannot start until the Project Review Committee supplies that question set. | 23/12/2026 | Zehranur Aymaz Kutluyer (Product Owner) |
+
+Rows 1, 3 and 4 have matching risks in [Risks](11-risks.md): R-01 (row 1), R-03 (row 3), and R-08 and R-13 (row 4).
 
 ## Example (illustrative only)
 

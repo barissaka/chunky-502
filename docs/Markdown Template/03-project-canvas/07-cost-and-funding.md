@@ -86,13 +86,28 @@ A good statement to copy for the Source of Funding: "All human-resource effort w
 
 Note: cost estimates should align with the budget constraint defined in the [Project Executive Summary](03-project-canvas_v2/01-project-executive-summary.md).
 
+Team capacity: 4 members × 7 hours per week × 11 weeks (14/10/2026 to 30/12/2026) = 308 person-hours (C-09, C-10).
+
 | # | Item | Type (One-time/Ongoing) | Estimated Cost | Notes |
 |---|---|---|---|---|
-| 1 | | | | |
+| 1 | Chartering, sprint planning, reviews and risk tracking ([Major Activities](04-major-activities.md) rows 1 and 18; D4) | Ongoing | 44 person-hours | 4 sprints × 11 h |
+| 2 | Default-state measurement and pilot test ([Major Activities](04-major-activities.md) rows 3 and 14; D3, D10) | One-time | 30 person-hours | 2 sessions × (10 participants × 0.5 h + 10 h for preparation and report) |
+| 3 | Document set and Dataset Report ([Major Activities](04-major-activities.md) rows 4 and 5; D1) | One-time | 16 person-hours | 6 texts × 2 h for download, extraction and counts, plus 4 h for the report |
+| 4 | Question set v1 and answer key ([Major Activities](04-major-activities.md) row 6; D2) | One-time | 40 person-hours | 40 questions × 0.5 h for collection and tagging, plus 40 × 0.5 h for the answer key and the second check |
+| 5 | Retrieval index, RAG pipeline, out-of-scope handling, follow-up questions and clarification ([Major Activities](04-major-activities.md) rows 7, 8, 9, 21 and 28) | One-time | 60 person-hours | Team estimate; rows 21 and 28 exist because of C-05 |
+| 6 | Personal-data masking and anonymised logs ([Major Activities](04-major-activities.md) rows 10 and 17) | One-time | 10 person-hours | These rows exist because of C-12 |
+| 7 | Web interface and builds ([Major Activities](04-major-activities.md) rows 11 and 16; D7, D9, D11) | One-time | 30 person-hours | 3 builds × 10 h |
+| 8 | Experiments and evaluation ([Major Activities](04-major-activities.md) rows 12, 13 and 15; D5, D6, D8, D11) | One-time | 45 person-hours | 4 evaluation runs with their cards × about 11 h |
+| 9 | Final report (D12) | One-time | 12 person-hours | Team estimate |
+| 10 | Amendment checks and credit tracking during the project ([Major Activities](04-major-activities.md) rows 5 and 16) | Ongoing | 10 person-hours | 4 amendment checks × 1 h, plus 11 weekly credit checks × about 0.5 h |
+| 11 | Google Cloud usage: hosted model calls, embeddings and deployment ([Facilities & Resources](09-facilities-and-resources.md) rows 2 to 6 and 9) | Ongoing | Up to $100 | The long-context baseline alone needs about 20.5 million input tokens; spend is tracked weekly with alerts at 50% and 75% (C-08) |
+| | **Total effort** | | **297 person-hours** | Within the 308 available (C-10) |
+
+Monitoring and updating the assistant after the project ends is out of scope ([Major Activities](04-major-activities.md) row 27), so it has no row here.
 
 ## 2. Source of Funding
 
-State the source(s) of funding that will support the project, and confirm that the necessary human resources have been committed to the project.
+All human-resource effort is contributed in-kind by the four students of the project team (297 person-hours), with no paid labour or external contractors; each member has committed to at most 7 hours per week (C-10). Compute and hosted model calls are paid from the $100 of Google Cloud credits (C-08). The legal texts and the FAQ and forum questions are public and used at no charge. The test participants take part as unpaid volunteers.
 
 ## Example (illustrative only)
 

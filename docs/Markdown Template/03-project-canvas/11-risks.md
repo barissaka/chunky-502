@@ -109,21 +109,21 @@ Add rows as needed. Rows with a score of 10 or more also need a detail block (ne
 
 | # | Layer | Risk (event) | When / where | Probability | Impact | Score | Owner | Linked to |
 |---|---|---|---|---|---|---|---|---|
-| R-01 | Data | At least one of the four added regulations cannot be extracted with its article boundaries (scanned or unconsolidated text) by M1 | Sprint 1; development | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | A-01, C-01 |
+| R-01 | Data | At least one of the four added regulations cannot be extracted with its article boundaries (scanned or unconsolidated text) by M1 | Sprint 1; development | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | A-01, C-01; Dependencies row 1 |
 | R-02 | Data | FAQ pages and forums yield fewer than 30 in-scope questions, or fewer than 5 in a question type, by M2 | Sprint 1; development | 3 | 4 | 12 | Business Analyst (Ekin Deniz Öztürk) | A-02 |
-| R-03 | People / process | Fewer than 10 participants complete the default-state session (M2) or the pilot session (M10) | Sprints 1 and 4; development | 3 | 4 | 12 | Product Owner (Zehranur Aymaz Kutluyer) | A-03 |
-| R-04 | Infrastructure | The cost of the Law-only baseline run, extrapolated to the two larger corpus sizes, exceeds 50% of the $100 credit, so a larger run is dropped at M4 | Sprint 2; development | 2 | 3 | 6 | Data Scientist (Barış Saka) | A-04, C-04 |
-| R-05 | Data | An amendment changes an article used in the answer key between 26/10/2026 and 30/12/2026 | Sprints 1–4; development. After deployment the same event makes answers outdated and triggers maintenance | 3 | 3 | 9 | Business Analyst (Ekin Deniz Öztürk) | A-05, C-02 |
-| R-06 | People / process | The terms of use of a chosen forum prohibit collecting or storing its content, and its questions must be dropped | Sprint 1; development | 2 | 2 | 4 | Business Analyst (Ekin Deniz Öztürk) | A-06 |
+| R-03 | People / process | Fewer than 10 participants complete the default-state session (M2) or the pilot session (M9) | Sprints 1 and 4; development | 3 | 4 | 12 | Product Owner (Zehranur Aymaz Kutluyer) | A-03; Dependencies row 3 |
+| R-04 | Infrastructure | The cost of the Law-only baseline run, extrapolated to the two larger corpus sizes, exceeds 50% of the $100 credit, so a larger run is dropped at M4 | Sprint 2; development | 2 | 3 | 6 | Data Scientist (Barış Saka) | C-04, C-08 |
+| R-05 | Data | An amendment changes an article used in the answer key between 26/10/2026 and 30/12/2026 | Sprints 1–4; development. After deployment the same event makes answers outdated and triggers maintenance | 3 | 3 | 9 | Business Analyst (Ekin Deniz Öztürk) | A-04, C-02 |
+| R-06 | People / process | The terms of use of a chosen forum prohibit collecting or storing its content, and its questions must be dropped | Sprint 1; development | 2 | 2 | 4 | Business Analyst (Ekin Deniz Öztürk) | A-05 |
 | R-07 | Model | The assistant answers an out-of-scope question or gives advice on an individual case instead of declining | Sprints 3–4; development and after deployment | 3 | 4 | 12 | Data Scientist (Barış Saka) | C-01, C-05, C-11 |
-| R-08 | Infrastructure | Google Cloud credit spend reaches $100 before 30/12/2026 | Sprints 2–4; development | 2 | 4 | 8 | Data Scientist (Özge Çalışkan) | C-06, C-08 |
+| R-08 | Infrastructure | Google Cloud credit spend reaches $100 before 30/12/2026 | Sprints 2–4; development | 2 | 4 | 8 | Data Scientist (Özge Çalışkan) | C-06, C-08; Dependencies row 4 |
 | R-09 | People / process | A team member cannot work on the project for more than 2 consecutive weeks | Sprints 1–4; development | 2 | 2 | 4 | Product Owner (Zehranur Aymaz Kutluyer) | C-10 |
 | R-10 | Data | A user types personal data (name, national ID number, licence plate) into a question and it is written to a log unmasked | Sprints 3–4; development and after deployment | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | C-12 |
-| R-11 | Model | The share of correct answers or of supported article references on the 30 in-scope questions is below 80% at M8 | Sprints 2–3; development | 3 | 4 | 12 | Product Owner (Zehranur Aymaz Kutluyer) | C-04 |
+| R-11 | Model | The share of correct answers or of supported article references on the 30 in-scope questions is below 80% at M7 | Sprints 2–3; development | 3 | 4 | 12 | Product Owner (Zehranur Aymaz Kutluyer) | C-04 |
 | R-12 | Model | At M5 the RAG pipeline scores no higher than the long-context baseline on correctness and on article citation | Sprint 2; development | 4 | 2 | 8 | Data Scientist (Barış Saka) | C-04 |
-| R-13 | Integration | The hosted model API on Google Cloud changes its model version or quota, or is unavailable for more than 1 day, during an evaluation or pilot week | Sprints 2–4; development | 2 | 2 | 4 | Data Scientist (Özge Çalışkan) | C-06; Dependencies row [TODO] |
-| R-14 | Model | At M8 fewer than 4 of the 5 follow-up questions in the question set are answered correctly, because the reference to the earlier turn is resolved to the wrong article | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Barış Saka) | C-05 |
-| R-15 | Model | On the ambiguity labels at M8, the ask decision has precision or recall below 0.70: the assistant asks when no condition is missing, or answers without asking when a missing condition changes the answer | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Özge Çalışkan) | C-05 |
+| R-13 | Integration | The hosted model API on Google Cloud changes its model version or quota, or is unavailable for more than 1 day, during an evaluation or pilot week | Sprints 2–4; development | 2 | 2 | 4 | Data Scientist (Özge Çalışkan) | C-06; Dependencies row 4 |
+| R-14 | Model | At M7 fewer than 4 of the 5 follow-up questions in the question set are answered correctly, because the reference to the earlier turn is resolved to the wrong article | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Barış Saka) | C-05 |
+| R-15 | Model | On the ambiguity labels at M7, the ask decision has precision or recall below 0.70: the assistant asks when no condition is missing, or answers without asking when a missing condition changes the answer | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Özge Çalışkan) | C-05 |
 
 "When / where" gives the sprint(s) and whether the risk arises during development or after deployment. "Linked to" gives the IDs of the assumption (A-xx) or constraint (C-xx) in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md), or the row number in [Dependencies](03-project-canvas_v2/06-dependencies.md), that the risk comes from.
 
@@ -154,13 +154,13 @@ Copy this block for each risk.
 |---|---|---|---|
 | R-01 | Major Activities row 4: each text is downloaded and its article count checked in Sprint 1, before any index is built | The Law and the Regulation are published as text on mevzuat.gov.tr; the four added regulations are not yet checked | A smaller document set leaves a technical requirement (M1) partly unmet |
 | R-04 | Major Activities row 12: the Law-only run goes first and its cost is checked before the larger runs | The three runs need about 20.5 million input tokens (measured token counts × 40 questions); the price of the chosen model is not yet fixed | The baseline comparison (M4) would run on fewer corpus sizes: a technical requirement is partly unmet |
-| R-05 | Major Activities row 5: amendment dates checked at each sprint start; retrieval date shown with answers | The Law was amended in 2026; follow-up changes to regulations are typical after such an amendment | The document set and the answer key stay as retrieved (C-02), so answers that rest on an amended article no longer match the law in force: a technical requirement is partly unmet. The questions affected are listed as a limitation in the final report (D13); no rework |
+| R-05 | Major Activities row 5: amendment dates checked at each sprint start; retrieval date shown with answers | The Law was amended in 2026; follow-up changes to regulations are typical after such an amendment | The document set and the answer key stay as retrieved (C-02), so answers that rest on an amended article no longer match the law in force: a technical requirement is partly unmet. The questions affected are listed as a limitation in the final report (D12); no rework |
 | R-06 | Major Activities row 6: terms of use read before collecting from each source | Questions come from several sources, so losing one does not empty a question type | A secondary source is lost; under 2 weeks of extra collection |
-| R-08 | Major Activities row 16: weekly spend tracking with alerts at 50% and 75% | No cost is measured yet; the long-context baseline runs alone need about 20.5 million input tokens | Running out of credit before M11 would stop the live demo, an acceptance step |
-| R-09 | Major Activities row 18: work is planned per sprint and every deliverable has a second named member who can take it over | Team experience from earlier course projects: [TODO: confirm] | One deliverable slips by up to one sprint (2–4 weeks) |
+| R-08 | Major Activities row 16: weekly spend tracking with alerts at 50% and 75% | No cost is measured yet; the long-context baseline runs alone need about 20.5 million input tokens | Running out of credit before M10 would stop the live demo, an acceptance step |
+| R-09 | Major Activities row 18: work is planned per sprint and every deliverable has a second named member who can take it over | Team estimate: over 11 weeks, an absence of 2 weeks or more by one of the four members (illness, exam period) is possible but not expected | One deliverable slips by up to one sprint (2–4 weeks) |
 | R-10 | Major Activities rows 10 and 17: masking before logging; logs keep anonymised data only | Masking patterns cover the formats of national ID numbers and licence plates; free-text names can be missed | A constraint (C-12) is partly unmet until the log is cleaned |
 | R-12 | Major Activities row 13: results are reported by question type together with cost per question and response time, so the comparison does not rest on correctness alone | Only models with a 1-million-token window can read the full set (255,138 tokens); Li et al. (2024) report that strong long-context models can beat RAG on average, at a much higher cost; no trial run yet | A secondary metric is affected; RAG remains the solution because of C-04 |
-| R-13 | Major Activities row 13: the model version is pinned in the configuration; evaluation runs are scheduled at least 3 days before each milestone | Third-party dependency; no outage observed so far | An evaluation run slips by under 2 weeks; if the model version changes between M5 and M8, the two results are not comparable (a secondary metric is affected) |
+| R-13 | Major Activities row 13: the model version is pinned in the configuration; evaluation runs are scheduled at least 3 days before each milestone | Third-party dependency; no outage observed so far | An evaluation run slips by under 2 weeks; if the model version changes between M5 and M7, the two results are not comparable (a secondary metric is affected) |
 | R-14 | Major Activities row 21: the earlier turns of the session are passed to retrieval and generation | No trial run yet; a follow-up question on its own often lacks the words that identify its topic, so retrieval on the follow-up alone can miss the article | Follow-up support (C-05) is partly unmet: a technical requirement |
 | R-15 | Major Activities row 28: five listed conditions, three answer strategies and at most one clarifying question, tested on the labelled question set from M5 | No trial run yet; with 8 ambiguous questions, one wrong decision moves precision or recall by about 0.12 | A wrong decision adds an unnecessary turn (Objective 1 time) or answers for the wrong condition: clarification handling (C-05) is partly unmet, a technical requirement |
 
@@ -187,16 +187,16 @@ Probability values without a pilot measurement are team estimates and are revise
 
 | Field | Content |
 |---|---|
-| **Risk (event)** | Fewer than 10 participants complete the default-state session (M2) or the pilot session (M10) |
-| **Linked to** | A-03 |
+| **Risk (event)** | Fewer than 10 participants complete the default-state session (M2) or the pilot session (M9) |
+| **Linked to** | A-03; Dependencies row 3 |
 | **Cause** | Participants are unpaid volunteers (classmates, colleagues and family members of the team) and the two sessions are about two months apart |
 | **When / where** | Sprints 1 and 4; during development |
-| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M9 (14/12/2026) |
-| **Probability (basis)** | 3: no written confirmation has been received yet; [TODO: update after 19/10/2026] |
+| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M8 (14/12/2026) |
+| **Probability (basis)** | 3: no written confirmation had been received on 18/10/2026 |
 | **Impact (basis)** | 4: the success criteria of Objectives 1 and 3 are defined on 10 participants |
 | **Score** | 12 (High) |
-| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 14/12/2026 (M9) |
-| **Contingency plan (B plan)** | The test runs with the participants available (at least 6); the thresholds of Objectives 1 and 3 are restated as shares (70% instead of 7 of 10), only participants who completed both sessions are compared for Objective 1, and the Project Review Committee is informed in writing |
+| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 14/12/2026 (M8) |
+| **Contingency plan (B plan)** | The test runs with the participants available (at least 6); the results of Objectives 1 and 3 are reported as counts out of the participants who took part, against the targets as written in the charter; only participants who completed both sessions are compared for Objective 1, and the Project Review Committee is informed in writing |
 | **Owner** | Zehranur Aymaz Kutluyer, Product Owner |
 | **Schedule effect** | None; the result is reported on fewer participants |
 
@@ -221,7 +221,7 @@ Probability values without a pilot measurement are team estimates and are revise
 
 | Field | Content |
 |---|---|
-| **Risk (event)** | The share of correct answers or of supported article references on the 30 in-scope questions is below 80% at M8 |
+| **Risk (event)** | The share of correct answers or of supported article references on the 30 in-scope questions is below 80% at M7 |
 | **Linked to** | C-04; Objective 2 in Project Executive Summary |
 | **Cause** | Retrieval misses the right article for questions in everyday language; some answers need several articles; the 2026 amendment changed provisions the language model may remember in their old form |
 | **When / where** | Sprints 2–3; during development |
@@ -229,8 +229,8 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; the levels are a team estimate until M5 |
 | **Impact (basis)** | 4: the 80% levels are the success criterion of Objective 2 |
 | **Score** | 12 (High) |
-| **Trigger** | Either share is below 70% at M5 (18/11/2026) or below 80% at M8 (09/12/2026) |
-| **Contingency plan (B plan)** | Narrow the scope: generated answers are released only for the question types that reach 80%; for the other types the assistant shows the retrieved articles with no generated answer, and the Product Owner records the revised Objective 2 with the Project Review Committee at M9 |
+| **Trigger** | Either share is below 70% at M5 (18/11/2026) or below 80% at M7 (09/12/2026) |
+| **Contingency plan (B plan)** | Narrow the scope: generated answers are released only for the question types that reach 80%; for the other types the assistant shows the retrieved articles with no generated answer, and the Product Owner reports the Objective 2 result as measured, against the target as written in the charter, to the Project Review Committee at M8 |
 | **Owner** | Zehranur Aymaz Kutluyer, Product Owner |
 | **Schedule effect** | About 1 week, inside Sprint 4 |
 

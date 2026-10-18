@@ -85,7 +85,16 @@ One row each for:
 
 | # | Resource | Description | Responsible Person/Team | Status |
 |---|---|---|---|---|
-| 1 | | | | |
+| 1 | Team members' laptops (4, member-owned) | Development compute for code, text extraction and indexing; the alpha (D7) runs on a team laptop; on-premise | Each member; set-up coordinated by Barış Saka (Data Scientist) | Available on 14/10/2026 (project start) |
+| 2 | Google Cloud project with $100 of credits | Cloud service for all compute and hosted model calls (C-06); spending is limited to $100 (C-08); budget alerts at 50% and 75% (Major Activities row 16) | Özge Çalışkan (Data Scientist, infrastructure) | Planned by 04/11/2026, start of Sprint 2 ([Dependencies](06-dependencies.md) row 4) |
+| 3 | Hosted generation model API on Google Cloud | Answer generation in the RAG pipeline (D6 to D11); the model version is pinned for evaluation runs (Major Activities row 13); usage is limited by the $100 credit and by the project's request quota for the chosen model, which is recorded in D6 | Barış Saka (Data Scientist) | Model choice planned by 18/11/2026 (recorded in D6) |
+| 4 | Hosted long-context model with a context window of at least 1 million tokens, on Google Cloud | Long-context baseline only (D5, Major Activities row 12); the three runs of 40 questions need about 20.5 million input tokens; same credit and quota limits as row 3 | Barış Saka (Data Scientist) | Planned by 04/11/2026, start of Sprint 2 |
+| 5 | Embedding model for Turkish text | Article and question embeddings for retrieval (Major Activities row 7); the model, where it runs (team laptop or Google Cloud) and any usage limit are recorded in D6 | Özge Çalışkan (Data Scientist) | Planned by 11/11/2026 |
+| 6 | Retrieval index (one chunk per article) | Index of the six texts (Major Activities row 7); built on a team laptop for the alpha and deployed with the release candidate (row 9) | Özge Çalışkan (Data Scientist) | Planned by 18/11/2026 (D7) |
+| 7 | Git repository | Shared code, document set files (D1), question set and answer key (D2) and experiment cards; access for the four team members only; no sensitive data: the legal texts are public and forum questions are stored without user names or licence plates (C-12) | Barış Saka (Data Scientist) | Planned by 21/10/2026 (M1) |
+| 8 | Tokenizer: tiktoken, o200k_base encoding | Token counts of the six texts (C-04, D1); runs on a team laptop | Barış Saka (Data Scientist) | Used in Sprint 1 for the token counts in C-04 |
+| 9 | Deployment environment: web app on the Google Cloud project | Runs the release candidate in the live demo (D11, Major Activities row 16); cloud service | Özge Çalışkan (Data Scientist) | Planned by 30/12/2026 (D11) |
+| 10 | Test sessions: a quiet room, a laptop with the assistant or a web browser, a timer and the survey form | Default-state measurement (D3) and pilot with the beta (D9, D10); on-premise | Zehranur Aymaz Kutluyer (Product Owner) | Planned by 26/10/2026 (D3) and 23/12/2026 (D10) |
 
 ## Example (illustrative only)
 
