@@ -69,15 +69,15 @@ Solid arrows are data flow; dotted arrows show that the indexer and the retrieve
 | Component | Responsibility | Technology and version | SBOM entry |
 |---|---|---|---|
 | AI user | Asks one question at a time in Turkish; reads the answer and its cited articles | Browser on the host laptop or on the same local network | — |
-| Source texts | The six legal texts: Kanun 2918 and five regulations; URL, licence, version date and checksum of each in `data/manifest.csv` | PDF from mevzuat.gov.tr | — (datasheet, not software) |
+| Source texts | The six legal texts: Kanun 2918 and five regulations; URL, licence, version date | PDF from mevzuat.gov.tr | — (datasheet, not software) |
 | Text extraction & cleaning | PDF → plain text; removes page headers, footnotes and repeated headings so that article boundaries are clean | Python [TEAM: version], PDF-to-text library [TEAM: pdftotext / pypdf / pdfplumber, version] | per chosen library |
 | Chunker | Splits the text at article (*madde*) boundaries; attaches document, section and article metadata to every chunk | Python, own code | — |
 | Indexer | Sends every chunk to the embedding model and writes the vectors with their metadata into the vector database; re-run when a text or the chunking changes | Python, own code | — |
-| Embedding model | Turns chunk texts and questions into vectors in the same space | Qwen3-Embedding 0.6B, served by Ollama | AI SBOM: Qwen3-Embedding-0.6B |
+| Embedding model | Turns chunk texts and questions into vectors in the same space | To be chosen: Qwen3-Embedding 0.6B, served by Ollama | AI SBOM: Qwen3-Embedding-0.6B |
 | Vector database | Stores chunk vectors and metadata; returns the chunks most similar to a question vector | To be chosen: Chroma, FAISS or Qdrant (D3) | per chosen store |
 | Retriever | Embeds the question, queries the vector database, hands the candidate chunks to the reranker and the selected chunks with the system prompt to the LLM; returns the answer and the source chunks to the UI | Python, own code; OpenAI-compatible client for Ollama | openai (Python SDK) |
-| Reranker | Scores each candidate chunk against the question and keeps the best ones; runs on the CPU inside the Python application, because Ollama does not serve rerankers | Qwen3-Reranker 0.6B via `transformers` [TEAM: version] + `torch` (CPU) | AI SBOM: Qwen3-Reranker-0.6B; transformers, torch |
-| LLM | Writes the answer from the selected chunks only, with article citations; refuses when the chunks do not contain the answer; also used as the judge model for the RAG-triad evaluation | Qwen3 4B (4-bit quantisation), served by Ollama | AI SBOM: Qwen3-4B |
+| Reranker | Scores each candidate chunk against the question and keeps the best ones; runs on the CPU inside the Python application, because Ollama does not serve rerankers | To be chosen: Qwen3-Reranker 0.6B via `transformers` [TEAM: version] + `torch` (CPU) | AI SBOM: Qwen3-Reranker-0.6B; transformers, torch |
+| LLM | Writes the answer from the selected chunks only, with article citations; refuses when the chunks do not contain the answer; also used as the judge model for the RAG-triad evaluation | To be chosen: Qwen3 4B (4-bit quantisation), served by Ollama | AI SBOM: Qwen3-4B |
 | Ollama | Local model server: downloads and serves the embedding model and the LLM, exposes an OpenAI-compatible HTTP API on the laptop | Ollama [TEAM: version], Windows installer | ollama |
 | Chat UI | Question box, streamed answer, the cited chunks shown under the answer | Gradio or Streamlit (D7) [TEAM: version] | gradio / streamlit |
 
@@ -105,7 +105,7 @@ Solid arrows are data flow; dotted arrows show that the indexer and the retrieve
 
 - **Retrieval metrics.** Precision@k, Recall@k and MRR against gold articles (the course's recommended retrieval metrics); reported with and without the reranker so its contribution is visible.
 - **Answer metrics.** The RAG triad — context relevance, groundedness, answer relevance — computed with RAGAS or DeepEval and the local judge; plus two rule-based rates that need no judge: citation rate (answers that cite at least one retrieved article) and refusal correctness (out-of-corpus questions answered with the refusal sentence, in-corpus questions not refused). Manual verification of the evaluation answers is the ground truth in Sprint 1.
-- **Baseline.** The same LLM answering without retrieval (parametric knowledge only), on the same questions; this isolates what retrieval adds.
+- **Baseline.**
 - **Latency.** Retrieval time, time to first token and full-answer time per question, measured on the host CPU. Targets are set after the first measurement and then written into the charter.
 - **Validation vs. test.** The question set used while tuning the prompt and the retrieval settings is the *validation* set. A second set, written by team members who did not tune the prompt, is the *test* set and is run only at sprint ends.
 
