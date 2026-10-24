@@ -20,11 +20,11 @@ At the Sprint 0 pitch (07/10/2026) the Project Review Committee asked why the as
 
 1. The literature does not support the statement that RAG answers more accurately than an LC model for a document set that fits the context window. The charter does not make that statement, and it should not be made in presentations.
 2. The reasons for RAG in this project are the following.
-   - RAG is the basic solution set by the Project Review Committee (C-04 in [Assumptions & Constraints](../Markdown%20Template/03-project-canvas/03-assumptions-and-constraints.md)).
+   - RAG is the basic solution set by the Project Review Committee (C-04 in [Assumptions & Constraints](../../Markdown%20Template/03-project-canvas/03-assumptions-and-constraints.md)).
    - Cost and time. An LC model receives all six texts with every question; RAG sends only the retrieved articles. The budget is $100 (C-09), and Objective 1 is measured in time.
    - The generation model of the assistant runs on the team's hardware (C-05). Whether the six texts fit its context window is assumption A-01, checked by 21/10/2026.
    - Article reference. The retrieved articles are the texts shown to the user as the quoted provision (Scope Definition, feature 2).
-3. The comparison is measured, not assumed. The LC baseline (D5, 11/11/2026) and the RAG baseline (D6, 18/11/2026) run on the same 40 questions and report the same five measures in [Deliverables](../Markdown%20Template/03-project-canvas/05-deliverables.md): correct answers, supporting article named, out-of-scope questions declined, cost per question and response time.
+3. The comparison is measured, not assumed. The LC baseline (D5, 11/11/2026) and the RAG baseline (D6, 18/11/2026) run on the same 40 questions and report the same five measures in [Deliverables](../../Markdown%20Template/03-project-canvas/05-deliverables.md): correct answers, supporting article named, out-of-scope questions declined, cost per question and response time.
 4. Hypothesis to test with D5 and D6: the LC baseline has a share of correct answers equal to or higher than the RAG baseline, and the RAG baseline has a lower cost per question and a lower median response time.
 5. Finding 1 is the basis for the probability of risk R-01 (the full document set fits the model, and the long-context baseline matches the assistant) in the Risks page.
 6. Question set (D2): questions whose answer needs more than one article are tagged as a separate question type, because finding 3 predicts that RAG loses most on them.
