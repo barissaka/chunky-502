@@ -38,9 +38,9 @@ Write Status as a short dated fact, such as "requested on <date>" or "access gra
 5. The deployment environment has its own row.
 6. Every data-access row names the storage and the access permissions, and says whether sensitive data needs a special environment [1].
 7. Every row has a dated Status.
-8. A fixed limit on a resource is also written as a constraint in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md).
-9. The chance that a resource fluctuates or fails is a risk in [Risks](03-project-canvas_v2/11-risks.md).
-10. When work waits for someone else to deliver a resource, that wait is also a row in [Dependencies](03-project-canvas_v2/06-dependencies.md).
+8. A fixed limit on a resource is also written as a constraint in [Assumptions & Constraints](03-assumptions-and-constraints.md).
+9. The chance that a resource fluctuates or fails is a risk in [Risks](11-risks.md).
+10. When work waits for someone else to deliver a resource, that wait is also a row in [Dependencies](06-dependencies.md).
 
 ## Test to apply to your draft
 
@@ -53,7 +53,7 @@ Each row below shows a resource problem that this page would have caught.
 | Not this | Rule broken | This (illustrative only) |
 |---|---|---|
 | The charter names "the cloud service provided by the university" as the project's resource, while the experiment cards report runs on a team member's laptop GPU. | The resource used is not the resource listed (rule 4) | Two compute rows: "Laptop GPU (12 GB VRAM), member-owned, for development runs" and "Cloud GPU under the university credit, for staging and load tests", each with its Responsible person and dated Status. |
-| A retrospective notes that API rate limits and latency spikes disrupted response-time tests, and that limited GPU resources forced a mid-sprint move to a paid notebook tier. | Limits not planned in advance (rules 3, 4) | "External data API, free tier: 60 calls per minute; test scripts cache responses." "Notebook GPU, free tier: session limit per day; fine-tuning runs scheduled within it." Plus a constraint for each limit in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md). |
+| A retrospective notes that API rate limits and latency spikes disrupted response-time tests, and that limited GPU resources forced a mid-sprint move to a paid notebook tier. | Limits not planned in advance (rules 3, 4) | "External data API, free tier: 60 calls per minute; test scripts cache responses." "Notebook GPU, free tier: session limit per day; fine-tuning runs scheduled within it." Plus a constraint for each limit in [Assumptions & Constraints](03-assumptions-and-constraints.md). |
 
 Two good practices to copy:
 
@@ -74,12 +74,12 @@ One row each for:
 
 ## What doesn't belong here
 
-- **Costs and person-hours** go in [Cost & Funding](03-project-canvas_v2/07-cost-and-funding.md).
-- **Fixed limits** (a credit amount, a quota) are constraints in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md).
-- **A resource failing or fluctuating** is a risk in [Risks](03-project-canvas_v2/11-risks.md).
-- **Waiting for an outside party** is a dependency in [Dependencies](03-project-canvas_v2/06-dependencies.md).
-- **Every third-party library, tool and model with its version and license** goes in [Software Bill of Materials](10-software-bill-of-materials.md). List here only what the team needs access to.
-- **Documentation of the datasets themselves** goes in the [Datasheets](11-datasheets/README.md) pages. List here only storage and access.
+- **Costs and person-hours** go in [Cost & Funding](07-cost-and-funding.md).
+- **Fixed limits** (a credit amount, a quota) are constraints in [Assumptions & Constraints](03-assumptions-and-constraints.md).
+- **A resource failing or fluctuating** is a risk in [Risks](11-risks.md).
+- **Waiting for an outside party** is a dependency in [Dependencies](06-dependencies.md).
+- **Every third-party library, tool and model with its version and license** goes in [Software Bill of Materials](../10-software-bill-of-materials.md). List here only what the team needs access to.
+- **Documentation of the datasets themselves** goes in the [Datasheets](../11-datasheets/README.md) pages. List here only storage and access.
 
 ## Resources
 
@@ -108,7 +108,7 @@ Scenario: a legal research assistant. Names, limits and dates are illustrative.
 | 4 | Vector database | Index of the document set; hosted on the cloud project | Member 3 | Planned for 28/11/2026 |
 | 5 | Shared storage for raw and processed documents | Encrypted bucket; access for team members only; no PII stored (C-03) | Member 3 (Business Analyst; contact with the data provider) | Created on 15/10/2026 |
 | 6 | Shared code repository and experiment tracker | Version control and run logs | Member 4 | Configured on 10/10/2026 |
-| 7 | Staging environment for the MVP | Web app on the cloud project; used by pilot AI users | Member 4 (Data Scientist, staging deployment) | Planned for 02/12/2026 ([Dependencies](03-project-canvas_v2/06-dependencies.md) row 4) |
+| 7 | Staging environment for the MVP | Web app on the cloud project; used by pilot AI users | Member 4 (Data Scientist, staging deployment) | Planned for 02/12/2026 ([Dependencies](06-dependencies.md) row 4) |
 
 ## Checklist before submitting
 
@@ -119,9 +119,9 @@ Scenario: a legal research assistant. Names, limits and dates are illustrative.
 - [ ] The deployment environment has its own row (rule 5)
 - [ ] Every data-access row names storage, permissions and any sensitive-data needs (rule 6)
 - [ ] Every row has a dated Status (rule 7)
-- [ ] Every fixed limit also appears as a constraint in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md) (rule 8)
-- [ ] Every resource that could fail has a risk in [Risks](03-project-canvas_v2/11-risks.md) (rule 9)
-- [ ] Every wait on an outside party is a row in [Dependencies](03-project-canvas_v2/06-dependencies.md) (rule 10)
+- [ ] Every fixed limit also appears as a constraint in [Assumptions & Constraints](03-assumptions-and-constraints.md) (rule 8)
+- [ ] Every resource that could fail has a risk in [Risks](11-risks.md) (rule 9)
+- [ ] Every wait on an outside party is a row in [Dependencies](06-dependencies.md) (rule 10)
 
 ---
 
