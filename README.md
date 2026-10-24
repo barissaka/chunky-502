@@ -1,99 +1,87 @@
-## Welcome to DI 502: Data Informatics Course - Fall 2026
+# Chunky — Turkish traffic rules and penalties assistant
 
-This repository holds the markdown templates for your project documentation as well as further instructions on setting up Confluence, Jira, and online resources to help build your project.
+**DI 502 Data Informatics Project · METU Informatics Institute · Fall 2026 · Team Chunky**
 
-## Contents
+Chunky answers single-turn questions in Turkish about road-traffic rules, procedures and penalties, and cites the articles (*madde*) of the legislation it used. It is a retrieval-augmented generation (RAG) system over six legal texts (Kanun 2918 and five regulations), running entirely on a team laptop with open-weight models served by Ollama. When the answer is not in the texts, it says so instead of guessing.
 
-- [How to start on Confluence](#how-to-start-on-confluence)
-  - [Adding reviewer accounts](#adding-reviewer-accounts)
-  - [Setting up Github actions workflow for Confluence integration](#setting-up-github-actions-workflow-for-confluence-integration)
-- [Instructions on User Story Mapping and Sprint Planning](#instructions-on-user-story-mapping-and-sprint-planning)
-- [How to start on Jira](#how-to-start-on-jira)
-  - [Instructions on Jira Usage](#instructions-on-jira-usage)
-- [Additional resources on Agile/Scrum](#additional-resources-on-agilescrum)
+Team: see [Team Members](Markdown%20Template/02-team-members.md). Project documentation lives in this repository as Markdown and is mirrored to Confluence on every push to `main`.
 
-## How to start on Confluence
+## Status
 
-Below is an updated guide on how to set up your Confluence space and invite your team members and us onboard.
+| Sprint | Dates | State |
+|---|---|---|
+| Sprint 1 | until 27 Oct 2026 | project canvas, user stories, system design v1 |
+| Sprint 2 | 28 Oct – 18 Nov | baseline retrieval, evaluation set, first experiment |
+| Sprint 3 | 18 Nov – 9 Dec | full pipeline, beats the baseline |
+| Sprint 4 | 9 – 30 Dec | final product and demo |
 
-1. Ideally create a new Confluence instance using this [link](https://www.atlassian.com/try/cloud/signup?bundle=confluence&edition=free) if you have not created one.
-2. Copy the link provided to invite your team members and us onto your Confluence space. (Link is valid for 30 days.) If you skip that step, you can manually invite members as such:
-    1. Invite other collaborators from this link: **`[group_name].atlassian.net/admin/users`**
-    2. To add them to your space, visit "space settings" for your project.
-    3. Under space permissions click "users".
-    4. Click "edit" and search for internal users. Add each collaborator.
-    5. For each, click select all for permissions.
+The code arrives in Sprint 2. Until then this repository holds the documentation and the configuration skeleton.
 
-### Adding reviewer accounts
+## Repository layout
 
-Each group must invite this email address to both their Confluence and Jira projects:
+```
+Markdown Template/          project documentation (synced to Confluence)
+  03-project-canvas/        charter: summary, milestones, risks, release plan
+  04-sprint-1/ 05-sprint-2/ sprint README, retrospective, review pages
+  06-user-stories/          user story maps and epic requirements
+  10-software-bill-of-materials.md
+  11-datasheets/            third-party dataset register, dataset and Q&A reports
+  11-system-architecture-design-document.md
+  12-experiment-cards/      one card per experiment; README is the index
+config/rag.yaml             product configuration: chunking, models, top-k, prompt variant
+prompts/                    prompt files, one version per file (never edited in place)
+data/                       local corpus and evaluation set (not committed; see datasheets)
+src/                        application code (indexer, retriever, query guard, UI)
+tests/                      pytest tests
+docs/
+  spikes/                   research spikes
+  eval/                     evaluation results per sprint
+  backlog/                  Jira exports
+requirements.txt            Python dependencies (pinned from Sprint 2)
+```
 
-* [di.502.reviewer.1@proton.me](mailto:di.502.reviewer.1@proton.me)
+## Running the system
 
-And the reviewer account assigned to your specific team:
+*To be completed in Sprint 2 with the baseline. The instructions below are the target shape.*
 
-| Team        | Reviewer account                                                  |
-|-------------|-------------------------------------------------------------------|
-| Chunky      | [di.502.reviewer.2@proton.me](mailto:di.502.reviewer.2@proton.me) |
-| Eliza | [di.502.reviewer.3@proton.me](mailto:di.502.reviewer.3@proton.me) |
-| Promp Fiction   | [di.502.reviewer.4@proton.me](mailto:di.502.reviewer.4@proton.me) |
-| Rag Against the Machine | [di.502.reviewer.5@proton.me](mailto:di.502.reviewer.5@proton.me) |
+Requirements: Python 3.11, [Ollama](https://ollama.com) installed on the host laptop (Windows), 16 GB RAM; no GPU needed.
 
-When adding reviewer accounts, consider giving them **read-only** access. (Managing permissions is only possible during the 30 day premium trial. After that you will be on the free plan.)
+```bash
+# 1. Environment
+python -m venv .venv
+.venv\Scripts\activate            # Windows
+pip install -r requirements.txt
 
-Whether you choose to send an invite link, or invite manually, please send a reminder to [volgas@metu.edu.tr](mailto:volgas@metu.edu.tr).
+# 2. Models (served locally by Ollama)
+ollama pull qwen3-embedding:0.6b
+ollama pull qwen3:4b
 
-### Setting up Github actions workflow for Confluence integration
+# 3. Build the index from the legal texts in data/
+python -m src.index
 
-1. Go to https://id.atlassian.com/manage-profile/security/api-tokens and choose Create API token (the classic kind, not "with scopes"). Copy it; Atlassian shows it only once.
-2. In Github, go to Settings → Secrets and variables → Actions. On the Secrets tab, add: 
-    * `CONFLUENCE_EMAIL`: Your user email
-    * `CONFLUENCE_API_TOKEN`: The api token you created
-3. On the Variables tab, add: 
-    * `CONFLUENCE_BASE_URL`: `https://<site>.atlassian.net`
-    * `CONFLUENCE_SPACE_KEY`: `KEY` in /wiki/spaces/<KEY>/… 
-    * `DOCS_DIR`: `docs/Markdown Template` (Directory where the template lives in)
+# 4. Start the assistant
+python -m src.app
 
-## Instructions on User Story Mapping and Sprint Planning
+# 5. Evaluation and tests
+python -m src.evaluate            # writes results to docs/eval/
+pytest
+```
 
-We recommend these resources if you haven't drafted a user story before:
+No API keys are required: every model runs on the laptop. Random seeds and LLM settings (temperature, thinking mode) are set in `config/rag.yaml` so that runs are reproducible.
 
-* [User stories with examples and a template [Atlassian]](https://www.atlassian.com/agile/project-management/user-stories)
-* [User stories [Ben Baumer, 5:31]](https://smith.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=2e293ab4-9faf-4550-8f94-acd8011132b1)
+## Where to look
 
-> [!TIP]
-> We highly recommend using these collaborative tools:
-> * [Miro](https://miro.com/) for user story mapping to identify which features are needed for your application,
-> * [Scrum Powder - Sprint Planning](https://scrumpowder.com/planning) for story point estimation with poker planning and
-> * [Scrum Powder - Retro](https://scrumpowder.com/retro) for having sprint retrospectives.
+- **What we are building and why:** [Project Executive Summary](Markdown%20Template/03-project-canvas/01-project-executive-summary.md)
+- **How it is built:** [System Architecture Design Document](Markdown%20Template/11-system-architecture-design-document.md)
+- **What has been tried:** [Experiment Cards](Markdown%20Template/12-experiment-cards/README.md)
+- **Where the data comes from:** [Datasheets](Markdown%20Template/11-datasheets/README.md)
+- **Sprint reports:** [Sprint 1](Markdown%20Template/04-sprint-1/README.md), [Sprint 2](Markdown%20Template/05-sprint-2/README.md)
+- **Confluence:** https://chunky-502.atlassian.net
+- **Jira backlog (project key CHUNKY):** https://chunky-502.atlassian.net/jira/software/projects/CHUNKY/boards/1/backlog
+- **Course repository and templates:** https://github.com/volgasezen/di502
 
-## How to start on Jira
+## Working agreements
 
-1. Similarly, create a new Jira space with the default settings.
-2. Click on the plus "+" icon in the header and add the "backlog" and "reports" pages.
-3. Visit `Space settings -> Features` and enable Sprints as well as Estimation.
-4. Set up your backlog to include four sprints that span the course.
-5. Invite us and your team members to the Jira space in a similar manner.
-
-### Instructions on Jira Usage
-
-> [!TIP]
-> We recommend taking at least one Jira course from those linked in Sprint 1 Fundementals of the [Online Course Register](online-course-register/README.md/#sprint-1-fundementals).
-
-Once you create user stories and tasks associated with them, make sure to:
-
-1. Assign specific people to the task, 
-2. Define acceptance criteria in the description field, and 
-3. Report the story point estimates in the "Story Point Estimate" field.
-
-> [!WARNING]
-> We don't recommend adding "subtasks" to divide big tasks as they cannot have story points and thus cannot be tracked. Make sure each task can be completed in one sprint (3 weeks) at most and by one member at least.
-
-## Additional resources on Agile/Scrum
-To be more familiar with Scrum framework, or Agile practices, be sure to check out the following websites and videos:
-
-* https://www.atlassian.com/agile/scrum
-* https://www.atlassian.com/agile/project-management/metrics
-* https://www.youtube.com/watch?v=GR9-8lOUhwA (Introduction to Scrum) [scrum.org, 58:15]
-* https://www.youtube.com/watch?v=wWSr3E2V6-Y (AI Is Making Teams Faster - And More Dangerous) [Mike Cohn, 9:01]
-* https://www.youtube.com/watch?v=4wMRXmLpdA8 (AI in the SDLC: Rethinking AI Coding Tools & AI Agents) [IBM, 9:27]
+- Documentation is Markdown in this repository; Confluence is a mirror, edited only here.
+- One branch per feature, named after the Jira issue (e.g. `CHUNKY-12-query-guard`); commit messages start with the issue key; merged into `main` with `--no-ff`.
+- Parameters live in `config/rag.yaml`; experiment parameter spaces live in the experiment cards and W&B.
