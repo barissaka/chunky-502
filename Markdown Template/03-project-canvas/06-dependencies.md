@@ -34,9 +34,9 @@ The life cycle itself creates dependencies: a piece of functionality is implemen
 2. Every row has a Critical Date.
 3. The Critical Date is no later than the planned start of B.
 4. Every row has a Contact who is a named team member.
-5. A row describes a relationship, not a task. "Prepare the final presentation" is a task; it goes in [Major Activities](03-project-canvas_v2/04-major-activities.md).
+5. A row describes a relationship, not a task. "Prepare the final presentation" is a task; it goes in [Major Activities](04-major-activities.md).
 6. A row for an outside supplier names the supplier [1].
-7. The chance that A fails or changes is a risk. Register it in [Risks](03-project-canvas_v2/11-risks.md) and write this row's number in its **Linked to** field.
+7. The chance that A fails or changes is a risk. Register it in [Risks](11-risks.md) and write this row's number in its **Linked to** field.
 
 ## Test to apply to your draft
 
@@ -52,7 +52,7 @@ The left column shows weak rows, each tagged with the rule it breaks. The correc
 
 | Not this | Rule broken | This (illustrative only) |
 |---|---|---|
-| "Necessary documentation updates and preparation of the final presentation must be done." | A task, not a relationship (rule 5) | Move it to [Major Activities](03-project-canvas_v2/04-major-activities.md). If something waits for it, write that link: "The final demo cannot start until the slides are reviewed. Check by: one week before the demo." |
+| "Necessary documentation updates and preparation of the final presentation must be done." | A task, not a relationship (rule 5) | Move it to [Major Activities](04-major-activities.md). If something waits for it, write that link: "The final demo cannot start until the slides are reviewed. Check by: one week before the demo." |
 | "Pretrained embedding models and an open-source LLM are needed to implement the chatbot." | A is not named precisely, and no supplier is named (rules 1, 6) | "Pipeline implementation cannot start until the chosen embedding model and LLM are downloaded from the model hub and run in the team environment. Check by: end of Sprint 2. Contact: the Data Scientist responsible for the environment." |
 
 Two good examples:
@@ -72,11 +72,11 @@ Why the dates matter: dependencies cause wait times. A Critical Date gives you a
 
 ## What doesn't belong here
 
-- **Tasks** themselves go in [Major Activities](03-project-canvas_v2/04-major-activities.md).
-- **Milestone dates** go in [Milestones](03-project-canvas_v2/02-milestones.md).
-- **What happens if A fails** (mitigation, contingency) goes in [Risks](03-project-canvas_v2/11-risks.md).
-- **The resource itself** (tool, account, compute, its owner and status) goes in [Facilities & Resources](03-project-canvas_v2/09-facilities-and-resources.md). Add a row here only when B is waiting for someone to deliver that resource.
-- **Fixed limits**, such as a quota, go in [Assumptions & Constraints](03-project-canvas_v2/03-assumptions-and-constraints.md) as constraints.
+- **Tasks** themselves go in [Major Activities](04-major-activities.md).
+- **Milestone dates** go in [Milestones](02-milestones.md).
+- **What happens if A fails** (mitigation, contingency) goes in [Risks](11-risks.md).
+- **The resource itself** (tool, account, compute, its owner and status) goes in [Facilities & Resources](09-facilities-and-resources.md). Add a row here only when B is waiting for someone to deliver that resource.
+- **Fixed limits**, such as a quota, go in [Assumptions & Constraints](03-assumptions-and-constraints.md) as constraints.
 
 ## Dependencies
 
@@ -105,7 +105,7 @@ Scenario: a legal research assistant. Names and dates are illustrative.
 | 3 | Retrieval evaluation cannot start until the evaluation Q&A set is generated and spot-checked. | 18/11/2026 | Data Scientist who builds the Q&A set (named member) |
 | 4 | Staging deployment cannot start until the cloud project is created under the university credit. | 02/12/2026 | Data Scientist responsible for infrastructure (named member) |
 
-Row 2 has a matching risk in [Risks](03-project-canvas_v2/11-risks.md): "The data provider delivers the document set more than one week late" (Linked to: [Dependencies](03-project-canvas_v2/06-dependencies.md) row 2).
+Row 2 has a matching risk in [Risks](11-risks.md): "The data provider delivers the document set more than one week late" (Linked to: [Dependencies](06-dependencies.md) row 2).
 
 ## Checklist before submitting
 
@@ -115,7 +115,7 @@ Row 2 has a matching risk in [Risks](03-project-canvas_v2/11-risks.md): "The dat
 - [ ] Every row has one named Contact (rule 4)
 - [ ] No row is a bare task (rule 5)
 - [ ] Every row for an outside supplier names the supplier (rule 6)
-- [ ] Every dependency that might fail has a risk in [Risks](03-project-canvas_v2/11-risks.md) that links back to it (rule 7)
+- [ ] Every dependency that might fail has a risk in [Risks](11-risks.md) that links back to it (rule 7)
 
 ---
 
