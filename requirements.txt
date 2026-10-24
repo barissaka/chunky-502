@@ -1,0 +1,23 @@
+# Chunky - Python dependencies (pin exact versions in Sprint 2 once the baseline runs)
+# Python 3.11
+
+# RAG pipeline
+ollama
+pyyaml
+pypdf
+
+# Reranker (Qwen3-Reranker-0.6B via transformers)
+torch
+transformers
+
+# Vector database - one of these will be kept after decision D3
+# chromadb
+# faiss-cpu
+# qdrant-client
+
+# UI - one of these will be kept
+# gradio
+# streamlit
+
+# Evaluation and tests
+pytest
