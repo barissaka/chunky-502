@@ -1,0 +1,15 @@
+# Chunky - product configuration (filled in Sprint 2 with the baseline)
+corpus:
+  chunking: article          # one chunk per madde
+embedding:
+  model: qwen3-embedding:0.6b
+vector_store:
+  type: null                 # chroma | faiss | qdrant - decision D3
+retrieval:
+  top_k: null
+  rerank: true
+  reranker: Qwen3-Reranker-0.6B
+generation:
+  model: qwen3:4b
+  thinking: null             # decided by experiment D8
+  prompt: answer_v1
