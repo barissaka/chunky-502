@@ -1,6 +1,6 @@
 # Spike 01: RAG or a long-context model
 
-**Project:** Traffic rules and penalties assistant · **Team:** Chunky · **Date:** 11/10/2026 · **Jira:** [TEAM: issue key] · **Prepared by:** [TEAM: name]
+**Project:** Traffic rules and penalties assistant · **Team:** Chunky · **Date:** 11/10/2026 · **Jira:** [CHUNKY-119](https://chunky-502.atlassian.net/browse/CHUNKY-119) (follow-up: CHUNKY-126) · **Prepared by:** Team Chunky
 
 ## Question
 
