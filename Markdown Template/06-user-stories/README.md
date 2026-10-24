@@ -9,4 +9,4 @@ Notes:
 - Provide versions through seperate pages:
   - [User Story Map v1](01-user-story-map-v1.md)
   - [User Story Map v2](02-user-story-map-v2.md) (Latest Version)
-- Give details on your epics via [story requirement]() pages.
+- Give details on your epics via [story requirement](03-story-requirements-for-epic-di-12.md) pages.
