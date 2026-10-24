@@ -1,4 +1,4 @@
-# E<n>: <experiment title>
+# E2: Reranker on/off
 
 **Note: this document uses HTML tags to disable rendering of instructions. View the raw file for further details.**
 

@@ -1,4 +1,4 @@
-# E<n>: <experiment title>
+# E1: Baseline — dense retrieval with Qwen3-Embedding
 
 **Note: this document uses HTML tags to disable rendering of instructions. View the raw file for further details.**
 
