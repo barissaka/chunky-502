@@ -39,7 +39,7 @@ Write one row per sprint.
 | **Sprint** | Sprint 1, 2, 3 or 4 | Every row | When is it built? |
 | **Start Date** | The sprint's start date from the calendar | Every row | From? |
 | **End Date** | The sprint's end date from the calendar | Every row | To? |
-| **Key Deliverable(s)** | Deliverables from [Deliverables](03-project-canvas_v2/05-deliverables.md) due in this sprint, given by number and name | Every row with a deliverable due in it | What is handed over? |
+| **Key Deliverable(s)** | Deliverables from [Deliverables](05-deliverables.md) due in this sprint, given by number and name | Every row with a deliverable due in it | What is handed over? |
 
 A release can span more than one sprint. Then it appears in more than one row, and the table shows how many sprints the release takes.
 
@@ -50,16 +50,16 @@ Each rule is a condition you can check with yes or no.
 1. All four sprints appear in the table.
 2. Start and end dates are not modified.
 3. Every Release names a release stage (pre-alpha, alpha, beta or release candidate) [1].
-4. Every Key Deliverable exists in [Deliverables](03-project-canvas_v2/05-deliverables.md) under the same number and name.
+4. Every Key Deliverable exists in [Deliverables](05-deliverables.md) under the same number and name.
 5. Every Key Deliverable's due date falls within the dates of the sprint it is listed in.
-6. A release does not combine items that [Deliverables](03-project-canvas_v2/05-deliverables.md) defines as separate deliverables under one new name; list the deliverable numbers instead.
+6. A release does not combine items that [Deliverables](05-deliverables.md) defines as separate deliverables under one new name; list the deliverable numbers instead.
 7. The plan has more than one release, spread over the sprints, not a single delivery at the end.
-8. Every beta names who receives it: which customers or testers [1]. The same people appear as Stakeholders of the beta deliverable in [Deliverables](03-project-canvas_v2/05-deliverables.md).
+8. Every beta names who receives it: which customers or testers [1]. The same people appear as Stakeholders of the beta deliverable in [Deliverables](05-deliverables.md).
 
 ## Test: two consistency checks
 
-1. **Against [Deliverables](03-project-canvas_v2/05-deliverables.md).** Pick each Key Deliverable. Is its due date inside the sprint's dates, and is its name the same as in 05?
-2. **Against [Milestones](03-project-canvas_v2/02-milestones.md).** Does every milestone in [Milestones](03-project-canvas_v2/02-milestones.md) fall in the sprint where its deliverable is listed here, or in the gap just after it?
+1. **Against [Deliverables](05-deliverables.md).** Pick each Key Deliverable. Is its due date inside the sprint's dates, and is its name the same as in 05?
+2. **Against [Milestones](02-milestones.md).** Does every milestone in [Milestones](02-milestones.md) fall in the sprint where its deliverable is listed here, or in the gap just after it?
 
 ## Not this / this
 
@@ -67,7 +67,7 @@ Each corrected entry fixes only the named defect. All examples are illustrative.
 
 | Not this | This | Defect |
 |---|---|---|
-| One "Chatbot Prototype" release that covers two capabilities, while [Deliverables](03-project-canvas_v2/05-deliverables.md) lists them as two deliverables | Key Deliverable(s): "D2 Functional core chat application; D5 Chatbot prototype" | Release plan and Deliverables disagree |
+| One "Chatbot Prototype" release that covers two capabilities, while [Deliverables](05-deliverables.md) lists them as two deliverables | Key Deliverable(s): "D2 Functional core chat application; D5 Chatbot prototype" | Release plan and Deliverables disagree |
 | "Release 1 — Sprints 1–4 — Final product" | Four rows: pre-alpha (S1), alpha (S2), beta (S3), release candidate (S4) | A single release at the end |
 | Dates written as "Mid-Sprint 2" | "04/11/2026 – 18/11/2026" | Start and end dates are required for each sprint |
 | "Beta — given to users" | "Beta — given to five pilot students from the target user group" | A beta goes to specific customers or testers [1] |
@@ -75,17 +75,17 @@ Each corrected entry fixes only the named defect. All examples are illustrative.
 ## Patterns to use if stuck
 
 - **One stage per sprint:** pre-alpha in Sprint 1 (charter and design), alpha in Sprint 2, beta in Sprint 3, release candidate in Sprint 4 [1]. Adjust if your team needs two sprints for one stage.
-- **A checkpoint before each beta or release candidate**, in the gap between sprints, where the Product Owner decides go or no-go (record it in [Milestones](03-project-canvas_v2/02-milestones.md)).
+- **A checkpoint before each beta or release candidate**, in the gap between sprints, where the Product Owner decides go or no-go (record it in [Milestones](02-milestones.md)).
 - **Minor releases for fixes:** if a beta needs fixes, plan "Beta 1.1 (minor)" in the next sprint rather than redoing the stage [1].
 
 ## What doesn't belong on this page
 
 | Item | Where it belongs |
 |---|---|
-| Milestones and checkpoints | [Milestones](03-project-canvas_v2/02-milestones.md) |
-| Deliverable descriptions, acceptance criteria and approvers | [Deliverables](03-project-canvas_v2/05-deliverables.md) |
+| Milestones and checkpoints | [Milestones](02-milestones.md) |
+| Deliverable descriptions, acceptance criteria and approvers | [Deliverables](05-deliverables.md) |
 | Which user stories are built in which sprint | The User Story Map, which can show sprints on its horizontal axis |
-| Activities and their scope | [Major Activities](03-project-canvas_v2/04-major-activities.md) |
+| Activities and their scope | [Major Activities](04-major-activities.md) |
 
 ## Release table
 
@@ -100,7 +100,7 @@ The go/no-go checkpoints fall in the gaps between sprints: M6 (23/11/2026) befor
 
 ## Example (illustrative only)
 
-The project and deliverable numbers are invented. They match the examples in [Milestones](03-project-canvas_v2/02-milestones.md) and [Deliverables](03-project-canvas_v2/05-deliverables.md).
+The project and deliverable numbers are invented. They match the examples in [Milestones](02-milestones.md) and [Deliverables](05-deliverables.md).
 
 | # | Release | Sprint | Start Date | End Date | Key Deliverable(s) |
 |---|---|---|---|---|---|
@@ -114,11 +114,11 @@ The project and deliverable numbers are invented. They match the examples in [Mi
 - [ ] All four sprints appear (Rule 1)
 - [ ] All start and end dates match the sprint calendar (Rule 2)
 - [ ] Every row names a release stage (Rule 3)
-- [ ] Every Key Deliverable exists in [Deliverables](03-project-canvas_v2/05-deliverables.md) under the same number and name (Rule 4)
+- [ ] Every Key Deliverable exists in [Deliverables](05-deliverables.md) under the same number and name (Rule 4)
 - [ ] Every Key Deliverable is due within its sprint's dates (Rule 5)
 - [ ] No release merges separate deliverables under a new name (Rule 6)
 - [ ] There is more than one release across the sprints (Rule 7)
-- [ ] Every beta names its customers or testers, and they match those in [Deliverables](03-project-canvas_v2/05-deliverables.md) (Rule 8)
+- [ ] Every beta names its customers or testers, and they match those in [Deliverables](05-deliverables.md) (Rule 8)
 
 ## References
 
