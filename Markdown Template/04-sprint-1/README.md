@@ -2,7 +2,7 @@
 
 Welcome.
 
-This is the main page of “Sprint 1” made by the ‘XXX’ team.
+This is the main page of “Sprint 1” made by the ‘Chunky’ team.
 
 Please present a brief summary of what is done in the 1st sprint.
 
