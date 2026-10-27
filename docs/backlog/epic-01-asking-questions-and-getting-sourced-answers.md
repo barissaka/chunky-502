@@ -1,6 +1,6 @@
 # Story Requirements for Epic 01 · Asking questions and getting sourced answers
 
-<!-- Exported from Jira on 2026-10-24 (project CHUNKY). Jira is the source of truth for this backlog;
+<!-- Exported from Jira on 2026-10-27 (project CHUNKY). Jira is the source of truth for this backlog;
      this file is a snapshot for the sprint deliverable and is regenerated before each sprint review. -->
 
 | Epic | Asking questions and getting sourced answers |
@@ -15,7 +15,7 @@
 
 | # | User story title | User story description | Priority | Points | Owner | Sprint | Status | Jira |
 |---|---|---|---|---|---|---|---|---|
-| S1 | US-01 Ask in my own words | As a driver, I want to ask a question about traffic rules or penalties in my own Turkish sentences, so that I do not need to know legal terms or article numbers before I ask. |  | 6 | özge çalışkan | Sprint 2 | To Do | [CHUNKY-124](https://chunky-502.atlassian.net/browse/CHUNKY-124) |
+| S1 | US-01 Ask in my own words | As a driver, I want to ask a question about traffic rules or penalties in my own Turkish sentences, so that I do not need to know legal terms or article numbers before I ask. |  | 8 | özge çalışkan | Sprint 2 | To Do | [CHUNKY-124](https://chunky-502.atlassian.net/browse/CHUNKY-124) |
 | S2 | US-02 Get a correct answer with its sources | As a driving-licence candidate, I want a correct answer drawn from the official legal texts together with the article it rests on, so that I can rely on it and check it myself when I prepare for the exam. |  | 8 |  | Sprint 3 | To Do | [CHUNKY-129](https://chunky-502.atlassian.net/browse/CHUNKY-129) |
 | S3 | US-03 Ask a follow-up question | As a driver, I want to ask a follow-up question about the answer I just received, so that I do not need to repeat my earlier question. |  | 5 |  | Sprint 4 | To Do | [CHUNKY-136](https://chunky-502.atlassian.net/browse/CHUNKY-136) |
 | S4 | US-04 Start a new chat | As a driver, I want to open a new chat whenever I want, so that my next question is not mixed with the previous topic. |  | 2 |  | Sprint 4 | To Do | [CHUNKY-137](https://chunky-502.atlassian.net/browse/CHUNKY-137) |

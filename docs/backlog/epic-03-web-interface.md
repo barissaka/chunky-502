@@ -1,6 +1,6 @@
 # Story Requirements for Epic 03 · Web interface
 
-<!-- Exported from Jira on 2026-10-24 (project CHUNKY). Jira is the source of truth for this backlog;
+<!-- Exported from Jira on 2026-10-27 (project CHUNKY). Jira is the source of truth for this backlog;
      this file is a snapshot for the sprint deliverable and is regenerated before each sprint review. -->
 
 | Epic | Web interface |
@@ -16,7 +16,7 @@
 | # | User story title | User story description | Priority | Points | Owner | Sprint | Status | Jira |
 |---|---|---|---|---|---|---|---|---|
 | S1 | US-09 Use the assistant in a web interface | As a driver, I want to use the assistant in my web browser, so that I need to install nothing. |  | 5 | Barış SAKA | Sprint 2 | To Do | [CHUNKY-125](https://chunky-502.atlassian.net/browse/CHUNKY-125) |
-| S2 | US-11 Get an answer quickly | As a driver, I want to receive the answer within seconds, so that I can get it while I am preparing or checking a rule. |  | 3 |  | Sprint 3 | To Do | [CHUNKY-133](https://chunky-502.atlassian.net/browse/CHUNKY-133) |
+| S2 | US-11 Read the full answer within one minute | As a driver, I want to see that the assistant is working on my question and to read the full answer within one minute, so that I do not wonder whether the page is stuck while I am preparing or checking a rule. |  | 3 |  | Sprint 3 | To Do | [CHUNKY-133](https://chunky-502.atlassian.net/browse/CHUNKY-133) |
 | S3 | US-10 See example questions when I open the page | As a driving-licence candidate, I want to see example questions when I open the page, so that I know what to ask. |  | 2 |  | Sprint 4 | To Do | [CHUNKY-139](https://chunky-502.atlassian.net/browse/CHUNKY-139) |
 
 ## S1 · US-09 Use the assistant in a web interface
@@ -32,12 +32,12 @@
 |---|---|---|---|---|
 | Write all interface texts in Turkish and check them | Zehranur KUTLUYER |  | To Do | [CHUNKY-166](https://chunky-502.atlassian.net/browse/CHUNKY-166) |
 
-## S2 · US-11 Get an answer quickly
+## S2 · US-11 Read the full answer within one minute
 
 **Acceptance criteria**
 
-- When the user submits a question, the interface shall show a progress indicator until the answer appears.
-- When the user submits a question, the assistant shall return the complete answer within 60 seconds.
+- When the user submits a question, the interface shall show a progress indicator until the answer is displayed.
+- When the user submits a question, the assistant shall display the complete answer within 60 seconds.
 
 **Sub-tasks**
 

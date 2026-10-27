@@ -1,6 +1,6 @@
 # Story Requirements for Epic 02 · Safe behaviour
 
-<!-- Exported from Jira on 2026-10-24 (project CHUNKY). Jira is the source of truth for this backlog;
+<!-- Exported from Jira on 2026-10-27 (project CHUNKY). Jira is the source of truth for this backlog;
      this file is a snapshot for the sprint deliverable and is regenerated before each sprint review. -->
 
 | Epic | Safe behaviour |
