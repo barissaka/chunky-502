@@ -269,7 +269,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **When / where** | Sprints 2–4; during development and after deployment |
 | **Mitigation** | Major Activities rows 8 and 16: small quantized local models (C-14); only the top candidates are reranked; response time is logged for every question in D6 |
 | **Probability (basis)** | 3: no measurement yet; CPU inference of a 4-billion-parameter model generates text slowly (team estimate) |
-| **Impact (basis)** | 4: slow answers threaten the Objective 1 target of a correct answer in under 2 minutes |
+| **Impact (basis)** | 4: slow answers threaten the Objective 1 target of a correct answer in under 77 seconds |
 | **Score** | 12 (High) |
 | **Trigger** | Median response time above 30 seconds at M5 (18/11/2026) or above 60 seconds at M7 (09/12/2026) |
 | **Contingency plan (B plan)** | Degrade gracefully: the assistant runs on PC 2, whose GPU runs the embedding and reranking models, or the gateway sends answer generation to a hosted language model within the $100 limit (Architecture AD-03); the Product Owner records the switch at M6 or M8 |

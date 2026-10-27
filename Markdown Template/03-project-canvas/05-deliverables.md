@@ -43,7 +43,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 
 | Project Deliverable #: | D3: Default-state measurement report |
 |---|---|
-| Description: | Results of the timed test in which participants answer questions with the official texts and a web search, without the assistant. It fixes the default-state value of Objective 1. |
+| Description: | Results of the timed test in which participants answer questions with the official texts and a web search, without the assistant. It holds the default-state value of Objective 1: a median of 77 seconds. |
 | Acceptance Criteria: | 1. 10 participants took part, each a licensed driver or a driving-licence candidate. 2. Each participant answered 3 questions from D2, and the time of all 30 attempts is recorded. 3. Each attempt is marked correct or incorrect against the D2 answer key. 4. The report states the median time to a correct answer and the median number of places consulted. 5. The default-state value written under Objective 1 in [Project Executive Summary](01-project-executive-summary.md) equals the median time in this report. |
 | Due Date: | 26/10/2026 |
 | Stakeholders: | Project Review Committee; project team |
@@ -106,7 +106,7 @@ The team writes no model card and no datasheet. No model is trained or fine-tune
 | Project Deliverable #: | D10: Pilot test report |
 |---|---|
 | Description: | Results of the timed usability test and the post-test survey with the pilot participants, and of the out-of-scope test. It holds the measurements of Objectives 1, 3 and 4 and the survey counts for the business outcomes. |
-| Acceptance Criteria: | 1. 10 participants completed 3 timed questions each with the beta (30 attempts) and the post-test survey, and the report states how many of them also took part in D3. 2. The report states the median time to a correct answer, next to the default-state value of D3 and the target of under 2 minutes (Objective 1). 3. The report states how many participants would use the assistant again and how many rate the answers 4 or 5 for clarity on the 5-point scale, each next to the target of 7 of 10 (Objective 3). 4. The report states how many of the 10 out-of-scope questions were declined with the expected response, as checked automatically against the fixed refusal sentence (Objective 4). 5. The report gives the survey count for each business outcome of Objectives 1 to 4. 6. Every survey question cites the published instrument or source it is taken from. |
+| Acceptance Criteria: | 1. 10 participants completed 3 timed questions each with the beta (30 attempts) and the post-test survey, and the report states how many of them also took part in D3. 2. The report states the median time to a correct answer, next to the target of under 77 seconds, the default-state value of D3 (Objective 1). 3. The report states how many participants would use the assistant again and how many rate the answers 4 or 5 for clarity on the 5-point scale, each next to the target of 7 of 10 (Objective 3). 4. The report states how many of the 10 out-of-scope questions were declined with the expected response, as checked automatically against the fixed refusal sentence (Objective 4). 5. The report gives the survey count for each business outcome of Objectives 1 to 4. 6. Every survey question cites the published instrument or source it is taken from. |
 | Due Date: | 23/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee |
 | Approving Stakeholder(s): | Product Owner |
