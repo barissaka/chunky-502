@@ -25,16 +25,10 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 | Column | Definition of Ready |
 |---|---|
 | Data acquisition | D1 is fixed and D2 is tagged and checked; the retrieval dates are recorded and the amendment dates are checked at the sprint start. |
-| Design and development | The team laptop that runs the models is confirmed: the embedding model and the generation model are downloaded and run on it; the evaluation script and its log format are agreed. |
-| Verification | The three corpus sizes (Law only, Law + Regulation, full set) are defined; the time and memory needed by the Law-only run are measured on the team laptop before the larger runs; the evaluation runs are planned at least 3 days before the milestone. |
-| All stages | The Sprint 1 review is done and Charter v1 is approved (dependency 5); the stories of the sprint (US-01, US-09) have acceptance criteria and test cases written. |
-
-| Column | Definition of Done |
-|---|---|
-| Design and development | The retrieval index with one chunk per article is built; the alpha runs end to end on a team laptop: a Turkish question returns a Turkish answer with its article reference (D7); the model version is pinned in the configuration. |
-| Verification | The long-context baseline is run at three sizes and logged by question type with response time and memory use, and the Law-only run was checked before the larger runs (D5); the RAG pipeline is evaluated by question type next to the baseline (D6); all run logs are stored and versioned. |
-| Stories | The acceptance criteria of US-01 and US-09 are met and their test cases passed; the Product Owner accepted them. |
-| All stages | Open problems have their own Jira items; actual hours are logged; the sprint review is held; the go/no-go material for the beta is prepared. |
+| Labelling (development set) | The 10 development questions are chosen from D2: 8 in-scope questions that cover the question types (including one follow-up and one ambiguous question) and 2 out-of-scope questions; their ids are written in the configuration and frozen. |
+| Design and development | The team laptop that runs the models is confirmed: the embedding model and the generation model are downloaded and run on it; the long-context model takes all six texts (255,138 tokens) and the question, checked with one test question; the evaluation script and its log format are agreed. |
+| Verification | One long-context run with all six texts at once is planne; the measures to report are listed (Recall@k, correct answers, supporting article, declined out-of-scope questions, response time). |
+| Stories and planning | The Sprint 1 review is done, Charter v1 is approved and the Sprint 1 feedback is listed; the stories of the sprint (US-01, US-09) have acceptance criteria and test cases written; the stakeholder roles of the stories are taken from the ISO/IEC 5339 categories. |
 
 ## Sprint 3:
 
