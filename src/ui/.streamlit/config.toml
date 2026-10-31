@@ -1,0 +1,21 @@
+# Chunky — Streamlit teması ve sunucu ayarları
+# Renkler: açık zemin, mavi vurgu, hafif mavi ikincil alanlar (kenar çubuğu, sohbet balonları).
+
+[theme]
+base = "light"
+primaryColor = "#2563EB"          # mavi — butonlar, kaydırıcılar, odak çerçevesi
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#EAF1FB"   # kenar çubuğu ve sohbet balonları, hafif mavi
+textColor = "#1F2933"
+font = "sans serif"
+
+[server]
+headless = true
+runOnSave = false
+maxUploadSize = 5
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"       # sağ üstteki Deploy / menü çubuğunu gizle (demo ekranı)
