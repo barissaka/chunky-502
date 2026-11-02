@@ -9,6 +9,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "ipykernel",
     "nbstripout",
+    "python-docx==1.2.0",
 ]
 
 [tool.setuptools.packages.find]
