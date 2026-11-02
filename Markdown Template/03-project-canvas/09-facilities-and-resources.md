@@ -96,7 +96,7 @@ One row each for:
 | 9 | Git repository (GitHub) | Shared code, document set files (D1), question set and answer key (D2) and experiment cards; access for the four team members only; no sensitive data: forum questions are stored without user names or licence plates (C-12) | Barış Saka (Data Scientist) | Planned by 21/10/2026 (M1) |
 | 10 | Project tools: Jira, Confluence and Weights & Biases accounts | Backlog and sprints (Jira), design decisions (Confluence), experiment and model-version tracking (Weights & Biases); accounts for the four team members | Zehranur Aymaz Kutluyer (Product Owner) | In use on 25/10/2026 |
 | 11 | Deployment environment: the host laptop (row 1) | The assistant runs on PC 1 for the pilot (D9, D10) and the live demo (D11, Major Activities row 16); PC 2 and PC 4 are the spare hosts | Özge Çalışkan | Planned by 09/12/2026 (D9) |
-| 12 | Test sessions: a quiet room, the host laptop or a laptop with a web browser, a timer and the survey form | Default-state measurement (D3) and pilot with the beta (D9, D10); on-premise | Zehranur Aymaz Kutluyer (Product Owner) | Planned by 26/10/2026 (D3) and 23/12/2026 (D10) |
+| 12 | Test sessions: a quiet room, the host laptop or a laptop with a web browser, a timer and the survey form | Default-state measurement (D3) and pilot with the beta (D9, D10); on-premise | Zehranur Aymaz Kutluyer (Product Owner) | Planned by 26/10/2026 (D3) and 22/12/2026 (D10) |
 
 The language, embedding and reranking models, the tokenizer and the retrieval index are software, not resources; they are listed with their versions and licences in the [Software Bill of Materials](../10-software-bill-of-materials.md).
 

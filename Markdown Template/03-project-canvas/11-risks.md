@@ -123,7 +123,7 @@ Add rows as needed. Rows with a score of 10 or more also need a detail block (ne
 | R-12 | Model | At M5 the assistant does not answer more correctly or cite articles more accurately than a general-purpose language model that reads the full texts | Sprint 2; development | 4 | 2 | 8 | Data Scientist (Barış Saka) | C-04 |
 | R-13 | Integration | The hosted model API on Google Cloud or Azure (hosted language model if chosen, long-context baseline, judge model) changes its model version or quota, or is unavailable for more than 1 day, during an evaluation or pilot week | Sprints 2–4; development | 2 | 2 | 4 | Data Scientist (Özge Çalışkan) | C-06; Dependencies row 4 |
 | R-14 | Model | At M7 fewer than 4 of the 5 follow-up questions in the question set are answered correctly, because the reference to the earlier turn is resolved to the wrong article | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Barış Saka) | C-05 |
-| R-15 | Model | On the ambiguity labels at M7, the ask decision has precision or recall below 0.70: the assistant asks when no condition is missing, or answers without asking when a missing condition changes the answer | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Özge Çalışkan) | C-05 |
+| R-15 | Model | On the ambiguity labels of D2 (defined under D2 in [Deliverables](05-deliverables.md)) at M7, the decision to ask a clarifying question has precision or recall below 0.70: the assistant asks when no condition is missing, or answers without asking when a missing condition changes the answer | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Özge Çalışkan) | C-05 |
 | R-16 | Model | A prompt-injection attempt passes the query guard and changes the assistant's behaviour | Sprints 3–4; development and after deployment | 2 | 4 | 8 | Data Scientist (Özge Çalışkan) | C-13 |
 | R-17 | Model | In the check before M5, the automated correctness score disagrees with the answer key on more than 3 of the 30 in-scope answers | Sprints 2–3; development | 3 | 4 | 12 | Business Analyst (Ekin Deniz Öztürk) | Objective 2; Major Activities row 13 |
 | R-18 | Integration | The host laptop has no internet connection during the pilot or the live demo while a hosted language model is configured | Sprint 4; development | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | C-06 |
@@ -237,7 +237,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; the levels are a team estimate |
 | **Impact (basis)** | 4: the 80% levels are the success criterion of Objective 2 |
 | **Score** | 12 (High) |
-| **Trigger** | Either share is below 70% at M5 (18/11/2026) or below 80% at M7 (09/12/2026) |
+| **Trigger** | Either share is below 70% at M5 (20/11/2026) or below 80% at M7 (11/12/2026) |
 | **Contingency plan (B plan)** | Narrow the scope: generated answers are released only for the question types that reach 80%; for the other types the assistant shows the retrieved articles with no generated answer, and the Product Owner reports the Objective 2 result as measured, against the target as written in the charter, to the Project Review Committee at M8 |
 | **Owner** | Zehranur Aymaz Kutluyer, Product Owner |
 | **Schedule effect** | About 1 week, inside Sprint 4 |
@@ -254,7 +254,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; legal answers often differ from the key only in a condition or an amount |
 | **Impact (basis)** | 4: Objective 2 is measured with these scores |
 | **Score** | 12 (High) |
-| **Trigger** | More than 3 of 30 disagreements in the hand check of 18/11/2026 (M5) |
+| **Trigger** | More than 3 of 30 disagreements in the hand check of the D6 run on 18/11/2026, before M5 (20/11/2026) |
 | **Contingency plan (B plan)** | Hand over to a human: for the question types where the scores disagree, the Business Analyst / Domain Expert scores the answers by hand against the answer key at M7, and D8 states which answers were scored by hand |
 | **Owner** | Ekin Deniz Öztürk, Business Analyst / Domain Expert |
 | **Schedule effect** | About 3 days, inside Sprint 3 |
@@ -271,7 +271,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no measurement yet; CPU inference of a 4-billion-parameter model generates text slowly (team estimate) |
 | **Impact (basis)** | 4: slow answers threaten the Objective 1 target of a correct answer in under 77 seconds |
 | **Score** | 12 (High) |
-| **Trigger** | Median response time above 30 seconds at M5 (18/11/2026) or above 60 seconds at M7 (09/12/2026) |
+| **Trigger** | Median response time above 30 seconds at M5 (20/11/2026) or above 60 seconds at M7 (11/12/2026) |
 | **Contingency plan (B plan)** | Degrade gracefully: the assistant runs on PC 2, whose GPU runs the embedding and reranking models, or the gateway sends answer generation to a hosted language model within the $100 limit (Architecture AD-03); the Product Owner records the switch at M6 or M8 |
 | **Owner** | Zehranur Aymaz Kutluyer, Product Owner |
 | **Schedule effect** | About 1 week, inside Sprint 3 |
