@@ -1,0 +1,76 @@
+# Belge kaydı: Third-party Dataset Register'ın makinece okunan kopyası.
+# Kaynak: belge_kaydi_sablon.xlsx (2/11/2026). Chunker her chunk'a buradaki bilgileri ekler.
+# Tarihler YYYY-AA-GG biçiminde.
+
+documents:
+  - file: 01_kanun_2918
+    doc_code: "KTK"
+    doc_title: "2918 sayılı Karayolları Trafik Kanunu"
+    doc_type: "Kanun"
+    first_published: "18/10/1983 – 18195"
+    source_url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=2918&MevzuatTur=1&MevzuatTertip=5"
+    source_format: "Word (.doc indirildi, Word ile .docx olarak kaydedildi)"
+    accessed: 2026-11-02
+    latest_amendment: "7590 sayılı Kanun (kabul 24/7/2026); değişiklik tablosuna göre yürürlük 31/7/2026"
+    version_date: 2026-07-24
+    notes: "91 dipnot Word'ün dipnot alanında, gövde metnine karışmıyor. Değişiklik tablosuna göre 7574 sayılı Kanunla Madde 103'te yapılan değişiklik 1/1/2027'de yürürlüğe girecek."
+
+  - file: 02_trafik_yonetmeligi
+    doc_code: "KTY"
+    doc_title: "Karayolları Trafik Yönetmeliği"
+    doc_type: "Yönetmelik"
+    first_published: "18/7/1997 – 23053"
+    source_url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=8182&MevzuatTur=7&MevzuatTertip=5"
+    source_format: "Word (.doc indirildi, Word ile .docx olarak kaydedildi)"
+    accessed: 2026-11-02
+    latest_amendment: "RG 3/7/2026 – 33299"
+    version_date: 2026-07-03
+    notes: "EK-1…EK-4 belgenin içinde. Madde içinde tablolar var (ör. Madde 100 hız sınırları)."
+
+  - file: 03_meb_surucu_kursu
+    doc_code: "KURS"
+    doc_title: "Millî Eğitim Bakanlığı Özel Motorlu Taşıt Sürücüleri Kursu Yönetmeliği"
+    doc_type: "Yönetmelik"
+    first_published: "29/5/2013 – 28661"
+    source_url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=18408&MevzuatTur=7&MevzuatTertip=5"
+    source_format: "Word (HTML biçiminde .doc indirildi; karakter kodlaması düzeltildi, Word ile .docx olarak kaydedildi)"
+    accessed: 2026-11-02
+    latest_amendment: "RG 9/7/2024 – 32597"
+    version_date: 2024-07-09
+    notes: "Ekler belgenin içinde yok ('Ekleri için tıklayınız' bağlantısı). Metinde ayrıca Danıştay'ın 8/10/2025 tarihli yürütmeyi durdurma kararına ilişkin not var."
+
+  - file: 04_surucu_saglik
+    doc_code: "SAĞLIK"
+    doc_title: "Sürücü Adayları ve Sürücülerde Aranacak Sağlık Şartları ile Muayenelerine Dair Yönetmelik"
+    doc_type: "Yönetmelik"
+    first_published: "26/9/2006 – 26301"
+    source_url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=10664&MevzuatTur=7&MevzuatTertip=5"
+    source_format: "Word (HTML biçiminde .doc indirildi, Word ile .docx olarak kaydedildi)"
+    accessed: 2026-11-02
+    latest_amendment: "RG 30/9/2021 – 31614"
+    version_date: 2021-09-30
+    notes: "Belge sonundaki değişiklik tablosunda yalnızca 30/9/2021 listeli; metin içi notlarda 29/12/2015 ve 13/6/2020 değişiklikleri de var."
+
+  - file: 05_arac_muayene
+    doc_code: "MUAYENE"
+    doc_title: "Araç Muayene İstasyonlarının Açılması, İşletilmesi ve Araç Muayenesi Hakkında Yönetmelik"
+    doc_type: "Yönetmelik"
+    first_published: "6/1/2021 – 31356"
+    source_url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=36213&MevzuatTur=7&MevzuatTertip=5"
+    source_format: "Word (.doc indirildi, Word ile .docx olarak kaydedildi)"
+    accessed: 2026-11-02
+    latest_amendment: "RG 9/10/2026 – 33395"
+    version_date: 2026-10-09
+    notes: "Ekler belgenin içinde yok ('Ekleri için tıklayınız' bağlantısı)."
+
+  - file: 06_elektrikli_skuter
+    doc_code: "SKUTER"
+    doc_title: "Elektrikli Skuter Yönetmeliği"
+    doc_type: "Yönetmelik"
+    first_published: "14/4/2021 – 31454"
+    source_url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=38528&MevzuatTur=7&MevzuatTertip=5"
+    source_format: "Word (.doc indirildi, Word ile .docx olarak kaydedildi)"
+    accessed: 2026-11-02
+    latest_amendment: "RG 13/10/2026 – 33399"
+    version_date: 2026-10-13
+    notes: ""
