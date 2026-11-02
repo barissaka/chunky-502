@@ -79,7 +79,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | Project Deliverable #: | D7: Alpha prototype |
 |---|---|
 | Description: | First integrated build of the assistant: a web chat interface connected to the RAG pipeline over the document set of D1. It runs on a team laptop. |
-| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The number of distinct article IDs in the index equals the number of articles reported in D1. 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
+| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The number of distinct article IDs in the index equals the number of articles reported in D1 (550). 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
 | Due Date: | 18/11/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Product Owner |
