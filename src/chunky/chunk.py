@@ -13,6 +13,12 @@ of its text: they hold the next article's heading ("Amaç") and, at a
 section break, the KISIM / BÖLÜM lines. These become the next chunk's
 article_heading and section.
 
+Amendment notes such as "(Değişik: 17/10/1996-4199/1 md.)" or
+"(Mülga ibare:RG-3/7/2021-31530)" are taken out of the text and kept in the
+chunk's "amendments" list with the label of the place they stood at. A line
+left with only a label after a repeal note is dropped; a unit left with no
+content (a repealed article or annex) gets no chunk.
+
 Sub-chunks for articles longer than the embedding model's input limit
 (AD-08) are added in the indexing step, once the model is chosen.
 
@@ -43,6 +49,14 @@ TAIL_UNITS = [
 ADDED_BY = re.compile(r"^\(Ek:[^)]*\)$")                              # "(Ek:6/12/2019-7196/42 md.)" before an annex
 ANNOTATION_IN_TEXT = re.compile(r"\s*\((?:Değişik|Ek)[^)]*\)")       # "(Değişik başlık: RG-...)" in a heading
 KIND = {"": ("m", "Madde"), "E": ("ekm", "Ek Madde"), "G": ("gm", "Geçici Madde")}  # by first letter: Ek / EK, Geçici / GEÇİCİ
+# Amendment note: a bracket with a date whose label names a change; a "(…)" right after it marks repealed words
+NOTE = re.compile(r"\((?P<label>[^()\d]*)(?P<rest>\d[^()]*)\)(?:\s*\((?:…|\.\.\.)\))?")
+NOTE_KIND = re.compile(r"\b(?:[Dd]eğişik|DEĞİŞİK|[Ee]k|EK|[Mm]ülga|MÜLGA|[İi]ptal|İPTAL|[Yy]eniden [Dd]üzenleme|[Tt]eselsül)\b")
+REPEAL = re.compile(r"[Mm]ülga|MÜLGA|[İi]ptal|İPTAL")
+DATE = re.compile(r"\d{1,2}/\d{1,2}/\d{4}")
+# Labels at the start of a line: "MADDE 5 –", "(2)", "2)", "3.", "b)", "EK-1", a defined term "Minibüs:"
+LABELS = re.compile(r"(?:\s*(?:(?:Ek |Geçici |EK |GEÇİCİ )?(?:Madde|MADDE)\s+\d+(?:/[A-ZÇ])?\s*[–\-—‒]"
+                    r"|\(\d+\)|\d+[.)]|[a-zçğıöşü]{1,2}\)|EK-\d+\*?|[^\s:|()][^:|()]{0,40}:))*\s*")
 
 
 def is_heading(line: str) -> bool:
@@ -109,11 +123,47 @@ def update_section(state: dict, section_lines: list[str]) -> None:
             titles.append(line)
 
 
-def chunk_document(name: str, doc: dict) -> list[dict]:
+def clean_line(line: str) -> tuple[str, list[dict], bool]:
+    """Take the amendment notes out of a line.
+
+    Returns (new line, notes, repealed): repealed means a repeal note ended the
+    line and only labels stood before it, as in "(2) (Mülga: …)" or "Minibüs: (Mülga: …)".
+    """
+    parts, notes, repeal, pos = [], [], False, 0
+    for m in NOTE.finditer(line):
+        if not (NOTE_KIND.search(m["label"]) and DATE.search(m["rest"])):
+            continue                                    # "(1)", "(28/4/1997 tarihinden önce alınanlar)", Danıştay notes
+        parts.append(line[pos:m.start()])
+        at = LABELS.match("".join(parts)).group().strip().rstrip("–-—‒: ")
+        notes.append({"note": (m["label"] + m["rest"]).strip(), "at": at})
+        repeal = repeal or bool(REPEAL.search(m["label"]))
+        pos = m.end()
+    if not notes:
+        return line, [], False
+    tail = line[pos:]
+    text = re.sub(r"\s+([,.;])", r"\1", re.sub(r"\s{2,}", " ", "".join(parts) + tail)).strip()
+    return text, notes, repeal and not tail.strip() and bool(LABELS.fullmatch(text))
+
+
+def clean_text(text: str) -> tuple[str | None, list[dict]]:
+    """Clean every line; the text is None when a repeal left no content."""
+    lines, notes = [], []
+    for i, line in enumerate(text.split("\n")):
+        new, found, repealed = clean_line(line)
+        notes += found
+        if not new or (repealed and i > 0):
+            continue                                    # note-only line or a repealed one; the header line stays
+        lines.append(new)
+    if any(REPEAL.search(n["note"]) for n in notes) and all(LABELS.fullmatch(l) for l in lines):
+        return None, notes
+    return "\n".join(lines), notes
+
+
+def chunk_document(name: str, doc: dict) -> tuple[list[dict], list[str]]:
     lines = (CLEAN_DIR / f"{name}.txt").read_text(encoding="utf-8").splitlines()
     units = find_units(lines)
     state = {"kisim": None, "bolum": None}
-    chunks = []
+    chunks, dropped = [], []
     for k, u in enumerate(units):
         nxt = units[k + 1] if k + 1 < len(units) else None
         end = nxt["start"] if nxt else len(lines)
@@ -125,6 +175,10 @@ def chunk_document(name: str, doc: dict) -> list[dict]:
             _, heading, section_lines = split_preamble(lines, prev_end, u["start"])
             update_section(state, section_lines)
         article_id = f"{doc['doc_code']}-{u['part']}"
+        text, notes = clean_text("\n".join(lines[u["start"]:end]))
+        if text is None:                               # repealed article or annex
+            dropped.append(article_id)
+            continue
         chunks.append({
             "chunk_id": article_id,
             "article_id": article_id,
@@ -137,19 +191,22 @@ def chunk_document(name: str, doc: dict) -> list[dict]:
             "source_url": doc["source_url"],
             "accessed": str(doc["accessed"]),
             "version_date": str(doc["version_date"]),
-            "text": "\n".join(lines[u["start"]:end]),
+            "text": text,
+            "amendments": notes,
         })
-    return chunks
+    return chunks, dropped
 
 
-def main() -> None:
+def main() -> list[str]:
     docs = {d["file"]: d for d in yaml.safe_load(DOCS_FILE.read_text(encoding="utf-8"))["documents"]}
-    all_chunks = []
+    all_chunks, all_dropped = [], []
     for name, doc in docs.items():
-        chunks = chunk_document(name, doc)
+        chunks, dropped = chunk_document(name, doc)
         all_chunks.extend(chunks)
+        all_dropped.extend(dropped)
         n_articles = sum(1 for c in chunks if c["article_label"].split()[0] in ("Madde", "Ek", "Geçici"))
-        print(f"{name:25} {len(chunks):4} chunks ({n_articles} articles, {len(chunks) - n_articles} other)")
+        print(f"{name:25} {len(chunks):4} chunks ({n_articles} articles, {len(chunks) - n_articles} other), "
+              f"{len(dropped)} repealed")
     ids = [c["chunk_id"] for c in all_chunks]
     dupes = sorted({i for i in ids if ids.count(i) > 1})
     if dupes:
@@ -159,6 +216,8 @@ def main() -> None:
         for c in all_chunks:
             f.write(json.dumps(c, ensure_ascii=False) + "\n")
     print(f"{len(all_chunks)} chunks -> {OUT_FILE.relative_to(ROOT)}")
+    print(f"Repealed, no chunk ({len(all_dropped)}):", ", ".join(all_dropped))
+    return all_dropped
 
 
 if __name__ == "__main__":
