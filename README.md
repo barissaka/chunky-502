@@ -85,3 +85,23 @@ No API keys are required: every model runs on the laptop. Random seeds and LLM s
 - Documentation is Markdown in this repository; Confluence is a mirror, edited only here.
 - One branch per feature, named after the Jira issue (e.g. `CHUNKY-12-query-guard`); commit messages start with the issue key; merged into `main` with `--no-ff`.
 - Parameters live in `config/rag.yaml`; experiment parameter spaces live in the experiment cards and W&B.
+
+## RAG development environment (Windows)
+
+Requirements: Git, Python 3.12, and VS Code with the Python and Jupyter extensions.
+
+```powershell
+git clone https://github.com/barissaka/chunky-502.git
+cd chunky-502
+py -3.12 -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -e .
+nbstripout --install
+```
+
+If `Activate.ps1` fails with "running scripts is disabled on this system", run
+`Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once and try again.
+
+`nbstripout --install` removes notebook outputs before each commit. It applies only to your own clone, so every team member needs to run it once.
+
+In notebooks, select `.venv` as the kernel. To check the setup, run `notebooks/00_setup_check.ipynb`.
