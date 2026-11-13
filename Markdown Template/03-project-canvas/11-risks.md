@@ -199,11 +199,11 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Linked to** | A-03; Dependencies row 3 |
 | **Cause** | Participants are unpaid volunteers (classmates, colleagues and family members of the team) and the two sessions are about two months apart |
 | **When / where** | Sprints 1 and 4; during development |
-| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M8 (14/12/2026) |
+| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M8 (09/12/2026) |
 | **Probability (basis)** | 3: no written confirmation had been received on 18/10/2026 |
 | **Impact (basis)** | 4: the success criteria of Objectives 1 and 3 are defined on 10 participants |
 | **Score** | 12 (High) |
-| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 14/12/2026 (M8) |
+| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 09/12/2026 (M8) |
 | **Contingency plan (B plan)** | The test runs with the participants available (at least 6); the results of Objectives 1 and 3 are reported as counts out of the participants who took part, against the targets as written in the charter; only participants who completed both sessions are compared for Objective 1, and the Project Review Committee is informed in writing |
 | **Owner** | Ekin Deniz Öztürk, Business Analyst / Domain Expert |
 | **Schedule effect** | None; the result is reported on fewer participants |
@@ -220,7 +220,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; the out-of-scope questions collected so far (insurance, individual objections) are close to in-scope topics |
 | **Impact (basis)** | 4: Objective 4 requires the assistant to decline all 10 out-of-scope questions |
 | **Score** | 12 (High) |
-| **Trigger** | The beta answers 1 or more of the 10 out-of-scope questions in the run of 09/12/2026 |
+| **Trigger** | The beta answers 1 or more of the 10 out-of-scope questions in the D8 run, uploaded by 05/12/2026 |
 | **Contingency plan (B plan)** | Degrade gracefully: below a retrieval-similarity threshold the assistant shows only the retrieved articles with no generated answer, and questions asking about the outcome of the user's own case receive a fixed refusal text |
 | **Owner** | Barış Saka, Data Scientist |
 | **Schedule effect** | About 1 week, inside Sprint 4 |
@@ -237,7 +237,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; the levels are a team estimate |
 | **Impact (basis)** | 4: the 80% levels are the success criterion of Objective 2 |
 | **Score** | 12 (High) |
-| **Trigger** | Either share is below 70% at M5 (20/11/2026) or below 80% at M7 (11/12/2026) |
+| **Trigger** | Either share is below 70% at M5 (18/11/2026) or below 80% at M7 (09/12/2026) |
 | **Contingency plan (B plan)** | Narrow the scope: generated answers are released only for the question types that reach 80%; for the other types the assistant shows the retrieved articles with no generated answer, and the Product Owner reports the Objective 2 result as measured, against the target as written in the charter, to the Project Review Committee at M8 |
 | **Owner** | Zehranur Aymaz Kutluyer, Product Owner |
 | **Schedule effect** | About 1 week, inside Sprint 4 |
@@ -254,7 +254,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; legal answers often differ from the key only in a condition or an amount |
 | **Impact (basis)** | 4: Objective 2 is measured with these scores |
 | **Score** | 12 (High) |
-| **Trigger** | More than 3 of 30 disagreements in the hand check of the D6 run on 18/11/2026, before M5 (20/11/2026) |
+| **Trigger** | More than 3 of 30 disagreements in the hand check of the D6 run, uploaded by 14/11/2026, before M5 (18/11/2026) |
 | **Contingency plan (B plan)** | Hand over to a human: for the question types where the scores disagree, the Business Analyst / Domain Expert scores the answers by hand against the answer key at M7, and D8 states which answers were scored by hand |
 | **Owner** | Ekin Deniz Öztürk, Business Analyst / Domain Expert |
 | **Schedule effect** | About 3 days, inside Sprint 3 |
@@ -271,7 +271,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no measurement yet; CPU inference of a 4-billion-parameter model generates text slowly (team estimate) |
 | **Impact (basis)** | 4: slow answers threaten the Objective 1 target of a correct answer in under 77 seconds |
 | **Score** | 12 (High) |
-| **Trigger** | Median response time above 30 seconds at M5 (20/11/2026) or above 60 seconds at M7 (11/12/2026) |
+| **Trigger** | Median response time above 30 seconds at M5 (18/11/2026) or above 60 seconds at M7 (09/12/2026) |
 | **Contingency plan (B plan)** | Degrade gracefully: the assistant runs on PC 2, whose GPU runs the embedding and reranking models, or the gateway sends answer generation to a hosted language model within the $100 limit (Architecture AD-03); the Product Owner records the switch at M6 or M8 |
 | **Owner** | Zehranur Aymaz Kutluyer, Product Owner |
 | **Schedule effect** | About 1 week, inside Sprint 3 |

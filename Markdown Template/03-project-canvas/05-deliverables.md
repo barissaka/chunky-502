@@ -2,7 +2,7 @@
 
 **Project:** Traffic rules and penalties assistant · **Team:** Chunky
 
-The deliverables below are the artifacts that prove the milestones in [Milestones](02-milestones.md). Each one carries the same number and name on both pages. From Sprint 2 on, each is due at least two days before its milestone, so that it can be reviewed before the milestone is recorded. The product is delivered in three builds: alpha (D7), beta (D9) and release candidate (D11).
+The deliverables below are the artifacts that prove the milestones in [Milestones](02-milestones.md). Each one carries the same number and name on both pages. Each is due by the upload deadline of its sprint (27/10, 14/11, 05/12 and 30/12/2026), so that the peer group can review it before the end-of-sprint presentation; in Sprint 4, D10, D11 and D12 are due earlier, before the live review on 30/12/2026. The product is delivered in three builds: alpha (D7), beta (D9) and release candidate (D11).
 
 The team writes no model card: no model is trained or fine-tuned. The question set and answer key (D2) have a datasheet (D13) that logs every decision behind their creation. The legal texts have no datasheet: they are used as published by their official sources, and D1 records those sources.
 
@@ -13,16 +13,16 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | D1 | Document set and Dataset Report | Solution | 21/10/2026 | M1 |
 | D2 | Q&A Generation-Dataset v1 | Solution | 26/10/2026 | M2 |
 | D3 | Default-state measurement report | Project management | 26/10/2026 | M2 |
-| D4 | Project Charter v1 | Project management | 28/10/2026 | M3 |
+| D4 | Project Charter v1 | Project management | 27/10/2026 | M3 |
 | D5 | Long-context baseline experiment card | Solution | 11/11/2026 | M4 |
-| D6 | RAG baseline experiment card | Solution | 18/11/2026 | M5, M6 |
-| D7 | Alpha prototype | Solution | 18/11/2026 | M5, M6 |
-| D8 | MVP validation experiment card | Solution | 09/12/2026 | M7, M8 |
-| D9 | Beta release | Solution | 09/12/2026 | M7, M8 |
+| D6 | RAG baseline experiment card | Solution | 14/11/2026 | M5, M6 |
+| D7 | Alpha prototype | Solution | 14/11/2026 | M5, M6 |
+| D8 | MVP validation experiment card | Solution | 05/12/2026 | M7, M8 |
+| D9 | Beta release | Solution | 05/12/2026 | M7, M8 |
 | D10 | Pilot test report | Project management | 22/12/2026 | M9 |
 | D11 | Release candidate | Solution | 27/12/2026 | M10 |
 | D12 | Final report | Project management | 27/12/2026 | M10 |
-| D13 | Datasheet for Q&A Generation-Dataset v1 | Solution | 16/11/2026 | M5 |
+| D13 | Datasheet for Q&A Generation-Dataset v1 | Solution | 14/11/2026 | M5 |
 
 ## Sprint 1
 
@@ -54,7 +54,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 |---|---|
 | Description: | Final version of all Project Canvas pages. |
 | Acceptance Criteria: | 1. Every cell marked as required in the canvas templates is filled. 2. Every objective has at least one numeric success criterion. 3. Every milestone in [Milestones](02-milestones.md) has an associated deliverable on this page under the same number and name. 4. The feedback given at the Sprint 0 pitch is listed item by item, each with the page that addresses it or the reason it is not addressed. |
-| Due Date: | 28/10/2026 |
+| Due Date: | 27/10/2026 |
 | Stakeholders: | Project Review Committee; project team |
 | Approving Stakeholder(s): | Product Owner |
 
@@ -72,7 +72,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 |---|---|
 | Description: | Results of the first RAG pipeline (one chunk per article) on all 40 questions of D2, set side by side with D5. It holds the first trial runs against which the Objective 2 levels are checked. |
 | Acceptance Criteria: | 1. All 40 questions are run through the pipeline of D7, and the generation model, embedding model, reranking model, number of retrieved chunks (k), number of chunks kept after reranking and prompt are recorded. 2. The card reports the five measures of D5, by question type, in one table with the D5 values. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks. 4. At least one run uses the same generation model as D5. 5. For each of the two 80% levels of Objective 2, the card states the measured value next to the level. 6. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification. |
-| Due Date: | 18/11/2026 |
+| Due Date: | 14/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee; Quality Team |
 | Approving Stakeholder(s): | Business Analyst |
 
@@ -80,7 +80,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 |---|---|
 | Description: | First integrated build of the assistant: a web chat interface connected to the RAG pipeline over the document set of D1. It runs on a team laptop. |
 | Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The number of distinct article IDs in the index equals the number of articles reported in D1 (550). 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
-| Due Date: | 18/11/2026 |
+| Due Date: | 14/11/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Product Owner |
 
@@ -88,7 +88,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 |---|---|
 | Description: | A datasheet for the question set and answer key of D2, kept in the [Datasheets](../11-datasheets/README.md) pages, that logs every decision that led to the dataset: why it was created, where the questions came from, how they were selected, labelled and checked, and what its limits are. It follows the questions of Gebru et al., "Datasheets for Datasets" (2021). |
 | Acceptance Criteria: | 1. Motivation: the purpose of the set (measurement of Objectives 2 and 4) and who created it are stated. 2. Collection: every source is listed with its URL, access date, the keywords used to search it and the result of the terms-of-use check (A-05). 3. Selection: the numbers of questions collected, rejected and kept are stated, with the reason for each group of rejected questions (for example, procedural FAQ questions that the six texts cannot answer). 4. Composition: one table gives the number of questions by question type, by source text, real or synthetic, follow-up or not, and ambiguous or not with the type of missing condition; every number matches the D2 file. 5. Synthetic questions: for each, how it was written (by hand, or with a named model and prompt) and which question type needed it. 6. Labelling and answer key: the definitions of the five question types and of the ambiguity label, who wrote the answer key and the result of the second member's check (30 of 30). 7. Privacy: forum questions are stored without user names or licence plates (C-12). 8. Versioning and maintenance: the freeze date of v1 (26/10/2026), the D1 retrieval dates the answer key rests on and the effect of an amendment (C-02, R-05). 9. Known limitations, including how far the set represents the questions of real users. |
-| Due Date: | 16/11/2026 |
+| Due Date: | 14/11/2026 |
 | Stakeholders: | Project team (AI developer role); Quality Team; Project Review Committee |
 | Approving Stakeholder(s): | Product Owner |
 
@@ -98,7 +98,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 |---|---|
 | Description: | Results of the beta (D9) on the fixed set of 30 in-scope questions and the 10 out-of-scope questions of D2. It holds the measurement of Objective 2. |
 | Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D9, and the settings are recorded. 2. Each in-scope answer is scored automatically against the D2 answer key; the scoring configuration and threshold are recorded. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. 5. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification, next to the D6 values. |
-| Due Date: | 09/12/2026 |
+| Due Date: | 05/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee; Quality Team |
 | Approving Stakeholder(s): | Business Analyst |
 
@@ -106,7 +106,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 |---|---|
 | Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. |
 | Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D8). 2. Every answer to an in-scope question shows the article reference and the quoted provision. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M6 is closed or has a recorded reason for staying open. |
-| Due Date: | 09/12/2026 |
+| Due Date: | 05/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: pilot participants (drivers and driving-licence candidates) |
 | Approving Stakeholder(s): | Product Owner; Business Analyst |
 

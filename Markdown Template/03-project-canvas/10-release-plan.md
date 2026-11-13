@@ -10,12 +10,12 @@ A weak plan has one release at the end. A strong plan shows what each sprint put
 
 The project has four sprints.
 
-| Sprint | Start | End |
-|---|---|---|
-| Sprint 1 | 14/10/2026 | 28/10/2026 |
-| Sprint 2 | 04/11/2026 | 18/11/2026 |
-| Sprint 3 | 25/11/2026 | 09/12/2026 |
-| Sprint 4 | 16/12/2026 | 30/12/2026 |
+| Sprint | Start | End | Upload deadline (23:59) | Reviews | End-of-sprint presentation |
+|---|---|---|---|---|---|
+| Sprint 1 · Discovery | 14/10/2026 | 28/10/2026 | 27/10/2026 | — | 28/10/2026: charter and user stories |
+| Sprint 2 · Baseline | 28/10/2026 | 18/11/2026 | 14/11/2026 | 15/11/2026 – 18/11/2026 | 18/11/2026: demo, reviews and rebuttals |
+| Sprint 3 · Pipeline | 18/11/2026 | 09/12/2026 | 05/12/2026 | 06/12/2026 – 09/12/2026 | 09/12/2026: demo, reviews and rebuttals |
+| Sprint 4 · Product | 09/12/2026 | 30/12/2026 | 30/12/2026 | 30/12/2026 (live) | 30/12/2026: final product demo |
 
 ## Release stages
 
@@ -92,11 +92,11 @@ Each corrected entry fixes only the named defect. All examples are illustrative.
 | # | Release | Sprint | Start Date | End Date | Key Deliverable(s) |
 |---|---|---|---|---|---|
 | 1 | Pre-alpha | Sprint 1 | 14/10/2026 | 28/10/2026 | D1 Document set and Dataset Report; D2 Q&A Generation-Dataset v1; D3 Default-state measurement report; D4 Project Charter v1 |
-| 2 | Alpha 0.1 | Sprint 2 | 04/11/2026 | 18/11/2026 | D5 Long-context baseline experiment card; D6 RAG baseline experiment card; D7 Alpha prototype (used by the development team); D13 Datasheet for Q&A Generation-Dataset v1 |
-| 3 | Beta 0.5 | Sprint 3 | 25/11/2026 | 09/12/2026 | D8 MVP validation experiment card; D9 Beta release (for the 10 pilot participants: licensed drivers and driving-licence candidates) |
-| 4 | Release candidate 1.0 | Sprint 4 | 16/12/2026 | 30/12/2026 | D10 Pilot test report; D11 Release candidate; D12 Final report |
+| 2 | Alpha 0.1 | Sprint 2 | 28/10/2026 | 18/11/2026 | D5 Long-context baseline experiment card; D6 RAG baseline experiment card; D7 Alpha prototype (used by the development team); D13 Datasheet for Q&A Generation-Dataset v1 |
+| 3 | Beta 0.5 | Sprint 3 | 18/11/2026 | 09/12/2026 | D8 MVP validation experiment card; D9 Beta release (for the 10 pilot participants: licensed drivers and driving-licence candidates) |
+| 4 | Release candidate 1.0 | Sprint 4 | 09/12/2026 | 30/12/2026 | D10 Pilot test report; D11 Release candidate; D12 Final report |
 
-The one-week gaps between sprints (19–24/11/2026 and 10–15/12/2026) are review periods. Deliverables are reviewed there before their milestones are recorded: M5 (20/11/2026) and M7 (11/12/2026). The go/no-go checkpoints also fall in these gaps: M6 (23/11/2026) before the beta and M8 (14/12/2026) before the pilot. Sprint 4 has no gap after it, so D10 is due on 22/12/2026 and D11 and D12 on 27/12/2026, leaving time for review before M10 (30/12/2026). All milestones are recorded in [Milestones](02-milestones.md).
+Deliverables are uploaded by the upload deadline of their sprint, and the peer group reviews them in the last days of the sprint: 15–18/11/2026 in Sprint 2 and 06–09/12/2026 in Sprint 3. The milestones that rest on them, M5 and M7, are recorded at the end-of-sprint presentation (18/11/2026 and 09/12/2026), together with the go/no-go checkpoints M6 before the beta and M8 before the pilot. In Sprint 4 the review takes place live on 30/12/2026; D10 is due on 22/12/2026 and D11 and D12 on 27/12/2026, before M10 (30/12/2026). All milestones are recorded in [Milestones](02-milestones.md).
 
 ## Example (illustrative only)
 
