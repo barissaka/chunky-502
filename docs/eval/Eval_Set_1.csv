@@ -1,0 +1,188 @@
+﻿Question ID,Question,Answer,Legal Article Reference,Question Tag,Ambiguity,Source Scope,Hop Type,Premise,Wording,Phrasing,User,Language,Question Word,Multi-part,Answerability,Time-sensitive
+S01,"Elektrikli skuter kullanmak için yaş sınırı var mı, ehliyet gerekiyor mu?",E-skuter için sürücü belgesi zorunlu değildir. Ancak elektrikli skuter kullananların 15 yaşını bitirmiş ve bedensel ve ruhsal bakımdan sağlıklı olmaları zorunludur. Bu şartları taşımayanlara araç kullandıranlar para cezası ile cezalandırılır.,"KTK Art. 37/1
+KTK Art. 37/2",Single article,No,Single article,Single-hop,Direct,Different terms,Natural question,Novice – e-scooter user,TR,Yes/No,Yes,Answerable,No
+S02,"Hususi otomobilim ilk muayeneye ne zaman girer, sonra hangi sıklıkla muayene olması gerekir?","Süre, aracın uygunluk belgesindeki imal tarihinden itibaren hesaplanır. Hususi ve resmî otomobiller ilk üç yaş sonunda, devamında her iki yılda bir periyodik muayeneye tabi tutulur.",MUAYENE Art. 14/1-a,Single article,No,Single article,Single-hop,Direct,Same terms,Natural question,Novice – vehicle owner,TR,When,Yes,Answerable,No
+S03,Sürücü kursunda bir ders saati kaç dakika sürer?,"Bir ders saati 50 dakikadır, iki ders saati arasındaki dinlenme süresi 10 dakikadır. Teorik derslerin uygulamalı konuları iki ders saati birleştirilerek blok ders yapılabilir; direksiyon eğitimi dersi blok ders olarak yapılamaz.",KURS Art. 21/1,Single article,No,Single article,Single-hop,Direct,Same terms,Natural question,Novice – driver candidate,TR,How many/much,No,Answerable,No
+S04,Araçta bulundurulması zorunlu ilk yardım malzemeleri nelerdir?,"2 büyük sargı bezi (10 cm x 3-5 m), 1 kutu hidrofil gaz steril (10x10 cm, 50'lik), 3 üçgen sargı, 1 antiseptik solüsyon (50 ml), 1 flaster (2 cm x 5 m), 10 çengelli iğne, 1 küçük paslanmaz çelik makas, 1 esmark bandajı, 1 turnike (en az 50 cm örgülü tekstil), 10 yara bandı, 1 alüminyum yanık örtüsü, 2 çift tıbbi eldiven ve 1 el feneri.",SAĞLIK Art. 10/1,Single article,No,Single article,Single-hop,Direct,Same terms,Natural question,Novice – driver,TR,What/Which,No,Answerable,No
+S05,E-skuterde hangi ışık ve ses donanımının bulunması zorunludur?,"E-skuterde önde beyaz ışık veren ve en az 20 metre önü aydınlatabilen bir far, arkada kırmızı ışık veren bir lamba ve kırmızı reflektör ile 30 metreden duyulabilen zil, korna veya benzeri bir ses aleti bulunması zorunludur.",SKUTER Art. 5/2,Single article,No,Single article,Single-hop,Direct,Same terms,Natural question,Novice – e-scooter user,TR,What/Which,No,Answerable,No
+S06,Hız sınırları nedir?,"Aksine bir işaret yoksa römorksuz araçların saatteki azami hız sınırları şöyledir (yerleşim yeri içi / şehirlerarası çift yönlü yol / bölünmüş yol / otoyol, km/s):
+• Otomobil (M1, M1G): 50 / 90 / 110 / 120
+• Minibüs (M2) ve otobüs (M2-M3): 50 / 80 / 90 / 100
+• Kamyonet (N1, N1G): 50 / 80 / 85 / 95
+• Panelvan (N1): 50 / 85 / 100 / 110
+• Kamyon ve çekici (N2-N3): 50 / 80 / 85 / 90
+• Motosiklet (L3): 50 / 80 / 90 / 100
+• Motosiklet (L4, L5, L7): 50 / 70 / 80 / 80
+• Motorlu bisiklet (L1, L2, L6) ve motorsuz bisiklet: 30 / 45 / 45 / otoyola giremez
+• Tehlikeli madde taşıyan araçlar (belgelerinde aksi yoksa): 30 / 50 / 60 / 70
+• Özel yük taşıma izin belgesi veya özel izin belgesiyle çıkan araçlar (belgelerinde aksi yoksa): 30 / 50 / 50 / 60
+• Lastik tekerlekli traktörler: 20 / 30 / 40 / otoyola giremez
+• Arızalı bir aracı çeken araçlar: 20 / 20 / 30 / 40
+• İş makineleri: 20 / 20 / 20 / otoyola ancak yoldan sorumlu kuruluşun izniyle girebilir
+Ek kurallar:
+• Hız sınırlayıcı cihaz zorunlu olan araçlarda cihaz ayarı, yol ayrımı yapılmaksızın M2 ve M3 otobüs ve minibüslerde 110 km/s, N2 ve N3 kamyon ve çekicilerde 99 km/s'tir. Bu araçlar şehir içinde diğer araçların azami sınırlarına uyar.
+• Zorunlu haller dışında asgari hız, araç cinsine bakılmaksızın şehirlerarası karayollarında 15 km/s, otoyollarda 40 km/s'tir.
+• Tehlikeli madde taşımaya mahsus araçlar boş olarak trafiğe çıktığında kendi sınıflarının hızıyla sürülebilir.
+• Römorklu veya yarı römorklu araçlarda azami hız, aynı cins römorksuz aracın sınırından 10 km/s düşüktür. Römork takmış traktör, tehlikeli madde taşıyan araçlar ve özel izinli araçlar bu kuralın dışındadır.
+• Servis freni bozuk araçları çeken araçlar 15 km/s'in üstünde sürülemez.
+• İçişleri Bakanlığı, Ulaştırma Bakanlığının görüşünü alarak yerleşim yeri dışındaki şehirlerarası çift yönlü yollarda, bölünmüş yollarda ve otoyollarda otomobiller için sınırı 20 km/s'e kadar artırabilir.
+• İl/ilçe trafik komisyonları ve ulaşım koordinasyon merkezleri, yerleşim yeri içinden geçen ve yaya geçişleri alt/üst geçitle sağlanan yüksek kapasiteli bölünmüş yollarda sınırları 32 km/s'e, yerleşim yeri içindeki diğer bölünmüş yollarda 20 km/s'e kadar artırabilir.","KTY Art. 100/1 (table)
+KTY Art. 100/2-8",Single article,Yes,Single article,Single-hop,Direct,Same terms,Natural question,Novice – driver,TR,What/Which,No,Answerable,No
+S07,B sınıfı ehliyet almak için kaç yaşında olmak gerekir?,"B sınıfı sürücü belgesi alacakların 18 yaşını bitirmiş olması gerekir. (Aynı maddeye göre M, A1 ve B1 için 16, A için 20, C, CE, D1 ve D1E için 21, D ve DE için 24 yaş aranır.)",KTY Art. 76/1-a,Single article,No,Single article,Single-hop,Direct,Different terms,Natural question,Novice – driver candidate,TR,How many/much,No,Answerable,No
+S08,Sadece maddi hasarlı bir kazada polisi beklemeden olay yerinden ayrılabilir miyiz?,"Evet. Yalnızca maddi hasar meydana gelen kazalarda kazaya karışan kişilerin tümü yetkili ve görevli kişinin gelmesine gerek görmezse, bunu aralarında yazılı olarak tespit ederek kaza yerinden ayrılabilirler.",KTK Art. 81/2,Single article,No,Single article,Single-hop,Direct,Different terms,Natural question,Novice – driver,TR,Yes/No,No,Answerable,No
+S09,"Aracım kazaya karıştı ama muayene süresi daha dolmadı. Yeniden muayene yaptırmam gerekir mi, ücret öder miyim?","Muayene süresi dolmamış olsa bile, kazaya karışması sonucu yetkili trafik zabıtasınca muayenesi gerekli görülen araçlar özel muayeneye tabi tutulur. Özel muayenelerde muayene ücreti ve varsa gecikme ücreti tam olarak alınır.","MUAYENE Art. 14/2
+MUAYENE Art. 8/7",Several articles of one text,No,Several articles of one text,Parallel,With premise,Same terms,Natural question,Novice – vehicle owner,TR,Yes/No,Yes,Answerable,No
+S10,Sürücü kursunda kaç derse girmezsem kaydım silinir? Teorik sınavı geçemezsem kursa yeniden para öder miyim?,"Teorik derslerin toplam ders saatinin 1/5'inden fazlasına devam etmeyenlerin kaydı silinir (eğitim personeli izinli veya raporluysa o günkü ders için telafi yapılır). Direksiyon eğitimi derslerinin 1/5'ine veya daha azına devam etmeyenlere bir defaya mahsus, ücretli telafi programı uygulanır. Teorik sınavda başarısız olanlar kursa yeniden devam etmeden ve kurs ücreti ödemeden, yalnızca sınav ücretini ödeyerek aralıksız üç kere daha teorik sınava girebilir.","KURS Art. 14/2
+KURS Art. 15/1",Several articles of one text,No,Several articles of one text,Parallel,Direct,Same terms,Natural question,Novice – driver candidate,TR,How many/much,Yes,Answerable,No
+S11,"Direksiyon sınavından sürekli kalıyorum. Kaç hakkım var, hepsini kaybedersem ne olur?","Direksiyon sınavında başarısız olan kursiyer, her başarısızlıktan sonra ilan edilen ders ücretini ödeyip en az iki saat direksiyon eğitimi alarak aralıksız üç sınav dönemi daha sınava girer, yani ilk turda toplam dört hak vardır. Dört sınav sonunda da başarısız olan kişi, son sınav sonucunun açıklanmasından itibaren en geç 60 gün içinde direksiyon dersi ücretini öder ve sertifika sınıfı için belirtilen sayıda ders alırsa dört sınav hakkı daha kazanır. İkinci dört hakkın sonunda da başarısız olan kişi, ücretini ödeyerek kursa yeniden kayıt yaptırabilir. Son sınav tarihinden itibaren üç yıl içinde yeniden kayıt yaptırırsa teorik eğitim ve sınavlardan muaf sayılır.","KURS Art. 15/1
+KURS Art. 15/4
+KURS Art. 15/5",Several articles of one text,No,Single article,Single-hop,With premise,Same terms,Natural question,Novice – driver candidate,TR,How many/much,Yes,Answerable,No
+S12,"Kamyon ehliyeti için göz şartı, diğerlerinden farklı mı? Gözlükle ölçüm kabul ediliyor mu?","Evet, farklıdır. Göz şartları sürücü belgesi sınıflarının iki grubuna göre değişir:
+• Birinci grup: M, A1, A2, A, B1, B, BE ve F. Kamyonet, B sınıfıyla kullanıldığı için bu gruptadır.
+• İkinci grup: C1, C1E, C, CE, D1, D1E, D, DE ve G. Kamyon ve tır ehliyetleri (C1, C1E, C, CE) bu gruptadır.
+Görme derecesi (Snellen eşeli, düzeltmeli veya düzeltmesiz):
+• Birinci grup: bir gözün görmesi 0,1'den aşağı olmamak şartıyla iki gözün toplamı 1,0 olmalıdır.
+• İkinci grup (kamyon): az gören göz en az 0,6 ve iyi gören göz en az 0,8 olmalı ya da iki göz de 0,7 olmalıdır.
+• Tek gözü gören (monoküler) kişiler: gören gözde 1,0 ve en az 120 derece yatay görme alanı aranır. Bu kişiler yalnızca birinci grup belge alabilir; yani kamyon ehliyeti alamazlar. Ambulans, resmî veya ticari araç da kullanamazlar.
+Gözlük ve lens:
+• Gözlükle ve kontakt lensle düzeltme kabul edilir. Ancak araç kullanırken gözlüğün veya lensin takılması zorunludur. Bu şart, kod numarasıyla sağlık raporuna ve sürücü belgesine yazılır.
+İkinci grubu (kamyonu) ayrıca etkileyen durumlar:
+• Tek veya iki taraflı afaki (göz merceğinin olmaması) olanlara ikinci grup belge verilmez. Ameliyattan 6 ay sonra birinci grup görme şartlarını taşıyorlarsa birinci grup belge alabilirler.
+• Katarakt hastalığında her grubun kendi asgari standartları aranır ve belge düzenli kontrol şartıyla verilir.
+Tüm sınıflar için ortak şartlar:
+• Görme alanı: Her gözde yatay görme alanı en az 120 derece olmalıdır. Merkezdeki 20 derecede kayıp (skotom) olmamalıdır. İki gözde merkezi skotomu olan hiçbir sınıf belge alamaz; tek gözde olan ise monoküler belge alır.
+• Derinlik duyusu: İki gözü olanlarda olmalıdır. Monoküler olanlarda tek gözlü kalınmasının üzerinden en az bir yıl geçmiş olmalıdır.
+• Gece körlüğü: Araç kullanımı, gün doğumundan bir saat sonrasından gün batımından bir saat öncesine kadarla sınırlanır.
+• Renk körlüğü: Herhangi bir koşul aranmadan sürücü olunabilir.
+• Çift görme (diplopi) ve paralitik şaşılık: Görme derecesi ne olursa olsun belge verilmez.
+• Görmeyi zamanla azaltan hastalıklar (katarakt, makula dejenerasyonu, retinopati gibi): Muayene yılda bir tekrarlanır.","SAĞLIK Art. 4/6
+SAĞLIK Art. 4/7
+SAĞLIK Art. 5/2
+SAĞLIK Art. 5/3
+SAĞLIK Art. 5/4
+SAĞLIK Art. 5/5-7
+SAĞLIK Art. 5/9
+SAĞLIK Art. 5/12-15",Several articles of one text,Yes,Several articles of one text,Comparison,Direct,Different terms,Natural question,Novice – driver candidate,TR,Yes/No,Yes,Answerable,No
+S13,Kiralık (paylaşımlı) e-skuterler en fazla kaç km/s hız yapar? Belirli bölgelerde neden yavaşlıyor?,"E-skuter, tanımı gereği hızı en fazla 25 km/saate ulaşan bir taşıttır. İşleticiler e-skuterleri UKOME veya il/ilçe trafik komisyonunun belirlediği hız sınırları içinde kullandırır, girilmesi yasak bölgeler ve hız sınırları için coğrafi çitleme uygular. Sürücü coğrafi çitleme olan bölgeye girerse, geri dönebilmesi için e-skuterin hızı kademeli olarak 6 km/saate indirilir. Bölgeye yaklaşırken de sesli uyarı verilir.","SKUTER Art. 4/1-c
+SKUTER Art. 16/10",Several articles of one text,No,Several articles of one text,Parallel,Direct,Different terms,Natural question,Novice – e-scooter user,TR,How many/much,Yes,Answerable,No
+S14,Alkollü araç kullandığım için ehliyetim 6 ay alındı. Bu süre içinde araç kullanırsam ne olur? Ehliyetimi geri almak için ne gerekir?,"Geri alma süresi içinde araç kullandığı tespit edilen kişi KTK m.36/3 uyarınca cezalandırılır. Belgesi geçici olarak geri alındığı hâlde motorlu araç kullananlara 200.000 TL idari para cezası verilir. Alkol nedeniyle geri alınan belgenin iade edilebilmesi için, kişi hakkında bu Kanun kapsamında verilen idari para cezalarının tamamının tahsil edilmiş olması şarttır.","KTK Art. 48/5
+KTK Art. 48/13
+KTK Art. 36/3-b
+KTK Art. 118 (last paragraph)",Several articles of one text,No,Several articles of one text,Chain,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,Yes,Answerable,Yes
+S15,"Hız sınırını biraz aşarsam ceza yazılır mı, yönetmelikte bir tolerans var mı?","Evet, küçük aşımlar için iki ayrı kaynaktan gelen bir pay vardır:
+• Yönetmelikteki tolerans: Araç cinsine göre belirlenen azami hız sınırını %10 oranına kadar aşan sürücülere KTK m.51'e göre işlem yapılmaz. Örneğin 50'lik yolda 55, 90'lık yolda 99, 120'lik otoyolda 132 km/s'e kadar.
+• Kanundaki ceza dilimleri: KTK m.51, sürücülerin aksine işaret yoksa Yönetmelikteki sınırları aşmamasını zorunlu tutar. Ceza ise yerleşim yeri içinde sınırı 6-10 km/s aşanlar için, yerleşim yeri dışında 11-15 km/s aşanlar için 2.000 TL ile başlar. Yerleşim yeri içinde 5 km/s'e, dışında 10 km/s'e kadar olan aşımlar için Kanunda ceza dilimi yoktur.
+• Geçme istisnası: İki yönlü yolda, geçme kuralının zorunlu kıldığı şartlar nedeniyle sınırı aşan sürücülere de işlem yapılmaz.
+İki kural birlikte uygulanınca:
+• Yerleşim yeri içinde 50'lik yolda 55 km/s'e kadar ceza yoktur, 56-60 km/s için 2.000 TL'dir.
+• Yerleşim yeri dışında 90'lık yolda 100 km/s'e kadar ceza yoktur, çünkü Kanundaki dilim 11 km/s aşımdan başlar. 101-105 km/s için 2.000 TL'dir.
+• Sınır yerleşim yeri içinde 50'nin, dışında 100'ün üzerindeyse iki metin dar bir aralıkta farklı sonuç verir. 110'luk yolda 121 km/s, 120'lik otoyolda 131-132 km/s, sınırı 70'e çıkarılmış şehir içi yolda 76-77 km/s, Yönetmeliğe göre tolerans içindedir ama Kanunun ilk ceza dilimine girer.","KTY Art. 101/3
+KTY Art. 101/4
+KTY Art. 100/1
+KTK Art. 51/1
+KTK Art. 51/2-a-1
+KTK Art. 51/2-b-1",Articles of several texts,No,Articles of several texts,Chain,Direct,Different terms,Natural question,Novice – driver,TR,Yes/No,Yes,Answerable,Yes
+S16,E-skuterle hangi yollarda gidemem? Kask takmak zorunlu mu?,"E-skuter otoyollarda, şehirlerarası karayollarında ve azami hız sınırı 50 km/s'in üzerinde olan karayollarında kullanılamaz. Yaya yollarında sürülemez. Ayrı bisiklet yolu veya şeridi varsa taşıt yolunda sürülemez. Bir şeritte ikiden fazla e-skuter yan yana gidemez. Kask için metinlerde e-skuter sürücüsüne doğrudan bir zorunluluk yoktur. Paylaşımlı e-skuter işleticisi, kullanıcıları kask, dizlik ve reflektörlü ceket gibi ekipmanlar konusunda bilgilendirmekle yükümlüdür. Gece seyahatlerinde ise sürücülerin reflektif yelek vb. kıyafet giymesi gerekir.","KTK Art. 66/1-a
+KTK Art. 66/1-e
+SKUTER Art. 5/1-a
+SKUTER Art. 16/8
+KTY Annex-1 Table (reflective clothing row)",Articles of several texts,No,Articles of several texts,Parallel,Direct,Different terms,Natural question,Novice – e-scooter user,TR,What/Which,Yes,Answerable,No
+S17,"Sürücü kursuna kayıt için hangi sağlık raporunu, nereden almam gerekiyor?","Kursa kayıt için Sürücü Adayları ve Sürücülerde Aranacak Sağlık Şartları ile Muayenelerine Dair Yönetmeliğe göre alınmış 'sürücü olur' raporu istenir. Muayene; Sağlık Bakanlığına ve üniversitelere bağlı sağlık tesisleri, aile sağlığı merkezleri ve muayenehaneler hariç özel sağlık kuruluşlarında görevli tabip veya uzman tabip tarafından yapılır. Tabip, yazılı sağlık beyanını alarak ilk muayeneyi yapar. Gerekirse kişiyi ilgili uzmana sevk eder; bu durumda iki rapor birlikte geçerlidir. Sağlık şartlarını taşımak, sürücü belgesi almanın kanuni şartlarından biridir.","KURS Art. 11/1-a-4
+SAĞLIK Art. 4/1
+SAĞLIK Art. 4/3
+KTK Art. 41/1-c",Articles of several texts,No,Articles of several texts,Chain,Direct,Same terms,Natural question,Novice – driver candidate,TR,What/Which,Yes,Answerable,No
+S18,100 ceza puanını doldurursam ne olur? Ehliyetimi nasıl geri alırım?,"Ceza puanları, ihlalin işlendiği tarihten geriye doğru bir yıl içinde hesaplanır. Sonuç, bir yıl içinde 100 puanın kaçıncı kez doldurulduğuna göre değişir:
+• Birinci kez: Sürücü belgesi 2 ay süreyle geri alınır ve sürücü eğitime tabi tutulur. Eğitim, bu iki ay içinde bir özel motorlu taşıt sürücüleri kursunda teorik derslerin tamamına devam edilerek alınır. Kursa kayıtta belgenin geri alındığını gösteren belge istenir, kurs da eğitimin alındığına dair belge verir. Eğitimi tamamladığını belgeleyen sürücüye belgesi 2 ayın sonunda iade edilir.
+• İkinci kez (aynı yıl içinde): Belge 4 ay süreyle geri alınır ve sürücü psiko-teknik değerlendirme ile psikiyatri uzmanı muayenesine tabi tutulur. Psiko-teknik raporla birlikte 45 gün içinde psikiyatri uzmanına başvurulması gerekir. Sürücülüğe engel hâli olmadığı belgelenirse belge 4 ayın sonunda iade edilir. Başarısız olunursa yeniden test, Yönetmelikteki bekleme süreleri dolunca yapılabilir: 45 günde başvurmayanlar 6 ay, ikinci denemede de başarısız olanlar 2 yıl teste alınmaz.
+• Üçüncü kez (bir yıl içinde): Kanuna göre sürücü belgesi süresiz olarak iptal edilir. Yönetmelik ise bu durumda sürücünün bir tutanakla sulh ceza hâkimliğine sevk edileceğini ve mahkeme kararına göre işlem yapılacağını söyler.
+Diğer kurallar:
+• 100 puana ulaşıldığı anda 100'ün üstünde kalan puanlar sonraki hesaplamaya aktarılmaz.
+• 100 puanın dolduğu tarih ile geri alma işleminin başladığı tarih arasında alınan puanlar sonraki hesaplamada dikkate alınır.
+• Belge o sırada sürücünün yanında değilse geri alma işlemi bilgisayar kayıtlarına işlenir.
+• Geri alma süresi içinde araç kullanan sürücüye, belgesi geri alınmışken araç kullanmaktan 200.000 TL idari para cezası verilir.","KTK Art. 118/1-4
+KTK Art. 118 (last paragraph)
+KTK Art. 36/3-b
+KTY Art. 167/1-2
+KTY Art. 167 (subsequent paragraphs)
+KTY Art. 79
+KURS Art. 11/1-c
+KURS Art. 16/3",Articles of several texts,Yes,Articles of several texts,Parallel,Direct,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,Yes,Answerable,Yes
+S19,"Yurt dışındaydım, aracımın muayenesini zamanında yaptıramadım. Gecikme için fazla ücret öder miyim?","Normalde muayene süresi geçirilen her ay için muayene ücreti %5 fazlasıyla tahsil edilir ve ay kesirleri tam ay sayılır. Ancak araç yurt dışında olduğu için süresinde muayene yaptırılamamışsa, aracın yurt dışında kaldığı süreyle sınırlı olmak ve bu durumu belgelemek şartıyla, yurda girişten itibaren bir ay içinde muayenesi yaptırılan araçlara %5 fazla ücret uygulanmaz.","MUAYENE Art. 8/5
+KTK Art. 35/2",Articles of several texts,No,Articles of several texts,Chain,With premise,Same terms,Natural question,Novice – vehicle owner,TR,Yes/No,No,Answerable,No
+S20,Ehliyet aldıktan sonra epilepsi teşhisi konulan birinin ehliyetine ne olur?,"Sürücüde sağlığı bakımından sürücülüğe engel açık bir değişiklik görülür ve tespit edilirse, trafik görevlilerince belge geçici olarak geri alınır ve kişiye 'sürücü olur' raporu aldırılır. Bir kamu kurumunun yazılı bildirimi de geri almaya yol açabilir. Kişi il sağlık müdürlüğü aracılığıyla ilgili branş uzmanına sevk edilir. Epilepsi hastalarına yalnızca belirli şartlarla ve sadece birinci grup sınıflar verilebilir. Örneğin altı ayda bir nöroloji muayenesiyle üç yıl boyunca nöbet geçirmediğini belgeleyenlerin durumu nöroloji sağlık kurulunda değerlendirilir. Bu kişiler ambulans, resmî veya ticari araç kullanamaz. Engel yoksa ya da sonradan ortadan kalkmışsa belge iade edilir.","KTK Art. 45/1
+KTY Art. 90/1-4
+SAĞLIK Art. 4/4
+SAĞLIK Art. 9/2-c",Articles of several texts,No,Articles of several texts,Chain,Direct,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,No
+S21,Çocuğumu arabada çocuk koltuğuyla taşımak zorunlu mu? Hangi yaşa veya boya kadar?,"Evet. 150 cm'den kısa ve 36 kg'ın altındaki çocuklar, ağırlıklarına uygun çocuk bağlama sistemiyle taşınmalıdır. 135 cm'den uzun çocuklar, ön koltukta oturmamak şartıyla diğer koltuklarda emniyet kemeri kullanabilir. Çocuk bağlama sistemi olmayan araçlarda 3 yaşın altındaki çocuklar taşınamaz. Ön hava yastığı devre dışı bırakılmadan, o koltukta yüzü geriye dönük çocuk koltuğu kullanılamaz. Sürücü, 15 yaşını doldurmamış çocukların koruyucu sistemleri kullanmasını sağlamakla yükümlüdür; aksi hâlde sürücüye 5.000 TL idari para cezası uygulanır.","KTY Art. 150 (child restraint system paragraphs)
+KTK Art. 78 (last paragraph)",Articles of several texts,No,Articles of several texts,Parallel,With premise,Different terms,Natural question,Novice – parent,TR,Yes/No,Yes,Answerable,Yes
+S22,"Gece körlüğüm var. Ehliyet alabilir miyim, kursta gece direksiyon dersi almam gerekir mi?","Evet, alabilirsiniz. Gece körlüğü olanlar gün doğumundan bir saat sonrasından gün batımından bir saat öncesine kadar araç kullanabilir, yani sürücülük gündüzle sınırlanır. Sağlık raporunda gece araç kullanamayacağı yönünde kısıtlama bulunan kursiyerlere, normalde zorunlu olan en az 2 saatlik gece direksiyon uygulaması yaptırılmaz.","SAĞLIK Art. 4/2-r
+SAĞLIK Art. 5/6
+KURS Art. 7/3",Articles of several texts,No,Articles of several texts,Parallel,With premise,Same terms,Natural question,Novice – driver candidate,TR,Yes/No,Yes,Answerable,No
+S23,"Dün akşam iki bira içip arabamla eve dönerken çevirmeye takıldım, üfledim 0.70 çıktı. Polis ehliyetimi aldı. Başıma ne gelecek?","Hususi otomobilde 0,50 promilin üzerinde alkollü araç kullanan sürücüye 25.000 TL idari para cezası verilir ve sürücü belgesi 6 ay süreyle geri alınır. Son beş yıl içinde ikinci kez olursa ceza 50.000 TL'ye ve geri alma süresi 2 yıla çıkar. Üç ve daha fazlasında her seferinde 150.000 TL ceza verilir ve belge 5 yıl geri alınır. Değer 1,00 promilin altında olduğu için TCK m.179/3 ayrıca uygulanmaz. Belgenin iade edilmesi için Kanun kapsamındaki tüm idari para cezalarının ödenmiş olması gerekir.","KTK Art. 48/5
+KTK Art. 48/6
+KTK Art. 48/13",Violation in the user's own words,No,Single article,Single-hop,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,Yes
+S24,"Sarıdan kırmızıya dönerken geçmeye çalıştım, kavşakta önümdeki arabaya arkadan vurdum. Ehliyetim gider mi?","Kırmızı ışık ihlali için 5.000 TL idari para cezası uygulanır. Kırmızı ışık kuralını ihlal ederek kazaya sebebiyet veren sürücünün belgesi 60 gün geri alınır. Kırmızı ışıkta geçme ve arkadan çarpma, trafik kazalarında asli kusur sayılan hâllerdendir. Geri alınan belge, cezaların tamamı ödenince iade edilir.","KTK Art. 47/1-b
+KTK Art. 47/2
+KTK Art. 47 (paragraph on causing an accident)
+KTK Art. 84/a,d
+KTY Art. 157/a-1,4",Violation in the user's own words,No,Articles of several texts,Parallel,With premise,Different terms,Natural question,Novice – driver,TR,Yes/No,No,Answerable,Yes
+S25,Şehir içinde 105 ile giderken radara yakalandım. Cezası ne?,"Ceza, o yoldaki ve aracınız için geçerli hız sınırına göre değişir. Ceza, sınırın ne kadar aşıldığına göre yerleşim yeri içi dilimlerinden belirlenir:
+• Sınır 50 km/s ise (otomobil, minibüs, otobüs, kamyonet, panelvan, kamyon, çekici ve motosiklet için yerleşim yeri içi genel sınır): 55 km/s aşım, '46-55 km/s' dilimine girer. 20.000 TL idari para cezası verilir ve sürücü belgesi 30 gün geri alınır.
+• Sınır 40 km/s ise (römorklu veya yarı römorklu araç; römorksuz sınırdan 10 km/s düşük): 65 km/s aşım, '56-65 km/s' dilimine girer. 25.000 TL ceza verilir ve belge 60 gün geri alınır. Levhayla 40 km/s'e düşürülmüş bir yolda da sonuç aynıdır.
+• Sınır 30 km/s ise (motorlu bisiklet, tehlikeli madde taşıyan araç, özel izin belgeli araç veya levhayla 30'a düşürülmüş yol): 75 km/s aşım, '66 km/s ve fazlası' dilimine girer. 30.000 TL ceza verilir ve belge 90 gün geri alınır.
+• Sınır 20 km/s ise (lastik tekerlekli traktör, arızalı araç çeken araç, iş makinesi): 85 km/s aşım, 30.000 TL ceza ve 90 gün geri alma.
+• Sınır trafik komisyonunca 20 km/s artırılmış bir bölünmüş yolsa (sınır 70): 35 km/s aşım, '26-35 km/s' dilimine girer. 12.000 TL ceza verilir, belge geri alınmaz.
+• Sınır 32 km/s artırılmış bir bölünmüş yolsa (sınır 82): 23 km/s aşım, '21-25 km/s' dilimine girer. 8.000 TL ceza verilir, belge geri alınmaz.
+Her durumda geçerli kurallar:
+• Yönetmelikteki %10 tolerans bu aşım miktarlarında uygulanamaz.
+• Geri alınan belge, Kanun kapsamındaki tüm idari para cezaları ödenmeden iade edilmez.
+• Bu madde kapsamında son bir yıl içinde beşinci kez geri alınan belge, ancak psiko-teknik değerlendirme ve psikiyatri uzmanı muayenesinden geçilirse iade edilir.
+• Geri alma süresi içinde araç kullanılırsa ayrıca 200.000 TL idari para cezası verilir.","KTK Art. 51/2-a
+KTK Art. 51/3
+KTK Art. 51/5
+KTK Art. 36/3-b
+KTY Art. 100/1 (table)
+KTY Art. 100/5
+KTY Art. 100/8
+KTY Art. 101/4",Violation in the user's own words,Yes,Articles of several texts,Chain,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,Yes
+S26,"Araba sürerken elimde telefonla konuşurken polis durdurdu. Bu yıl üçüncü oldu, ne olur? Bluetooth'la konuşsam sorun olur muydu?","Seyir hâlinde cep telefonu kullanmak yasaktır. Son bir yıl içinde üçüncü veya daha fazla ihlalde her seferinde 20.000 TL idari para cezası uygulanır ve sürücü belgesi 30 gün geri alınır. İlk ihlal 5.000 TL, ikincisi 10.000 TL'dir. Telefonun elektronik sistemler aracılığıyla ele alınmadan kullanılması (örneğin eller serbest/Bluetooth) bu yasak kapsamında değerlendirilmez.","KTK Art. 73/1
+KTK Art. 73/2
+KTY Art. 145/1-d
+KTY Art. 145/2",Violation in the user's own words,No,Articles of several texts,Parallel,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,Yes,Answerable,Yes
+S27,"Arabamın muayenesi üç ay önce bitmiş, fark etmemişim. Yolda çevirmede yakaladılar. Ne olacak?","Yol kontrolünde:
+• Muayenesi yapılmamış araçla trafiğe çıkıldığı için araç sahibine 235 TL idari para cezası verilir (Kanun metnindeki tutar).
+• Araç trafikten men edilir. Muayenesini yaptırmanız için 'Geçici Olarak Trafiğe Çıkış İzin Belgesi' düzenlenerek yedi iş gününe kadar izin verilir.
+• Bu süre sonunda muayene yaptırılmadan ya da muayenede 'emniyetsiz' raporu alınmış araçla trafiğe çıkılırsa araç sahibine 488 TL idari para cezası verilir (Kanun metnindeki tutar). Araç trafikten men edilir ve çekici/kurtarıcıyla götürülür.
+• Muayenenin yaptırılmadığı üç veya daha fazla kez tespit edilirse her seferinde idari para cezası uygulanır, araç trafikten men edilip çekiciyle götürülür.
+Muayene istasyonunda:
+• Muayene süresi geçirilen her ay için muayene ücreti %5 fazlasıyla alınır ve ay kesirleri tam ay sayılır. Gecikme tam üç aysa ücret %15, üç ayı bir gün bile geçmişse dört ay sayılır ve %20 fazla alınır.
+Tutarların artırılması (KTK m.35):
+• Muayene ücretleri ile m.35'teki para cezaları her takvim yılı başından geçerli olmak üzere, her yıl Vergi Usul Kanunu uyarınca ilan edilen yeniden değerleme oranında artırılır.
+• Cumhurbaşkanı, uygulanan muayene ücretlerini her beş yılda bir %20'ye kadar artırmaya veya eksiltmeye yetkilidir.
+• Kanundaki diğer trafik cezaları da (235 TL ve 488 TL dahil) Ek Madde 3 uyarınca her yıl aynı yeniden değerleme oranında artırılır. Bu nedenle bugün uygulanan tutarlar metindeki rakamlardan yüksektir.","KTK Art. 34/6
+KTK Art. 34/7
+KTK Art. 35/2
+KTK Additional Article 3
+KTY Art. 125/f-15
+MUAYENE Art. 14/1",Violation in the user's own words,No,Articles of several texts,Chain,With premise,Different terms,Natural question,Novice – vehicle owner,TR,What happens/Penalty,No,Answerable,Yes
+S28,"Kiraladığım scooter'a arkadaşımı da bindirdim, kaldırımdan gidiyorduk, polis durdurdu. Yanlış bir şey mi yaptık?","Evet, iki ayrı ihlal var. E-skuterde sürücü dışında başka kişi taşınması yasaktır. E-skuterin yaya yollarında sürülmesi de yasaktır. Bu kurallara uymayan sürücülere 5.000 TL idari para cezası uygulanır.","SKUTER Art. 5/1-a-4
+SKUTER Art. 5/1-b-2
+KTK Art. 66/1-a
+KTK Art. 66/1-d
+KTK Art. 66 (penalty paragraph)",Violation in the user's own words,No,Articles of several texts,Parallel,With premise,Different terms,Natural question,Novice – e-scooter user,TR,Yes/No,No,Answerable,Yes
+S29,"Ehliyetim yok, babamın arabasını kullanırken yakalandım. Bana ve babama ne ceza gelir?","Sürücü belgesi olmadan motorlu araç kullanana 40.000 TL idari para cezası verilir. Aracın sürülmesine izin veren işletene, yani araç sahibi babaya da tescil plakası üzerinden 40.000 TL idari para cezası verilir.","KTK Art. 36/1
+KTK Art. 36/3-a
+KTK Art. 36/3 (last sentence)",Violation in the user's own words,No,Single article,Single-hop,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,Yes
+S30,Muayenede arabama 'emniyetsiz' yazdılar ama yarın işe gitmem lazım. Arabayı kullanabilir miyim?,"Hayır. 'Emniyetsiz' sonucunda araç muayene raporuna, muayene tamamlanmadan aracın karayolunda sürülemeyeceğine dair şerh konur ve muayene tekrarı için bir aylık süre tanınır. Emniyetsiz raporu verilen aracın trafiğe çıkarılması hâlinde araç sahibine idari para cezası verilir ve araç trafikten men edilerek en yakın muayene istasyonuna gönderilir.","MUAYENE Art. 8/2-ç
+KTK Art. 34/6
+KTK Art. 34/7",Violation in the user's own words,No,Articles of several texts,Parallel,With premise,Same terms,Natural question,Novice – vehicle owner,TR,Yes/No,No,Answerable,No
+K01,Trafikte beni tehlikeye düşüren bir durumla karşılaştığımda ne yapabilirim? (EGM SSS-4),"Konunun kapsamdaki metinlerde yer almadığını söylemek, ihbar kanalları (155, e-başvuru vb.) uydurmamak. İsteğe bağlı olarak kullanıcıyı yetkili kuruma yönlendirmek.",None (out of scope),Out-of-scope,No,,,Direct,,Natural question,Novice – driver,TR,How/What to do,No,Unanswerable – out of domain,No
+K02,Yurt dışından almış olduğum araçla Türkiye'ye gelebilir miyim? (EGM SSS-5),Araç ithali ve geçici giriş gümrük mevzuatına tabidir ve metinlerde yer almaz. Bunu belirtip referans vermemek.,None (out of scope),Out-of-scope,No,,,With premise,,Natural question,Novice – vehicle owner,TR,Yes/No,No,Unanswerable – out of domain (related provision exists),No
+K03,Eski aracımın şu an kime ait olduğunu öğrenebilir miyim? (EGM SSS-6),Metinlerde böyle bir sorgu hakkı veya yöntemi yok. Kapsam dışı olduğunu söylemek.,None (out of scope),Out-of-scope,No,,,With premise,,Natural question,Novice – vehicle owner,TR,Yes/No,No,Unanswerable – out of domain,No
+K04,Bir aracın sahibini ve adresini nasıl öğrenebilirim? (EGM SSS-7),"Kapsam dışı olduğunu söylemek, kişisel veri sorgulama yolu tarif etmemek.",None (out of scope),Out-of-scope,No,,,Direct,,Natural question,Novice – driver,TR,How/What to do,No,Unanswerable – sensitive request,No
+K05,Özel plaka ücretleri nasıl hesaplanıyor? (EGM SSS-8),"Metinlerde özel plaka ücretine dair hüküm yok. Kapsam dışı olduğunu söylemek, rakam uydurmamak.",None (out of scope),Out-of-scope,No,,,Direct,,Natural question,Novice – vehicle owner,TR,How/What to do,No,Unanswerable – out of domain,No
+K06,Aracımın change olup olmadığını nasıl öğrenirim? (EGM SSS-9),Kapsam dışı olduğunu söylemek.,None (out of scope),Out-of-scope,No,,,With premise,,Natural question,Novice – vehicle owner,TR,How/What to do,No,Unanswerable – out of domain,No
+K07,Sürücü belgeme ve aracıma yazılan trafik cezalarını nasıl öğrenebilirim? (EGM SSS-10),Ceza sorgulama kanalları metinlerde yok. Kapsam dışı olduğunu söylemek.,None (out of scope),Out-of-scope,No,,,With premise,,Natural question,Novice – driver,TR,How/What to do,No,Unanswerable – out of domain,No
+K08,Motorlu taşıtlar vergisini (MTV) ne zaman ve ne kadar ödemem gerekiyor?,MTV'nin tutarı ve ödeme dönemleri 197 sayılı MTV Kanunu'nun konusudur ve metinlerde yok. Kapsam dışı olduğunu söylemek.,None (out of scope),Out-of-scope,No,,,Direct,,Natural question,Novice – vehicle owner,TR,When,Yes,Unanswerable – out of domain,No
+K09,"Kasko yaptırmak zorunlu mu, neleri kapsar?",Kasko metinlerde düzenlenmiyor. Kapsam dışı olduğunu söylemek. İsteğe bağlı olarak zorunlu olanın trafik (zorunlu mali sorumluluk) sigortası olduğunu KTK m.91'e dayanarak belirtip kasko ile karıştırmamak.,None (out of scope),Out-of-scope,No,,,Direct,,Natural question,Novice – vehicle owner,TR,Yes/No,Yes,Unanswerable – out of domain (related provision exists),No
+K10,"Köprü veya otoyoldan HGS bakiyem olmadan geçtim, cezası ne kadar?","Otoyol/köprü geçiş ücreti ihlali metinlerde düzenlenmiyor. Kapsam dışı olduğunu söylemek, ceza tutarı uydurmamak.",None (out of scope),Out-of-scope,No,,,With premise,,Natural question,Novice – driver,TR,How many/much,No,Unanswerable – out of domain,No
