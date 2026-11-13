@@ -1,0 +1,56 @@
+﻿Question ID,Selection Reason,Question,Answer,Legal Article Reference,Question Tag,Ambiguity,Source Scope,Hop Type,Premise,Wording,Phrasing,User,Language,Question Word,Multi-part,Answerability,Time-sensitive
+S01,"Single article, everyday terms (ehliyet), yes/no","Elektrikli skuter kullanmak için yaş sınırı var mı, ehliyet gerekiyor mu?",E-skuter için sürücü belgesi zorunlu değildir. Ancak elektrikli skuter kullananların 15 yaşını bitirmiş ve bedensel ve ruhsal bakımdan sağlıklı olmaları zorunludur. Bu şartları taşımayanlara araç kullandıranlar para cezası ile cezalandırılır.,"KTK Art. 37/1
+KTK Art. 37/2",Single article,No,Single article,Single-hop,Direct,Different terms,Natural question,Novice – e-scooter user,TR,Yes/No,Yes,Answerable,No
+S03,"Single article, only KURS item; how-many question",Sürücü kursunda bir ders saati kaç dakika sürer?,"Bir ders saati 50 dakikadır, iki ders saati arasındaki dinlenme süresi 10 dakikadır. Teorik derslerin uygulamalı konuları iki ders saati birleştirilerek blok ders yapılabilir; direksiyon eğitimi dersi blok ders olarak yapılamaz.",KURS Art. 21/1,Single article,No,Single article,Single-hop,Direct,Same terms,Natural question,Novice – driver candidate,TR,How many/much,No,Answerable,No
+S09,"Several articles of one text, with premise","Aracım kazaya karıştı ama muayene süresi daha dolmadı. Yeniden muayene yaptırmam gerekir mi, ücret öder miyim?","Muayene süresi dolmamış olsa bile, kazaya karışması sonucu yetkili trafik zabıtasınca muayenesi gerekli görülen araçlar özel muayeneye tabi tutulur. Özel muayenelerde muayene ücreti ve varsa gecikme ücreti tam olarak alınır.","MUAYENE Art. 14/2
+MUAYENE Art. 8/7",Several articles of one text,No,Several articles of one text,Parallel,With premise,Same terms,Natural question,Novice – vehicle owner,TR,Yes/No,Yes,Answerable,No
+S13,"Several articles of one text, different terms",Kiralık (paylaşımlı) e-skuterler en fazla kaç km/s hız yapar? Belirli bölgelerde neden yavaşlıyor?,"E-skuter, tanımı gereği hızı en fazla 25 km/saate ulaşan bir taşıttır. İşleticiler e-skuterleri UKOME veya il/ilçe trafik komisyonunun belirlediği hız sınırları içinde kullandırır, girilmesi yasak bölgeler ve hız sınırları için coğrafi çitleme uygular. Sürücü coğrafi çitleme olan bölgeye girerse, geri dönebilmesi için e-skuterin hızı kademeli olarak 6 km/saate indirilir. Bölgeye yaklaşırken de sesli uyarı verilir.","SKUTER Art. 4/1-c
+SKUTER Art. 16/10",Several articles of one text,No,Several articles of one text,Parallel,Direct,Different terms,Natural question,Novice – e-scooter user,TR,How many/much,Yes,Answerable,No
+S14,"Chain reasoning, time-sensitive",Alkollü araç kullandığım için ehliyetim 6 ay alındı. Bu süre içinde araç kullanırsam ne olur? Ehliyetimi geri almak için ne gerekir?,"Geri alma süresi içinde araç kullandığı tespit edilen kişi KTK m.36/3 uyarınca cezalandırılır. Belgesi geçici olarak geri alındığı hâlde motorlu araç kullananlara 200.000 TL idari para cezası verilir. Alkol nedeniyle geri alınan belgenin iade edilebilmesi için, kişi hakkında bu Kanun kapsamında verilen idari para cezalarının tamamının tahsil edilmiş olması şarttır.","KTK Art. 48/5
+KTK Art. 48/13
+KTK Art. 36/3-b
+KTK Art. 118 (last paragraph)",Several articles of one text,No,Several articles of one text,Chain,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,Yes,Answerable,Yes
+S15,Interaction of two texts (KTK-KTY),"Hız sınırını biraz aşarsam ceza yazılır mı, yönetmelikte bir tolerans var mı?","Evet, küçük aşımlar için iki ayrı kaynaktan gelen bir pay vardır:
+• Yönetmelikteki tolerans: Araç cinsine göre belirlenen azami hız sınırını %10 oranına kadar aşan sürücülere KTK m.51'e göre işlem yapılmaz. Örneğin 50'lik yolda 55, 90'lık yolda 99, 120'lik otoyolda 132 km/s'e kadar.
+• Kanundaki ceza dilimleri: KTK m.51, sürücülerin aksine işaret yoksa Yönetmelikteki sınırları aşmamasını zorunlu tutar. Ceza ise yerleşim yeri içinde sınırı 6-10 km/s aşanlar için, yerleşim yeri dışında 11-15 km/s aşanlar için 2.000 TL ile başlar. Yerleşim yeri içinde 5 km/s'e, dışında 10 km/s'e kadar olan aşımlar için Kanunda ceza dilimi yoktur.
+• Geçme istisnası: İki yönlü yolda, geçme kuralının zorunlu kıldığı şartlar nedeniyle sınırı aşan sürücülere de işlem yapılmaz.
+İki kural birlikte uygulanınca:
+• Yerleşim yeri içinde 50'lik yolda 55 km/s'e kadar ceza yoktur, 56-60 km/s için 2.000 TL'dir.
+• Yerleşim yeri dışında 90'lık yolda 100 km/s'e kadar ceza yoktur, çünkü Kanundaki dilim 11 km/s aşımdan başlar. 101-105 km/s için 2.000 TL'dir.
+• Sınır yerleşim yeri içinde 50'nin, dışında 100'ün üzerindeyse iki metin dar bir aralıkta farklı sonuç verir. 110'luk yolda 121 km/s, 120'lik otoyolda 131-132 km/s, sınırı 70'e çıkarılmış şehir içi yolda 76-77 km/s, Yönetmeliğe göre tolerans içindedir ama Kanunun ilk ceza dilimine girer.","KTY Art. 101/3
+KTY Art. 101/4
+KTY Art. 100/1
+KTK Art. 51/1
+KTK Art. 51/2-a-1
+KTK Art. 51/2-b-1",Articles of several texts,No,Articles of several texts,Chain,Direct,Different terms,Natural question,Novice – driver,TR,Yes/No,Yes,Answerable,Yes
+S20,Chain across three texts,Ehliyet aldıktan sonra epilepsi teşhisi konulan birinin ehliyetine ne olur?,"Sürücüde sağlığı bakımından sürücülüğe engel açık bir değişiklik görülür ve tespit edilirse, trafik görevlilerince belge geçici olarak geri alınır ve kişiye 'sürücü olur' raporu aldırılır. Bir kamu kurumunun yazılı bildirimi de geri almaya yol açabilir. Kişi il sağlık müdürlüğü aracılığıyla ilgili branş uzmanına sevk edilir. Epilepsi hastalarına yalnızca belirli şartlarla ve sadece birinci grup sınıflar verilebilir. Örneğin altı ayda bir nöroloji muayenesiyle üç yıl boyunca nöbet geçirmediğini belgeleyenlerin durumu nöroloji sağlık kurulunda değerlendirilir. Bu kişiler ambulans, resmî veya ticari araç kullanamaz. Engel yoksa ya da sonradan ortadan kalkmışsa belge iade edilir.","KTK Art. 45/1
+KTY Art. 90/1-4
+SAĞLIK Art. 4/4
+SAĞLIK Art. 9/2-c",Articles of several texts,No,Articles of several texts,Chain,Direct,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,No
+S23,"Violation in user's own words, single article","Dün akşam iki bira içip arabamla eve dönerken çevirmeye takıldım, üfledim 0.70 çıktı. Polis ehliyetimi aldı. Başıma ne gelecek?","Hususi otomobilde 0,50 promilin üzerinde alkollü araç kullanan sürücüye 25.000 TL idari para cezası verilir ve sürücü belgesi 6 ay süreyle geri alınır. Son beş yıl içinde ikinci kez olursa ceza 50.000 TL'ye ve geri alma süresi 2 yıla çıkar. Üç ve daha fazlasında her seferinde 150.000 TL ceza verilir ve belge 5 yıl geri alınır. Değer 1,00 promilin altında olduğu için TCK m.179/3 ayrıca uygulanmaz. Belgenin iade edilmesi için Kanun kapsamındaki tüm idari para cezalarının ödenmiş olması gerekir.","KTK Art. 48/5
+KTK Art. 48/6
+KTK Art. 48/13",Violation in the user's own words,No,Single article,Single-hop,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,Yes
+S25,"Ambiguous question, conditional answer",Şehir içinde 105 ile giderken radara yakalandım. Cezası ne?,"Ceza, o yoldaki ve aracınız için geçerli hız sınırına göre değişir. Ceza, sınırın ne kadar aşıldığına göre yerleşim yeri içi dilimlerinden belirlenir:
+• Sınır 50 km/s ise (otomobil, minibüs, otobüs, kamyonet, panelvan, kamyon, çekici ve motosiklet için yerleşim yeri içi genel sınır): 55 km/s aşım, '46-55 km/s' dilimine girer. 20.000 TL idari para cezası verilir ve sürücü belgesi 30 gün geri alınır.
+• Sınır 40 km/s ise (römorklu veya yarı römorklu araç; römorksuz sınırdan 10 km/s düşük): 65 km/s aşım, '56-65 km/s' dilimine girer. 25.000 TL ceza verilir ve belge 60 gün geri alınır. Levhayla 40 km/s'e düşürülmüş bir yolda da sonuç aynıdır.
+• Sınır 30 km/s ise (motorlu bisiklet, tehlikeli madde taşıyan araç, özel izin belgeli araç veya levhayla 30'a düşürülmüş yol): 75 km/s aşım, '66 km/s ve fazlası' dilimine girer. 30.000 TL ceza verilir ve belge 90 gün geri alınır.
+• Sınır 20 km/s ise (lastik tekerlekli traktör, arızalı araç çeken araç, iş makinesi): 85 km/s aşım, 30.000 TL ceza ve 90 gün geri alma.
+• Sınır trafik komisyonunca 20 km/s artırılmış bir bölünmüş yolsa (sınır 70): 35 km/s aşım, '26-35 km/s' dilimine girer. 12.000 TL ceza verilir, belge geri alınmaz.
+• Sınır 32 km/s artırılmış bir bölünmüş yolsa (sınır 82): 23 km/s aşım, '21-25 km/s' dilimine girer. 8.000 TL ceza verilir, belge geri alınmaz.
+Her durumda geçerli kurallar:
+• Yönetmelikteki %10 tolerans bu aşım miktarlarında uygulanamaz.
+• Geri alınan belge, Kanun kapsamındaki tüm idari para cezaları ödenmeden iade edilmez.
+• Bu madde kapsamında son bir yıl içinde beşinci kez geri alınan belge, ancak psiko-teknik değerlendirme ve psikiyatri uzmanı muayenesinden geçilirse iade edilir.
+• Geri alma süresi içinde araç kullanılırsa ayrıca 200.000 TL idari para cezası verilir.","KTK Art. 51/2-a
+KTK Art. 51/3
+KTK Art. 51/5
+KTK Art. 36/3-b
+KTY Art. 100/1 (table)
+KTY Art. 100/5
+KTY Art. 100/8
+KTY Art. 101/4",Violation in the user's own words,Yes,Articles of several texts,Chain,With premise,Different terms,Natural question,Novice – driver,TR,What happens/Penalty,No,Answerable,Yes
+S28,"Violation in user's own words, two texts","Kiraladığım scooter'a arkadaşımı da bindirdim, kaldırımdan gidiyorduk, polis durdurdu. Yanlış bir şey mi yaptık?","Evet, iki ayrı ihlal var. E-skuterde sürücü dışında başka kişi taşınması yasaktır. E-skuterin yaya yollarında sürülmesi de yasaktır. Bu kurallara uymayan sürücülere 5.000 TL idari para cezası uygulanır.","SKUTER Art. 5/1-a-4
+SKUTER Art. 5/1-b-2
+KTK Art. 66/1-a
+KTK Art. 66/1-d
+KTK Art. 66 (penalty paragraph)",Violation in the user's own words,No,Articles of several texts,Parallel,With premise,Different terms,Natural question,Novice – e-scooter user,TR,Yes/No,No,Answerable,Yes
