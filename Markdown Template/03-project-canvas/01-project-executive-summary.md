@@ -55,7 +55,7 @@ The document set consists of the Highway Traffic Law No. 2918 [1], the Highway T
 | # | Feature | What the user can do with it | Objective(s) it serves |
 |---|---|---|---|
 | 1 | Questions in the user's own words | Ask in Turkish about a traffic rule, a violation or a penalty and get an answer in Turkish | 1, 2, 3, 4 |
-| 2 | Article reference | See which article of which text each answer rests on and read the quoted provision | 2 |
+| 2 | Article reference | See which article of which text each answer rests on, read the quoted provision and see the version date of the text | 2 |
 | 3 | Sanctions for a violation | Describe a violation and see the sanctions the document set lays down for it: the fine as written in the Law, penalties, licence withdrawal and vehicle ban; amounts are shown as written in the texts, and a notice on the chat page states that fine amounts are revalued every year | 1, 2 |
 | 4 | Out-of-scope handling | Get a statement that the assistant cannot answer when the question lies outside the document set | 4 |
 

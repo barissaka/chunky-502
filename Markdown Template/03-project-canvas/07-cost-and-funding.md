@@ -101,8 +101,8 @@ Team capacity: 4 members × 7 hours per week × 11 weeks (14/10/2026 to 30/12/20
 | 11 | Runtime environment of the AI customer ([Major Activities](04-major-activities.md) row 33) | One-time | 4 person-hours | Review of public documents |
 | 12 | Final report (D12) | One-time | 12 person-hours | Team estimate |
 | 13 | Amendment checks, weekly review of reported answers during the pilot and credit tracking ([Major Activities](04-major-activities.md) rows 5, 16 and 32) | Ongoing | 10 person-hours | 4 amendment checks × 1 h, 2 pilot weeks × 1 h, plus 11 weekly credit checks × about 0.4 h |
-| 14 | Hosted model calls on Google Cloud or Azure: long-context baseline, judge model and a hosted language model if one is chosen ([Facilities & Resources](09-facilities-and-resources.md) rows 5 and 6) | Ongoing | Up to $100 | The long-context baseline alone needs about 20.5 million input tokens; spend is tracked weekly with alerts at 50% and 75% (C-08) |
-| 15 | Host laptop, spare host and development laptops ([Facilities & Resources](09-facilities-and-resources.md) rows 1 to 3) | Ongoing | $0 | Member-owned; local models run at no charge |
+| 14 | Hosted model calls on Google Cloud or Azure: answer generation with the baseline model (gpt-oss-120b on Vertex AI), long-context baseline (D5, and the D6 run with the same model), and judge model ([Facilities & Resources](09-facilities-and-resources.md) rows 6 and 7) | Ongoing | Up to $100 | The long-context baseline alone needs about 20.5 million input tokens; spend is tracked weekly with alerts at 50% and 75% (C-08) |
+| 15 | Host laptop, spare host and development laptops ([Facilities & Resources](09-facilities-and-resources.md) rows 1 to 4) | Ongoing | $0 | Member-owned; local models run at no charge |
 | 16 | Datasheet for question set v1 ([Major Activities](04-major-activities.md) row 34; D13) | One-time | 6 person-hours | Sources, keywords and selection decisions are logged during collection (row 6); 6 h to write them up and check the counts against the D2 file |
 | | **Total effort** | | **308 person-hours** | Equal to the 308 available (C-10); no spare hours |
 
