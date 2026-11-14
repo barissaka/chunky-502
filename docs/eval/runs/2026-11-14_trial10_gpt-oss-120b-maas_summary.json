@@ -1,0 +1,190 @@
+{
+  "summary": {
+    "run_file": "2026-11-14_trial10_gpt-oss-120b-maas.jsonl",
+    "model": "openai/gpt-oss-120b-maas",
+    "prompt": "answer_v1",
+    "top_k": 8,
+    "sparse_weight": 0.3,
+    "questions": 10,
+    "retrieval": {
+      "recall@5_hit_rate": 1.0,
+      "recall@8_hit_rate": 1.0,
+      "article_recall@5": 0.792,
+      "article_recall@8": 0.917,
+      "precision@8": 0.25,
+      "mrr@8": 0.758
+    },
+    "generation": {
+      "citation_recall": 0.725,
+      "citation_precision": 0.615,
+      "answers_citing_an_expected_article": 10,
+      "unknown_citations_total": 4
+    },
+    "seconds": {
+      "mean": 29.5,
+      "median": 26.6,
+      "p95": 62.1,
+      "max": 70.7
+    },
+    "tokens_mean": {
+      "input": 7816,
+      "output": 920
+    },
+    "not_computed_here": [
+      "correct answers (eval.py LLM judge)",
+      "declined out-of-scope questions (not run yet)"
+    ]
+  },
+  "per_question": [
+    {
+      "id": "S01",
+      "expected": 1,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.125,
+      "rr": 0.5,
+      "citation_recall": 1.0,
+      "citation_precision": 0.5,
+      "unknown_citations": 0,
+      "seconds": 7.3
+    },
+    {
+      "id": "S03",
+      "expected": 1,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.125,
+      "rr": 1.0,
+      "citation_recall": 1.0,
+      "citation_precision": 1.0,
+      "unknown_citations": 0,
+      "seconds": 5.5
+    },
+    {
+      "id": "S09",
+      "expected": 2,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "precision@5": 0.2,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.25,
+      "rr": 0.25,
+      "citation_recall": 0.5,
+      "citation_precision": 0.3333333333333333,
+      "unknown_citations": 0,
+      "seconds": 7.0
+    },
+    {
+      "id": "S13",
+      "expected": 2,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.25,
+      "rr": 0.5,
+      "citation_recall": 0.5,
+      "citation_precision": 0.25,
+      "unknown_citations": 1,
+      "seconds": 51.7
+    },
+    {
+      "id": "S14",
+      "expected": 3,
+      "hit@5": 1.0,
+      "recall@5": 0.6666666666666666,
+      "precision@5": 0.4,
+      "hit@8": 1.0,
+      "recall@8": 0.6666666666666666,
+      "precision@8": 0.25,
+      "rr": 1.0,
+      "citation_recall": 0.3333333333333333,
+      "citation_precision": 0.5,
+      "unknown_citations": 0,
+      "seconds": 44.4
+    },
+    {
+      "id": "S15",
+      "expected": 3,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.6,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.375,
+      "rr": 1.0,
+      "citation_recall": 0.6666666666666666,
+      "citation_precision": 1.0,
+      "unknown_citations": 0,
+      "seconds": 42.7
+    },
+    {
+      "id": "S20",
+      "expected": 4,
+      "hit@5": 1.0,
+      "recall@5": 0.25,
+      "precision@5": 0.2,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.5,
+      "rr": 1.0,
+      "citation_recall": 0.75,
+      "citation_precision": 1.0,
+      "unknown_citations": 0,
+      "seconds": 10.4
+    },
+    {
+      "id": "S23",
+      "expected": 1,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.125,
+      "rr": 1.0,
+      "citation_recall": 1.0,
+      "citation_precision": 0.5,
+      "unknown_citations": 0,
+      "seconds": 70.7
+    },
+    {
+      "id": "S25",
+      "expected": 4,
+      "hit@5": 1.0,
+      "recall@5": 0.5,
+      "precision@5": 0.4,
+      "hit@8": 1.0,
+      "recall@8": 0.5,
+      "precision@8": 0.25,
+      "rr": 1.0,
+      "citation_recall": 0.5,
+      "citation_precision": 0.4,
+      "unknown_citations": 3,
+      "seconds": 9.7
+    },
+    {
+      "id": "S28",
+      "expected": 2,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "hit@8": 1.0,
+      "recall@8": 1.0,
+      "precision@8": 0.25,
+      "rr": 0.3333333333333333,
+      "citation_recall": 1.0,
+      "citation_precision": 0.6666666666666666,
+      "unknown_citations": 0,
+      "seconds": 45.7
+    }
+  ]
+}
