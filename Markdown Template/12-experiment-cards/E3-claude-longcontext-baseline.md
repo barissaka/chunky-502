@@ -10,7 +10,7 @@
 
 | Date | Author(s) | Status |
 |---|---|---|
-| 2026-11-13 | Ekin | completed |
+| 2026-11-13 | Ekin Deniz Öztürk | completed |
 
 **Aim:**
 <!-- The question you want to answer, and what you compare against: the baseline or another configuration. -->
@@ -85,3 +85,24 @@ The two missing_key_fact cases, as the judge describes them: S15 gives both prov
 With all six texts in context, Claude Sonnet 5.5 answers the in-scope questions well (judge score 0.80, 8 of 10 pass, article recall 0.92), and the judge found no contradiction with the gold answers. Its weaknesses are completeness and form: it leaves out cases on long multi-case questions (S15, S25), cites more articles than the gold references (article precision 0.51), and on out-of-scope questions it does not stop at the refusal: all 10 answers add related provisions and some add referrals, which the team's rule does not allow (judge 0.42), and the `in_scope` flag is inconsistent (4 of 10). The baseline_v1 prompt only said "say it clearly" and did not forbid adding related content, which likely explains this.
 
 Limits: one run only (no run-to-run spread); scores come from one LLM judge with no human check, and the judge is also a Claude model (possible family bias, though judge and generator are different models). Paragraph scores for KTK and KTY are held back by the missing paragraph numbers in these texts (D29). Decisions: D28, D30–D33, D35.
+
+**Acceptance criteria (added 2026-11-14):**
+<!-- Added after the run; the sections above are unchanged. Values computed from run1/results.jsonl and run1/scores.csv, no new model calls. -->
+
+1. Run record: the 10 selected in-scope questions and the 10 out-of-scope questions were run. Model `claude-sonnet-5-5` (Anthropic API model ID; no dated snapshot is recorded) through the `anthropic` Python SDK 2.8.0; prompt `prompts/baseline_v1_system.txt` (sha256 3fa9a2e92d35f0e7); settings: model-default sampling, max_tokens 16,000, prompt caching on the corpus, 1 run (see *Design* and `run1/results.meta.json`).
+2. Automatic scoring against the answer key: each in-scope answer is scored correct (judge score ≥ 0.7) or incorrect against the gold answers of `trial_full_20.json` (`judge_pass` in `run1/scores.csv`). Each article an in-scope answer names is labelled supporting (among the gold references of that question, article level) or not supporting (`supporting_articles`, `non_supporting_articles`). Of the 51 distinct articles named in the 10 answers, 20 are supporting and 31 are not. "Not supporting" means only that the article is not in the gold references; whether it is related to the answer is not checked.
+3. By question type:
+
+| Question type | n | Correct answers | Answers naming a supporting article | Mean cost per question (USD) | Median response time (s) |
+|---|---|---|---|---|---|
+| Single article | 2 | 2 / 2 (100%) | 2 / 2 (100%) | 0.09 | 4.4 |
+| Several articles of one text | 3 | 3 / 3 (100%) | 3 / 3 (100%) | 0.11 | 17.9 |
+| Articles of several texts | 2 | 1 / 2 (50%) | 2 / 2 (100%) | 0.11 | 17.1 |
+| Violation in the user's own words | 3 | 2 / 3 (67%) | 3 / 3 (100%) | 0.11 | 18.4 |
+| **In-scope total** | 10 | **8 / 10 (80%)** | **10 / 10 (100%)** | **0.11** | **17.7** |
+| Out-of-scope | 10 | — | — | 0.10 | 11.4 |
+| **All 20** | 20 | | | **0.10** | **13.7** |
+
+Out-of-scope questions declined: **0 of 10**. Counted by the team's rule (D28): a question counts as declined only when the answer says the topic is not covered and adds nothing else (no citations, related provisions or referral). Every answer states that the topic is not covered, but all 10 then add related provisions.
+
+Cost is computed from the recorded tokens at list price (input 2 USD, cache write 2.5 USD, cache read 0.2 USD, output 10 USD per million tokens) with the corpus read from the prompt cache. Not included: the one-off cache write of the corpus (about 1.12 USD, paid in the 2-question cache test) and the judge calls.
