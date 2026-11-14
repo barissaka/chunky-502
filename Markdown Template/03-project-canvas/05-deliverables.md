@@ -62,7 +62,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 
 | Project Deliverable #: | D5: Long-context baseline experiment card |
 |---|---|
-| Description: | Results of a long-context model that receives the full document set (D1), with no retrieval, on all 40 questions of D2. It is the comparison point for the RAG results in D6 and D8. |
+| Description: | Results of a long-context model that receives the full document set (D1), with no retrieval, on selected 10 questions of D2 and all 10 out of scope questions. It is the comparison point for the RAG results in D6 and D8. |
 | Acceptance Criteria: | 1. Selected 10 questions are run, and the model name, model version, prompt and settings are recorded. 2. Each in-scope answer is scored correct or incorrect automatically, against the D2 answer key (Architecture AD-12), and each named article is scored as supporting or not supporting the answer. 3. The card reports, by question type: share of correct answers, share of answers that name a supporting article, number of out-of-scope questions declined (of 10), mean cost per question in USD and median response time in seconds. |
 | Due Date: | 11/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee |
@@ -70,7 +70,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 
 | Project Deliverable #: | D6: RAG baseline experiment card |
 |---|---|
-| Description: | Results of the first RAG pipeline (472 chunks over the 550 articles of D1, with closely related articles merged into one chunk) on all 40 questions of D2, set side by side with D5. It holds the first trial runs against which the Objective 2 levels are checked. |
+| Description: | Results of the first RAG pipeline (472 chunks over the 550 articles of D1, with closely related articles merged into one chunk) on selected 10 questions of D2, set side by side with D5. It holds the first trial runs against which the Objective 2 levels are checked. |
 | Acceptance Criteria: | 1. Selected 10 questions are run through the pipeline of D7, and the generation model, embedding model, reranking model, number of retrieved chunks (k), number of chunks kept after reranking and prompt are recorded. 2. The card reports the five measures of D5, by question type, in one table with the D5 values. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks. 4. At least one run uses the same generation model as D5. 5. For each of the two 80% levels of Objective 2, the card states the measured value next to the level. 6. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification. |
 | Due Date: | 14/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee; Quality Team |
