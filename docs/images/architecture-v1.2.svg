@@ -66,7 +66,7 @@
 <rect x="480" y="900" width="300" height="210" rx="22" fill="#FFFFFF" stroke="#1B2A41" stroke-width="4"/>
 <path d="M603.0 946 h54 a4 4 0 0 1 4 4 v34 a4 4 0 0 1 -4 4 h-38 l-14 12 v-12 h-2 a4 4 0 0 1 -4 -4 v-34 a4 4 0 0 1 4 -4 z" fill="none" stroke="#1B2A41" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="630.0" y="1040" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="bold" fill="#1B2A41" text-anchor="middle">Chat UI</text>
-<text x="630.0" y="1072" font-family="DejaVu Sans, Arial, sans-serif" font-size="21" font-weight="normal" fill="#5B6B7F" text-anchor="middle">Gradio / Streamlit</text>
+<text x="630.0" y="1072" font-family="DejaVu Sans, Arial, sans-serif" font-size="21" font-weight="normal" fill="#5B6B7F" text-anchor="middle">Streamlit</text>
 <text x="630.0" y="1098" font-family="DejaVu Sans, Arial, sans-serif" font-size="21" font-weight="normal" fill="#5B6B7F" text-anchor="middle">history in session only</text>
 <rect x="880" y="900" width="300" height="210" rx="22" fill="#FFFFFF" stroke="#1B2A41" stroke-width="4"/>
 <rect x="999.0" y="950" width="62" height="42" rx="6" fill="none" stroke="#1B2A41" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
