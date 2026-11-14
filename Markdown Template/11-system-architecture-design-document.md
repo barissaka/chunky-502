@@ -70,7 +70,7 @@ flowchart LR
         embed["Embedding model<br/>bge-m3 · local CPU (AD-04)"]
 
         subgraph online ["Online · question answering"]
-            user(["AI user<br/>driver / licence candidate"]) -->|question / reply| ui["Chat UI<br/>Gradio / Streamlit<br/>history in session only"]
+            user(["AI user<br/>driver / licence candidate"]) -->|question / reply| ui["Chat UI<br/>Streamlit<br/>history in session only"]
             ui -->|turn + history| mask["PII masker<br/>ID no · plate<br/><i>regex, no LLM:</i><br/>• T.C. ID no: 11 digits + check digit<br/>• plate: province code + letters + digits"]
             mask -->|masked turn| guard["Query guard<br/>sanity · injection<br/>advice request<br/><i>rules, no LLM:</i><br/>• empty / too long → message<br/>• injection patterns (TR/EN) → fixed reply<br/>• advice request → fixed reply"]
             guard -.->|fixed reply · rejected turn| ui
@@ -111,10 +111,10 @@ flowchart LR
     qs[("D2 question set v1<br/>40 questions · answer key<br/>type, follow-up and ambiguity labels")] --> runner["Evaluation runner"]
     prc[("Unseen question set<br/>from the Project Review Committee (D11)")] --> runner
     runner -->|questions + scripted replies| pipe["RAG pipeline<br/>same code and config as the chat UI"]
-    runner -->|questions + full document set<br/>3 sizes, no retrieval| lc["Long-context baseline<br/>hosted model, ≥1M-token window"]
-    pipe -->|answers, retrieved and cited articles,<br/>tokens, timings| scorer["Scorer<br/>rule-based checks + RAGAS / DeepEval"]
+    runner -->|questions + full document set<br/>no retrieval| lc["Long-context baseline (E3)<br/>Claude Sonnet 5.5 · Anthropic API<br/>all six texts in context"]
+    pipe -->|answers, retrieved and cited articles,<br/>tokens, timings| scorer["Scorer · eval.py<br/>rule-based citation checks + DeepEval GEval"]
     lc -->|answers, cited articles, tokens, timings| scorer
-    scorer -->|judge prompts| judge["Judge model<br/>hosted, different from the generator"]
+    scorer -->|judge prompts| judge["Judge model<br/>Claude Opus 5.5 · Anthropic API<br/>different from the generators"]
     scorer -->|metrics by question type| wandb[("Weights & Biases<br/>experiment cards D5, D6, D8")]
 
     classDef data fill:#FFFFFF,stroke:#2E8B57,stroke-width:2px
@@ -140,7 +140,7 @@ The default-state baseline (D3) is a timed test with people and no system, so it
 | Indexer | Reads `data/chunks/chunks.jsonl`, splits only the chunks above the embedding model's input limit into retrieval-only sub-chunks (AD-08; none with bge-m3, whose limit no unit exceeds), embeds them and writes vectors and metadata into the vector store. The index folder `index/` is not committed; each member builds it on their own laptop from the committed `chunks.jsonl`. Re-run when a text, the chunking or the embedding model changes | Python, own code (`src/chunky/index.py`); `numpy` 2.5.4 | numpy 2.5.4 |
 | Embedding model | Turns chunks and questions into vectors in the same space | Baseline: `BAAI/bge-m3` (revision `5617a9f`), FP32 on the host CPU, through `transformers` 5.23.0 and `torch` 2.15.0; final choice in the retrieval spike (AD-04) | AI SBOM: BAAI/bge-m3; transformers 5.23.0; torch 2.15.0 |
 | Vector store | Stores chunk vectors and metadata; returns the chunks most similar to a question vector, with metadata filters by text and article | numpy arrays on disk in `index/bge-m3/` (`dense.npy`, `sparse.jsonl`, `chunks.jsonl`, `manifest.json`); exhaustive search; filters in Python (AD-06) | numpy 2.5.4 |
-| Chat UI | Question box; streamed answer; cited articles with quoted provision and version date under the answer; clarifying-question options as buttons; a fixed notice on fine amounts; session history held in the browser session only, cleared when the session ends | Candidate: Gradio / Streamlit (AD-14) [version] | gradio / streamlit |
+| Chat UI | Question box; streamed answer; cited articles with quoted provision and version date under the answer; clarifying-question options as buttons; a fixed notice on fine amounts; session history held in the browser session only, cleared when the session ends | Streamlit (AD-14); version pinned when the UI is added | streamlit |
 | PII masker | Masks personal data in every user turn before anything is logged, checked or sent to a model: national ID numbers (11 digits with the official check-digit rule) and licence plates (province code, letters, digits). Personal names are not masked (AD-10; Major Activities row 10; C-12) | Python, own code: regular expressions and the check-digit rule (AD-10) | — |
 | Query guard | Rule-based checks on the masked turn, in order: sanity (empty → "Lütfen bir soru yazın"; longer than a configured limit, for example 1,000 characters → a request to shorten it), prompt injection (a list of 15–20 Turkish and English patterns → fixed reply), request for advice on an individual case (pattern list → advice-refusal sentence). A rejected turn gets a fixed reply and never reaches retrieval or the LLM; the decision is logged. The system prompt repeats the injection and advice rules as a second safeguard | Python, own code: pattern lists (AD-10) | — |
 | Retriever | Builds the retrieval query (the current question; for a follow-up, joined with the user's previous question in the session, AD-11), embeds it, queries the vector store and returns the top-k candidate articles. There is no score-based scope gate: out-of-scope questions are declined by the LLM with the refusal sentence (AD-10) | Python, own code | — |
@@ -150,8 +150,8 @@ The default-state baseline (D3) is a timed test with people and no system, so it
 | LLM backend | Generates clarifying questions and answers | Hosted model on Google Cloud Vertex AI, paid from the course credit (AD-03); baseline (Sprint 2): `openai/gpt-oss-120b-maas`, us-central1 | AI SBOM: gpt-oss-120b (baseline) |
 | Interaction log | Keeps masked turns, guard and scope decisions, retrieved article IDs, answers and timings, so that false rejections and wrong answers can be reviewed | Local JSON Lines file on the host laptop | — |
 | Evaluation runner | Runs D2 (and later the unseen set for D11) through the RAG pipeline and through the long-context baseline; feeds scripted replies to clarifying questions; records answers, articles, tokens and timings | Python, own code | — |
-| Long-context baseline | Answers D2 from the full document set with no retrieval, at three sizes: Law only, Law + Regulation, full set (Major Activities row 12) | Hosted model with a context window of at least 1 million tokens on Google Cloud or Azure; model and version pinned in config (AD-13) | AI SBOM: chosen model and version |
-| Scorer and judge | Computes all metrics automatically (section 5, Evaluation): rule-based checks plus reference-based metrics against the D2 answer key, with a judge model that is not the generator | Candidate library: RAGAS / DeepEval (AD-12); judge: hosted model | ragas / deepeval |
+| Long-context baseline | Answers the trial questions from the full document set with no retrieval (all six texts in context, 447,423 tokens with the system prompt) | Claude Sonnet 5.5 (`claude-sonnet-5-5`, 1M-token context) through the Anthropic Messages API, `anthropic` 2.8.0 (`run.py`), with prompt caching of the corpus; prompt `prompts/baseline_v1_system.txt` (AD-13; [E3](12-experiment-cards/E3-claude-longcontext-baseline.md)) | AI SBOM: Claude Sonnet 5.5; anthropic 2.8.0 |
+| Scorer and judge | Computes all metrics automatically (section 5, Evaluation): rule-based checks plus reference-based metrics against the D2 answer key, with a judge model that is not the generator | `eval.py`: DeepEval 4.3.4 GEval for correctness and the out-of-scope rubric, pass threshold 0.7; judge Claude Opus 5.5 (`claude-opus-5-5`) through the Anthropic API; rule-based article and paragraph citation scores (AD-12) | deepeval 4.3.4; pandas 3.1.1; anthropic 2.8.0 |
 | Experiment tracking | Stores every run with its configuration, dataset version and model versions; source of the experiment cards D5, D6 and D8 | Weights & Biases ([Project Organization](03-project-canvas/08-project-organization.md)) | wandb |
 
 ## 5. Design details
@@ -204,9 +204,9 @@ All metrics are computed automatically (AD-12) on D2 v1: 30 in-scope and 10 out-
 
 | Measure | How it is computed | Charter link |
 |---|---|---|
-| Correct answers (share) | Reference-based answer-correctness score (RAGAS or DeepEval) against the D2 answer key, judged by a hosted model that is not the generator; a score at or above a threshold fixed before M5 counts as correct | Objective 2 (≥80%); D5, D6, D8 |
+| Correct answers (share) | Reference-based answer-correctness score (DeepEval GEval) against the D2 answer key, judged by Claude Opus 5.5, which is not a generator; a score of 0.7 or above counts as correct | Objective 2 (≥80%); D5, D6, D8 |
 | Supported article references (share) | Rule-based: the answer cites at least one article, and at least one cited article ID is among the supporting articles in the answer key | Objective 2 (≥80%); D5, D6, D8 |
-| Groundedness | Faithfulness of the answer to the articles given to the model (RAGAS or DeepEval) | Diagnostic |
+| Groundedness | Faithfulness of the answer to the articles given to the model (DeepEval) | Diagnostic |
 | Out-of-scope refusal | Rule-based: the 10 out-of-scope questions are answered with the refusal sentence; in-scope questions that receive it are counted as false refusals | Objective 4 (10 of 10); D11 |
 | Retrieval | Recall@k (at least one supporting article of the answer key among the retrieved articles), plus article recall@k (share of the supporting articles retrieved), Precision@k and MRR; with and without the reranker | D6, D8 |
 | Clarification | Precision and recall of the *ask* decision on the D2 ambiguity labels; answer correctness after the scripted reply | Major Activities row 13; R-15 |
@@ -218,7 +218,7 @@ All metrics are computed automatically (AD-12) on D2 v1: 30 in-scope and 10 out-
 **Baselines (AD-13).**
 
 - *Default-state baseline (D3).* Participants answer comparable D2 questions with the official texts and a web search, without the assistant. The median time to a correct answer and the number of places consulted are recorded in Sprint 1. The pilot report (D10) compares the time with the assistant against this value.
-- *Long-context baseline (D5).* A hosted model with a context window of at least 1 million tokens receives the document set with no retrieval and answers all 40 questions with the same answer prompt and the same scorer. It is run at three sizes (Law only: 77,985 tokens; Law + Regulation: 179,015; full set: 255,138). The Law-only run goes first, and its cost is checked before the larger runs (R-04). At least one RAG run uses the same generation model as D5 (D6, acceptance criterion 4), so that the comparison isolates what retrieval changes.
+- *Long-context baseline (D5).* Claude Sonnet 5.5 (1M-token context) receives all six texts with no retrieval (447,423 tokens with the system prompt) and answers the 20 questions of the trial set (10 in scope, 10 out of scope), scored by the same `eval.py` and judge as the RAG pipeline ([E3](12-experiment-cards/E3-claude-longcontext-baseline.md)). In Sprint 2 it was run once on the full set: in-scope judge score 0.80 (8 of 10 pass), article recall 0.92, out-of-scope judge score 0.42; cost about 2.1 USD with prompt caching. The RAG pipeline is not run again with the long-context generation model (team decision, 14/11/2026); the RAG–long-context comparison uses the two baselines as they are.
 
 **Latency budget.** Proposed: median full-answer time of at most 30 seconds on the host laptop, so that reading time still fits within the 2-minute median of Objective 1. The budget is confirmed or corrected after the first measurement and then recorded in [Assumptions & Constraints](03-project-canvas/03-assumptions-and-constraints.md).
 
@@ -245,8 +245,8 @@ All metrics are computed automatically (AD-12) on D2 v1: 30 in-scope and 10 out-
 | LLM gateway | LLM backend | chat request; streamed response | OpenAI-compatible chat completions API over HTTPS to Google Cloud Vertex AI |
 | Answer generator | Chat UI | clarifying question with options, or answer with cited articles, quoted provisions and version dates | Python generator (streamed) |
 | Evaluation runner | RAG pipeline | D2 questions, scripted replies | Python call, same entry point as the UI |
-| Evaluation runner | Long-context baseline | full document set + question | HTTPS to the hosted provider |
-| Scorer | Judge model | judge prompts | HTTPS to the hosted provider |
+| Evaluation runner | Long-context baseline | full document set + question | HTTPS to the Anthropic Messages API |
+| Scorer | Judge model | judge prompts | HTTPS to the Anthropic Messages API, through DeepEval |
 | Scorer | Weights & Biases | metrics, configuration, versions | `wandb` Python SDK (no personal data; evaluation questions only) |
 
 ### Deployment
@@ -269,9 +269,9 @@ No component is deployed to Google Cloud. The host laptop needs an internet conn
 | C-03 Turkish only | Answers in Turkish (system prompt) |
 | C-04 RAG; long-context model as baseline only | Retrieval pipeline; long-context baseline in the evaluation flow only |
 | C-05 Follow-ups and one clarifying question | Session history in the UI, previous question joined to the retrieval query, clarify-or-answer step |
-| C-06 Compute and hosted model calls | No cloud deployment; hosted calls limited to the LLM backend (if chosen), the long-context baseline and the judge. LLM provider: Google Cloud Vertex AI (AD-03; see the charter change list) |
+| C-06 Compute and hosted model calls | No cloud deployment; hosted calls limited to the LLM backend, the long-context baseline and the judge. Providers: Google Cloud Vertex AI for the LLM backend (AD-03); the Anthropic API for the long-context baseline and the judge (AD-12, AD-13; see the charter change list) |
 | C-07 No connection to EGM systems or e-Devlet | No such interface exists |
-| C-08 Budget | Gateway records tokens per call; cost per question reported; Law-only baseline run first |
+| C-08 Budget | Gateway records tokens per call; cost per question reported; long-context baseline run with prompt caching (about 2.1 USD, E3) |
 | C-11 No advice on an individual case | Advice check in the query guard; advice-refusal sentence |
 | C-12 No personal data stored | PII masker before every log write and model call; session history not stored |
 
@@ -425,7 +425,7 @@ Decision IDs use the prefix AD (architecture decision) so that they are not conf
 
 **Status:** accepted (numpy index for the baseline)
 
-### AD-07: Local runtime — Ollama, only if a local model is used
+### AD-07: Local runtime — withdrawn (no local LLM)
 
 **Context:** A local embedding model or LLM needs a runtime that loads it and exposes an API.
 
@@ -569,7 +569,9 @@ The clarification design follows the three steps of Zhang and Choi [7]: decide w
 
 **Evidence:** First evaluation run, Sprint 2.
 
-**Owner and date:** Özge Çalışkan, 2026-10-25
+**Update (2026-11-14): library, judge and threshold chosen.** Scoring uses the team's `eval.py`: DeepEval 4.3.4 GEval for answer correctness against the gold answer and for the out-of-scope rubric, with Claude Opus 5.5 (`claude-opus-5-5`, Anthropic API) as the judge and a pass threshold of 0.7; there are no manual scores. Citations are scored by rule at article level (primary) and paragraph level (secondary). The same script scores the long-context baseline (E3) and the RAG pipeline (E1, from its `_eval.jsonl` export). Consequences: the judge is a Claude model, and so is the long-context generator (different models, possible family bias); the judge's reliability is not checked against human scores. Evidence: [E3](12-experiment-cards/E3-claude-longcontext-baseline.md); `docs/spikes/05-evaluation-library.md`.
+
+**Owner and date:** Özge Çalışkan, 2026-10-25; updated 2026-11-14
 
 **Status:** accepted
 
@@ -581,11 +583,13 @@ The clarification design follows the three steps of Zhang and Choi [7]: decide w
 
 **Consequences:** The long-context model is called only by the evaluation runner, never by the chat UI.
 
-**Owner and date:** Özge Çalışkan, 2026-10-25
+**Update (2026-11-14): long-context baseline run.** The long-context baseline is Claude Sonnet 5.5 (`claude-sonnet-5-5`, 1M-token context) through the Anthropic Messages API with prompt caching, given all six texts (447,423 tokens with the system prompt) and the prompt `prompts/baseline_v1_system.txt`. It was run once on the 20-question trial set at the full corpus size only: in-scope judge score 0.80 (8 of 10 pass), article recall 0.92, out-of-scope judge score 0.42 (it states that the topic is not covered but adds related provisions), cost about 2.1 USD. The RAG pipeline is not run again with this model (team decision, 14/11/2026), so D6 acceptance criterion 4 needs rewording in the charter change list. Evidence: [E3](12-experiment-cards/E3-claude-longcontext-baseline.md).
+
+**Owner and date:** Özge Çalışkan, 2026-10-25; updated 2026-11-14
 
 **Status:** accepted
 
-### AD-14: Chat UI — Gradio or Streamlit
+### AD-14: Chat UI — Streamlit
 
 **Context:** A pure-Python UI is needed from the alpha. It must stream answers, show cited articles with quoted provisions and version dates, show clarifying-question options as buttons, hold history in the session only and carry the fine-amount notice.
 
@@ -596,28 +600,30 @@ The clarification design follows the three steps of Zhang and Choi [7]: decide w
 | Gradio | Chat component with streaming; little code | Fewer layout options for the source panel |
 | Streamlit | Flexible layout for answer and sources; chat widgets | Slightly more code |
 
-**Decision:** Open; decided at the first UI prototype by whichever meets the requirements above with the least code.
+**Decision:** Streamlit, chosen by Spike 06 (31/10/2026). It is already proven in the project: both earlier prototypes shipped a Streamlit page with chat history, streamed tokens, a sources expander and sidebar settings; all Turkish texts sit in one file (`texts.py`), so a non-developer can edit them; the sidebar holds the experiment controls; `streamlit.testing.v1.AppTest` tests the page without a browser; and a Cloudflare tunnel lets teammates review it remotely. Gradio would reach the same page with more layout code, and a plain HTML page would add a JavaScript layer.
 
-**Evidence:** First UI prototype, Sprint 2.
+**Consequences:** Streamlit re-runs the script on every interaction, so the index, models and configuration are kept in memory with `st.cache_resource`; text changes in `texts.py` need a server restart. Whether the UI and a retrieval service run as one process or two is not decided by this record.
 
-**Owner and date:** Özge Çalışkan, 2026-10-25
+**Evidence:** [Spike 06](../docs/spikes/06-chat-ui-framework.md) (31/10/2026).
 
-**Status:** open
+**Owner and date:** Özge Çalışkan, 2026-10-25; updated 2026-11-14
+
+**Status:** accepted
 
 ## 7. Open design areas
 
 | Area | What is open | Settled by |
 |---|---|---|
 | LLM backend (AD-03) | Which model on Vertex AI (gpt-oss-120b in the baseline; Qwen3-235B not accessible); the course's quantized-model expectation | Model experiment on D2, Sprint 3 |
-| Hosted provider | Google Cloud (Vertex AI) for the baseline LLM (AD-03); Google Cloud or Azure for the long-context baseline and the judge, depending on credit availability | Before the first hosted run; [Dependencies](03-project-canvas/06-dependencies.md) row 4 (04/11/2026) |
+| Hosted provider | Settled: Google Cloud Vertex AI for the LLM (AD-03); Anthropic API for the long-context baseline and the judge (AD-12, AD-13) | Settled (14/11/2026) |
 | Embedding model (AD-04) | bge-m3 in the baseline; final candidate | Retrieval spike, start of Sprint 3 |
 | Reranker (AD-05) | None in the baseline; which candidate, or none | Retrieval spike, start of Sprint 3 |
 | Vector store (AD-06) | numpy index in the baseline; whether Qdrant is reconsidered | Retrieval spike, start of Sprint 3 |
 | Sub-chunking (AD-08) | Settled for bge-m3: no unit exceeds the input limit; checked again if the embedding model changes | Token counts in `04_index_check.ipynb` |
 | Query guard (AD-10) | Pattern lists and the length limit (design approved; not built yet) | Guard tests on D2, Sprint 3 |
 | Follow-up handling (AD-11) | Whether joining the previous question is enough; how many earlier questions to join | Follow-up questions of D2, M5 and M7 |
-| Evaluation library (AD-12) | RAGAS vs. DeepEval; judge model; correctness threshold | First evaluation run; threshold fixed before M5 |
-| Chat UI (AD-14) | Gradio vs. Streamlit | First UI prototype, Sprint 2 |
+| Evaluation library (AD-12) | Settled: DeepEval GEval, judge Claude Opus 5.5, threshold 0.7 | Settled (E3, 14/11/2026) |
+| Chat UI (AD-14) | Settled: Streamlit | Spike 06 (31/10/2026) |
 | Local runtime (AD-07) | Withdrawn: no local LLM (AD-03) | — |
 | Latency budget | Confirm or correct the proposed 30-second median full-answer time | First measurement on the host laptop |
 
@@ -629,7 +635,7 @@ The baseline index was built on 14/11/2026. The retrieval spike for AD-04 and AD
 |---|---|---|---|
 | v1 | 2026-10-25 | First version | [PR] |
 | v1.1 | 2026-11-03 | Data pipeline updated to the implementation: Word sources for all six texts (AD-09); extraction with `python-docx` 1.2.0, tables kept row by row; clean text in `data/clean/`, chunks in `data/chunks/chunks.jsonl`; chunk units, metadata fields and `documents.yaml` (AD-08, 550 units); Qdrant local mode proposed (AD-06); bge-m3 as first embedding candidate (AD-04); development environment | [PR] |
-| v1.2 | 2026-11-14 | Sprint 2 baseline decisions: amendment notes moved to metadata and repealed units dropped, 472 units, no sub-chunks (AD-08); bge-m3 run with `transformers`, chunk text embedded as it is, hybrid retrieval with top 8 (AD-04, E2); no reranker (AD-05); numpy index instead of Qdrant, which Windows Application Control blocked (AD-06); baseline generator gpt-oss-120b on Vertex AI, Qwen3-235B not accessible (AD-03); retrieval spike moved to Sprint 3; LLM decided as a hosted model on Google Cloud Vertex AI, local option and AD-07 withdrawn (AD-03); simplified PII masking, rule-based guard and prompt-based scope check approved by the course assistant (AD-10); diagram v1.2 | [PR] |
+| v1.2 | 2026-11-14 | Sprint 2 baseline decisions: amendment notes moved to metadata and repealed units dropped, 472 units, no sub-chunks (AD-08); bge-m3 run with `transformers`, chunk text embedded as it is, hybrid retrieval with top 8 (AD-04, E2); no reranker (AD-05); numpy index instead of Qdrant, which Windows Application Control blocked (AD-06); baseline generator gpt-oss-120b on Vertex AI, Qwen3-235B not accessible (AD-03); retrieval spike moved to Sprint 3; LLM decided as a hosted model on Google Cloud Vertex AI, local option and AD-07 withdrawn (AD-03); simplified PII masking, rule-based guard and prompt-based scope check approved by the course assistant (AD-10); evaluation with `eval.py`, DeepEval GEval and a Claude Opus 5.5 judge (AD-12); long-context baseline Claude Sonnet 5.5 on the full corpus, E3 (AD-13); Streamlit chosen by Spike 06 (AD-14); diagram v1.2 | [PR] |
 
 ## Checklist before submitting
 
