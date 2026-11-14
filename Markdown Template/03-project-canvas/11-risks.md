@@ -123,7 +123,7 @@ Add rows as needed. Rows with a score of 10 or more also need a detail block (ne
 | R-12 | Model | At M5 the assistant does not answer more correctly or cite articles more accurately than a general-purpose language model that reads the full texts | Sprint 2; development | 4 | 2 | 8 | Data Scientist (Barış Saka) | C-04 |
 | R-13 | Integration | The hosted model API on Google Cloud or Azure (hosted language model if chosen, long-context baseline, judge model) changes its model version or quota, or is unavailable for more than 1 day, during an evaluation or pilot week | Sprints 2–4; development | 2 | 2 | 4 | Data Scientist (Özge Çalışkan) | C-06; Dependencies row 4 |
 | R-14 | Model | At M7 fewer than 4 of the 5 follow-up questions in the question set are answered correctly, because the reference to the earlier turn is resolved to the wrong article | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Barış Saka) | C-05 |
-| R-15 | Model | On the ambiguity labels at M7, the ask decision has precision or recall below 0.70: the assistant asks when no condition is missing, or answers without asking when a missing condition changes the answer | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Özge Çalışkan) | C-05 |
+| R-15 | Model | On the ambiguity labels of D2 (defined under D2 in [Deliverables](05-deliverables.md)) at M7, the decision to ask a clarifying question has precision or recall below 0.70: the assistant asks when no condition is missing, or answers without asking when a missing condition changes the answer | Sprints 2–3; development and after deployment | 3 | 3 | 9 | Data Scientist (Özge Çalışkan) | C-05 |
 | R-16 | Model | A prompt-injection attempt passes the query guard and changes the assistant's behaviour | Sprints 3–4; development and after deployment | 2 | 4 | 8 | Data Scientist (Özge Çalışkan) | C-13 |
 | R-17 | Model | In the check before M5, the automated correctness score disagrees with the answer key on more than 3 of the 30 in-scope answers | Sprints 2–3; development | 3 | 4 | 12 | Business Analyst (Ekin Deniz Öztürk) | Objective 2; Major Activities row 13 |
 | R-18 | Integration | The host laptop has no internet connection during the pilot or the live demo while a hosted language model is configured | Sprint 4; development | 2 | 3 | 6 | Data Scientist (Özge Çalışkan) | C-06 |
@@ -199,11 +199,11 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Linked to** | A-03; Dependencies row 3 |
 | **Cause** | Participants are unpaid volunteers (classmates, colleagues and family members of the team) and the two sessions are about two months apart |
 | **When / where** | Sprints 1 and 4; during development |
-| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M8 (14/12/2026) |
+| **Mitigation** | Major Activities row 3: 12 people are invited so that 2 are in reserve; written confirmation by 19/10/2026 and again by M8 (09/12/2026) |
 | **Probability (basis)** | 3: no written confirmation had been received on 18/10/2026 |
 | **Impact (basis)** | 4: the success criteria of Objectives 1 and 3 are defined on 10 participants |
 | **Score** | 12 (High) |
-| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 14/12/2026 (M8) |
+| **Trigger** | Fewer than 10 written confirmations on 19/10/2026, or fewer than 10 on 09/12/2026 (M8) |
 | **Contingency plan (B plan)** | The test runs with the participants available (at least 6); the results of Objectives 1 and 3 are reported as counts out of the participants who took part, against the targets as written in the charter; only participants who completed both sessions are compared for Objective 1, and the Project Review Committee is informed in writing |
 | **Owner** | Ekin Deniz Öztürk, Business Analyst / Domain Expert |
 | **Schedule effect** | None; the result is reported on fewer participants |
@@ -220,7 +220,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; the out-of-scope questions collected so far (insurance, individual objections) are close to in-scope topics |
 | **Impact (basis)** | 4: Objective 4 requires the assistant to decline all 10 out-of-scope questions |
 | **Score** | 12 (High) |
-| **Trigger** | The beta answers 1 or more of the 10 out-of-scope questions in the run of 09/12/2026 |
+| **Trigger** | The beta answers 1 or more of the 10 out-of-scope questions in the D8 run, uploaded by 05/12/2026 |
 | **Contingency plan (B plan)** | Degrade gracefully: below a retrieval-similarity threshold the assistant shows only the retrieved articles with no generated answer, and questions asking about the outcome of the user's own case receive a fixed refusal text |
 | **Owner** | Barış Saka, Data Scientist |
 | **Schedule effect** | About 1 week, inside Sprint 4 |
@@ -254,7 +254,7 @@ Probability values without a pilot measurement are team estimates and are revise
 | **Probability (basis)** | 3: no trial run yet; legal answers often differ from the key only in a condition or an amount |
 | **Impact (basis)** | 4: Objective 2 is measured with these scores |
 | **Score** | 12 (High) |
-| **Trigger** | More than 3 of 30 disagreements in the hand check of 18/11/2026 (M5) |
+| **Trigger** | More than 3 of 30 disagreements in the hand check of the D6 run, uploaded by 14/11/2026, before M5 (18/11/2026) |
 | **Contingency plan (B plan)** | Hand over to a human: for the question types where the scores disagree, the Business Analyst / Domain Expert scores the answers by hand against the answer key at M7, and D8 states which answers were scored by hand |
 | **Owner** | Ekin Deniz Öztürk, Business Analyst / Domain Expert |
 | **Schedule effect** | About 3 days, inside Sprint 3 |

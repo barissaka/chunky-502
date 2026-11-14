@@ -103,13 +103,14 @@ Team capacity: 4 members × 7 hours per week × 11 weeks (14/10/2026 to 30/12/20
 | 13 | Amendment checks, weekly review of reported answers during the pilot and credit tracking ([Major Activities](04-major-activities.md) rows 5, 16 and 32) | Ongoing | 10 person-hours | 4 amendment checks × 1 h, 2 pilot weeks × 1 h, plus 11 weekly credit checks × about 0.4 h |
 | 14 | Hosted model calls on Google Cloud or Azure: long-context baseline, judge model and a hosted language model if one is chosen ([Facilities & Resources](09-facilities-and-resources.md) rows 5 and 6) | Ongoing | Up to $100 | The long-context baseline alone needs about 20.5 million input tokens; spend is tracked weekly with alerts at 50% and 75% (C-08) |
 | 15 | Host laptop, spare host and development laptops ([Facilities & Resources](09-facilities-and-resources.md) rows 1 to 3) | Ongoing | $0 | Member-owned; local models run at no charge |
-| | **Total effort** | | **302 person-hours** | Within the 308 available (C-10) |
+| 16 | Datasheet for question set v1 ([Major Activities](04-major-activities.md) row 34; D13) | One-time | 6 person-hours | Sources, keywords and selection decisions are logged during collection (row 6); 6 h to write them up and check the counts against the D2 file |
+| | **Total effort** | | **308 person-hours** | Equal to the 308 available (C-10); no spare hours |
 
 Monitoring and updating the assistant after the project ends is out of scope ([Major Activities](04-major-activities.md) row 27), so it has no row here.
 
 ## 2. Source of Funding
 
-All human-resource effort is contributed in-kind by the four students of the project team (302 person-hours), with no paid labour or external contractors; each member has committed to at most 7 hours per week (C-10). The assistant runs on member-owned laptops at no charge. Hosted model calls are paid from the $100 of Google Cloud credits; if Azure is used, total cloud spending on both stays within $100 (C-08). The legal texts and the FAQ and forum questions are public and used at no charge. The test participants take part as unpaid volunteers.
+All human-resource effort is contributed in-kind by the four students of the project team (308 person-hours), with no paid labour or external contractors; each member has committed to at most 7 hours per week (C-10). The assistant runs on member-owned laptops at no charge. Hosted model calls are paid from the $100 of Google Cloud credits; if Azure is used, total cloud spending on both stays within $100 (C-08). The legal texts and the FAQ and forum questions are public and used at no charge. The test participants take part as unpaid volunteers.
 
 ## Example (illustrative only)
 

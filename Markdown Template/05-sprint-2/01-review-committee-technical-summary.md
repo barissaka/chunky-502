@@ -17,7 +17,7 @@
 
 <!-- In 3 to 5 sentences: what you tried this sprint, the main result compared with the baseline and the target, and what you will do next. -->
 
-This sprint we built the RAG baseline end to end: the six legal texts are extracted from Word, split into 472 article-level chunks, embedded locally with bge-m3 (dense and sparse vectors) and stored in a numpy index; the top 8 articles go to gpt-oss-120b on Vertex AI, which answers with article citations. On the 10 in-scope trial questions, every question gets at least one supporting article in the retrieved set (Recall@8 = 1.00, target ≥ 0.80), and 20 of the 23 supporting articles are retrieved (article recall@8 = 0.92). Hybrid retrieval beat dense-only retrieval (article recall@5 0.79 vs. 0.67), and k = 8 retrieved four more supporting articles than k = 5 (E3). The misses are articles that apply only as a consequence of another rule (chain questions). Next sprint: the retrieval spike (second embedding model, reranker) on the full in-scope set, cross-reference expansion for chain questions, and the out-of-scope refusal.
+This sprint we built the RAG baseline end to end: the six legal texts are extracted from Word, split into 472 article-level chunks, embedded locally with bge-m3 (dense and sparse vectors) and stored in a numpy index; the top 8 articles go to gpt-oss-120b on Vertex AI, which answers with article citations. On the 10 in-scope trial questions, every question gets at least one supporting article in the retrieved set (Recall@8 = 1.00, target ≥ 0.80), and 20 of the 23 supporting articles are retrieved (article recall@8 = 0.92). Hybrid retrieval beat dense-only retrieval (article recall@5 0.79 vs. 0.67), and k = 8 retrieved four more supporting articles than k = 5 (E2). The misses are articles that apply only as a consequence of another rule (chain questions). Next sprint: the retrieval spike (second embedding model, reranker) on the full in-scope set, cross-reference expansion for chain questions, and the out-of-scope refusal.
 
 **Decisions this sprint:** [AD-03](../11-system-architecture-design-document.md#ad-03-llm-access--hosted-model-on-google-cloud-vertex-ai-through-an-openai-compatible-gateway) (hosted LLM on Google Cloud Vertex AI; baseline generator gpt-oss-120b), [AD-04](../11-system-architecture-design-document.md#ad-04-embedding-model--bge-m3-for-the-baseline-final-choice-in-the-retrieval-spike) (bge-m3, hybrid retrieval), [AD-05](../11-system-architecture-design-document.md#ad-05-reranker--none-in-the-baseline-chosen-in-the-retrieval-spike) (no reranker in the baseline), [AD-06](../11-system-architecture-design-document.md#ad-06-vector-store--numpy-index-on-disk-qdrant-blocked-on-the-host-laptop) (numpy index instead of Qdrant), [AD-08](../11-system-architecture-design-document.md#ad-08-chunking--one-chunk-per-article-retrieval-only-sub-chunks-for-over-long-articles) (472 units, no sub-chunks).
 
@@ -51,9 +51,9 @@ Answer correctness, supported article references in the answers, out-of-scope re
 |---|---|---|---|---|---|---|
 | Target (charter) | — | — | ≥ 0.80 | — | — | — |
 | [E1 RAG baseline](../12-experiment-cards/E1-baseline.md) (bge-m3 hybrid, k = 8, gpt-oss-120b) | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
-| [E3 Retrieval mode and k](../12-experiment-cards/E3-retrieval-mode-and-k.md) — best: hybrid, k = 8 | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
+| [E2 Retrieval mode and k](../12-experiment-cards/E2-retrieval-mode-and-k.md) — best: hybrid, k = 8 | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
 
-W&B was not set up in Sprint 2, so the run links are null; the run files are in `docs/eval/runs/` and the E3 results in `notebooks/04_index_check.ipynb`. Retrieval is deterministic, so one repeat gives std 0. E3's best combination is the configuration used in E1; its other combinations (dense k = 5: article recall@5 0.67; hybrid k = 5: 0.79; hybrid k = 10: 0.92) are in the card.
+W&B was not set up in Sprint 2, so the run links are null; the run files are in `docs/eval/runs/` and the E2 results in `notebooks/04_index_check.ipynb`. Retrieval is deterministic, so one repeat gives std 0. E2's best combination is the configuration used in E1; its other combinations (dense k = 5: article recall@5 0.67; hybrid k = 5: 0.79; hybrid k = 10: 0.92) are in the card.
 
 **Best configuration:** <!-- From Sprint 3 on. Link its W&B run, and say whether config/rag.yaml now uses it. -->
 
@@ -68,5 +68,5 @@ W&B was not set up in Sprint 2, so the run links are null; the run files are in 
 ## Checklist before submitting
 
 - [x] The summary is two pages or shorter.
-- [ ] Every row in Results links to an experiment card. Every card from this sprint either has a row or is marked deprecated. <!-- Open: the row for E2 (long-context baseline) is added with the RAG–long-context comparison. -->
+- [ ] Every row in Results links to an experiment card. Every card from this sprint either has a row or is marked deprecated. <!-- Open: the row for E3 (long-context baseline) is added with the RAG–long-context comparison. -->
 - [x] Every decision in section 1 has a record in the design document.

@@ -1,4 +1,4 @@
-# E3: Retrieval mode (dense vs. hybrid) and number of retrieved articles (k)
+# E2: Retrieval mode (dense vs. hybrid) and number of retrieved articles (k)
 
 **Note: this document uses HTML tags to disable rendering of instructions. View the raw file for further details.**
 

@@ -4,7 +4,7 @@
 
 ### Background
 
-Road users in Türkiye are bound by the Highway Traffic Law No. 2918 [1], the Highway Traffic Regulation [2] and further regulations on driver courses [3], the health requirements for drivers [4], vehicle inspection [5] and electric scooters [6]. Together the six texts hold several hundred articles, written in legal language, and a single question can require reading several articles across more than one text.
+Road users in Türkiye are bound by the Highway Traffic Law No. 2918 [1], the Highway Traffic Regulation [2] and further regulations on driver courses [3], the health requirements for drivers [4], vehicle inspection [5] and electric scooters [6]. Together the six texts hold 550 articles, written in legal language, and a single question can require reading several articles across more than one text.
 
 Because laws are amended and fine amounts are revalued every year, a driver finds it difficult to tell which rule applies and where it is written. Drivers and driving-licence candidates therefore either read the legal texts themselves or rely on pages that do not show which article they rest on. The project exists to give them one place to ask a question and see the article behind the answer.
 
