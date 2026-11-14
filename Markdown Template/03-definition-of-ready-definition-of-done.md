@@ -26,13 +26,13 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 |---|---|
 | Data acquisition | D1 is fixed and D2 is tagged and checked; the retrieval dates are recorded and the amendment dates are checked at the sprint start. |
 | Labelling (development set) | The 10 development questions are chosen from D2: their ids are written in the configuration and frozen. |
-| Design and development | The team laptop that runs the models is confirmed: the embedding model and the generation model are downloaded and run on it; the long-context model takes all six texts and the question, checked with one test question; the evaluation script and its log format are agreed. |
+| Design and development | The embedding model runs locally on a team laptop and the hosted LLM on Google Cloud is reachable; the long-context model takes all six texts and the question, checked with one test question; the evaluation script and its log format are agreed. |
 | Verification | One long-context run with all six texts at once is planned; the measures to report are listed (Recall@k, correct answers, supporting article, response time). |
 | Stories and planning | The Sprint 1 review is done, Charter v1 is approved and the Sprint 1 feedback is listed; the stories of the sprint (US-01, US-09) have acceptance criteria and test cases written; the stakeholder roles of the stories are taken from the ISO/IEC 5339 categories. |
 
 | Column | Definition of Done |
 |---|---|
-| Design and development | The retrieval index with one chunk per article of all six texts is built; the question endpoint returns the answer and the interface page is connected to it;  the alpha runs end to end on a team laptop: a Turkish question returns a Turkish answer with its article reference (D7); the model versions are pinned in the configuration; the user interface technology is chosen. |
+| Design and development | The retrieval index with one chunk per article of all six texts is built; the question endpoint returns the answer and the interface page is connected to it; the alpha runs end to end with the embedding model on a team laptop and the LLM on Google Cloud: a Turkish question returns a Turkish answer with its article reference (D7); the model versions are pinned in the configuration; the user interface technology is chosen. |
 | Verification | The long-context baseline is run once with all six texts on the 10 development questions and logged with response time and memory use (D5); the RAG pipeline is run on the same 10 questions and Recall@k is calculated; the results are reported as counts out of 10 by question type, next to D5 and marked "baseline, indicative" (D6) |
 | Data | The question set is in `docs/eval/eval-set-v1.csv` with question, type, gold source and gold answer. |
 | Design and documents | The technical summary names the metrics, why they were chosen, the baseline score and the target from the charter; the design document describes each stage of the RAG pipeline with its parameters and the interface technology; a mockup of the user interface exists as an image. |
@@ -46,12 +46,12 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 |---|---|
 | Design and development | The go/no-go decision for the beta (M6) is recorded; the beta scope and the list of known problems from the alpha are written. |
 | Verification | The question set for the formal run is frozen (40 questions, 5 penalty questions, 5 individual-case questions); the 8 ambiguous questions with their scripted replies are listed for US-12; the settings of the run are fixed; the run is planned at least 3 days before M7. |
-| Deployment | The team laptop that runs the beta is set up and tested; the test sessions with the 10 pilot participants are planned; personal data masking is in place before logging (C-12). |
+| Deployment | 	The team laptop that runs the beta (with the local embedding model) is set up and tested and reaches the hosted LLM on Google Cloud; the test sessions with the 10 pilot participants are planned; personal data masking is in place before logging (C-12). |
 | All stories | US-02, US-06, US-07, US-08, US-11 and US-12  have acceptance criteria, test cases and points; the dependencies between them are written. |
 
 | Column | Definition of Done |
 |---|---|
-| Design and development | The beta runs on a team laptop and the pilot participants can use it in the test sessions (D9); the prompt, chunking and retrieval settings are recorded. |
+| Design and development | The beta runs with the embedding model on a team laptop and the LLM on Google Cloud and the pilot participants can use it in the test sessions (D9); the prompt, chunking and retrieval settings are recorded. |
 | Verification | One formal run of all questions is scored once; the card reports correct answers and supported article references on the 30 in-scope questions, the penalty questions, the refusals and the response times, next to D5 and D6 (D8); 10 of 10 out-of-scope questions are declined; every answer is returned within 60 seconds; the share of correct clarifying questions on the 8 ambiguous questions is reported |
 | Stories | The acceptance criteria of US-02, US-06, US-07, US-08, US-11 and US-12 are met and their test cases passed; a second member reviewed the work; the Product Owner accepted it. |
 | All stages | Actual hours are logged; the technical document and the ADRs are updated; the go/no-go material for the pilot is prepared. |
@@ -67,7 +67,7 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 | Column | Definition of Done |
 |---|---|
 | Validation (pilot) | The pilot is run and the results are reported against the Objective 1, 3 and 4 targets, as counts out of the participants who took part (D10). |
-| Deployment | The release candidate is installed on the team laptop and the live demo script returns a response without an error for every question (D11). |
+| Deployment | 	The release candidate is installed on the team laptop with the hosted LLM on Google Cloud reachable and the live demo script returns a response without an error for every question (D11). |
 | Verification | The release candidate is evaluated on the unseen question set after the last change (D11). |
 | Stories | The acceptance criteria of US-03, US-04, US-05, US-10 and US-13 are met and their test cases passed; the Product Owner accepted them. |
 | All stages | The final report includes the limitations, such as the articles amended after retrieval (D12); the documents match the delivered system; no known critical problem is open; actual hours are logged; the retrospective is held. |
