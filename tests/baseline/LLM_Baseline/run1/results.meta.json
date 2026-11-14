@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-11-13T17:40:25",
+  "model": "claude-sonnet-5-5",
+  "runs": 1,
+  "n_questions": 20,
+  "questions_file": "trial_full_20.json",
+  "questions_sha256": "acc5a745001db394",
+  "prompt_file": "prompts/baseline_v1_system.txt",
+  "prompt_sha256": "3fa9a2e92d35f0e7",
+  "docs_sha256": {
+    "KTK": "29a0b0c48852b4d4",
+    "KTY": "32b2cc66a8523531",
+    "KURS": "e49339afc48c55c1",
+    "MUAYENE": "da33d120044240b8",
+    "SAĞLIK": "c1dc0f3d104808be",
+    "SKUTER": "d3d0d3070f9cb9db"
+  },
+  "packages": {
+    "anthropic": "2.8.0"
+  },
+  "results_file": "results.jsonl",
+  "finished_at": "2026-11-13T17:44:55",
+  "totals": {
+    "input_tokens": 1054,
+    "output_tokens": 28431,
+    "cache_read_tokens": 8948380,
+    "cache_write_tokens": 0,
+    "latency_s": 269.4
+  }
+}

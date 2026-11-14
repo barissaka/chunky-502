@@ -1,0 +1,94 @@
+{
+  "results_file": "2026-11-14_trial10_gpt-oss-120b-maas_eval.jsonl",
+  "judge": "claude-opus-5-5",
+  "packages": {
+    "deepeval": "4.3.4",
+    "pandas": "3.1.1"
+  },
+  "in_scope_mean": {
+    "judge_score": 0.61,
+    "art_P": 0.675,
+    "art_R": 0.675,
+    "art_F1": 0.624,
+    "para_R": 0.0
+  },
+  "in_scope_run_means_judge": {
+    "rag_gpt-oss-120b-maas_answer_v1": 0.61
+  },
+  "false_refusal_rate": 0.0,
+  "oos_refusal_rate": null,
+  "oos_strict_refusal_rate": null,
+  "oos_cited_anything_rate": null,
+  "oos_judge_mean": NaN,
+  "by_type": {
+    "Articles of several texts": {
+      "judge_score": 0.55,
+      "art_P": 0.834,
+      "art_R": 0.584,
+      "art_F1": 0.686,
+      "para_R": 0.0
+    },
+    "Several articles of one text": {
+      "judge_score": 0.533,
+      "art_P": 0.361,
+      "art_R": 0.444,
+      "art_F1": 0.378,
+      "para_R": 0.0
+    },
+    "Single article": {
+      "judge_score": 0.75,
+      "art_P": 0.75,
+      "art_R": 1.0,
+      "art_F1": 0.834,
+      "para_R": 0.0
+    },
+    "Violation in the user's own words": {
+      "judge_score": 0.633,
+      "art_P": 0.833,
+      "art_R": 0.75,
+      "art_F1": 0.689,
+      "para_R": 0.0
+    }
+  },
+  "by_hop_type": {
+    "Chain": {
+      "judge_score": 0.475,
+      "art_P": 0.792,
+      "art_R": 0.438,
+      "art_F1": 0.543,
+      "para_R": 0.0
+    },
+    "Parallel": {
+      "judge_score": 0.667,
+      "art_P": 0.528,
+      "art_R": 0.667,
+      "art_F1": 0.578,
+      "para_R": 0.0
+    },
+    "Single-hop": {
+      "judge_score": 0.733,
+      "art_P": 0.667,
+      "art_R": 1.0,
+      "art_F1": 0.778,
+      "para_R": 0.0
+    }
+  },
+  "latency_s_mean": 38.56,
+  "failure_causes": [
+    "missing_key_fact",
+    "wrong_fact",
+    "outside_knowledge",
+    "wrong_citation",
+    "missing_citation",
+    "assumed_ambiguity",
+    "conflict_not_shown",
+    "false_refusal",
+    "oos_fabricated",
+    "oos_not_refused",
+    "format_error",
+    "judge_below_threshold",
+    "judge_error",
+    "scope_flag_mismatch",
+    "oos_cited_related"
+  ]
+}
