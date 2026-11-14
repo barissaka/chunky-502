@@ -1,13 +1,18 @@
 # Chunky - product configuration (filled in Sprint 2 with the baseline)
 corpus:
   chunking: article          # one chunk per madde
+  chunks: data/chunks/chunks.jsonl
 embedding:
-  model: qwen3-embedding:0.6b
+  model: BAAI/bge-m3         # first candidate; final choice in retrieval spike (AD-04)
+  revision: 5617a9f61b028005a4858fdac845db406aefb181   # pinned Hugging Face commit
+  max_tokens: 8192
 vector_store:
-  type: null                 # chroma | faiss | qdrant - decision D3
+  type: numpy                # qdrant blocked on dev laptop (Windows App Control); revisit in Sprint 3 spike
+  dir: index/bge-m3          # in .gitignore (index/)
 retrieval:
-  top_k: null
-  rerank: true
+  top_k: 8                   # 20/23 expected articles on the 10 trial questions (k=5: 16/23, k=10: 20/23)
+  sparse_weight: 0.3         # hybrid = dense + 0.3 * sparse; 0 = dense only; tuned in the retrieval spike
+  rerank: false              # not used yet; reranker decision in the retrieval spike (Sprint 3)
   reranker: Qwen3-Reranker-0.6B
 generation:
   model: qwen3:4b

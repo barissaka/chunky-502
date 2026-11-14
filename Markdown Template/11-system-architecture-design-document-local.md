@@ -71,11 +71,11 @@ flowchart LR
 
         subgraph online ["Online · question answering"]
             user(["AI user<br/>driver / licence candidate"]) -->|question / reply| ui["Chat UI<br/>Gradio / Streamlit<br/>history in session only"]
-            ui -->|turn + history| mask["PII masker<br/>name · ID no · plate"]
-            mask -->|masked turn| guard["Query guard<br/>sanity · injection<br/>advice request"]
+            ui -->|turn + history| mask["PII masker<br/>ID no · plate<br/><i>regex, no LLM:</i><br/>• T.C. ID no: 11 digits + check digit<br/>• plate: province code + letters + digits"]
+            mask -->|masked turn| guard["Query guard<br/>sanity · injection<br/>advice request<br/><i>rules, no LLM:</i><br/>• empty / too long → message<br/>• injection patterns (TR/EN) → fixed reply<br/>• advice request → fixed reply"]
             guard -.->|fixed reply · rejected turn| ui
             guard -->|question + last question| retriever["Retriever<br/>+ scope gate · Python"]
-            retriever -.->|refusal sentence · below scope threshold| ui
+            retriever -.->|refusal sentence · out of scope| ui
             retriever -->|candidate articles| rerank["Reranker<br/>candidate (AD-05)<br/>can be switched off"]
             rerank -->|top articles| gen["Answer generator<br/>clarify or answer<br/>citation check"]
             gen -->|prompt + articles + history| gw["LLM gateway<br/>OpenAI-compatible client"]
