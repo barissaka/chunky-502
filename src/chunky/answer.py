@@ -45,7 +45,8 @@ def call_llm(messages, gen):
     body = {"model": gen["model"], "messages": messages, "temperature": gen["temperature"]}
     r = requests.post(url, headers={"Authorization": f"Bearer {creds.token}"}, json=body, timeout=180)
     r.raise_for_status()
-    return r.json()["choices"][0]["message"]["content"]
+    data = r.json()
+    return data["choices"][0]["message"]["content"], data.get("usage", {})
 
 
 def answer(question, embedder, index, cfg):
@@ -57,8 +58,9 @@ def answer(question, embedder, index, cfg):
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": f"Articles:\n\n{format_context(hits)}\n\nQuestion: {question}"},
     ]
+    text, usage = call_llm(messages, gen)
     # Normalize cited IDs to the plain-hyphen form used in chunks.jsonl.
-    text = CHUNK_ID.sub(lambda m: f"{m[1]}-{m[2]}", call_llm(messages, gen))
+    text = CHUNK_ID.sub(lambda m: f"{m[1]}-{m[2]}", text)
 
     # Citation check: every cited ID must be one of the retrieved articles.
     retrieved = {c["chunk_id"]: c for _, c in hits}
@@ -73,4 +75,6 @@ def answer(question, embedder, index, cfg):
         "model": gen["model"],
         "prompt": gen["prompt"],
         "seconds": round(time.time() - start, 1),  # end-to-end: retrieval + LLM call
+        "input_tokens": usage.get("prompt_tokens"),
+        "output_tokens": usage.get("completion_tokens"),  # includes the model's reasoning tokens, if any
     }

@@ -2,7 +2,7 @@
 
 **DI 502 Data Informatics Project · METU Informatics Institute · Fall 2026 · Team Chunky**
 
-Chunky answers single-turn questions in Turkish about road-traffic rules, procedures and penalties, and cites the articles (*madde*) of the legislation it used. It is a retrieval-augmented generation (RAG) system over six legal texts (Kanun 2918 and five regulations), running entirely on a team laptop with open-weight models served by Ollama. When the answer is not in the texts, it says so instead of guessing.
+Chunky answers single-turn questions in Turkish about road-traffic rules, procedures and penalties, and cites the articles (*madde*) of the legislation it used. It is a retrieval-augmented generation (RAG) system over six legal texts (Kanun 2918 and five regulations), running on a team laptop. The Sprint 2 baseline embeds the texts locally with bge-m3 and generates answers with an open-weight model (gpt-oss-120b) served by Google Cloud Vertex AI. When the answer is not in the texts, it says so instead of guessing.
 
 Team: see [Team Members](Markdown%20Template/02-team-members.md). Project documentation lives in this repository as Markdown and is mirrored to Confluence on every push to `main`.
 
@@ -15,7 +15,7 @@ Team: see [Team Members](Markdown%20Template/02-team-members.md). Project docume
 | Sprint 3 | 18 Nov – 9 Dec | full pipeline, beats the baseline |
 | Sprint 4 | 9 – 30 Dec | final product and demo |
 
-The code arrives in Sprint 2. Until then this repository holds the documentation and the configuration skeleton.
+Sprint 2 adds the baseline pipeline: text extraction, chunking, the index and answering with citations (see [Running the baseline](#running-the-baseline-sprint-2)).
 
 ## Repository layout
 
@@ -40,34 +40,31 @@ docs/
 requirements.txt            Python dependencies (pinned from Sprint 2)
 ```
 
-## Running the system
+## Running the baseline (Sprint 2)
 
-*To be completed in Sprint 2 with the baseline. The instructions below are the target shape.*
+Requirements: the [RAG development environment](#rag-development-environment-windows) below (Windows, Python 3.12, `.venv`), the [Google Cloud CLI](https://cloud.google.com/sdk/docs/install), access to the team's Google Cloud project `di502-rag-chatbot`, and about 5 GB of free disk space for the embedding model. No GPU is needed.
 
-Requirements: Python 3.11, [Ollama](https://ollama.com) installed on the host laptop (Windows), 16 GB RAM; no GPU needed.
-
-```bash
-# 1. Environment
-python -m venv .venv
-.venv\Scripts\activate            # Windows
+```powershell
+# 1. Dependencies (pinned) and the project package
 pip install -r requirements.txt
+pip install -e . --no-deps
 
-# 2. Models (served locally by Ollama)
-ollama pull qwen3-embedding:0.6b
-ollama pull qwen3:4b
+# 2. Google Cloud login, once per laptop (no API key is stored)
+gcloud auth application-default login
+gcloud auth application-default set-quota-project di502-rag-chatbot
 
-# 3. Build the index from the legal texts in data/
-python -m src.index
-
-# 4. Start the assistant
-python -m src.app
-
-# 5. Evaluation and tests
-python -m src.evaluate            # writes results to docs/eval/
-pytest
+# 3. Build the index from data/chunks/chunks.jsonl into index/bge-m3/ (not committed)
+#    The first run downloads bge-m3 into the Hugging Face cache; indexing takes about 6 minutes on CPU.
+python -m chunky.index
 ```
 
-No API keys are required: every model runs on the laptop. Random seeds and LLM settings (temperature, thinking mode) are set in `config/rag.yaml` so that runs are reproducible.
+4. Run `notebooks/04_index_check.ipynb` (index and retrieval checks) and `notebooks/05_answer_check.ipynb` (answers the 10 trial questions and writes the results to `docs/eval/runs/`, also in the format of the team's `eval.py`).
+
+Parameters (embedding model and revision, `top_k`, sparse weight, LLM, temperature, prompt version) are in `config/rag.yaml`; prompts are in `prompts/`. The baseline and its results are described in [E1](Markdown%20Template/12-experiment-cards/E1-baseline.md).
+
+Notes:
+- On Linux, install the CPU build of PyTorch first (`pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu`); on Windows and macOS the default wheel is fine.
+- If Windows reports *"An Application Control policy has blocked this file"* when a package is imported, see AD-06 in the [design document](Markdown%20Template/11-system-architecture-design-document.md); `FlagEmbedding` and `qdrant-client` are not used for this reason.
 
 ## Where to look
 
