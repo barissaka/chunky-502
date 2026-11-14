@@ -17,7 +17,7 @@
 
 <!-- In 3 to 5 sentences: what you tried this sprint, the main result compared with the baseline and the target, and what you will do next. -->
 
-This sprint we built the RAG baseline end to end: the six legal texts are extracted from Word, split into 472 article-level chunks, embedded locally with bge-m3 (dense and sparse vectors) and stored in a numpy index; the top 8 articles go to gpt-oss-120b on Vertex AI, which answers with article citations. On the 10 in-scope trial questions, every question gets at least one supporting article in the retrieved set (Recall@8 = 1.00, target ≥ 0.80), and 20 of the 23 supporting articles are retrieved (article recall@8 = 0.92). Hybrid retrieval beat dense-only retrieval (article recall@5 0.79 vs. 0.67), and k = 8 retrieved four more supporting articles than k = 5 (E2). The misses are articles that apply only as a consequence of another rule (chain questions). Next sprint: the retrieval spike (second embedding model, reranker) on the full in-scope set, cross-reference expansion for chain questions, and the out-of-scope refusal.
+This sprint we built the RAG baseline end to end: the six legal texts are extracted from Word, split into 472 article-level chunks, embedded locally with bge-m3 (dense and sparse vectors) and stored in a numpy index; the top 8 articles go to gpt-oss-120b on Vertex AI, which answers with article citations. On the 10 in-scope trial questions, every question gets at least one supporting article in the retrieved set (Recall@8 = 1.00, target ≥ 0.80), and 20 of the 23 supporting articles are retrieved (article recall@8 = 0.92). Hybrid retrieval beat dense-only retrieval (article recall@5 0.79 vs. 0.67), and k = 8 retrieved four more supporting articles than k = 5 (E2). The misses are articles that apply only as a consequence of another rule (chain questions). Against the long-context baseline (E3: Claude Sonnet 5.5 with all six texts in context, no retrieval), the RAG pipeline answers 5 of 10 questions correctly against 8 of 10; since retrieval finds most supporting articles, most of this gap is in generation, mainly on chain questions. Next sprint: the retrieval spike (second embedding model, reranker) on the full in-scope set, cross-reference expansion for chain questions, and the out-of-scope refusal.
 
 **Decisions this sprint:** [AD-03](../11-system-architecture-design-document.md#ad-03-llm-access--hosted-model-on-google-cloud-vertex-ai-through-an-openai-compatible-gateway) (hosted LLM on Google Cloud Vertex AI; baseline generator gpt-oss-120b), [AD-04](../11-system-architecture-design-document.md#ad-04-embedding-model--bge-m3-for-the-baseline-final-choice-in-the-retrieval-spike) (bge-m3, hybrid retrieval), [AD-05](../11-system-architecture-design-document.md#ad-05-reranker--none-in-the-baseline-chosen-in-the-retrieval-spike) (no reranker in the baseline), [AD-06](../11-system-architecture-design-document.md#ad-06-vector-store--numpy-index-on-disk-qdrant-blocked-on-the-host-laptop) (numpy index instead of Qdrant), [AD-08](../11-system-architecture-design-document.md#ad-08-chunking--one-chunk-per-article-retrieval-only-sub-chunks-for-over-long-articles) (472 units, no sub-chunks).
 
@@ -52,8 +52,18 @@ Answer correctness, supported article references in the answers, out-of-scope re
 | Target (charter) | — | — | ≥ 0.80 | — | — | — |
 | [E1 RAG baseline](../12-experiment-cards/E1-baseline.md) (bge-m3 hybrid, k = 8, gpt-oss-120b) | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
 | [E2 Retrieval mode and k](../12-experiment-cards/E2-retrieval-mode-and-k.md) — best: hybrid, k = 8 | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
+| [E3 Long-context baseline](../12-experiment-cards/E3-claude-longcontext-baseline.md) (claude-sonnet-5-5, all six texts in context, no retrieval) | 2 | null | null | null | null | 1 |
 
-W&B was not set up in Sprint 2, so the run links are null; the run files are in `docs/eval/runs/` and the E2 results in `notebooks/04_index_check.ipynb`. Retrieval is deterministic, so one repeat gives std 0. E2's best combination is the configuration used in E1; its other combinations (dense k = 5: article recall@5 0.67; hybrid k = 5: 0.79; hybrid k = 10: 0.92) are in the card.
+W&B was not set up in Sprint 2, so the run links are null; the run files are in `docs/eval/runs/` and the E2 results in `notebooks/04_index_check.ipynb`. Retrieval is deterministic, so one repeat gives std 0. E2's best combination is the configuration used in E1; its other combinations (dense k = 5: article recall@5 0.67; hybrid k = 5: 0.79; hybrid k = 10: 0.92) are in the card. E3 has no retriever (the whole corpus, 447k tokens, is in the model's context), so the retrieval columns are null for it.
+
+**RAG vs long-context baseline (answer quality, same 10 questions):**
+
+| Experiment | Correct answers (judge ≥ 0.7) | Judge score | Answers naming a supporting article | Cited-article recall | Out-of-scope declined (of 10) | Median response time (s) | Mean cost per question (USD) | Repeats (n) |
+|---|---|---|---|---|---|---|---|---|
+| E1 RAG baseline (gpt-oss-120b) | 5 / 10 | 0.61 | **10 / 10** | 0.68 | null | 26.6 | null | 1 |
+| E3 Long-context baseline (claude-sonnet-5-5) | **8 / 10** | **0.80** | **10 / 10** | **0.92** | 0 | **17.7** | 0.11 | 1 |
+
+Correctness is scored with the team's `eval.py` (judge `claude-opus-5-5`, DeepEval GEval) against the gold answers; one run each, so no std. E1's out-of-scope questions were not run and its cost is null because the Vertex AI price is not recorded. E3 declines 0 of 10 out-of-scope questions under the team's rule (decline only, no related provisions or referral): every answer says the topic is not covered but then adds related provisions. E1's response time is the card's median; the `latency_s` values in E1's `_eval.jsonl` give a median of 18.1 s, to be reconciled. E3's cost uses the prompt cache and leaves out the one-off cache write (about 1.12 USD). Two limits: E3's in-scope answers were judged before one rubric step was added (D32 in the Q&A Data Report), and the judge is a Claude model, as is E3's generator.
 
 **Best configuration:** <!-- From Sprint 3 on. Link its W&B run, and say whether config/rag.yaml now uses it. -->
 
@@ -68,5 +78,5 @@ W&B was not set up in Sprint 2, so the run links are null; the run files are in 
 ## Checklist before submitting
 
 - [x] The summary is two pages or shorter.
-- [ ] Every row in Results links to an experiment card. Every card from this sprint either has a row or is marked deprecated. <!-- Open: the row for E3 (long-context baseline) is added with the RAG–long-context comparison. -->
+- [x] Every row in Results links to an experiment card. Every card from this sprint either has a row or is marked deprecated.
 - [x] Every decision in section 1 has a record in the design document.
