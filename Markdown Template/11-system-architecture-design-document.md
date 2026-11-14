@@ -51,7 +51,7 @@ Each goal names the objective in the [Project Executive Summary](03-project-canv
 
 **Version:** v1.2 (2026-11-14)
 
-![Chunky system architecture v1](../images/architecture-v1.2.png)
+![Chunky system architecture v1.2](../docs/images/architecture-v1.2.png)
 
 Editable source: `docs/images/architecture-v1-local.svg`. The Mermaid diagram in 3.1 shows the same design as the PNG, for GitHub rendering and diffs; the evaluation flow in 3.2 exists only as Mermaid. Confluence does not render Mermaid; attach the PNG to the Confluence page by hand after each sync.
 
