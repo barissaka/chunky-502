@@ -32,8 +32,8 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 
 | Column | Definition of Done |
 |---|---|
-| Design and development | The retrieval index with one chunk per article of all six texts is built; the question endpoint returns the answer and the interface page is connected to it; the alpha runs end to end with the embedding model on a team laptop and the LLM on Google Cloud: a Turkish question returns a Turkish answer with its article reference (D7); the model versions are pinned in the configuration; the user interface technology is chosen. |
-| Verification | The long-context baseline is run once with all six texts on the 10 development questions and logged with response time and memory use (D5); the RAG pipeline is run on the same 10 questions and Recall@k is calculated; the results are reported as counts out of 10 by question type, next to D5 and marked "baseline, indicative" (D6) |
+| Design and development | The retrieval index with one chunk per article of all six texts is built; the RAG pipeline returns the answer.; the alpha runs end to end with the embedding model on a team laptop and the LLM on Google Cloud: a Turkish question returns a Turkish answer with its article reference (D7); the model versions are pinned in the configuration; the user interface technology is chosen. |
+| Verification | The long-context baseline is run once with all six texts on the 10 development questions and logged with response time and memory use (D5); the RAG pipeline is run on the same 10 questions and Recall@k is calculated; the results are reported as counts out of 10 by question type.; |
 | Data | The question set is in `docs/eval/eval-set-v1.csv` with question, type, gold source and gold answer. |
 | Design and documents | The technical summary names the metrics, why they were chosen, the baseline score and the target from the charter; the design document describes each stage of the RAG pipeline with its parameters and the interface technology; a mockup of the user interface exists as an image. |
 | Stories and planning | The charter is revised after the Sprint 1 feedback and frozen as the final charter; story map v2 is in the repository; the story requirements of every epic list each story's tasks, success criteria and test cases next to the story; the backlog is prioritised.|
@@ -51,7 +51,7 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 
 | Column | Definition of Done |
 |---|---|
-| Design and development | The beta runs with the embedding model on a team laptop and the LLM on Google Cloud and the pilot participants can use it in the test sessions (D9); the prompt, chunking and retrieval settings are recorded. |
+| Design and development | The beta runs with the embedding model on a team laptop and the LLM on Google Cloud and the pilot participants can use it in the test sessions (D9); the prompt, chunking and retrieval settings are recorded.; the question endpoint returns the answer and the interface page is connected to it. |
 | Verification | One formal run of all questions is scored once; the card reports correct answers and supported article references on the 30 in-scope questions, the penalty questions, the refusals and the response times, next to D5 and D6 (D8); 10 of 10 out-of-scope questions are declined; every answer is returned within 60 seconds; the share of correct clarifying questions on the 8 ambiguous questions is reported |
 | Stories | The acceptance criteria of US-02, US-06, US-07, US-08, US-11 and US-12 are met and their test cases passed; a second member reviewed the work; the Product Owner accepted it. |
 | All stages | Actual hours are logged; the technical document and the ADRs are updated; the go/no-go material for the pilot is prepared. |
