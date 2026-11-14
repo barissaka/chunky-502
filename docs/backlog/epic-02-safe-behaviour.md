@@ -5,7 +5,7 @@
 
 | Epic | Safe behaviour |
 |---|---|
-| Summary | The assistant declines outside its documents, explains failures in plain language, and keeps personal data private. Done when: US-06 to US-08 are done and 10 of 10 out-of-scope questions are declined in D10. |
+| Summary | The assistant declines outside its documents, explains failures in plain language, and keeps personal data private. Done when: US-06 to US-08 and US-13 are done and 10 of 10 out-of-scope questions are declined in D10. |
 | Document Owner |  |
 | Release Target (Sprint) |  |
 | Status | To Do |
