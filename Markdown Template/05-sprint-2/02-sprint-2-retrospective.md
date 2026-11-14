@@ -23,8 +23,10 @@
 4. The 7-hours-per-week constraint was exceeded in both sprints. A constraint that does not hold should either be changed openly in the charter or enforced by smaller sprint scopes.
 
 **Development environment**
+
 5. Working on personal branches and merging through pull requests worked well, and we will keep it.
 
 **Team collaboration**
+
 6. Three short meetings a week kept everyone informed; one of them will now be used to update the Jira board, so that the burndown shows the real pace of the work.
 7. Turning the last retrospective's actions into Jira items made sure they were carried out; we will do the same with the actions above.
