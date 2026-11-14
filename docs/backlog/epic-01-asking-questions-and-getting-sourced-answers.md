@@ -5,7 +5,7 @@
 
 | Epic | Asking questions and getting sourced answers |
 |---|---|
-| Summary | Users ask in their own Turkish words, receive a correct answer with its article, continue the conversation, and see what the assistant covers. Done when: US-01 to US-05 are done and the Objective 2 targets are met in D8. |
+| Summary | Users ask in their own Turkish words, receive a correct answer with its article, continue the conversation, and see what the assistant covers. Done when: US-01 to US-05 and US-12 are done and the Objective 2 targets are met in D8. |
 | Document Owner |  |
 | Release Target (Sprint) |  |
 | Status | To Do |
