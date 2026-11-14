@@ -25,15 +25,15 @@ The "Column" cell names the AI life cycle stage (ISO/IEC 5338) of the work. Acce
 | Column | Definition of Ready |
 |---|---|
 | Data acquisition | D1 is fixed and D2 is tagged and checked; the retrieval dates are recorded and the amendment dates are checked at the sprint start. |
-| Labelling (development set) | The 10 development questions are chosen from D2: 8 in-scope questions that cover the question types (including one follow-up and one ambiguous question) and 2 out-of-scope questions; their ids are written in the configuration and frozen. |
-| Design and development | The team laptop that runs the models is confirmed: the embedding model and the generation model are downloaded and run on it; the long-context model takes all six texts (255,138 tokens) and the question, checked with one test question; the evaluation script and its log format are agreed. |
-| Verification | One long-context run with all six texts at once is planned; the measures to report are listed (Recall@k, correct answers, supporting article, declined out-of-scope questions, response time). |
+| Labelling (development set) | The 10 development questions are chosen from D2: their ids are written in the configuration and frozen. |
+| Design and development | The team laptop that runs the models is confirmed: the embedding model and the generation model are downloaded and run on it; the long-context model takes all six texts and the question, checked with one test question; the evaluation script and its log format are agreed. |
+| Verification | One long-context run with all six texts at once is planned; the measures to report are listed (Recall@k, correct answers, supporting article, response time). |
 | Stories and planning | The Sprint 1 review is done, Charter v1 is approved and the Sprint 1 feedback is listed; the stories of the sprint (US-01, US-09) have acceptance criteria and test cases written; the stakeholder roles of the stories are taken from the ISO/IEC 5339 categories. |
 
 | Column | Definition of Done |
 |---|---|
 | Design and development | The retrieval index with one chunk per article of all six texts is built; the question endpoint returns the answer and the interface page is connected to it;  the alpha runs end to end on a team laptop: a Turkish question returns a Turkish answer with its article reference (D7); the model versions are pinned in the configuration; the user interface technology is chosen. |
-| Verification | The long-context baseline is run once with all six texts on the 10 development questions and logged with response time and memory use (D5); the RAG pipeline is run on the same 10 questions, once also with the D5 model, and Recall@k is calculated; the results are reported as counts out of 10 by question type, next to D5 and marked "baseline, indicative" (D6) |
+| Verification | The long-context baseline is run once with all six texts on the 10 development questions and logged with response time and memory use (D5); the RAG pipeline is run on the same 10 questions and Recall@k is calculated; the results are reported as counts out of 10 by question type, next to D5 and marked "baseline, indicative" (D6) |
 | Data | The question set is in `docs/eval/eval-set-v1.csv` with question, type, gold source and gold answer. |
 | Design and documents | The technical summary names the metrics, why they were chosen, the baseline score and the target from the charter; the design document describes each stage of the RAG pipeline with its parameters and the interface technology; a mockup of the user interface exists as an image. |
 | Stories and planning | The charter is revised after the Sprint 1 feedback and frozen as the final charter; story map v2 is in the repository; the story requirements of every epic list each story's tasks, success criteria and test cases next to the story; the backlog is prioritised.|
