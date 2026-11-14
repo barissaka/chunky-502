@@ -70,7 +70,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 
 | Project Deliverable #: | D6: RAG baseline experiment card |
 |---|---|
-| Description: | Results of the first RAG pipeline (one chunk per article) on all 40 questions of D2, set side by side with D5. It holds the first trial runs against which the Objective 2 levels are checked. |
+| Description: | Results of the first RAG pipeline (472 chunks over the 550 articles of D1, with closely related articles merged into one chunk) on all 40 questions of D2, set side by side with D5. It holds the first trial runs against which the Objective 2 levels are checked. |
 | Acceptance Criteria: | 1. All 40 questions are run through the pipeline of D7, and the generation model, embedding model, reranking model, number of retrieved chunks (k), number of chunks kept after reranking and prompt are recorded. 2. The card reports the five measures of D5, by question type, in one table with the D5 values. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks. 4. At least one run uses the same generation model as D5. 5. For each of the two 80% levels of Objective 2, the card states the measured value next to the level. 6. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification. |
 | Due Date: | 14/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee; Quality Team |
@@ -79,7 +79,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | Project Deliverable #: | D7: Alpha prototype |
 |---|---|
 | Description: | First integrated build of the assistant: a web chat interface connected to the RAG pipeline over the document set of D1. It runs on a team laptop. |
-| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The number of distinct article IDs in the index equals the number of articles reported in D1 (550). 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
+| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The index holds 472 chunks that together cover all 550 articles reported in D1: every article ID appears in exactly one chunk. 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
 | Due Date: | 14/11/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Product Owner |
