@@ -1,0 +1,560 @@
+[
+  {
+    "id": "S01",
+    "question": "Elektrikli skuter kullanmak için yaş sınırı var mı, ehliyet gerekiyor mu?",
+    "gold_answer": "E-skuter için sürücü belgesi zorunlu değildir. Ancak elektrikli skuter kullananların 15 yaşını bitirmiş ve bedensel ve ruhsal bakımdan sağlıklı olmaları zorunludur. Bu şartları taşımayanlara araç kullandıranlar para cezası ile cezalandırılır.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KTK Art. 37/1",
+        "doc": "KTK",
+        "article": "37",
+        "paras": [
+          "37/1"
+        ]
+      },
+      {
+        "raw": "KTK Art. 37/2",
+        "doc": "KTK",
+        "article": "37",
+        "paras": [
+          "37/2"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "KTK 37"
+    ],
+    "tags": {
+      "Question Tag": "Single article",
+      "Ambiguity": "No",
+      "Source Scope": "Single article",
+      "Hop Type": "Single-hop",
+      "Premise": "Direct",
+      "Wording": "Different terms",
+      "Question Word": "Yes/No",
+      "Multi-part": "Yes",
+      "Answerability": "Answerable",
+      "Time-sensitive": "No"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S03",
+    "question": "Sürücü kursunda bir ders saati kaç dakika sürer?",
+    "gold_answer": "Bir ders saati 50 dakikadır, iki ders saati arasındaki dinlenme süresi 10 dakikadır. Teorik derslerin uygulamalı konuları iki ders saati birleştirilerek blok ders yapılabilir; direksiyon eğitimi dersi blok ders olarak yapılamaz.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KURS Art. 21/1",
+        "doc": "KURS",
+        "article": "21",
+        "paras": [
+          "21/1"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "KURS 21"
+    ],
+    "tags": {
+      "Question Tag": "Single article",
+      "Ambiguity": "No",
+      "Source Scope": "Single article",
+      "Hop Type": "Single-hop",
+      "Premise": "Direct",
+      "Wording": "Same terms",
+      "Question Word": "How many/much",
+      "Multi-part": "No",
+      "Answerability": "Answerable",
+      "Time-sensitive": "No"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S09",
+    "question": "Aracım kazaya karıştı ama muayene süresi daha dolmadı. Yeniden muayene yaptırmam gerekir mi, ücret öder miyim?",
+    "gold_answer": "Muayene süresi dolmamış olsa bile, kazaya karışması sonucu yetkili trafik zabıtasınca muayenesi gerekli görülen araçlar özel muayeneye tabi tutulur. Özel muayenelerde muayene ücreti ve varsa gecikme ücreti tam olarak alınır.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "MUAYENE Art. 14/2",
+        "doc": "MUAYENE",
+        "article": "14",
+        "paras": [
+          "14/2"
+        ]
+      },
+      {
+        "raw": "MUAYENE Art. 8/7",
+        "doc": "MUAYENE",
+        "article": "8",
+        "paras": [
+          "8/7"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "MUAYENE 14",
+      "MUAYENE 8"
+    ],
+    "tags": {
+      "Question Tag": "Several articles of one text",
+      "Ambiguity": "No",
+      "Source Scope": "Several articles of one text",
+      "Hop Type": "Parallel",
+      "Premise": "With premise",
+      "Wording": "Same terms",
+      "Question Word": "Yes/No",
+      "Multi-part": "Yes",
+      "Answerability": "Answerable",
+      "Time-sensitive": "No"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S13",
+    "question": "Kiralık (paylaşımlı) e-skuterler en fazla kaç km/s hız yapar? Belirli bölgelerde neden yavaşlıyor?",
+    "gold_answer": "E-skuter, tanımı gereği hızı en fazla 25 km/saate ulaşan bir taşıttır. İşleticiler e-skuterleri UKOME veya il/ilçe trafik komisyonunun belirlediği hız sınırları içinde kullandırır, girilmesi yasak bölgeler ve hız sınırları için coğrafi çitleme uygular. Sürücü coğrafi çitleme olan bölgeye girerse, geri dönebilmesi için e-skuterin hızı kademeli olarak 6 km/saate indirilir. Bölgeye yaklaşırken de sesli uyarı verilir.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "SKUTER Art. 4/1-c",
+        "doc": "SKUTER",
+        "article": "4",
+        "paras": [
+          "4/1-c"
+        ]
+      },
+      {
+        "raw": "SKUTER Art. 16/10",
+        "doc": "SKUTER",
+        "article": "16",
+        "paras": [
+          "16/10"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "SKUTER 16",
+      "SKUTER 4"
+    ],
+    "tags": {
+      "Question Tag": "Several articles of one text",
+      "Ambiguity": "No",
+      "Source Scope": "Several articles of one text",
+      "Hop Type": "Parallel",
+      "Premise": "Direct",
+      "Wording": "Different terms",
+      "Question Word": "How many/much",
+      "Multi-part": "Yes",
+      "Answerability": "Answerable",
+      "Time-sensitive": "No"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S14",
+    "question": "Alkollü araç kullandığım için ehliyetim 6 ay alındı. Bu süre içinde araç kullanırsam ne olur? Ehliyetimi geri almak için ne gerekir?",
+    "gold_answer": "Geri alma süresi içinde araç kullandığı tespit edilen kişi KTK m.36/3 uyarınca cezalandırılır. Belgesi geçici olarak geri alındığı hâlde motorlu araç kullananlara 200.000 TL idari para cezası verilir. Alkol nedeniyle geri alınan belgenin iade edilebilmesi için, kişi hakkında bu Kanun kapsamında verilen idari para cezalarının tamamının tahsil edilmiş olması şarttır.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KTK Art. 48/5",
+        "doc": "KTK",
+        "article": "48",
+        "paras": [
+          "48/5"
+        ]
+      },
+      {
+        "raw": "KTK Art. 48/13",
+        "doc": "KTK",
+        "article": "48",
+        "paras": [
+          "48/13"
+        ]
+      },
+      {
+        "raw": "KTK Art. 36/3-b",
+        "doc": "KTK",
+        "article": "36",
+        "paras": [
+          "36/3-b"
+        ]
+      },
+      {
+        "raw": "KTK Art. 118 (last paragraph)",
+        "doc": "KTK",
+        "article": "118",
+        "paras": []
+      }
+    ],
+    "gold_articles": [
+      "KTK 118",
+      "KTK 36",
+      "KTK 48"
+    ],
+    "tags": {
+      "Question Tag": "Several articles of one text",
+      "Ambiguity": "No",
+      "Source Scope": "Several articles of one text",
+      "Hop Type": "Chain",
+      "Premise": "With premise",
+      "Wording": "Different terms",
+      "Question Word": "What happens/Penalty",
+      "Multi-part": "Yes",
+      "Answerability": "Answerable",
+      "Time-sensitive": "Yes"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S15",
+    "question": "Hız sınırını biraz aşarsam ceza yazılır mı, yönetmelikte bir tolerans var mı?",
+    "gold_answer": "Evet, küçük aşımlar için iki ayrı kaynaktan gelen bir pay vardır:\n• Yönetmelikteki tolerans: Araç cinsine göre belirlenen azami hız sınırını %10 oranına kadar aşan sürücülere KTK m.51'e göre işlem yapılmaz. Örneğin 50'lik yolda 55, 90'lık yolda 99, 120'lik otoyolda 132 km/s'e kadar.\n• Kanundaki ceza dilimleri: KTK m.51, sürücülerin aksine işaret yoksa Yönetmelikteki sınırları aşmamasını zorunlu tutar. Ceza ise yerleşim yeri içinde sınırı 6-10 km/s aşanlar için, yerleşim yeri dışında 11-15 km/s aşanlar için 2.000 TL ile başlar. Yerleşim yeri içinde 5 km/s'e, dışında 10 km/s'e kadar olan aşımlar için Kanunda ceza dilimi yoktur.\n• Geçme istisnası: İki yönlü yolda, geçme kuralının zorunlu kıldığı şartlar nedeniyle sınırı aşan sürücülere de işlem yapılmaz.\nİki kural birlikte uygulanınca:\n• Yerleşim yeri içinde 50'lik yolda 55 km/s'e kadar ceza yoktur, 56-60 km/s için 2.000 TL'dir.\n• Yerleşim yeri dışında 90'lık yolda 100 km/s'e kadar ceza yoktur, çünkü Kanundaki dilim 11 km/s aşımdan başlar. 101-105 km/s için 2.000 TL'dir.\n• Sınır yerleşim yeri içinde 50'nin, dışında 100'ün üzerindeyse iki metin dar bir aralıkta farklı sonuç verir. 110'luk yolda 121 km/s, 120'lik otoyolda 131-132 km/s, sınırı 70'e çıkarılmış şehir içi yolda 76-77 km/s, Yönetmeliğe göre tolerans içindedir ama Kanunun ilk ceza dilimine girer.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KTY Art. 101/3",
+        "doc": "KTY",
+        "article": "101",
+        "paras": [
+          "101/3"
+        ]
+      },
+      {
+        "raw": "KTY Art. 101/4",
+        "doc": "KTY",
+        "article": "101",
+        "paras": [
+          "101/4"
+        ]
+      },
+      {
+        "raw": "KTY Art. 100/1",
+        "doc": "KTY",
+        "article": "100",
+        "paras": [
+          "100/1"
+        ]
+      },
+      {
+        "raw": "KTK Art. 51/1",
+        "doc": "KTK",
+        "article": "51",
+        "paras": [
+          "51/1"
+        ]
+      },
+      {
+        "raw": "KTK Art. 51/2-a-1",
+        "doc": "KTK",
+        "article": "51",
+        "paras": [
+          "51/2-a-1"
+        ]
+      },
+      {
+        "raw": "KTK Art. 51/2-b-1",
+        "doc": "KTK",
+        "article": "51",
+        "paras": [
+          "51/2-b-1"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "KTK 51",
+      "KTY 100",
+      "KTY 101"
+    ],
+    "tags": {
+      "Question Tag": "Articles of several texts",
+      "Ambiguity": "No",
+      "Source Scope": "Articles of several texts",
+      "Hop Type": "Chain",
+      "Premise": "Direct",
+      "Wording": "Different terms",
+      "Question Word": "Yes/No",
+      "Multi-part": "Yes",
+      "Answerability": "Answerable",
+      "Time-sensitive": "Yes"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S20",
+    "question": "Ehliyet aldıktan sonra epilepsi teşhisi konulan birinin ehliyetine ne olur?",
+    "gold_answer": "Sürücüde sağlığı bakımından sürücülüğe engel açık bir değişiklik görülür ve tespit edilirse, trafik görevlilerince belge geçici olarak geri alınır ve kişiye 'sürücü olur' raporu aldırılır. Bir kamu kurumunun yazılı bildirimi de geri almaya yol açabilir. Kişi il sağlık müdürlüğü aracılığıyla ilgili branş uzmanına sevk edilir. Epilepsi hastalarına yalnızca belirli şartlarla ve sadece birinci grup sınıflar verilebilir. Örneğin altı ayda bir nöroloji muayenesiyle üç yıl boyunca nöbet geçirmediğini belgeleyenlerin durumu nöroloji sağlık kurulunda değerlendirilir. Bu kişiler ambulans, resmî veya ticari araç kullanamaz. Engel yoksa ya da sonradan ortadan kalkmışsa belge iade edilir.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KTK Art. 45/1",
+        "doc": "KTK",
+        "article": "45",
+        "paras": [
+          "45/1"
+        ]
+      },
+      {
+        "raw": "KTY Art. 90/1-4",
+        "doc": "KTY",
+        "article": "90",
+        "paras": [
+          "90/1",
+          "90/2",
+          "90/3",
+          "90/4"
+        ]
+      },
+      {
+        "raw": "SAĞLIK Art. 4/4",
+        "doc": "SAĞLIK",
+        "article": "4",
+        "paras": [
+          "4/4"
+        ]
+      },
+      {
+        "raw": "SAĞLIK Art. 9/2-c",
+        "doc": "SAĞLIK",
+        "article": "9",
+        "paras": [
+          "9/2-c"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "KTK 45",
+      "KTY 90",
+      "SAĞLIK 4",
+      "SAĞLIK 9"
+    ],
+    "tags": {
+      "Question Tag": "Articles of several texts",
+      "Ambiguity": "No",
+      "Source Scope": "Articles of several texts",
+      "Hop Type": "Chain",
+      "Premise": "Direct",
+      "Wording": "Different terms",
+      "Question Word": "What happens/Penalty",
+      "Multi-part": "No",
+      "Answerability": "Answerable",
+      "Time-sensitive": "No"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S23",
+    "question": "Dün akşam iki bira içip arabamla eve dönerken çevirmeye takıldım, üfledim 0.70 çıktı. Polis ehliyetimi aldı. Başıma ne gelecek?",
+    "gold_answer": "Hususi otomobilde 0,50 promilin üzerinde alkollü araç kullanan sürücüye 25.000 TL idari para cezası verilir ve sürücü belgesi 6 ay süreyle geri alınır. Son beş yıl içinde ikinci kez olursa ceza 50.000 TL'ye ve geri alma süresi 2 yıla çıkar. Üç ve daha fazlasında her seferinde 150.000 TL ceza verilir ve belge 5 yıl geri alınır. Değer 1,00 promilin altında olduğu için TCK m.179/3 ayrıca uygulanmaz. Belgenin iade edilmesi için Kanun kapsamındaki tüm idari para cezalarının ödenmiş olması gerekir.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KTK Art. 48/5",
+        "doc": "KTK",
+        "article": "48",
+        "paras": [
+          "48/5"
+        ]
+      },
+      {
+        "raw": "KTK Art. 48/6",
+        "doc": "KTK",
+        "article": "48",
+        "paras": [
+          "48/6"
+        ]
+      },
+      {
+        "raw": "KTK Art. 48/13",
+        "doc": "KTK",
+        "article": "48",
+        "paras": [
+          "48/13"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "KTK 48"
+    ],
+    "tags": {
+      "Question Tag": "Violation in the user's own words",
+      "Ambiguity": "No",
+      "Source Scope": "Single article",
+      "Hop Type": "Single-hop",
+      "Premise": "With premise",
+      "Wording": "Different terms",
+      "Question Word": "What happens/Penalty",
+      "Multi-part": "No",
+      "Answerability": "Answerable",
+      "Time-sensitive": "Yes"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S25",
+    "question": "Şehir içinde 105 ile giderken radara yakalandım. Cezası ne?",
+    "gold_answer": "Ceza, o yoldaki ve aracınız için geçerli hız sınırına göre değişir. Ceza, sınırın ne kadar aşıldığına göre yerleşim yeri içi dilimlerinden belirlenir:\n• Sınır 50 km/s ise (otomobil, minibüs, otobüs, kamyonet, panelvan, kamyon, çekici ve motosiklet için yerleşim yeri içi genel sınır): 55 km/s aşım, '46-55 km/s' dilimine girer. 20.000 TL idari para cezası verilir ve sürücü belgesi 30 gün geri alınır.\n• Sınır 40 km/s ise (römorklu veya yarı römorklu araç; römorksuz sınırdan 10 km/s düşük): 65 km/s aşım, '56-65 km/s' dilimine girer. 25.000 TL ceza verilir ve belge 60 gün geri alınır. Levhayla 40 km/s'e düşürülmüş bir yolda da sonuç aynıdır.\n• Sınır 30 km/s ise (motorlu bisiklet, tehlikeli madde taşıyan araç, özel izin belgeli araç veya levhayla 30'a düşürülmüş yol): 75 km/s aşım, '66 km/s ve fazlası' dilimine girer. 30.000 TL ceza verilir ve belge 90 gün geri alınır.\n• Sınır 20 km/s ise (lastik tekerlekli traktör, arızalı araç çeken araç, iş makinesi): 85 km/s aşım, 30.000 TL ceza ve 90 gün geri alma.\n• Sınır trafik komisyonunca 20 km/s artırılmış bir bölünmüş yolsa (sınır 70): 35 km/s aşım, '26-35 km/s' dilimine girer. 12.000 TL ceza verilir, belge geri alınmaz.\n• Sınır 32 km/s artırılmış bir bölünmüş yolsa (sınır 82): 23 km/s aşım, '21-25 km/s' dilimine girer. 8.000 TL ceza verilir, belge geri alınmaz.\nHer durumda geçerli kurallar:\n• Yönetmelikteki %10 tolerans bu aşım miktarlarında uygulanamaz.\n• Geri alınan belge, Kanun kapsamındaki tüm idari para cezaları ödenmeden iade edilmez.\n• Bu madde kapsamında son bir yıl içinde beşinci kez geri alınan belge, ancak psiko-teknik değerlendirme ve psikiyatri uzmanı muayenesinden geçilirse iade edilir.\n• Geri alma süresi içinde araç kullanılırsa ayrıca 200.000 TL idari para cezası verilir.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "KTK Art. 51/2-a",
+        "doc": "KTK",
+        "article": "51",
+        "paras": [
+          "51/2-a"
+        ]
+      },
+      {
+        "raw": "KTK Art. 51/3",
+        "doc": "KTK",
+        "article": "51",
+        "paras": [
+          "51/3"
+        ]
+      },
+      {
+        "raw": "KTK Art. 51/5",
+        "doc": "KTK",
+        "article": "51",
+        "paras": [
+          "51/5"
+        ]
+      },
+      {
+        "raw": "KTK Art. 36/3-b",
+        "doc": "KTK",
+        "article": "36",
+        "paras": [
+          "36/3-b"
+        ]
+      },
+      {
+        "raw": "KTY Art. 100/1 (table)",
+        "doc": "KTY",
+        "article": "100",
+        "paras": [
+          "100/1"
+        ]
+      },
+      {
+        "raw": "KTY Art. 100/5",
+        "doc": "KTY",
+        "article": "100",
+        "paras": [
+          "100/5"
+        ]
+      },
+      {
+        "raw": "KTY Art. 100/8",
+        "doc": "KTY",
+        "article": "100",
+        "paras": [
+          "100/8"
+        ]
+      },
+      {
+        "raw": "KTY Art. 101/4",
+        "doc": "KTY",
+        "article": "101",
+        "paras": [
+          "101/4"
+        ]
+      }
+    ],
+    "gold_articles": [
+      "KTK 36",
+      "KTK 51",
+      "KTY 100",
+      "KTY 101"
+    ],
+    "tags": {
+      "Question Tag": "Violation in the user's own words",
+      "Ambiguity": "Yes",
+      "Source Scope": "Articles of several texts",
+      "Hop Type": "Chain",
+      "Premise": "With premise",
+      "Wording": "Different terms",
+      "Question Word": "What happens/Penalty",
+      "Multi-part": "No",
+      "Answerability": "Answerable",
+      "Time-sensitive": "Yes"
+    },
+    "key_facts": []
+  },
+  {
+    "id": "S28",
+    "question": "Kiraladığım scooter'a arkadaşımı da bindirdim, kaldırımdan gidiyorduk, polis durdurdu. Yanlış bir şey mi yaptık?",
+    "gold_answer": "Evet, iki ayrı ihlal var. E-skuterde sürücü dışında başka kişi taşınması yasaktır. E-skuterin yaya yollarında sürülmesi de yasaktır. Bu kurallara uymayan sürücülere 5.000 TL idari para cezası uygulanır.",
+    "scope": "in",
+    "expected_behavior": "answer",
+    "gold_refs": [
+      {
+        "raw": "SKUTER Art. 5/1-a-4",
+        "doc": "SKUTER",
+        "article": "5",
+        "paras": [
+          "5/1-a-4"
+        ]
+      },
+      {
+        "raw": "SKUTER Art. 5/1-b-2",
+        "doc": "SKUTER",
+        "article": "5",
+        "paras": [
+          "5/1-b-2"
+        ]
+      },
+      {
+        "raw": "KTK Art. 66/1-a",
+        "doc": "KTK",
+        "article": "66",
+        "paras": [
+          "66/1-a"
+        ]
+      },
+      {
+        "raw": "KTK Art. 66/1-d",
+        "doc": "KTK",
+        "article": "66",
+        "paras": [
+          "66/1-d"
+        ]
+      },
+      {
+        "raw": "KTK Art. 66 (penalty paragraph)",
+        "doc": "KTK",
+        "article": "66",
+        "paras": []
+      }
+    ],
+    "gold_articles": [
+      "KTK 66",
+      "SKUTER 5"
+    ],
+    "tags": {
+      "Question Tag": "Violation in the user's own words",
+      "Ambiguity": "No",
+      "Source Scope": "Articles of several texts",
+      "Hop Type": "Parallel",
+      "Premise": "With premise",
+      "Wording": "Different terms",
+      "Question Word": "Yes/No",
+      "Multi-part": "No",
+      "Answerability": "Answerable",
+      "Time-sensitive": "Yes"
+    },
+    "key_facts": []
+  }
+]

@@ -1,0 +1,11 @@
+﻿id,type,hop_type,judge_score_rag,art_P_rag,art_R_rag,art_F1_rag,judge_pass_rag,latency_s_rag,judge_score_base,art_P_base,art_R_base,art_F1_base,judge_pass_base,latency_s_base,judge_diff
+S01,Single article,Single-hop,0.8,0.5,1.0,0.667,True,82.4,0.7,0.25,1.0,0.4,True,5.76,0.1
+S03,Single article,Single-hop,0.7,1.0,1.0,1.0,True,5.5,1.0,1.0,1.0,1.0,True,2.95,-0.3
+S09,Several articles of one text,Parallel,0.6,0.333,0.5,0.4,False,22.1,0.9,0.25,1.0,0.4,True,17.86,-0.3
+S13,Several articles of one text,Parallel,0.7,0.25,0.5,0.333,True,53.1,0.9,0.333,1.0,0.5,True,17.47,-0.2
+S14,Several articles of one text,Chain,0.3,0.5,0.333,0.4,False,11.6,0.9,0.429,1.0,0.6,True,19.56,-0.6
+S15,Articles of several texts,Chain,0.5,1.0,0.667,0.8,False,128.7,0.5,1.0,0.667,0.8,False,10.96,0.0
+S20,Articles of several texts,Chain,0.6,0.667,0.5,0.571,False,14.0,0.8,1.0,1.0,1.0,True,23.14,-0.2
+S23,Violation in the user's own words,Single-hop,0.7,0.5,1.0,0.667,True,7.4,0.9,0.125,1.0,0.222,True,20.28,-0.2
+S25,Violation in the user's own words,Chain,0.5,1.0,0.25,0.4,False,53.6,0.5,0.4,0.5,0.444,False,18.43,0.0
+S28,Violation in the user's own words,Parallel,0.7,1.0,1.0,1.0,True,7.2,0.9,0.333,1.0,0.5,True,16.38,-0.2

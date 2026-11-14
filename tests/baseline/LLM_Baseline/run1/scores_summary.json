@@ -1,0 +1,80 @@
+{
+  "results_file": "run1/results.jsonl",
+  "judge": "claude-opus-5-5",
+  "packages": {
+    "deepeval": "4.3.4",
+    "pandas": "3.1.1"
+  },
+  "sources": {
+    "in_scope": "run1/scores_judge.csv",
+    "out_of_scope": "run1/scores_judge_oos.csv (corrected rubric, D31)"
+  },
+  "in_scope_mean": {
+    "judge_score": 0.8,
+    "art_P": 0.512,
+    "art_R": 0.917,
+    "art_F1": 0.587,
+    "para_R": 0.795
+  },
+  "in_scope_judge_pass_rate": 0.8,
+  "false_refusal_rate": 0.0,
+  "oos_judge_mean": 0.42,
+  "oos_judge_pass_rate": 0.0,
+  "oos_refusal_rate_flag": 0.6,
+  "oos_strict_refusal_rate": 0.0,
+  "oos_cited_anything_rate": 1.0,
+  "by_type": {
+    "Articles of several texts": {
+      "judge_score": 0.65,
+      "art_P": 1.0,
+      "art_R": 0.834,
+      "art_F1": 0.9,
+      "para_R": 0.536
+    },
+    "Several articles of one text": {
+      "judge_score": 0.9,
+      "art_P": 0.337,
+      "art_R": 1.0,
+      "art_F1": 0.5,
+      "para_R": 1.0
+    },
+    "Single article": {
+      "judge_score": 0.85,
+      "art_P": 0.625,
+      "art_R": 1.0,
+      "art_F1": 0.7,
+      "para_R": 0.75
+    },
+    "Violation in the user's own words": {
+      "judge_score": 0.767,
+      "art_P": 0.286,
+      "art_R": 0.833,
+      "art_F1": 0.389,
+      "para_R": 0.792
+    }
+  },
+  "by_hop_type": {
+    "Chain": {
+      "judge_score": 0.675,
+      "art_P": 0.707,
+      "art_R": 0.792,
+      "art_F1": 0.711,
+      "para_R": 0.611
+    },
+    "Parallel": {
+      "judge_score": 0.9,
+      "art_P": 0.305,
+      "art_R": 1.0,
+      "art_F1": 0.467,
+      "para_R": 1.0
+    },
+    "Single-hop": {
+      "judge_score": 0.867,
+      "art_P": 0.458,
+      "art_R": 1.0,
+      "art_F1": 0.541,
+      "para_R": 0.833
+    }
+  },
+  "latency_s_mean": 13.47
+}
