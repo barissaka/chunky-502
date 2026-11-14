@@ -85,3 +85,43 @@ Retrieval failures (supporting articles not in the top 8):
 **Discussion and Conclusion:**
 <!-- What the numbers mean and what you will do next. Link the decision they led to (D?), if any. -->
 Every question gets at least one supporting article in the top 5, and 20 of the 23 supporting articles are in the top 8, so retrieval is not the main limit for single-article questions. The misses are in chain questions: the penalty for driving while the licence is suspended (KTK-m36) is never retrieved, because the questions describe the situation (a licence already taken away) rather than the rule, and the article shares few terms with them. Precision@8 is low by design (most questions have one or two supporting articles), which is acceptable because the generator receives whole articles and the context stays small (median about 5k tokens at k = 8). The low MRR for parallel questions shows that the first supporting article is often not ranked first, which a reranker may improve. Next (Sprint 3): retrieval spike with a second embedding model and a reranker (AD-04, AD-05), and one-step cross-reference expansion for chain questions. Decisions: AD-04, AD-05, AD-06, AD-08 in the design document; the choice of hybrid retrieval and k = 8 comes from [E2](E2-retrieval-mode-and-k.md).
+
+**Answer correctness (`eval.py` LLM judge, added 2026-11-14):**
+<!-- Added after the run; the sections above are unchanged. -->
+
+The 10 answers of this run (`2026-11-14_trial10_gpt-oss-120b-maas_eval.jsonl`) scored with the team's `eval.py`: judge `claude-opus-5-5` via DeepEval GEval against the gold answers, current correctness rubric, pass at 0.7 or above, one run. Results: [`tests/baseline/rag/scores_rag.csv`](../../tests/baseline/rag/scores_rag.csv) (score and reason per answer) and [`scores_rag_summary.json`](../../tests/baseline/rag/scores_rag_summary.json).
+
+| Metric | Value |
+|---|---|
+| Judge score (mean) | 0.61 |
+| Judge pass (≥ 0.7) | 5 of 10 (S01, S03, S13, S23, S28) |
+| Cited-article precision (`eval.py`, mean over questions) | 0.68 |
+| Cited-article recall (`eval.py`, mean over questions) | 0.68 |
+| Cited-article F1 (`eval.py`, mean over questions) | 0.62 |
+
+The cited-article figures are computed by `eval.py` (citations normalised to text and article, averaged over questions) and are not the same calculation as the citation recall and precision in the generation paragraph above.
+
+| Question tag | n | Judge score | Judge pass |
+|---|---|---|---|
+| Single article | 2 | 0.75 | 2 / 2 |
+| Several articles of one text | 3 | 0.53 | 1 / 3 |
+| Articles of several texts | 2 | 0.55 | 0 / 2 |
+| Violation in the user's own words | 3 | 0.63 | 2 / 3 |
+
+| Hop type | n | Judge score | Judge pass |
+|---|---|---|---|
+| Single-hop | 3 | 0.73 | 3 / 3 |
+| Parallel | 3 | 0.67 | 2 / 3 |
+| Chain | 4 | 0.47 | 0 / 4 |
+
+Answers below 0.7, as the judge describes them:
+
+| ID | Judge score | Judge's main point |
+|---|---|---|
+| S14 | 0.3 | Treats driving during the suspension as a repeat alcohol offence instead of the 200,000 TL fine of KTK m.36/3, and adds a 75-penalty-point condition the texts do not support |
+| S15 | 0.5 | Does not work out how the 10% tolerance and the KTK fine bands combine; leaves out the overtaking exception |
+| S25 | 0.5 | Gives only the 50 km/h case and a general method, not the other speed limits or the general rules |
+| S09 | 0.6 | States that any accident makes a special inspection mandatory; the rule applies only when the traffic police deem it necessary |
+| S20 | 0.6 | Leaves out the three-year, six-monthly neurology condition and the referral route |
+
+All four Chain questions fall below 0.7, in line with the retrieval misses on chain questions above (KTK-m36 not retrieved for S14 and S25). Two citations name a different article from the one whose content they support: S13 cites SKUTER-m10 for the geofencing rule (SKUTER m.16/10) and S20 cites KTK-m90 for the temporary withdrawal (KTY m.90).
