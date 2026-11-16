@@ -1,4 +1,4 @@
-# Sprint 2 Review Page
+# Sprint 2 Review Page (template copy)
 
 This page is reserved for when Sprint 2 is finished. A group will be assigned to review your documents and fill in this form.
 
