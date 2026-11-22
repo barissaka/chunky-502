@@ -1,18 +1,25 @@
-"""Chunky — Trafik Mevzuatı Asistanı · Streamlit sohbet arayüzü (US-09 / CHUNKY-125, EN-15 / CHUNKY-165)
+"""Chunky web interface: Streamlit chat page for the traffic legislation assistant.
 
-İki çalışma modu, tek ekran:
-  * Yerel mod  — varsayılan. Ekibin pipeline'ı (src/chunky) doğrudan çağrılır: bu bilgisayardaki bge-m3 arama
-                 dizini + Google Cloud Vertex AI'daki cevap modeli. Ayarlar config/rag.yaml'dan okunur; notebooks/
-                 05_answer_check.ipynb ile aynı fonksiyon (chunky.answer.answer) kullanılır.
-  * API modu   — .env'de CHUNKY_API_URL tanımlıysa soru  POST {CHUNKY_API_URL}/ask  ile retriever servisine gider
-                 (sözleşme: docs/ask-endpoint-contract.md).
+Jira: US-09 / CHUNKY-125 (question box and answer area), EN-15 / CHUNKY-165 (interface
+framework and /ask connection), US-04 (new chat button).
 
-Ön koşullar (README → "Running the baseline"): .venv içinde `pip install -e .`, `python -m chunky.index` ile
-kurulmuş dizin, `gcloud auth application-default login`.
+The page has two modes and one screen:
 
-Tüm Türkçe metinler texts.py'de (T sözlüğü). Tema .streamlit/config.toml'da (bu klasörden çalıştırılınca okunur).
+* Local mode (default): calls the team pipeline in ``src/chunky`` directly, the same
+  function as ``notebooks/05_answer_check.ipynb`` (``chunky.answer.answer``). Retrieval
+  runs on this laptop with the bge-m3 index; the answer comes from the model set in
+  ``config/rag.yaml`` (Google Cloud Vertex AI).
+* API mode: if ``CHUNKY_API_URL`` is set in ``src/ui/.env``, each question is sent to
+  ``POST {CHUNKY_API_URL}/ask`` instead (contract: ``docs/ask-endpoint-contract.md``).
 
-Çalıştır (src/ui klasöründen):  python -m streamlit run app.py   ->  http://localhost:8501
+Prerequisites (README, "Running the baseline"): ``pip install -e .`` in the virtual
+environment, the index built with ``python -m chunky.index``, and
+``gcloud auth application-default login``.
+
+All Turkish texts shown on the page are in ``texts.py`` (dictionary ``T``); the theme is in
+``.streamlit/config.toml``, which Streamlit reads only when started from this folder.
+
+Run from ``src/ui``:  ``python -m streamlit run app.py``  ->  http://localhost:8501
 """
 from __future__ import annotations
 
@@ -29,9 +36,16 @@ ROOT = Path(__file__).resolve().parent
 MAX_QUESTION_CHARS = 1000
 
 
-# ----------------------------------------------------------------------------- .env
+# ----------------------------------------------------------------------------- .env settings
 def _load_env() -> None:
-    """python-dotenv varsa onu, yoksa basit bir okuyucu kullan; ortam değişkeni .env'i ezer."""
+    """Load ``src/ui/.env`` into the process environment.
+
+    Uses python-dotenv when it is installed; otherwise reads ``KEY=VALUE`` lines with a
+    small built-in parser. Variables already set in the environment are not overwritten.
+
+    Returns:
+        None. The values are written to ``os.environ``.
+    """
     try:
         from dotenv import load_dotenv
 
@@ -55,10 +69,10 @@ API_MODE = bool(API_URL)
 
 
 class UIError(Exception):
-    """Kullanıcıya gösterilecek, çevrilmiş hata metni."""
+    """Error whose message is a Turkish text meant to be shown to the user as is."""
 
 
-# ----------------------------------------------------------------------------- yerel mod: ekibin pipeline'ı
+# ----------------------------------------------------------------------------- local mode: the team pipeline
 if not API_MODE:
     from chunky.answer import answer as chunky_answer
     from chunky.index import ROOT as REPO_ROOT
@@ -68,7 +82,21 @@ if not API_MODE:
 
     @st.cache_resource(show_spinner=False)
     def _pipeline():
-        """bge-m3 modeli ve arama dizini bir kez yüklenir, sayfa yenilense de bellekte kalır."""
+        """Load the embedding model and the search index once per server process.
+
+        Streamlit keeps the result in memory (``st.cache_resource``), so later questions
+        and page reloads do not load bge-m3 again. An exception is not cached, so the page
+        retries after the index has been built.
+
+        Returns:
+            tuple: ``(embedder, index, by_id)`` where ``embedder`` is the bge-m3
+            ``chunky.index.Embedder``, ``index`` is the tuple returned by
+            ``chunky.index.load_index()`` and ``by_id`` maps each ``chunk_id`` to its
+            chunk record (title, article label, heading, version date, text).
+
+        Raises:
+            UIError: if the index folder (``index/bge-m3``) does not exist.
+        """
         emb = CFG["embedding"]
         try:
             index = load_index()
@@ -80,7 +108,18 @@ if not API_MODE:
 
 
 def _local_error(e: Exception) -> str:
-    """Yerel pipeline hatalarını Türkçe, yol gösteren bir metne çevirir; ayrıntı terminale yazılır."""
+    """Turn an error of the local pipeline into a Turkish message that says what to do.
+
+    The technical details are printed to the terminal; the user sees only the message.
+
+    Args:
+        e: the exception raised by ``chunky.answer.answer``.
+
+    Returns:
+        str: one of the error texts of ``texts.T``: missing Google Cloud login, no access
+        to the project (HTTP 401/403/404), model unavailable (HTTP 429/5xx or a network
+        error), timeout, or a generic error with the exception name.
+    """
     print(f"[app] yerel pipeline hatası: {type(e).__name__}: {e}", flush=True)
     if type(e).__name__ == "DefaultCredentialsError" or "credentials" in str(e).lower():
         return T["err_auth"]
@@ -98,7 +137,27 @@ def _local_error(e: Exception) -> str:
 
 
 def answer_local(question: str) -> dict:
-    """chunky.answer.answer sonucunu arayüzün kullandığı yanıt nesnesine (API sözleşmesiyle aynı alanlar) çevirir."""
+    """Answer a question with the team pipeline and shape the result for the page.
+
+    Calls ``chunky.answer.answer`` with the settings of ``config/rag.yaml`` and converts its
+    result into the same fields as the /ask contract, so that both modes are shown by the
+    same code.
+
+    Args:
+        question: the user's question, already stripped and cut to
+            ``MAX_QUESTION_CHARS``.
+
+    Returns:
+        dict: ``request_id``, ``question``, ``answer``, ``refused`` and ``refusal_reason``
+        (an empty answer counts as refused), ``sources`` (one entry per cited article that
+        was also retrieved: ``id``, ``document``, ``header``, ``version_date``, ``text``),
+        ``unknown_citations`` (cited ids that were not retrieved), ``config`` (model,
+        prompt, ``top_k``, sparse weight), ``timings`` (``total_s``) and ``usage``
+        (prompt and completion tokens).
+
+    Raises:
+        UIError: if the pipeline fails; the message comes from ``_local_error``.
+    """
     embedder, index, by_id = _pipeline()
     gen, ret = CFG["generation"], CFG["retrieval"]
     with st.spinner(T["spinner_answering"]):
@@ -111,7 +170,7 @@ def answer_local(question: str) -> dict:
     for cid in r["cited"]:
         c = by_id.get(cid)
         if c is None or cid not in r["retrieved"]:
-            continue  # aranan maddeler arasında olmayan atıf: kaynak listesine girmez, ayrıca uyarılır
+            continue  # cited but not retrieved: left out of the sources and shown as a warning
         heading = f" – {c['article_heading']}" if c.get("article_heading") else ""
         sources.append({
             "id": cid,
@@ -136,8 +195,15 @@ def answer_local(question: str) -> dict:
     }
 
 
-# ----------------------------------------------------------------------------- API modu
+# ----------------------------------------------------------------------------- API mode
 def api_health() -> dict | None:
+    """Ask the /ask service whether it is running (``GET {CHUNKY_API_URL}/health``).
+
+    Returns:
+        dict | None: the service's health record (for example ``corpus_version``,
+        ``embedding_model``, ``reranker_model``) if it answers with HTTP 200 within
+        5 seconds; ``None`` otherwise.
+    """
     try:
         r = requests.get(f"{API_URL}/health", timeout=5)
         return r.json() if r.status_code == 200 else None
@@ -146,6 +212,24 @@ def api_health() -> dict | None:
 
 
 def answer_api(question: str, opts: dict | None) -> dict:
+    """Send a question to the /ask service and return its answer.
+
+    Args:
+        question: the user's question, already stripped and cut to
+            ``MAX_QUESTION_CHARS``.
+        opts: retrieval options chosen in the sidebar (``rerank``, ``k``, ``top``), or
+            ``None`` to use the service defaults.
+
+    Returns:
+        dict: the service's answer with the contract fields (``answer``, ``sources``,
+        ``config``, ``timings``, ``usage`` and so on); missing optional fields are filled
+        with empty defaults. A refusal (HTTP 422 with code ``rejected``) is returned as an
+        answer with ``refused = True`` and the matching Turkish refusal text.
+
+    Raises:
+        UIError: on a timeout, a connection error, or HTTP 400, 503, 504 or any other
+        error status, with a Turkish message.
+    """
     payload: dict = {"question": question, "client": {"name": "streamlit-ui", "version": "0.2"}}
     if opts:
         payload["options"] = opts
@@ -168,7 +252,7 @@ def answer_api(question: str, opts: dict | None) -> dict:
     except ValueError:
         pass
     err = body.get("error", {}) if isinstance(body, dict) else {}
-    if r.status_code == 422 and err.get("code") == "rejected":  # sözleşme §3: ret, hata değil
+    if r.status_code == 422 and err.get("code") == "rejected":  # contract section 3: a refusal, not an error
         reason = err.get("reason", "default")
         return {"request_id": body.get("request_id", "-"), "question": question,
                 "answer": T["refusal"].get(reason, T["refusal"]["default"]), "refused": True,
@@ -183,11 +267,11 @@ def answer_api(question: str, opts: dict | None) -> dict:
     raise UIError(T["err_generic"].format(code=r.status_code))
 
 
-# ----------------------------------------------------------------------------- sayfa
+# ----------------------------------------------------------------------------- page
 st.set_page_config(page_title=T["page_title"], page_icon="🚦", layout="wide", initial_sidebar_state="collapsed")
 
-# Üst çubuk menüsü/Deploy gizlenir (kenar çubuğu aç/kapa oku kalır); sohbet kutusunun altına sabit
-# sorumluluk notu eklenir (mockup: docs/images/ui-mockup-v1.png).
+# Hide the toolbar menu and the Deploy button (the sidebar toggle stays) and add the fixed
+# AI notice under the chat box (mockup: docs/images/ui-mockup-v1.png).
 st.markdown(
     f"""<style>
     [data-testid="stAppDeployButton"], .stAppDeployButton, [data-testid="stMainMenu"], #MainMenu {{ display: none !important; }}
@@ -221,7 +305,7 @@ with st.sidebar:
             rerank = st.toggle(T["opt_rerank"], value=True)
             k = st.slider(T["opt_k"], 5, 40, 20, step=5)
             top = st.slider(T["opt_top"], 1, 10, 5)
-        if not (rerank and k == 20 and top == 5):  # yalnızca değiştirildiyse gönder
+        if not (rerank and k == 20 and top == 5):  # send options only if changed
             opts = {"rerank": rerank, "k": k, "top": top}
     else:
         gen, ret = CFG["generation"], CFG["retrieval"]
@@ -247,6 +331,18 @@ with st.sidebar:
 
 
 def render_sources(result: dict) -> None:
+    """Show the details under an answer: warnings, sources, timing and settings.
+
+    Args:
+        result: an answer in the contract format, from ``answer_local`` or ``answer_api``.
+
+    Returns:
+        None. Writes to the page: a warning for citations outside the retrieved set; for a
+        refused answer or one without sources only the request id; otherwise a collapsed
+        "used chunks" section with one line per source (title, version date, pages, score
+        if any, and the text when the sidebar switch is on), token counts and the settings
+        of the run. Uses ``show_text`` from the sidebar.
+    """
     tm, us, cf = result.get("timings", {}), result.get("usage", {}), result.get("config", {})
     if result.get("unknown_citations"):
         st.warning(T["unknown_citations"].format(ids=", ".join(result["unknown_citations"])))
@@ -283,7 +379,7 @@ def render_sources(result: dict) -> None:
                 rerank=T["rerank_on"] if cf.get("rerank") else T["rerank_off"], request_id=result.get("request_id", "-")))
 
 
-# Yerel modda bge-m3 ilk açılışta yüklenir; dizin yoksa kullanıcı burada yönlendirilir.
+# In local mode bge-m3 is loaded on first open; if the index is missing, the user is told how to build it.
 if not API_MODE:
     try:
         with st.spinner(T["spinner_loading"]):
@@ -292,7 +388,7 @@ if not API_MODE:
         st.error(str(e))
         st.stop()
 
-# Başlık satırı: solda soru başlığı, sağda "Yeni Sohbet" (US-04 — kenar çubuğu kapalıyken de görünür)
+# Heading row: the question heading on the left, "Yeni Sohbet" on the right (US-04, visible with the sidebar closed)
 col_title, col_new = st.columns([6, 1], vertical_alignment="center")
 with col_title:
     st.markdown(f"### {T['heading_icon']} {T['ask_heading']}")
@@ -336,7 +432,7 @@ if question:
         except UIError as e:
             text = str(e)
             box.error(text)
-        except Exception as e:  # beklenmeyen hata — kullanıcıya Türkçe, ayrıntı terminale
+        except Exception as e:  # unexpected error: Turkish message to the user, details to the terminal
             print(f"[app] beklenmeyen hata: {type(e).__name__}: {e}", flush=True)
             text = T["err_generic"].format(code=type(e).__name__)
             box.error(text)
