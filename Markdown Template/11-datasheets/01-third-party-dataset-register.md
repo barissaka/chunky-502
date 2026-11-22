@@ -2,7 +2,7 @@
 
 Project: Traffic rules and penalties assistant · Team: Chunky
 
-The corpus of Chunky is the six legal texts below, used as published. Each text was downloaded from the Presidency Legislation Information System (mevzuat.gov.tr) as the consolidated ("güncel") text. Following AD-09 of the design document (Word where mevzuat.gov.tr offers it, otherwise PDF), the format in use is **Word (.docx) for all six texts**; mevzuat.gov.tr offered a Word version of every text. How the files are processed is described in the [System Architecture Design Document](../11-system-architecture-design-document-local.md), section 5 Data pipeline; the chunk set and the question–answer set are documented in the [Dataset Report](02-dataset-report.md) and the [Q&A Data Report](03-qa-data-report.md), not here.
+The corpus of Chunky is the six legal texts below, used as published. Each text was downloaded from the Presidency Legislation Information System (mevzuat.gov.tr) as the consolidated ("güncel") text. Following AD-09 of the design document (Word where mevzuat.gov.tr offers it, otherwise PDF), the format in use is **Word (.docx) for all six texts**; mevzuat.gov.tr offered a Word version of every text. How the files are processed is described in the [System Architecture Design Document](../11-system-architecture-design-document.md), section 5 Data pipeline; the chunk set and the question–answer set are documented in the [Dataset Report](02-dataset-report.md) and the [Q&A Data Report](03-qa-data-report.md), not here.
 
 | Dataset Name | Purpose | Accesser | Date of Access | Format | Version (latest amendment in the text) | License | Experiment and Results |
 |---|---|---|---|---|---|---|---|
