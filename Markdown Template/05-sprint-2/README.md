@@ -38,7 +38,10 @@ Deliverables of Sprint 2
 
 **Goal:** The charter and user stories are finalized. A first baseline retrieves relevant documents to the user queries and its performance has been measured. Go further if your workload allows.
 
+**Submitted Commit:** 2e52859
+
 **What we achieved:**
+
 
 - Baseline results (10 in-scope development questions):
   - Long-context baseline, all six texts at once: judge score 0.80, 8 of 10 answers pass, mean response time 15.28 s. [E3](https://github.com/barissaka/chunky-502/blob/main/Markdown%20Template/12-experiment-cards/E3-claude-longcontext-baseline.md)
