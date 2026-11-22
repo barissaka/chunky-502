@@ -66,6 +66,20 @@ Notes:
 - On Linux, install the CPU build of PyTorch first (`pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu`); on Windows and macOS the default wheel is fine.
 - If Windows reports *"An Application Control policy has blocked this file"* when a package is imported, see AD-06 in the [design document](Markdown%20Template/11-system-architecture-design-document.md); `FlagEmbedding` and `qdrant-client` are not used for this reason.
 
+## Running the web interface
+
+The chat interface (Streamlit) calls the same pipeline as `notebooks/05_answer_check.ipynb`: retrieval on this laptop, answer from the model in `config/rag.yaml`. Complete [Running the baseline](#running-the-baseline-sprint-2) first (index built, Google Cloud login done).
+
+```powershell
+cd src\ui
+pip install -r requirements.txt
+python -m streamlit run app.py
+```
+
+The page opens at http://localhost:8501. The first question takes about a minute longer because the embedding model is loaded into memory. Run the command from `src\ui` so the theme in `src/ui/.streamlit/config.toml` is applied. Stop the interface with `Ctrl+C` in the terminal.
+
+Settings (model, prompt, `top_k`) are read from `config/rag.yaml`; the interface has no separate settings. If `CHUNKY_API_URL` is set in `src/ui/.env` (copy `.env.example`), the interface sends questions to a `/ask` service instead.
+
 ## Where to look
 
 - **What we are building and why:** [Project Executive Summary](Markdown%20Template/03-project-canvas/01-project-executive-summary.md)

@@ -1,15 +1,18 @@
 """Chunky — Trafik Mevzuatı Asistanı · Streamlit sohbet arayüzü (US-09 / CHUNKY-125, EN-15 / CHUNKY-165)
 
 İki çalışma modu, tek ekran:
+  * Yerel mod  — varsayılan. Ekibin pipeline'ı (src/chunky) doğrudan çağrılır: bu bilgisayardaki bge-m3 arama
+                 dizini + Google Cloud Vertex AI'daki cevap modeli. Ayarlar config/rag.yaml'dan okunur; notebooks/
+                 05_answer_check.ipynb ile aynı fonksiyon (chunky.answer.answer) kullanılır.
   * API modu   — .env'de CHUNKY_API_URL tanımlıysa soru  POST {CHUNKY_API_URL}/ask  ile retriever servisine gider
-                 (sözleşme: docs/ask-endpoint-contract.md). Cevap tek parça gelir.
-  * Yerel mod  — CHUNKY_API_URL yoksa aynı klasördeki laptop-spike pipeline'ı (rag.py + Ollama) doğrudan çağrılır;
-                 cevap akışlı yazılır. Yerel mod sözleşmedeki yanıt nesnesinin aynısını üretir, arayüz tek yol kullanır.
+                 (sözleşme: docs/ask-endpoint-contract.md).
 
-Tüm Türkçe metinler texts.py'de (T sözlüğü). Tema .streamlit/config.toml'da.
+Ön koşullar (README → "Running the baseline"): .venv içinde `pip install -e .`, `python -m chunky.index` ile
+kurulmuş dizin, `gcloud auth application-default login`.
 
-Çalıştır:  python -m streamlit run app.py        ->  http://localhost:8501
-.env:      CHUNKY_API_URL=http://localhost:8000   (isteğe bağlı)   CHUNKY_API_TIMEOUT_S=600
+Tüm Türkçe metinler texts.py'de (T sözlüğü). Tema .streamlit/config.toml'da (bu klasörden çalıştırılınca okunur).
+
+Çalıştır (src/ui klasöründen):  python -m streamlit run app.py   ->  http://localhost:8501
 """
 from __future__ import annotations
 
@@ -55,92 +58,81 @@ class UIError(Exception):
     """Kullanıcıya gösterilecek, çevrilmiş hata metni."""
 
 
-# ----------------------------------------------------------------------------- yerel pipeline (API yoksa)
+# ----------------------------------------------------------------------------- yerel mod: ekibin pipeline'ı
 if not API_MODE:
-    import llm_api
-    import rag
+    from chunky.answer import answer as chunky_answer
+    from chunky.index import ROOT as REPO_ROOT
+    from chunky.index import Embedder, load_config, load_index
+
+    CFG = load_config()
 
     @st.cache_resource(show_spinner=False)
-    def _reranker(model: str, max_len: int, bs: int):
-        from rerank import Reranker
-
-        return Reranker(model, max_len, bs)
-
-    @st.cache_resource(show_spinner=False)
-    def _retriever(use_rerank: bool, prompt_file: str):
-        cfg = rag.load_config()
-        rr = _reranker(cfg["reranker_model"], cfg.get("rerank_max_length", 1536), cfg.get("rerank_batch_size", 4)) if use_rerank else None
-        return rag.Retriever(cfg, use_rerank=use_rerank, reranker=rr, prompt_file=prompt_file)
-
-    LOCAL_CFG = rag.load_config()
-    PROMPTS = sorted(p.stem for p in (ROOT / "prompts").glob("*.md"))
-    try:
-        LOCAL_MODELS = [m for m in llm_api.installed_models(LOCAL_CFG["ollama_base_url"]) if "embed" not in m and "rerank" not in m]
-        LOCAL_OLLAMA_OK = True
-    except Exception:
-        LOCAL_MODELS, LOCAL_OLLAMA_OK = [LOCAL_CFG["answer_model"]], False
+    def _pipeline():
+        """bge-m3 modeli ve arama dizini bir kez yüklenir, sayfa yenilense de bellekte kalır."""
+        emb = CFG["embedding"]
+        try:
+            index = load_index()
+        except FileNotFoundError:
+            raise UIError(T["err_index_missing"])
+        embedder = Embedder(emb["model"], emb["revision"], emb["max_tokens"])
+        by_id = {c["chunk_id"]: c for c in index[2]}
+        return embedder, index, by_id
 
 
-def _pages(chunk: dict):
-    p = chunk.get("pages")
-    if isinstance(p, (list, tuple)) and p:
-        return [p[0], p[-1]]
-    if isinstance(p, (int, str)) and str(p).strip():
-        return [str(p), str(p)]
-    return None
+def _local_error(e: Exception) -> str:
+    """Yerel pipeline hatalarını Türkçe, yol gösteren bir metne çevirir; ayrıntı terminale yazılır."""
+    print(f"[app] yerel pipeline hatası: {type(e).__name__}: {e}", flush=True)
+    if type(e).__name__ == "DefaultCredentialsError" or "credentials" in str(e).lower():
+        return T["err_auth"]
+    if isinstance(e, requests.exceptions.HTTPError) and e.response is not None:
+        code = e.response.status_code
+        if code in (401, 403, 404):
+            return T["err_permission"].format(code=code, project=CFG["generation"]["project"])
+        if code in (429, 500, 502, 503):
+            return T["err_model_unavailable"]
+    if isinstance(e, requests.exceptions.Timeout):
+        return T["err_timeout"]
+    if isinstance(e, requests.exceptions.RequestException):
+        return T["err_model_unavailable"]
+    return T["err_generic"].format(code=type(e).__name__)
 
 
-def _source_from_chunk(chunk: dict, score: float, with_text: bool) -> dict:
-    doc = chunk.get("doc_id") or chunk["id"].split("-")[0]
-    return {
-        "id": chunk["id"],
-        "document": DOC_NAMES.get(doc, doc),
-        "article": rag.article_of(chunk) if not API_MODE else None,
-        "header": chunk.get("header", chunk["id"]),
-        "pages": _pages(chunk),
-        "score": round(float(score), 4),
-        "text": (chunk["text"][:4000] if with_text else None),
-    }
-
-
-def answer_local(question: str, opts: dict, box) -> dict:
-    """Sözleşmedeki 200 yanıtının aynısını üretir; cevabı `box` içine akışlı yazar."""
-    r = _retriever(opts["rerank"], f"prompts/{opts['prompt']}.md")
-    t0 = time.perf_counter()
-    with st.spinner(T["spinner_retrieving"]):
-        res = r.retrieve(question, opts["k"], opts["top"])
-    ids = [cid for cid, _ in res["final"]]
-    box.markdown(T["writing"])
-    text, stats, t_first = "", {}, None
-    t1 = time.perf_counter()
-    for kind, piece in r.answer_stream(question, ids, opts["model"], False):
-        if kind == "content":
-            if t_first is None:
-                t_first = time.perf_counter() - t0
-            text += piece
-            box.markdown(text + T["cursor"])
-        elif kind == "done":
-            stats = piece
-    text = text.strip()
-    refused = rag.is_refusal(text) or not text
+def answer_local(question: str) -> dict:
+    """chunky.answer.answer sonucunu arayüzün kullandığı yanıt nesnesine (API sözleşmesiyle aynı alanlar) çevirir."""
+    embedder, index, by_id = _pipeline()
+    gen, ret = CFG["generation"], CFG["retrieval"]
+    with st.spinner(T["spinner_answering"]):
+        try:
+            r = chunky_answer(question, embedder, index, CFG)
+        except Exception as e:
+            raise UIError(_local_error(e))
+    text = (r["answer"] or "").strip()
+    sources = []
+    for cid in r["cited"]:
+        c = by_id.get(cid)
+        if c is None or cid not in r["retrieved"]:
+            continue  # aranan maddeler arasında olmayan atıf: kaynak listesine girmez, ayrıca uyarılır
+        heading = f" – {c['article_heading']}" if c.get("article_heading") else ""
+        sources.append({
+            "id": cid,
+            "document": c.get("doc_title") or DOC_NAMES.get(c.get("doc_code"), c.get("doc_code")),
+            "header": f"{c.get('doc_title', cid)}, {c.get('article_label', cid)}{heading}",
+            "version_date": c.get("version_date"),
+            "pages": None,
+            "score": None,
+            "text": c["text"][:4000],
+        })
     return {
         "request_id": "local-" + time.strftime("%Y%m%d-%H%M%S"),
         "question": question,
         "answer": text or T["empty_answer"],
-        "refused": refused,
-        "refusal_reason": ("not_in_corpus" if text else "empty_or_invalid") if refused else None,
-        "sources": [] if refused else [_source_from_chunk(r.by_id[cid], s, True) for cid, s in res["final"]],
-        "config": {
-            "model": stats.get("model", opts["model"]), "prompt": r.prompt_name, "k": opts["k"], "top": opts["top"],
-            "rerank": opts["rerank"], "embedding_model": r.cfg["embedding_model"], "reranker_model": r.cfg["reranker_model"],
-            "corpus_version": r.index.meta.get("built_at", "?"),
-        },
-        "timings": {
-            "retrieval_s": res["timings"]["retrieval_s"],
-            "first_token_s": round(t_first, 3) if t_first else None,
-            "total_s": round(time.perf_counter() - t0, 3),
-        },
-        "usage": {"prompt_tokens": stats.get("prompt_tokens"), "completion_tokens": stats.get("completion_tokens")},
+        "refused": not text,
+        "refusal_reason": None if text else "empty_or_invalid",
+        "sources": sources,
+        "unknown_citations": r.get("unknown_citations", []),
+        "config": {"model": r["model"], "prompt": r["prompt"], "k": ret["top_k"], "sparse_weight": ret["sparse_weight"]},
+        "timings": {"total_s": r["seconds"]},
+        "usage": {"prompt_tokens": r.get("input_tokens"), "completion_tokens": r.get("output_tokens")},
     }
 
 
@@ -154,23 +146,21 @@ def api_health() -> dict | None:
 
 
 def answer_api(question: str, opts: dict | None) -> dict:
-    payload: dict = {"question": question, "client": {"name": "streamlit-ui", "version": "0.1"}}
+    payload: dict = {"question": question, "client": {"name": "streamlit-ui", "version": "0.2"}}
     if opts:
         payload["options"] = opts
     try:
-        r = requests.post(f"{API_URL}/ask", json=payload, timeout=API_TIMEOUT)
+        with st.spinner(T["spinner_waiting_api"]):
+            r = requests.post(f"{API_URL}/ask", json=payload, timeout=API_TIMEOUT)
     except requests.exceptions.Timeout:
         raise UIError(T["err_timeout"])
     except requests.exceptions.RequestException:
         raise UIError(T["err_connection"].format(url=API_URL))
     if r.status_code == 200:
         data = r.json()
-        data.setdefault("refused", False)
-        data.setdefault("refusal_reason", None)
-        data.setdefault("sources", [])
-        data.setdefault("config", {})
-        data.setdefault("timings", {})
-        data.setdefault("usage", {})
+        for key, default in (("refused", False), ("refusal_reason", None), ("sources", []),
+                             ("config", {}), ("timings", {}), ("usage", {}), ("unknown_citations", [])):
+            data.setdefault(key, default)
         return data
     body = {}
     try:
@@ -182,7 +172,8 @@ def answer_api(question: str, opts: dict | None) -> dict:
         reason = err.get("reason", "default")
         return {"request_id": body.get("request_id", "-"), "question": question,
                 "answer": T["refusal"].get(reason, T["refusal"]["default"]), "refused": True,
-                "refusal_reason": reason, "sources": [], "config": {}, "timings": {}, "usage": {}}
+                "refusal_reason": reason, "sources": [], "unknown_citations": [],
+                "config": {}, "timings": {}, "usage": {}}
     if r.status_code == 400:
         raise UIError(T["err_bad_request"])
     if r.status_code == 503:
@@ -193,7 +184,19 @@ def answer_api(question: str, opts: dict | None) -> dict:
 
 
 # ----------------------------------------------------------------------------- sayfa
-st.set_page_config(page_title=T["page_title"], page_icon="🚦", layout="wide")
+st.set_page_config(page_title=T["page_title"], page_icon="🚦", layout="wide", initial_sidebar_state="collapsed")
+
+# Üst çubuk menüsü/Deploy gizlenir (kenar çubuğu aç/kapa oku kalır); sohbet kutusunun altına sabit
+# sorumluluk notu eklenir (mockup: docs/images/ui-mockup-v1.png).
+st.markdown(
+    f"""<style>
+    [data-testid="stAppDeployButton"], .stAppDeployButton, [data-testid="stMainMenu"], #MainMenu {{ display: none !important; }}
+    [data-testid="stBottomBlockContainer"]::after {{ content: "{T['ai_notice']}"; display: block; text-align: center;
+        font-size: 0.75rem; color: #6b7280; padding: 6px 0 2px 0; }}
+    [data-testid="stBottomBlockContainer"] {{ padding-bottom: 0.6rem; }}
+    </style>""",
+    unsafe_allow_html=True,
+)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -210,8 +213,6 @@ with st.sidebar:
             st.success(T["health_ok"].format(corpus=h.get("corpus_version", "?")))
     else:
         st.markdown(T["mode_local"])
-        if not LOCAL_OLLAMA_OK:
-            st.error(T["err_model_unavailable"])
 
     st.subheader(T["settings_header"])
     opts: dict = {}
@@ -223,14 +224,9 @@ with st.sidebar:
         if not (rerank and k == 20 and top == 5):  # yalnızca değiştirildiyse gönder
             opts = {"rerank": rerank, "k": k, "top": top}
     else:
-        default_ix = next((i for i, m in enumerate(LOCAL_MODELS) if m.split(":latest")[0] == LOCAL_CFG["answer_model"]), 0)
-        model = st.selectbox(T["opt_model"], LOCAL_MODELS, index=default_ix)
-        default_prompt = Path(LOCAL_CFG["prompt_file"]).stem
-        prompt = st.selectbox(T["opt_prompt"], PROMPTS, index=PROMPTS.index(default_prompt) if default_prompt in PROMPTS else 0)
-        rerank = st.toggle(T["opt_rerank"], value=LOCAL_CFG.get("rerank", True))
-        k = st.slider(T["opt_k"], 5, 40, LOCAL_CFG["k"], step=5)
-        top = st.slider(T["opt_top"], 1, 10, LOCAL_CFG["top"])
-        opts = {"model": model, "prompt": prompt, "rerank": rerank, "k": k, "top": top}
+        gen, ret = CFG["generation"], CFG["retrieval"]
+        st.markdown(T["settings_local"].format(
+            model=gen["model"], prompt=gen["prompt"], k=ret["top_k"], sw=ret["sparse_weight"]))
     show_text = st.toggle(T["opt_show_text"], value=False)
 
     st.divider()
@@ -240,14 +236,11 @@ with st.sidebar:
             st.markdown(T["models_line"].format(embedding=h.get("embedding_model"), reranker=h.get("reranker_model", "-")))
     else:
         try:
-            n_chunks = sum(1 for _ in open(LOCAL_CFG["chunks_file"], encoding="utf-8"))
+            n_chunks = sum(1 for _ in open(REPO_ROOT / CFG["corpus"]["chunks"], encoding="utf-8"))
             st.markdown(T["corpus_line"].format(n_chunks=n_chunks))
         except OSError:
             pass
-        st.markdown(T["models_line"].format(embedding=LOCAL_CFG["embedding_model"], reranker=LOCAL_CFG["reranker_model"]))
-    if st.button(T["clear_chat"], use_container_width=True):
-        st.session_state.messages = []
-        st.rerun()
+        st.markdown(T["models_line_local"].format(embedding=CFG["embedding"]["model"]))
     st.divider()
     st.caption(T["disclaimer"])
     st.caption(T["ai_disclaimer"])
@@ -255,9 +248,11 @@ with st.sidebar:
 
 def render_sources(result: dict) -> None:
     tm, us, cf = result.get("timings", {}), result.get("usage", {}), result.get("config", {})
+    if result.get("unknown_citations"):
+        st.warning(T["unknown_citations"].format(ids=", ".join(result["unknown_citations"])))
     if result.get("refused") or not result.get("sources"):
         if result.get("request_id"):
-            st.caption(f"istek {result['request_id']}")
+            st.caption(T["request_line"].format(request_id=result["request_id"]))
         return
     label = T["sources_label"].format(total=tm.get("total_s") or 0)
     if tm.get("retrieval_s") is not None:
@@ -265,7 +260,11 @@ def render_sources(result: dict) -> None:
                   if tm.get("first_token_s") else T["sources_label_detail_no_ttft"].format(retr=tm["retrieval_s"]))
     with st.expander(label, expanded=False):
         for s in result["sources"]:
-            line = T["source_line"].format(header=s.get("header", s.get("id")), score=s.get("score") or 0)
+            header = s.get("header", s.get("id"))
+            line = (T["source_line"].format(header=header, score=s["score"]) if s.get("score") is not None
+                    else T["source_line_noscore"].format(header=header))
+            if s.get("version_date"):
+                line += T["source_version"].format(date=s["version_date"])
             if s.get("pages"):
                 p = s["pages"]
                 line += T["source_pages"].format(pages=f"{p[0]}–{p[1]}" if p[0] != p[1] else p[0])
@@ -274,16 +273,33 @@ def render_sources(result: dict) -> None:
                 st.text(s["text"][:1500])
         if us.get("prompt_tokens") or us.get("completion_tokens"):
             st.caption(T["tokens_line"].format(prompt=us.get("prompt_tokens", "-"), completion=us.get("completion_tokens", "-")))
-        st.caption(T["config_line"].format(
-            model=cf.get("model", "-"), prompt=cf.get("prompt", "-"), k=cf.get("k", "-"), top=cf.get("top", "-"),
-            rerank=T["rerank_on"] if cf.get("rerank") else T["rerank_off"], request_id=result.get("request_id", "-")))
+        if "sparse_weight" in cf:
+            st.caption(T["config_line_local"].format(
+                model=cf.get("model", "-"), prompt=cf.get("prompt", "-"), k=cf.get("k", "-"),
+                sw=cf.get("sparse_weight", "-"), request_id=result.get("request_id", "-")))
+        else:
+            st.caption(T["config_line"].format(
+                model=cf.get("model", "-"), prompt=cf.get("prompt", "-"), k=cf.get("k", "-"), top=cf.get("top", "-"),
+                rerank=T["rerank_on"] if cf.get("rerank") else T["rerank_off"], request_id=result.get("request_id", "-")))
 
 
-st.title(T["title"])
-st.caption(T["subtitle"])
-st.info(T["ai_disclaimer"], icon="ℹ️")
+# Yerel modda bge-m3 ilk açılışta yüklenir; dizin yoksa kullanıcı burada yönlendirilir.
+if not API_MODE:
+    try:
+        with st.spinner(T["spinner_loading"]):
+            _pipeline()
+    except UIError as e:
+        st.error(str(e))
+        st.stop()
 
-st.markdown(f"### {T['ask_heading']}")
+# Başlık satırı: solda soru başlığı, sağda "Yeni Sohbet" (US-04 — kenar çubuğu kapalıyken de görünür)
+col_title, col_new = st.columns([6, 1], vertical_alignment="center")
+with col_title:
+    st.markdown(f"### {T['heading_icon']} {T['ask_heading']}")
+with col_new:
+    if st.button(T["new_chat"], icon=":material/add_comment:", type="primary", use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
 cols = st.columns(len(T["examples"]))
 clicked = None
 for c, ex in zip(cols, T["examples"]):
@@ -310,24 +326,19 @@ if question:
         box = st.empty()
         result = None
         try:
-            if API_MODE:
-                with st.spinner(T["spinner_waiting_api"]):
-                    result = answer_api(question, opts)
-            else:
-                result = answer_local(question, opts, box)
+            result = answer_api(question, opts) if API_MODE else answer_local(question)
             text = result["answer"]
-            if result.get("refused"):
-                text = T["refusal"].get(result.get("refusal_reason") or "default", result["answer"]) if result.get("refusal_reason") != "not_in_corpus" else result["answer"]
+            if result.get("refused") and result.get("refusal_reason") not in (None, "not_in_corpus"):
+                text = T["refusal"].get(result["refusal_reason"], result["answer"])
             if result.get("question") and result["question"] != question:
                 st.caption(T["interpreted_as"].format(q=result["question"]))
             box.markdown(text)
         except UIError as e:
             text = str(e)
             box.error(text)
-        except Exception as e:  # yerel pipeline hataları — kullanıcıya Türkçe, ayrıntı terminale
-            print(f"[app] yerel pipeline hatası: {type(e).__name__}: {e}", flush=True)
-            is_conn = isinstance(e, requests.exceptions.RequestException) or "Ollama" in type(e).__name__
-            text = T["err_model_unavailable"] if is_conn else T["err_generic"].format(code=type(e).__name__)
+        except Exception as e:  # beklenmeyen hata — kullanıcıya Türkçe, ayrıntı terminale
+            print(f"[app] beklenmeyen hata: {type(e).__name__}: {e}", flush=True)
+            text = T["err_generic"].format(code=type(e).__name__)
             box.error(text)
         if result:
             render_sources(result)

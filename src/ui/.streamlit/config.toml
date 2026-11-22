@@ -1,11 +1,11 @@
 # Chunky — Streamlit teması ve sunucu ayarları
-# Renkler: açık zemin, mavi vurgu, hafif mavi ikincil alanlar (kenar çubuğu, sohbet balonları).
+# Renkler docs/images/ui-mockup-v1.png ile aynı: açık zemin, koyu turkuaz vurgu, açık gri-mavi ikincil alanlar.
 
 [theme]
 base = "light"
-primaryColor = "#2563EB"          # mavi — butonlar, kaydırıcılar, odak çerçevesi
+primaryColor = "#1F6F8B"          # koyu turkuaz — butonlar, kaydırıcılar, odak çerçevesi (mockup)
 backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#EAF1FB"   # kenar çubuğu ve sohbet balonları, hafif mavi
+secondaryBackgroundColor = "#F3F6F9"   # kenar çubuğu, sohbet kutusu ve balonlar, açık gri-mavi (mockup)
 textColor = "#1F2933"
 font = "sans serif"
 
@@ -18,4 +18,4 @@ maxUploadSize = 5
 gatherUsageStats = false
 
 [client]
-toolbarMode = "minimal"       # sağ üstteki Deploy / menü çubuğunu gizle (demo ekranı)
+toolbarMode = "viewer"        # sağ üstteki Deploy düğmesini gizle (demo ekranı); kalan menü app.py'de CSS ile gizlenir
