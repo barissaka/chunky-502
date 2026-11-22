@@ -24,6 +24,8 @@ Checksums below were taken on 13 Nov 2026 with `pip download <package>==<version
 | requests | 2.34.2 | Sends the chat completions requests to Vertex AI (LLM gateway, AD-03, E1) | Apache-2.0 | Python Software Foundation | SHA-256 `2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0` (requests-2.34.2-py3-none-any.whl) |
 | ipykernel | 7.4.0 | Jupyter kernel for the check notebooks (development only) | BSD-3-Clause | Project Jupyter | SHA-256 `a6757f790ddc5a6006b813d82da1a9dbb65b3a00f2b6607df776418c6566ec1c` (ipykernel-7.4.0-py3-none-any.whl) |
 | nbstripout | 0.9.1 | Removes notebook outputs before each commit (development only) | MIT | nbstripout contributors | SHA-256 `ca027ee45742ee77e4f8e9080254f9a707f1161ba11367b82fdf4a29892c759e` (nbstripout-0.9.1-py3-none-any.whl) |
+| streamlit | 1.67.0 | Web interface of the assistant (`src/ui/app.py`, US-09); installed from `src/ui/requirements.txt` | Apache-2.0 | Snowflake Inc. | SHA-256 `f29da87c443bfbdfc52738616e3d65745d438e718da8faf69e2be0da1e52ce64` (streamlit-1.67.0-py3-none-any.whl) |
+| python-dotenv | 1.2.4 | Reads the optional `src/ui/.env` file (`CHUNKY_API_URL`) for the web interface; installed from `src/ui/requirements.txt` | BSD-3-Clause | Saurabh Kumar and python-dotenv contributors | SHA-256 `42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc` (python_dotenv-1.2.4-py3-none-any.whl) |
 
 ### Tools and services not in requirements.txt
 
