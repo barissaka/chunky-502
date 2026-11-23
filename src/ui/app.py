@@ -410,18 +410,27 @@ if not API_MODE:
         st.error(str(e))
         st.stop()
 
+# --- added: barissaka, CHUNKY-133 (US-11), sub-task CHUNKY-190 ---
+# While a question is being answered, the question box and the buttons are disabled, so a
+# second question cannot interrupt the first one. "pending" holds the question in work.
+if "pending" not in st.session_state:
+    st.session_state.pending = None
+busy = st.session_state.pending is not None
+# --- end of addition: barissaka, CHUNKY-133 ---
+
 # Heading row: the question heading on the left, "Yeni Sohbet" on the right (US-04, visible with the sidebar closed)
 col_title, col_new = st.columns([6, 1], vertical_alignment="center")
 with col_title:
     st.markdown(f"### {T['heading_icon']} {T['ask_heading']}")
 with col_new:
-    if st.button(T["new_chat"], icon=":material/add_comment:", type="primary", use_container_width=True):
+    if st.button(T["new_chat"], icon=":material/add_comment:", type="primary", use_container_width=True,
+                 disabled=busy):  # changed: barissaka, CHUNKY-133 (US-11). added: disabled=busy
         st.session_state.messages = []
         st.rerun()
 cols = st.columns(len(T["examples"]))
 clicked = None
 for c, ex in zip(cols, T["examples"]):
-    if c.button(ex, use_container_width=True):
+    if c.button(ex, use_container_width=True, disabled=busy):  # changed: barissaka, CHUNKY-133 (US-11). added: disabled=busy
         clicked = ex
 
 for m in st.session_state.messages:
@@ -430,16 +439,25 @@ for m in st.session_state.messages:
         if m["role"] == "assistant" and m.get("result"):
             render_sources(m["result"])
 
-question = st.chat_input(T["input_placeholder"]) or clicked
+# --- changed: barissaka, CHUNKY-133 (US-11), sub-task CHUNKY-190 ---
+# was: the question was answered in the same run in which it was typed, with the question box
+# still enabled; a second question sent during the wait stopped the first one without an answer.
+# now: step 1 stores the question and reruns the page, so the box and the buttons are drawn
+# disabled; step 2 answers it under the progress indicator; then the page is enabled again.
+asked = st.chat_input(T["input_placeholder"], disabled=busy) or clicked
 
-if question:
-    question = question.strip()
-    if len(question) > MAX_QUESTION_CHARS:
-        st.warning(T["input_too_long"].format(n=len(question), max=MAX_QUESTION_CHARS))
-        question = question[:MAX_QUESTION_CHARS]
-    st.session_state.messages.append({"role": "user", "content": question})
-    with st.chat_message("user", avatar=T["avatar_user"]):
-        st.markdown(question)
+if asked and not busy:  # step 1: take the question
+    asked = asked.strip()
+    if asked:
+        st.session_state.messages.append({"role": "user", "content": asked[:MAX_QUESTION_CHARS]})
+        st.session_state.pending = {"question": asked[:MAX_QUESTION_CHARS], "typed_chars": len(asked)}
+        st.rerun()
+
+if busy:  # step 2: answer the stored question
+    question = st.session_state.pending["question"]
+    typed_chars = st.session_state.pending["typed_chars"]
+    if typed_chars > MAX_QUESTION_CHARS:
+        st.warning(T["input_too_long"].format(n=typed_chars, max=MAX_QUESTION_CHARS))
     with st.chat_message("assistant", avatar=T["avatar_assistant"]):
         box = st.empty()
         result = None
@@ -461,3 +479,6 @@ if question:
         if result:
             render_sources(result)
     st.session_state.messages.append({"role": "assistant", "content": text, "result": result})
+    st.session_state.pending = None
+    st.rerun()  # draw the page again with the question box and the buttons enabled
+# --- end of change: barissaka, CHUNKY-133 ---
