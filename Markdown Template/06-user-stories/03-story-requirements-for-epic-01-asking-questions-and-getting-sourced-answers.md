@@ -1,6 +1,6 @@
 # Story Requirements for Epic 01 · Asking questions and getting sourced answers
 
-<!-- Exported from Jira on 2026-11-10 (project CHUNKY). Jira is the source of truth for this backlog;
+<!-- Exported from Jira on 2026-11-10 (project CHUNKY); aligned with the Jira export of 2026-11-23. Jira is the source of truth for this backlog;
      this file is a snapshot for the sprint deliverable and is regenerated before each sprint review. -->
 
 | Epic | Asking questions and getting sourced answers |
@@ -15,12 +15,12 @@
 
 | # | User story title | User story description | Priority | Points | Owner | Sprint | Status | Jira |
 |---|---|---|---|---|---|---|---|---|
-| S1 | US-01 Ask in my own words | As a driver, I want to ask a question about traffic rules or penalties in my own Turkish sentences, so that I do not need to know legal terms or article numbers before I ask. |  | 8 | özge çalışkan | Sprint 2 | Done | [CHUNKY-124](https://chunky-502.atlassian.net/browse/CHUNKY-124) |
-| S2 | US-02 Get a correct answer with its sources | As a driving-licence candidate, I want a correct answer drawn from the official legal texts together with the article it rests on, so that I can rely on it and check it myself when I prepare for the exam. |  | 8 |  | Sprint 3 | To Do | [CHUNKY-129](https://chunky-502.atlassian.net/browse/CHUNKY-129) |
-| S3 | US-03 Ask a follow-up question | As a driver, I want to ask a follow-up question about the answer I just received, so that I do not need to repeat my earlier question. |  | 5 |  | Sprint 4 | To Do | [CHUNKY-136](https://chunky-502.atlassian.net/browse/CHUNKY-136) |
-| S4 | US-04 Start a new chat | As a driver, I want to open a new chat whenever I want, so that my next question is not mixed with the previous topic. |  | 2 |  | Sprint 4 | To Do | [CHUNKY-137](https://chunky-502.atlassian.net/browse/CHUNKY-137) |
-| S5 | US-05 Know what the assistant covers and how current it is | As a driving-licence candidate, I want to see which legal texts the assistant covers, how current they are, and open them, so that I know what I can ask, whether the rules are up to date, and can read the full text if I want. |  | 5 |  | Sprint 4 | To Do | [CHUNKY-138](https://chunky-502.atlassian.net/browse/CHUNKY-138) |
-| S6 | US-12 Ask for a missing detail | As the General Directorate of Security (EGM), I want the assistant to ask the user for a detail that changes the penalty or the rule, so that citizens do not get a wrong fine and EGM does not give wrong information through the assistant. | Medium | 5 |  | Sprint 3 | To Do | [CHUNKY-223](https://chunky-502.atlassian.net/browse/CHUNKY-223) |
+| S1 | US-01 Ask in my own words | As a driver, I want to ask a question about traffic rules or penalties in my own Turkish sentences, so that I do not need to know legal terms or article numbers before I ask. | Highest | 8 | özge çalışkan | Sprint 2 | Done | [CHUNKY-124](https://chunky-502.atlassian.net/browse/CHUNKY-124) |
+| S2 | US-02 Get a correct answer with its sources | As a driving-licence candidate, I want a correct answer drawn from the official legal texts together with the article it rests on, so that I can rely on it and check it myself when I prepare for the exam. | Highest | 5 | özge çalışkan | Sprint 3 | To Do | [CHUNKY-129](https://chunky-502.atlassian.net/browse/CHUNKY-129) |
+| S3 | US-03 Ask a follow-up question | As a driver, I want to ask a follow-up question about the answer I just received, so that I do not need to repeat my earlier question. | Medium | 5 |  | Sprint 4 | To Do | [CHUNKY-136](https://chunky-502.atlassian.net/browse/CHUNKY-136) |
+| S4 | US-04 Start a new chat | As a driver, I want to open a new chat whenever I want, so that my next question is not mixed with the previous topic. | Low | 2 |  | Sprint 4 | To Do | [CHUNKY-137](https://chunky-502.atlassian.net/browse/CHUNKY-137) |
+| S5 | US-05 Know what the assistant covers and how current it is | As a driving-licence candidate, I want to see which legal texts the assistant covers, how current they are, and open them, so that I know what I can ask, whether the rules are up to date, and can read the full text if I want. | Medium | 5 |  | Sprint 4 | To Do | [CHUNKY-138](https://chunky-502.atlassian.net/browse/CHUNKY-138) |
+| S6 | US-12 Ask for a missing detail | As the General Directorate of Security (EGM), I want the assistant to ask the user for a detail that changes the penalty or the rule, so that citizens do not get a wrong fine and EGM does not give wrong information through the assistant. | Medium | 13 | özge çalışkan | Sprint 3 | To Do | [CHUNKY-223](https://chunky-502.atlassian.net/browse/CHUNKY-223) |
 
 ## S1 · US-01 Ask in my own words
 
@@ -35,8 +35,8 @@
 
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
-| Write the prompt rule for sanctions and block empty messages in the interface | özge çalışkan |  | To Do | [CHUNKY-163](https://chunky-502.atlassian.net/browse/CHUNKY-163) |
-| Test 10 everyday-word questions, with and without Turkish characters | Ekin Deniz Öztürk |  | To Do | [CHUNKY-164](https://chunky-502.atlassian.net/browse/CHUNKY-164) |
+| Write the prompt rule for sanctions and block empty messages in the interface | özge çalışkan |  | Done | [CHUNKY-163](https://chunky-502.atlassian.net/browse/CHUNKY-163) |
+| Test 10 everyday-word questions, with and without Turkish characters | Ekin Deniz Öztürk |  | Done | [CHUNKY-164](https://chunky-502.atlassian.net/browse/CHUNKY-164) |
 
 **Test cases**
 
@@ -62,8 +62,13 @@
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
 | Analyse wrong answers of D6 and tune chunking, k and prompt |  |  | To Do | [CHUNKY-178](https://chunky-502.atlassian.net/browse/CHUNKY-178) |
-| Improve retrieval for questions that need several articles; show the quoted provision |  |  | To Do | [CHUNKY-179](https://chunky-502.atlassian.net/browse/CHUNKY-179) |
-| Test 5 penalty questions and re-run the 30 in-scope questions |  |  | To Do | [CHUNKY-180](https://chunky-502.atlassian.net/browse/CHUNKY-180) |
+| Improve retrieval for questions that need several articles; show the quoted provision | özge çalışkan |  | To Do | [CHUNKY-179](https://chunky-502.atlassian.net/browse/CHUNKY-179) |
+
+**Tasks (linked to the story)**
+
+| Task | Owner | Points | Status | Jira |
+|---|---|---|---|---|
+| EN-29 Test 5 penalty questions and re-run the 30 in-scope questions | özge çalışkan | 3 | To Do | [CHUNKY-180](https://chunky-502.atlassian.net/browse/CHUNKY-180) |
 
 **Test cases**
 
@@ -151,11 +156,11 @@
 
 **Acceptance criteria**
 
-- When a question lacks a detail that changes the answer (vehicle type, licence class, place, repeat offence or fine year), the assistant shall ask one clarifying question and show the options as buttons.
+- When a question lacks a detail that changes the answer (vehicle type, licence class, place, repeat offence or fine year), the assistant shall ask one clarifying question.
 - While a detail that changes the penalty is missing, the assistant shall not state a single fine amount as if it applied to every case.
-- Where only a few options exist, the assistant shall answer all of them in a short table.
+- Where only a few options exist, the assistant shall answer all of them.
 - Where the missing detail changes the answer only slightly, the assistant shall answer and state the assumption it made.
-- When the user has answered the clarifying question, the assistant shall answer for the chosen option and shall not ask a second clarifying question.
+- When the user has answered the clarifying question, the assistant shall answer for the detail the user gave and shall not ask a second clarifying question.
 - When no detail is missing, the assistant shall answer without asking.
 
 **Sub-tasks**
@@ -168,9 +173,9 @@
 
 | ID | Criterion checked | Steps | Expected result |
 |---|---|---|---|
-| TC-12-1 | Clarifying question with buttons | Ask a penalty question without the vehicle type. | The assistant asks one question and shows the options as buttons. |
-| TC-12-2 | No single fine when a detail is missing | Repeat TC-12-1 and read the reply before pressing a button. | The reply gives no single fine amount as if it applied to every case. |
-| TC-12-3 | Table for few options | Ask a question with two possible answers. | A short table shows both answers. |
+| TC-12-1 | One clarifying question | Ask a penalty question without the vehicle type. | The assistant asks one clarifying question. |
+| TC-12-2 | No single fine when a detail is missing | Repeat TC-12-1 and read the reply before answering the question. | The reply gives no single fine amount as if it applied to every case. |
+| TC-12-3 | All options answered | Ask a question with two possible answers. | The assistant answers both. |
 | TC-12-4 | Assumption stated | Ask a question where the missing detail changes the answer only slightly. | The assistant answers and states the assumption it made. |
-| TC-12-5 | No second question | Press a button in TC-12-1. | The answer fits the chosen option and no second question follows. |
+| TC-12-5 | No second question | Answer the clarifying question of TC-12-1 with a vehicle type. | The answer fits the detail given and no second question follows. |
 | TC-12-6 | No question when nothing is missing | Ask a question with all details given. | The assistant answers directly. |
