@@ -1,6 +1,6 @@
 # Story Requirements for Epic 03 · Web interface
 
-<!-- Exported from Jira on 2026-11-10 (project CHUNKY). Jira is the source of truth for this backlog;
+<!-- Exported from Jira on 2026-11-10 (project CHUNKY); aligned with the Jira export of 2026-11-23. Jira is the source of truth for this backlog;
      this file is a snapshot for the sprint deliverable and is regenerated before each sprint review. -->
 
 | Epic | Web interface |
@@ -15,9 +15,9 @@
 
 | # | User story title | User story description | Priority | Points | Owner | Sprint | Status | Jira |
 |---|---|---|---|---|---|---|---|---|
-| S1 | US-09 Use the assistant in a web interface | As a driver, I want to use the assistant in my web browser, so that I need to install nothing. |  | 5 | Barış SAKA | Sprint 2 | Done | [CHUNKY-125](https://chunky-502.atlassian.net/browse/CHUNKY-125) |
-| S2 | US-11 Read the full answer within one minute | As a driver, I want to see that the assistant is working on my question and to read the full answer within one minute, so that I do not wonder whether the page is stuck while I am preparing or checking a rule. |  | 3 |  | Sprint 3 | To Do | [CHUNKY-133](https://chunky-502.atlassian.net/browse/CHUNKY-133) |
-| S3 | US-10 See example questions when I open the page | As a driving-licence candidate, I want to see example questions when I open the page, so that I know what to ask. |  | 2 |  | Sprint 4 | To Do | [CHUNKY-139](https://chunky-502.atlassian.net/browse/CHUNKY-139) |
+| S1 | US-09 Use the assistant in a web interface | As a driver, I want to use the assistant in my web browser, so that I need to install nothing. | Highest | 5 | Barış SAKA | Sprint 2 | Done | [CHUNKY-125](https://chunky-502.atlassian.net/browse/CHUNKY-125) |
+| S2 | US-11 Read the full answer within one minute | As a driver, I want to see that the assistant is working on my question and to read the full answer within one minute, so that I do not wonder whether the page is stuck while I am preparing or checking a rule. | High | 5 | Barış SAKA | Sprint 3 | To Do | [CHUNKY-133](https://chunky-502.atlassian.net/browse/CHUNKY-133) |
+| S3 | US-10 See example questions when I open the page | As a driving-licence candidate, I want to see example questions when I open the page, so that I know what to ask. | Low | 2 |  | Sprint 4 | To Do | [CHUNKY-139](https://chunky-502.atlassian.net/browse/CHUNKY-139) |
 
 ## S1 · US-09 Use the assistant in a web interface
 
@@ -30,7 +30,7 @@
 
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
-| Write all interface texts in Turkish and check them | Zehranur KUTLUYER |  | To Do | [CHUNKY-166](https://chunky-502.atlassian.net/browse/CHUNKY-166) |
+| Write all interface texts in Turkish and check them | Zehranur KUTLUYER |  | Done | [CHUNKY-166](https://chunky-502.atlassian.net/browse/CHUNKY-166) |
 
 **Test cases**
 
@@ -50,8 +50,13 @@
 
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
-| Add the progress indicator |  |  | To Do | [CHUNKY-190](https://chunky-502.atlassian.net/browse/CHUNKY-190) |
-| Measure the response time on the 40 questions and optimise if needed |  |  | To Do | [CHUNKY-191](https://chunky-502.atlassian.net/browse/CHUNKY-191) |
+| Add the progress indicator | Barış SAKA |  | To Do | [CHUNKY-190](https://chunky-502.atlassian.net/browse/CHUNKY-190) |
+
+**Tasks (linked to the story)**
+
+| Task | Owner | Points | Status | Jira |
+|---|---|---|---|---|
+| EN-33 Measure the response time on the 40 questions and optimise if needed | Barış SAKA | 3 | To Do | [CHUNKY-191](https://chunky-502.atlassian.net/browse/CHUNKY-191) |
 
 **Test cases**
 
