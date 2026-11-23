@@ -1,0 +1,11 @@
+Question ID,Question,Why out of scope
+DOOS-01,Trafik sigortamı hangi şirketten yaptırmak daha ucuz olur?,A price comparison between insurers; no legal text covers it. (Replaced on 23 Nov 2026: the first DOOS-01 asked how the premium is calculated which KTK Art. 93 answers.)
+DOOS-02,Benzin fiyatları neden her hafta değişiyor?,Fuel pricing is an energy-market topic.
+DOOS-03,İstanbul'da otopark ücretleri ne kadar?,Parking fees are set by municipalities.
+DOOS-04,Evime elektrikli araç şarj ünitesi kurmak için hangi izinler gerekir?,Charging installations fall under energy and building rules.
+DOOS-05,Yeni araç alırken ödenen ÖTV oranı kaç?,Special consumption tax is a tax-law topic.
+DOOS-06,Araç kiralarken ne kadar depozito ödemem gerekir?,Rental deposits are a commercial contract matter.
+DOOS-07,Ehliyet sınavına hazırlanmak için hangi mobil uygulama en iyisi?,A product recommendation; no legal text covers it.
+DOOS-08,Lastiklerimi kaç kilometrede bir değiştirmeliyim?,Tyre change intervals are a maintenance recommendation, not a legal rule.
+DOOS-09,Aracımı boyatmak ikinci el değerini düşürür mü?,A market-value question.
+DOOS-10,Hangi marka otomobil daha az yakıt tüketir?,A product comparison.
