@@ -16,7 +16,7 @@ import google.auth
 import google.auth.transport.requests
 import requests
 
-from chunky.guard import DECLINE_REPLY, is_decline  # added: barissaka, CHUNKY-130 (US-06)
+from chunky.guard import DECLINE_REPLY, has_advice_notice, is_decline  # added: barissaka, CHUNKY-130 (US-06)
 from chunky.index import ROOT, search
 
 # Chunk IDs as produced by chunk.py, e.g. KTK-m48, SAĞLIK-m4, KTY-cetvel4, KTK-m65A, KTK-islenemeyen.
@@ -76,6 +76,7 @@ def answer(question, embedder, index, cfg):
         "question": question,
         "answer": text,
         "declined": declined,  # added: barissaka, CHUNKY-130 (US-06). True = the answer is the fixed out-of-scope reply
+        "advice_notice": has_advice_notice(text),  # added: barissaka, CHUNKY-130 (US-06). True = the answer ends with the no-advice notice
         "sources": [citation_label(retrieved[i]) for i in cited if i in retrieved],
         "cited": cited,
         "unknown_citations": [i for i in cited if i not in retrieved],
