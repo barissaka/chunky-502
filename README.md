@@ -80,6 +80,16 @@ The page opens at http://localhost:8501. The first question takes about a minute
 
 Settings (model, prompt, `top_k`) are read from `config/rag.yaml`; the interface has no separate settings. If `CHUNKY_API_URL` is set in `src/ui/.env` (copy `.env.example`), the interface sends questions to a `/ask` service instead.
 
+## Running the tests
+
+The automated tests are in `tests/` and run with pytest (installed by `pip install -r requirements.txt`). They call no model and need no index or Google Cloud login.
+
+```powershell
+python -m pytest tests
+```
+
+`tests/test_guard.py` checks the decline path (US-06): the code that recognises the fixed out-of-scope reply and the no-advice notice, and that the prompt set in `config/rag.yaml` contains both sentences. Whether the model declines the right questions is measured in `notebooks/06_decline_check.ipynb`.
+
 ## Where to look
 
 - **What we are building and why:** [Project Executive Summary](Markdown%20Template/03-project-canvas/01-project-executive-summary.md)
