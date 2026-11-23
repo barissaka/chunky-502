@@ -181,12 +181,14 @@ def answer_local(question: str) -> dict:
             "score": None,
             "text": c["text"][:4000],
         })
+    declined = bool(r.get("declined"))  # added: barissaka, CHUNKY-130 (US-06). True = fixed out-of-scope reply
     return {
         "request_id": "local-" + time.strftime("%Y%m%d-%H%M%S"),
         "question": question,
         "answer": text or T["empty_answer"],
-        "refused": not text,
-        "refusal_reason": None if text else "empty_or_invalid",
+        "refused": declined or not text,  # changed: barissaka, CHUNKY-130 (US-06). was: not text
+        "refusal_reason": "not_in_corpus" if declined else (None if text else "empty_or_invalid"),  # changed: barissaka, CHUNKY-130 (US-06). was: None if text else "empty_or_invalid"
+        "advice_notice": bool(r.get("advice_notice")),  # added: barissaka, CHUNKY-130 (US-06). True = answer ends with the no-advice notice
         "sources": sources,
         "unknown_citations": r.get("unknown_citations", []),
         "config": {"model": r["model"], "prompt": r["prompt"], "k": ret["top_k"], "sparse_weight": ret["sparse_weight"]},
@@ -330,6 +332,26 @@ with st.sidebar:
     st.caption(T["ai_disclaimer"])
 
 
+# --- added: barissaka, CHUNKY-130 (US-06), decline path ---
+def show_answer(target, text: str, result: dict | None) -> None:
+    """Write an answer to the page; the fixed out-of-scope reply goes into an info box.
+
+    Args:
+        target: where to write: an ``st.empty()`` placeholder or the ``st`` module itself.
+        text: the answer text to show.
+        result: the answer in the contract format, or ``None`` if the request failed.
+
+    Returns:
+        None. A declined answer (``refusal_reason == "not_in_corpus"``) is shown with
+        ``target.info``; every other answer with ``target.markdown``.
+    """
+    if result and result.get("refusal_reason") == "not_in_corpus":
+        target.info(text)
+    else:
+        target.markdown(text)
+# --- end of addition: barissaka, CHUNKY-130 ---
+
+
 def render_sources(result: dict) -> None:
     """Show the details under an answer: warnings, sources, timing and settings.
 
@@ -404,7 +426,7 @@ for c, ex in zip(cols, T["examples"]):
 
 for m in st.session_state.messages:
     with st.chat_message(m["role"], avatar=T["avatar_user"] if m["role"] == "user" else T["avatar_assistant"]):
-        st.markdown(m["content"])
+        show_answer(st, m["content"], m.get("result"))  # changed: barissaka, CHUNKY-130 (US-06). was: st.markdown(m["content"])
         if m["role"] == "assistant" and m.get("result"):
             render_sources(m["result"])
 
@@ -428,7 +450,7 @@ if question:
                 text = T["refusal"].get(result["refusal_reason"], result["answer"])
             if result.get("question") and result["question"] != question:
                 st.caption(T["interpreted_as"].format(q=result["question"]))
-            box.markdown(text)
+            show_answer(box, text, result)  # changed: barissaka, CHUNKY-130 (US-06). was: box.markdown(text)
         except UIError as e:
             text = str(e)
             box.error(text)
