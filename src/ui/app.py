@@ -1,15 +1,25 @@
-"""Chunky — Trafik Mevzuatı Asistanı · Streamlit sohbet arayüzü (US-09 / CHUNKY-125, EN-15 / CHUNKY-165)
+"""Chunky web interface: Streamlit chat page for the traffic legislation assistant.
 
-İki çalışma modu, tek ekran:
-  * API modu   — .env'de CHUNKY_API_URL tanımlıysa soru  POST {CHUNKY_API_URL}/ask  ile retriever servisine gider
-                 (sözleşme: docs/ask-endpoint-contract.md). Cevap tek parça gelir.
-  * Yerel mod  — CHUNKY_API_URL yoksa aynı klasördeki laptop-spike pipeline'ı (rag.py + Ollama) doğrudan çağrılır;
-                 cevap akışlı yazılır. Yerel mod sözleşmedeki yanıt nesnesinin aynısını üretir, arayüz tek yol kullanır.
+Jira: US-09 / CHUNKY-125 (question box and answer area), EN-15 / CHUNKY-165 (interface
+framework and /ask connection), US-04 (new chat button).
 
-Tüm Türkçe metinler texts.py'de (T sözlüğü). Tema .streamlit/config.toml'da.
+The page has two modes and one screen:
 
-Çalıştır:  python -m streamlit run app.py        ->  http://localhost:8501
-.env:      CHUNKY_API_URL=http://localhost:8000   (isteğe bağlı)   CHUNKY_API_TIMEOUT_S=600
+* Local mode (default): calls the team pipeline in ``src/chunky`` directly, the same
+  function as ``notebooks/05_answer_check.ipynb`` (``chunky.answer.answer``). Retrieval
+  runs on this laptop with the bge-m3 index; the answer comes from the model set in
+  ``config/rag.yaml`` (Google Cloud Vertex AI).
+* API mode: if ``CHUNKY_API_URL`` is set in ``src/ui/.env``, each question is sent to
+  ``POST {CHUNKY_API_URL}/ask`` instead (contract: ``docs/ask-endpoint-contract.md``).
+
+Prerequisites (README, "Running the baseline"): ``pip install -e .`` in the virtual
+environment, the index built with ``python -m chunky.index``, and
+``gcloud auth application-default login``.
+
+All Turkish texts shown on the page are in ``texts.py`` (dictionary ``T``); the theme is in
+``.streamlit/config.toml``, which Streamlit reads only when started from this folder.
+
+Run from ``src/ui``:  ``python -m streamlit run app.py``  ->  http://localhost:8501
 """
 from __future__ import annotations
 
@@ -26,9 +36,16 @@ ROOT = Path(__file__).resolve().parent
 MAX_QUESTION_CHARS = 1000
 
 
-# ----------------------------------------------------------------------------- .env
+# ----------------------------------------------------------------------------- .env settings
 def _load_env() -> None:
-    """python-dotenv varsa onu, yoksa basit bir okuyucu kullan; ortam değişkeni .env'i ezer."""
+    """Load ``src/ui/.env`` into the process environment.
+
+    Uses python-dotenv when it is installed; otherwise reads ``KEY=VALUE`` lines with a
+    small built-in parser. Variables already set in the environment are not overwritten.
+
+    Returns:
+        None. The values are written to ``os.environ``.
+    """
     try:
         from dotenv import load_dotenv
 
@@ -52,100 +69,141 @@ API_MODE = bool(API_URL)
 
 
 class UIError(Exception):
-    """Kullanıcıya gösterilecek, çevrilmiş hata metni."""
+    """Error whose message is a Turkish text meant to be shown to the user as is."""
 
 
-# ----------------------------------------------------------------------------- yerel pipeline (API yoksa)
+# ----------------------------------------------------------------------------- local mode: the team pipeline
 if not API_MODE:
-    import llm_api
-    import rag
+    from chunky.answer import answer as chunky_answer
+    from chunky.index import ROOT as REPO_ROOT
+    from chunky.index import Embedder, load_config, load_index
+
+    CFG = load_config()
 
     @st.cache_resource(show_spinner=False)
-    def _reranker(model: str, max_len: int, bs: int):
-        from rerank import Reranker
+    def _pipeline():
+        """Load the embedding model and the search index once per server process.
 
-        return Reranker(model, max_len, bs)
+        Streamlit keeps the result in memory (``st.cache_resource``), so later questions
+        and page reloads do not load bge-m3 again. An exception is not cached, so the page
+        retries after the index has been built.
 
-    @st.cache_resource(show_spinner=False)
-    def _retriever(use_rerank: bool, prompt_file: str):
-        cfg = rag.load_config()
-        rr = _reranker(cfg["reranker_model"], cfg.get("rerank_max_length", 1536), cfg.get("rerank_batch_size", 4)) if use_rerank else None
-        return rag.Retriever(cfg, use_rerank=use_rerank, reranker=rr, prompt_file=prompt_file)
+        Returns:
+            tuple: ``(embedder, index, by_id)`` where ``embedder`` is the bge-m3
+            ``chunky.index.Embedder``, ``index`` is the tuple returned by
+            ``chunky.index.load_index()`` and ``by_id`` maps each ``chunk_id`` to its
+            chunk record (title, article label, heading, version date, text).
 
-    LOCAL_CFG = rag.load_config()
-    PROMPTS = sorted(p.stem for p in (ROOT / "prompts").glob("*.md"))
-    try:
-        LOCAL_MODELS = [m for m in llm_api.installed_models(LOCAL_CFG["ollama_base_url"]) if "embed" not in m and "rerank" not in m]
-        LOCAL_OLLAMA_OK = True
-    except Exception:
-        LOCAL_MODELS, LOCAL_OLLAMA_OK = [LOCAL_CFG["answer_model"]], False
-
-
-def _pages(chunk: dict):
-    p = chunk.get("pages")
-    if isinstance(p, (list, tuple)) and p:
-        return [p[0], p[-1]]
-    if isinstance(p, (int, str)) and str(p).strip():
-        return [str(p), str(p)]
-    return None
+        Raises:
+            UIError: if the index folder (``index/bge-m3``) does not exist.
+        """
+        emb = CFG["embedding"]
+        try:
+            index = load_index()
+        except FileNotFoundError:
+            raise UIError(T["err_index_missing"])
+        embedder = Embedder(emb["model"], emb["revision"], emb["max_tokens"])
+        by_id = {c["chunk_id"]: c for c in index[2]}
+        return embedder, index, by_id
 
 
-def _source_from_chunk(chunk: dict, score: float, with_text: bool) -> dict:
-    doc = chunk.get("doc_id") or chunk["id"].split("-")[0]
-    return {
-        "id": chunk["id"],
-        "document": DOC_NAMES.get(doc, doc),
-        "article": rag.article_of(chunk) if not API_MODE else None,
-        "header": chunk.get("header", chunk["id"]),
-        "pages": _pages(chunk),
-        "score": round(float(score), 4),
-        "text": (chunk["text"][:4000] if with_text else None),
-    }
+def _local_error(e: Exception) -> str:
+    """Turn an error of the local pipeline into a Turkish message that says what to do.
+
+    The technical details are printed to the terminal; the user sees only the message.
+
+    Args:
+        e: the exception raised by ``chunky.answer.answer``.
+
+    Returns:
+        str: one of the error texts of ``texts.T``: missing Google Cloud login, no access
+        to the project (HTTP 401/403/404), model unavailable (HTTP 429/5xx or a network
+        error), timeout, or a generic error with the exception name.
+    """
+    print(f"[app] yerel pipeline hatası: {type(e).__name__}: {e}", flush=True)
+    if type(e).__name__ == "DefaultCredentialsError" or "credentials" in str(e).lower():
+        return T["err_auth"]
+    if isinstance(e, requests.exceptions.HTTPError) and e.response is not None:
+        code = e.response.status_code
+        if code in (401, 403, 404):
+            return T["err_permission"].format(code=code, project=CFG["generation"]["project"])
+        if code in (429, 500, 502, 503):
+            return T["err_model_unavailable"]
+    if isinstance(e, requests.exceptions.Timeout):
+        return T["err_timeout"]
+    if isinstance(e, requests.exceptions.RequestException):
+        return T["err_model_unavailable"]
+    return T["err_generic"].format(code=type(e).__name__)
 
 
-def answer_local(question: str, opts: dict, box) -> dict:
-    """Sözleşmedeki 200 yanıtının aynısını üretir; cevabı `box` içine akışlı yazar."""
-    r = _retriever(opts["rerank"], f"prompts/{opts['prompt']}.md")
-    t0 = time.perf_counter()
-    with st.spinner(T["spinner_retrieving"]):
-        res = r.retrieve(question, opts["k"], opts["top"])
-    ids = [cid for cid, _ in res["final"]]
-    box.markdown(T["writing"])
-    text, stats, t_first = "", {}, None
-    t1 = time.perf_counter()
-    for kind, piece in r.answer_stream(question, ids, opts["model"], False):
-        if kind == "content":
-            if t_first is None:
-                t_first = time.perf_counter() - t0
-            text += piece
-            box.markdown(text + T["cursor"])
-        elif kind == "done":
-            stats = piece
-    text = text.strip()
-    refused = rag.is_refusal(text) or not text
+def answer_local(question: str) -> dict:
+    """Answer a question with the team pipeline and shape the result for the page.
+
+    Calls ``chunky.answer.answer`` with the settings of ``config/rag.yaml`` and converts its
+    result into the same fields as the /ask contract, so that both modes are shown by the
+    same code.
+
+    Args:
+        question: the user's question, already stripped and cut to
+            ``MAX_QUESTION_CHARS``.
+
+    Returns:
+        dict: ``request_id``, ``question``, ``answer``, ``refused`` and ``refusal_reason``
+        (an empty answer counts as refused), ``sources`` (one entry per cited article that
+        was also retrieved: ``id``, ``document``, ``header``, ``version_date``, ``text``),
+        ``unknown_citations`` (cited ids that were not retrieved), ``config`` (model,
+        prompt, ``top_k``, sparse weight), ``timings`` (``total_s``) and ``usage``
+        (prompt and completion tokens).
+
+    Raises:
+        UIError: if the pipeline fails; the message comes from ``_local_error``.
+    """
+    embedder, index, by_id = _pipeline()
+    gen, ret = CFG["generation"], CFG["retrieval"]
+    with st.spinner(T["spinner_answering"]):
+        try:
+            r = chunky_answer(question, embedder, index, CFG)
+        except Exception as e:
+            raise UIError(_local_error(e))
+    text = (r["answer"] or "").strip()
+    sources = []
+    for cid in r["cited"]:
+        c = by_id.get(cid)
+        if c is None or cid not in r["retrieved"]:
+            continue  # cited but not retrieved: left out of the sources and shown as a warning
+        heading = f" – {c['article_heading']}" if c.get("article_heading") else ""
+        sources.append({
+            "id": cid,
+            "document": c.get("doc_title") or DOC_NAMES.get(c.get("doc_code"), c.get("doc_code")),
+            "header": f"{c.get('doc_title', cid)}, {c.get('article_label', cid)}{heading}",
+            "version_date": c.get("version_date"),
+            "pages": None,
+            "score": None,
+            "text": c["text"][:4000],
+        })
     return {
         "request_id": "local-" + time.strftime("%Y%m%d-%H%M%S"),
         "question": question,
         "answer": text or T["empty_answer"],
-        "refused": refused,
-        "refusal_reason": ("not_in_corpus" if text else "empty_or_invalid") if refused else None,
-        "sources": [] if refused else [_source_from_chunk(r.by_id[cid], s, True) for cid, s in res["final"]],
-        "config": {
-            "model": stats.get("model", opts["model"]), "prompt": r.prompt_name, "k": opts["k"], "top": opts["top"],
-            "rerank": opts["rerank"], "embedding_model": r.cfg["embedding_model"], "reranker_model": r.cfg["reranker_model"],
-            "corpus_version": r.index.meta.get("built_at", "?"),
-        },
-        "timings": {
-            "retrieval_s": res["timings"]["retrieval_s"],
-            "first_token_s": round(t_first, 3) if t_first else None,
-            "total_s": round(time.perf_counter() - t0, 3),
-        },
-        "usage": {"prompt_tokens": stats.get("prompt_tokens"), "completion_tokens": stats.get("completion_tokens")},
+        "refused": not text,
+        "refusal_reason": None if text else "empty_or_invalid",
+        "sources": sources,
+        "unknown_citations": r.get("unknown_citations", []),
+        "config": {"model": r["model"], "prompt": r["prompt"], "k": ret["top_k"], "sparse_weight": ret["sparse_weight"]},
+        "timings": {"total_s": r["seconds"]},
+        "usage": {"prompt_tokens": r.get("input_tokens"), "completion_tokens": r.get("output_tokens")},
     }
 
 
-# ----------------------------------------------------------------------------- API modu
+# ----------------------------------------------------------------------------- API mode
 def api_health() -> dict | None:
+    """Ask the /ask service whether it is running (``GET {CHUNKY_API_URL}/health``).
+
+    Returns:
+        dict | None: the service's health record (for example ``corpus_version``,
+        ``embedding_model``, ``reranker_model``) if it answers with HTTP 200 within
+        5 seconds; ``None`` otherwise.
+    """
     try:
         r = requests.get(f"{API_URL}/health", timeout=5)
         return r.json() if r.status_code == 200 else None
@@ -154,23 +212,39 @@ def api_health() -> dict | None:
 
 
 def answer_api(question: str, opts: dict | None) -> dict:
-    payload: dict = {"question": question, "client": {"name": "streamlit-ui", "version": "0.1"}}
+    """Send a question to the /ask service and return its answer.
+
+    Args:
+        question: the user's question, already stripped and cut to
+            ``MAX_QUESTION_CHARS``.
+        opts: retrieval options chosen in the sidebar (``rerank``, ``k``, ``top``), or
+            ``None`` to use the service defaults.
+
+    Returns:
+        dict: the service's answer with the contract fields (``answer``, ``sources``,
+        ``config``, ``timings``, ``usage`` and so on); missing optional fields are filled
+        with empty defaults. A refusal (HTTP 422 with code ``rejected``) is returned as an
+        answer with ``refused = True`` and the matching Turkish refusal text.
+
+    Raises:
+        UIError: on a timeout, a connection error, or HTTP 400, 503, 504 or any other
+        error status, with a Turkish message.
+    """
+    payload: dict = {"question": question, "client": {"name": "streamlit-ui", "version": "0.2"}}
     if opts:
         payload["options"] = opts
     try:
-        r = requests.post(f"{API_URL}/ask", json=payload, timeout=API_TIMEOUT)
+        with st.spinner(T["spinner_waiting_api"]):
+            r = requests.post(f"{API_URL}/ask", json=payload, timeout=API_TIMEOUT)
     except requests.exceptions.Timeout:
         raise UIError(T["err_timeout"])
     except requests.exceptions.RequestException:
         raise UIError(T["err_connection"].format(url=API_URL))
     if r.status_code == 200:
         data = r.json()
-        data.setdefault("refused", False)
-        data.setdefault("refusal_reason", None)
-        data.setdefault("sources", [])
-        data.setdefault("config", {})
-        data.setdefault("timings", {})
-        data.setdefault("usage", {})
+        for key, default in (("refused", False), ("refusal_reason", None), ("sources", []),
+                             ("config", {}), ("timings", {}), ("usage", {}), ("unknown_citations", [])):
+            data.setdefault(key, default)
         return data
     body = {}
     try:
@@ -178,11 +252,12 @@ def answer_api(question: str, opts: dict | None) -> dict:
     except ValueError:
         pass
     err = body.get("error", {}) if isinstance(body, dict) else {}
-    if r.status_code == 422 and err.get("code") == "rejected":  # sözleşme §3: ret, hata değil
+    if r.status_code == 422 and err.get("code") == "rejected":  # contract section 3: a refusal, not an error
         reason = err.get("reason", "default")
         return {"request_id": body.get("request_id", "-"), "question": question,
                 "answer": T["refusal"].get(reason, T["refusal"]["default"]), "refused": True,
-                "refusal_reason": reason, "sources": [], "config": {}, "timings": {}, "usage": {}}
+                "refusal_reason": reason, "sources": [], "unknown_citations": [],
+                "config": {}, "timings": {}, "usage": {}}
     if r.status_code == 400:
         raise UIError(T["err_bad_request"])
     if r.status_code == 503:
@@ -192,8 +267,20 @@ def answer_api(question: str, opts: dict | None) -> dict:
     raise UIError(T["err_generic"].format(code=r.status_code))
 
 
-# ----------------------------------------------------------------------------- sayfa
-st.set_page_config(page_title=T["page_title"], page_icon="🚦", layout="wide")
+# ----------------------------------------------------------------------------- page
+st.set_page_config(page_title=T["page_title"], page_icon="🚦", layout="wide", initial_sidebar_state="collapsed")
+
+# Hide the toolbar menu and the Deploy button (the sidebar toggle stays) and add the fixed
+# AI notice under the chat box (mockup: docs/images/ui-mockup-v1.png).
+st.markdown(
+    f"""<style>
+    [data-testid="stAppDeployButton"], .stAppDeployButton, [data-testid="stMainMenu"], #MainMenu {{ display: none !important; }}
+    [data-testid="stBottomBlockContainer"]::after {{ content: "{T['ai_notice']}"; display: block; text-align: center;
+        font-size: 0.75rem; color: #6b7280; padding: 6px 0 2px 0; }}
+    [data-testid="stBottomBlockContainer"] {{ padding-bottom: 0.6rem; }}
+    </style>""",
+    unsafe_allow_html=True,
+)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -210,8 +297,6 @@ with st.sidebar:
             st.success(T["health_ok"].format(corpus=h.get("corpus_version", "?")))
     else:
         st.markdown(T["mode_local"])
-        if not LOCAL_OLLAMA_OK:
-            st.error(T["err_model_unavailable"])
 
     st.subheader(T["settings_header"])
     opts: dict = {}
@@ -220,17 +305,12 @@ with st.sidebar:
             rerank = st.toggle(T["opt_rerank"], value=True)
             k = st.slider(T["opt_k"], 5, 40, 20, step=5)
             top = st.slider(T["opt_top"], 1, 10, 5)
-        if not (rerank and k == 20 and top == 5):  # yalnızca değiştirildiyse gönder
+        if not (rerank and k == 20 and top == 5):  # send options only if changed
             opts = {"rerank": rerank, "k": k, "top": top}
     else:
-        default_ix = next((i for i, m in enumerate(LOCAL_MODELS) if m.split(":latest")[0] == LOCAL_CFG["answer_model"]), 0)
-        model = st.selectbox(T["opt_model"], LOCAL_MODELS, index=default_ix)
-        default_prompt = Path(LOCAL_CFG["prompt_file"]).stem
-        prompt = st.selectbox(T["opt_prompt"], PROMPTS, index=PROMPTS.index(default_prompt) if default_prompt in PROMPTS else 0)
-        rerank = st.toggle(T["opt_rerank"], value=LOCAL_CFG.get("rerank", True))
-        k = st.slider(T["opt_k"], 5, 40, LOCAL_CFG["k"], step=5)
-        top = st.slider(T["opt_top"], 1, 10, LOCAL_CFG["top"])
-        opts = {"model": model, "prompt": prompt, "rerank": rerank, "k": k, "top": top}
+        gen, ret = CFG["generation"], CFG["retrieval"]
+        st.markdown(T["settings_local"].format(
+            model=gen["model"], prompt=gen["prompt"], k=ret["top_k"], sw=ret["sparse_weight"]))
     show_text = st.toggle(T["opt_show_text"], value=False)
 
     st.divider()
@@ -240,24 +320,35 @@ with st.sidebar:
             st.markdown(T["models_line"].format(embedding=h.get("embedding_model"), reranker=h.get("reranker_model", "-")))
     else:
         try:
-            n_chunks = sum(1 for _ in open(LOCAL_CFG["chunks_file"], encoding="utf-8"))
+            n_chunks = sum(1 for _ in open(REPO_ROOT / CFG["corpus"]["chunks"], encoding="utf-8"))
             st.markdown(T["corpus_line"].format(n_chunks=n_chunks))
         except OSError:
             pass
-        st.markdown(T["models_line"].format(embedding=LOCAL_CFG["embedding_model"], reranker=LOCAL_CFG["reranker_model"]))
-    if st.button(T["clear_chat"], use_container_width=True):
-        st.session_state.messages = []
-        st.rerun()
+        st.markdown(T["models_line_local"].format(embedding=CFG["embedding"]["model"]))
     st.divider()
     st.caption(T["disclaimer"])
     st.caption(T["ai_disclaimer"])
 
 
 def render_sources(result: dict) -> None:
+    """Show the details under an answer: warnings, sources, timing and settings.
+
+    Args:
+        result: an answer in the contract format, from ``answer_local`` or ``answer_api``.
+
+    Returns:
+        None. Writes to the page: a warning for citations outside the retrieved set; for a
+        refused answer or one without sources only the request id; otherwise a collapsed
+        "used chunks" section with one line per source (title, version date, pages, score
+        if any, and the text when the sidebar switch is on), token counts and the settings
+        of the run. Uses ``show_text`` from the sidebar.
+    """
     tm, us, cf = result.get("timings", {}), result.get("usage", {}), result.get("config", {})
+    if result.get("unknown_citations"):
+        st.warning(T["unknown_citations"].format(ids=", ".join(result["unknown_citations"])))
     if result.get("refused") or not result.get("sources"):
         if result.get("request_id"):
-            st.caption(f"istek {result['request_id']}")
+            st.caption(T["request_line"].format(request_id=result["request_id"]))
         return
     label = T["sources_label"].format(total=tm.get("total_s") or 0)
     if tm.get("retrieval_s") is not None:
@@ -265,7 +356,11 @@ def render_sources(result: dict) -> None:
                   if tm.get("first_token_s") else T["sources_label_detail_no_ttft"].format(retr=tm["retrieval_s"]))
     with st.expander(label, expanded=False):
         for s in result["sources"]:
-            line = T["source_line"].format(header=s.get("header", s.get("id")), score=s.get("score") or 0)
+            header = s.get("header", s.get("id"))
+            line = (T["source_line"].format(header=header, score=s["score"]) if s.get("score") is not None
+                    else T["source_line_noscore"].format(header=header))
+            if s.get("version_date"):
+                line += T["source_version"].format(date=s["version_date"])
             if s.get("pages"):
                 p = s["pages"]
                 line += T["source_pages"].format(pages=f"{p[0]}–{p[1]}" if p[0] != p[1] else p[0])
@@ -274,16 +369,33 @@ def render_sources(result: dict) -> None:
                 st.text(s["text"][:1500])
         if us.get("prompt_tokens") or us.get("completion_tokens"):
             st.caption(T["tokens_line"].format(prompt=us.get("prompt_tokens", "-"), completion=us.get("completion_tokens", "-")))
-        st.caption(T["config_line"].format(
-            model=cf.get("model", "-"), prompt=cf.get("prompt", "-"), k=cf.get("k", "-"), top=cf.get("top", "-"),
-            rerank=T["rerank_on"] if cf.get("rerank") else T["rerank_off"], request_id=result.get("request_id", "-")))
+        if "sparse_weight" in cf:
+            st.caption(T["config_line_local"].format(
+                model=cf.get("model", "-"), prompt=cf.get("prompt", "-"), k=cf.get("k", "-"),
+                sw=cf.get("sparse_weight", "-"), request_id=result.get("request_id", "-")))
+        else:
+            st.caption(T["config_line"].format(
+                model=cf.get("model", "-"), prompt=cf.get("prompt", "-"), k=cf.get("k", "-"), top=cf.get("top", "-"),
+                rerank=T["rerank_on"] if cf.get("rerank") else T["rerank_off"], request_id=result.get("request_id", "-")))
 
 
-st.title(T["title"])
-st.caption(T["subtitle"])
-st.info(T["ai_disclaimer"], icon="ℹ️")
+# In local mode bge-m3 is loaded on first open; if the index is missing, the user is told how to build it.
+if not API_MODE:
+    try:
+        with st.spinner(T["spinner_loading"]):
+            _pipeline()
+    except UIError as e:
+        st.error(str(e))
+        st.stop()
 
-st.markdown(f"### {T['ask_heading']}")
+# Heading row: the question heading on the left, "Yeni Sohbet" on the right (US-04, visible with the sidebar closed)
+col_title, col_new = st.columns([6, 1], vertical_alignment="center")
+with col_title:
+    st.markdown(f"### {T['heading_icon']} {T['ask_heading']}")
+with col_new:
+    if st.button(T["new_chat"], icon=":material/add_comment:", type="primary", use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
 cols = st.columns(len(T["examples"]))
 clicked = None
 for c, ex in zip(cols, T["examples"]):
@@ -310,24 +422,19 @@ if question:
         box = st.empty()
         result = None
         try:
-            if API_MODE:
-                with st.spinner(T["spinner_waiting_api"]):
-                    result = answer_api(question, opts)
-            else:
-                result = answer_local(question, opts, box)
+            result = answer_api(question, opts) if API_MODE else answer_local(question)
             text = result["answer"]
-            if result.get("refused"):
-                text = T["refusal"].get(result.get("refusal_reason") or "default", result["answer"]) if result.get("refusal_reason") != "not_in_corpus" else result["answer"]
+            if result.get("refused") and result.get("refusal_reason") not in (None, "not_in_corpus"):
+                text = T["refusal"].get(result["refusal_reason"], result["answer"])
             if result.get("question") and result["question"] != question:
                 st.caption(T["interpreted_as"].format(q=result["question"]))
             box.markdown(text)
         except UIError as e:
             text = str(e)
             box.error(text)
-        except Exception as e:  # yerel pipeline hataları — kullanıcıya Türkçe, ayrıntı terminale
-            print(f"[app] yerel pipeline hatası: {type(e).__name__}: {e}", flush=True)
-            is_conn = isinstance(e, requests.exceptions.RequestException) or "Ollama" in type(e).__name__
-            text = T["err_model_unavailable"] if is_conn else T["err_generic"].format(code=type(e).__name__)
+        except Exception as e:  # unexpected error: Turkish message to the user, details to the terminal
+            print(f"[app] beklenmeyen hata: {type(e).__name__}: {e}", flush=True)
+            text = T["err_generic"].format(code=type(e).__name__)
             box.error(text)
         if result:
             render_sources(result)
