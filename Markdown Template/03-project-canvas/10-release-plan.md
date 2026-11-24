@@ -92,7 +92,7 @@ Each corrected entry fixes only the named defect. All examples are illustrative.
 | # | Release | Sprint | Start Date | End Date | Key Deliverable(s) |
 |---|---|---|---|---|---|
 | 1 | Pre-alpha | Sprint 1 | 14/10/2026 | 28/10/2026 | D1 Document set and Dataset Report; D2 Q&A Generation-Dataset v1; D3 Default-state measurement report; D4 Project Charter v1 |
-| 2 | Alpha 0.1 | Sprint 2 | 28/10/2026 | 18/11/2026 | D5 Long-context baseline experiment card; D6 RAG baseline experiment card; D7 Alpha prototype (used by the development team); D13 Datasheet for Q&A Generation-Dataset v1 |
+| 2 | Alpha 0.1 | Sprint 2 | 28/10/2026 | 18/11/2026 | D5 Long-context baseline experiment card; D6 RAG baseline experiment card; D7 Alpha prototype (used by the development team); D13 Datasheet for Q&A Generation-Dataset v1; [D14 Project Charter v2](README.md) |
 | 3 | Beta 0.5 | Sprint 3 | 18/11/2026 | 09/12/2026 | D8 MVP validation experiment card; D9 Beta release (for the 10 pilot participants: licensed drivers and driving-licence candidates) |
 | 4 | Release candidate 1.0 | Sprint 4 | 09/12/2026 | 30/12/2026 | D10 Pilot test report; D11 Release candidate; D12 Final report |
 
