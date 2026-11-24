@@ -16,6 +16,7 @@ import google.auth
 import google.auth.transport.requests
 import requests
 
+from chunky.guard import DECLINE_REPLY, has_advice_notice, is_decline  # added: barissaka, CHUNKY-130 (US-06)
 from chunky.index import ROOT, search
 
 # Chunk IDs as produced by chunk.py, e.g. KTK-m48, SAĞLIK-m4, KTY-cetvel4, KTK-m65A, KTK-islenemeyen.
@@ -61,6 +62,12 @@ def answer(question, embedder, index, cfg):
     text, usage = call_llm(messages, gen)
     # Normalize cited IDs to the plain-hyphen form used in chunks.jsonl.
     text = CHUNK_ID.sub(lambda m: f"{m[1]}-{m[2]}", text)
+    # --- added: barissaka, CHUNKY-130 (US-06), decline path ---
+    # If the model says the texts do not cover the question, return the fixed reply only.
+    declined = is_decline(text)
+    if declined:
+        text = DECLINE_REPLY
+    # --- end of addition: barissaka, CHUNKY-130 ---
 
     # Citation check: every cited ID must be one of the retrieved articles.
     retrieved = {c["chunk_id"]: c for _, c in hits}
@@ -68,6 +75,8 @@ def answer(question, embedder, index, cfg):
     return {
         "question": question,
         "answer": text,
+        "declined": declined,  # added: barissaka, CHUNKY-130 (US-06). True = the answer is the fixed out-of-scope reply
+        "advice_notice": has_advice_notice(text),  # added: barissaka, CHUNKY-130 (US-06). True = the answer ends with the no-advice notice
         "sources": [citation_label(retrieved[i]) for i in cited if i in retrieved],
         "cited": cited,
         "unknown_citations": [i for i in cited if i not in retrieved],

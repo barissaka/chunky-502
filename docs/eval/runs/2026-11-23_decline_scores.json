@@ -1,0 +1,362 @@
+[
+ {
+  "group": "dev_in",
+  "id": "S01",
+  "question": "Elektrikli skuter kullanmak için yaş sınırı var mı, ehliyet gerekiyor mu?",
+  "top1": 0.6984,
+  "mean_topk": 0.6263,
+  "top_ids": [
+   "KTK-m66",
+   "KTK-m37",
+   "SKUTER-m1"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S03",
+  "question": "Sürücü kursunda bir ders saati kaç dakika sürer?",
+  "top1": 0.7659,
+  "mean_topk": 0.6977,
+  "top_ids": [
+   "KURS-m21",
+   "KURS-m7",
+   "KURS-m20"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S09",
+  "question": "Aracım kazaya karıştı ama muayene süresi daha dolmadı. Yeniden muayene yaptırmam gerekir mi, ücret öder miyim?",
+  "top1": 0.697,
+  "mean_topk": 0.6528,
+  "top_ids": [
+   "KTK-m34",
+   "KTK-m35",
+   "MUAYENE-gm1"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S13",
+  "question": "Kiralık (paylaşımlı) e-skuterler en fazla kaç km/s hız yapar? Belirli bölgelerde neden yavaşlıyor?",
+  "top1": 0.7075,
+  "mean_topk": 0.6674,
+  "top_ids": [
+   "SKUTER-m5",
+   "SKUTER-m16",
+   "SKUTER-m11"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S14",
+  "question": "Alkollü araç kullandığım için ehliyetim 6 ay alındı. Bu süre içinde araç kullanırsam ne olur? Ehliyetimi geri almak için ne gerekir?",
+  "top1": 0.7253,
+  "mean_topk": 0.684,
+  "top_ids": [
+   "KTK-m48",
+   "KTK-ekm17",
+   "KTY-ekm3"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S15",
+  "question": "Hız sınırını biraz aşarsam ceza yazılır mı, yönetmelikte bir tolerans var mı?",
+  "top1": 0.7925,
+  "mean_topk": 0.7069,
+  "top_ids": [
+   "KTK-m51",
+   "KTY-m101",
+   "KTK-m52"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S20",
+  "question": "Ehliyet aldıktan sonra epilepsi teşhisi konulan birinin ehliyetine ne olur?",
+  "top1": 0.6723,
+  "mean_topk": 0.5862,
+  "top_ids": [
+   "SAĞLIK-m9",
+   "SAĞLIK-m6",
+   "SAĞLIK-m8"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S23",
+  "question": "Dün akşam iki bira içip arabamla eve dönerken çevirmeye takıldım, üfledim 0.70 çıktı. Polis ehliyetimi aldı. Başıma ne gelecek?",
+  "top1": 0.5963,
+  "mean_topk": 0.5672,
+  "top_ids": [
+   "KTK-m48",
+   "KTY-m97",
+   "KTK-m45"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S25",
+  "question": "Şehir içinde 105 ile giderken radara yakalandım. Cezası ne?",
+  "top1": 0.6114,
+  "mean_topk": 0.5963,
+  "top_ids": [
+   "KTK-m51",
+   "KTY-m101",
+   "KTK-m73"
+  ]
+ },
+ {
+  "group": "dev_in",
+  "id": "S28",
+  "question": "Kiraladığım scooter'a arkadaşımı da bindirdim, kaldırımdan gidiyorduk, polis durdurdu. Yanlış bir şey mi yaptık?",
+  "top1": 0.5155,
+  "mean_topk": 0.492,
+  "top_ids": [
+   "KTY-m110",
+   "KTK-m58",
+   "KTK-m66"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-01",
+  "question": "Trafik sigortası primi neye göre hesaplanır?",
+  "top1": 0.6576,
+  "mean_topk": 0.5899,
+  "top_ids": [
+   "KTK-m98",
+   "KTK-m91",
+   "KTK-m93"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-02",
+  "question": "Benzin fiyatları neden her hafta değişiyor?",
+  "top1": 0.462,
+  "mean_topk": 0.4423,
+  "top_ids": [
+   "KTY-m170",
+   "KTY-cetvel1",
+   "KTK-m47"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-03",
+  "question": "İstanbul'da otopark ücretleri ne kadar?",
+  "top1": 0.6119,
+  "mean_topk": 0.5257,
+  "top_ids": [
+   "KTK-m79",
+   "KTY-m151",
+   "KTY-m122"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-04",
+  "question": "Evime elektrikli araç şarj ünitesi kurmak için hangi izinler gerekir?",
+  "top1": 0.6028,
+  "mean_topk": 0.5777,
+  "top_ids": [
+   "KTK-m17",
+   "KTY-m26",
+   "SKUTER-m16"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-05",
+  "question": "Yeni araç alırken ödenen ÖTV oranı kaç?",
+  "top1": 0.5634,
+  "mean_topk": 0.5349,
+  "top_ids": [
+   "KTY-m3",
+   "KTY-cetvel1",
+   "KTK-islenemeyen"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-06",
+  "question": "Araç kiralarken ne kadar depozito ödemem gerekir?",
+  "top1": 0.5796,
+  "mean_topk": 0.5671,
+  "top_ids": [
+   "KTY-m3",
+   "KTK-m31",
+   "KTK-m32"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-07",
+  "question": "Ehliyet sınavına hazırlanmak için hangi mobil uygulama en iyisi?",
+  "top1": 0.5436,
+  "mean_topk": 0.5061,
+  "top_ids": [
+   "KTK-m42",
+   "KURS-m28",
+   "KTY-cetvel4"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-08",
+  "question": "Lastiklerimi kaç kilometrede bir değiştirmeliyim?",
+  "top1": 0.6134,
+  "mean_topk": 0.5596,
+  "top_ids": [
+   "KTK-m65A",
+   "KTK-m30",
+   "KTK-m94"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-09",
+  "question": "Aracımı boyatmak ikinci el değerini düşürür mü?",
+  "top1": 0.5565,
+  "mean_topk": 0.4959,
+  "top_ids": [
+   "KTK-m28",
+   "KTY-m62",
+   "KTY-m135"
+  ]
+ },
+ {
+  "group": "dev_out",
+  "id": "DOOS-10",
+  "question": "Hangi marka otomobil daha az yakıt tüketir?",
+  "top1": 0.4957,
+  "mean_topk": 0.4199,
+  "top_ids": [
+   "KTY-m3",
+   "KTY-cetvel1",
+   "KTY-m100"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K01",
+  "question": "Trafikte beni tehlikeye düşüren bir durumla karşılaştığımda ne yapabilirim?",
+  "top1": 0.6832,
+  "mean_topk": 0.658,
+  "top_ids": [
+   "KTY-m116",
+   "KTY-m137",
+   "KTY-m152"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K02",
+  "question": "Yurt dışından almış olduğum araçla Türkiye'ye gelebilir miyim?",
+  "top1": 0.6809,
+  "mean_topk": 0.6079,
+  "top_ids": [
+   "KTY-m88",
+   "KTK-m19",
+   "KTY-m92"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K03",
+  "question": "Eski aracımın şu an kime ait olduğunu öğrenebilir miyim?",
+  "top1": 0.6096,
+  "mean_topk": 0.5704,
+  "top_ids": [
+   "KTK-gm10",
+   "KTK-ekm14",
+   "KTY-m174"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K04",
+  "question": "Bir aracın sahibini ve adresini nasıl öğrenebilirim?",
+  "top1": 0.6268,
+  "mean_topk": 0.592,
+  "top_ids": [
+   "KTK-ekm14",
+   "KTY-m174",
+   "KTY-m125"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K05",
+  "question": "Özel plaka ücretleri nasıl hesaplanıyor?",
+  "top1": 0.7072,
+  "mean_topk": 0.624,
+  "top_ids": [
+   "KTK-m131",
+   "KTY-m53",
+   "KTK-m33"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K06",
+  "question": "Aracımın change olup olmadığını nasıl öğrenirim?",
+  "top1": 0.5837,
+  "mean_topk": 0.5644,
+  "top_ids": [
+   "KTY-m65",
+   "KTK-gm1",
+   "KTY-gm10"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K07",
+  "question": "Sürücü belgeme ve aracıma yazılan trafik cezalarını nasıl öğrenebilirim?",
+  "top1": 0.7044,
+  "mean_topk": 0.6833,
+  "top_ids": [
+   "KTK-m44",
+   "KTY-m167",
+   "KTK-m114"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K08",
+  "question": "Motorlu taşıtlar vergisini (MTV) ne zaman ve ne kadar ödemem gerekiyor?",
+  "top1": 0.5699,
+  "mean_topk": 0.5661,
+  "top_ids": [
+   "KTK-m34",
+   "KTK-islenemeyen",
+   "KTY-cetvel1"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K09",
+  "question": "Kasko yaptırmak zorunlu mu, neleri kapsar?",
+  "top1": 0.6488,
+  "mean_topk": 0.5787,
+  "top_ids": [
+   "KTK-m91",
+   "KTK-m101",
+   "KTY-m150"
+  ]
+ },
+ {
+  "group": "test_out",
+  "id": "K10",
+  "question": "Köprü veya otoyoldan HGS bakiyem olmadan geçtim, cezası ne kadar?",
+  "top1": 0.6394,
+  "mean_topk": 0.6147,
+  "top_ids": [
+   "KTK-m17",
+   "KTK-m55",
+   "KTK-m52"
+  ]
+ }
+]

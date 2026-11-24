@@ -26,6 +26,7 @@ Checksums below were taken on 13 Nov 2026 with `pip download <package>==<version
 | nbstripout | 0.9.1 | Removes notebook outputs before each commit (development only) | MIT | nbstripout contributors | SHA-256 `ca027ee45742ee77e4f8e9080254f9a707f1161ba11367b82fdf4a29892c759e` (nbstripout-0.9.1-py3-none-any.whl) |
 | streamlit | 1.67.0 | Web interface of the assistant (`src/ui/app.py`, US-09); installed from `src/ui/requirements.txt` | Apache-2.0 | Snowflake Inc. | SHA-256 `f29da87c443bfbdfc52738616e3d65745d438e718da8faf69e2be0da1e52ce64` (streamlit-1.67.0-py3-none-any.whl) |
 | python-dotenv | 1.2.4 | Reads the optional `src/ui/.env` file (`CHUNKY_API_URL`) for the web interface; installed from `src/ui/requirements.txt` | BSD-3-Clause | Saurabh Kumar and python-dotenv contributors | SHA-256 `42269a8a5b3fd54ffa6f3d84b18abed50064717576b4ecf03dc4a55d8aa04fdc` (python_dotenv-1.2.4-py3-none-any.whl) |
+| pytest | 9.2.0 | Runs the automated tests in `tests/` (`python -m pytest tests`); development tool, not used when the assistant answers | MIT | pytest-dev team (Holger Krekel and others) | SHA-256 `07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588` (pytest-9.2.0-py3-none-any.whl) |
 
 ### Tools and services not in requirements.txt
 

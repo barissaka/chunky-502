@@ -9,3 +9,4 @@ transformers==5.23.0
 huggingface-hub==2.4.0
 google-auth==2.62.2
 requests==2.34.2
+pytest==9.2.0

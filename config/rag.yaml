@@ -20,4 +20,4 @@ generation:
   model: openai/gpt-oss-120b-maas   # open model (Apache-2.0) served by Vertex AI as a managed API (MaaS)
   temperature: 0             # stable answers for evaluation
   thinking: null             # decided by experiment D8
-  prompt: answer_v1          # prompts/answer_v1.txt
+  prompt: answer_v3          # prompts/answer_v3.txt. changed: barissaka, CHUNKY-130 (US-06). was: answer_v1
