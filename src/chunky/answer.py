@@ -44,10 +44,25 @@ def call_llm(messages, gen):
         f"/locations/{gen['location']}/endpoints/openapi/chat/completions"
     )
     body = {"model": gen["model"], "messages": messages, "temperature": gen["temperature"]}
-    r = requests.post(url, headers={"Authorization": f"Bearer {creds.token}"}, json=body, timeout=180)
+    # --- changed: barissaka, CHUNKY-191 (EN-33, US-11), time limit and retry ---
+    # was: r = requests.post(url, headers={"Authorization": f"Bearer {creds.token}"}, json=body, timeout=180)
+    # About 3 of 100 calls stalled for 65-85 s, while a normal call takes 5-11 s
+    # (docs/eval/runs/2026-11-24_response_time.jsonl). A call that sends no reply within
+    # timeout_s seconds is now dropped and sent again, at most `attempts` times in total.
+    timeout_s, attempts = gen.get("timeout_s", 25), gen.get("attempts", 2)
+    for attempt in range(1, attempts + 1):
+        try:
+            r = requests.post(url, headers={"Authorization": f"Bearer {creds.token}"}, json=body, timeout=timeout_s)
+            break
+        except requests.exceptions.Timeout:
+            if attempt == attempts:
+                raise
+    # --- end of change: barissaka, CHUNKY-191 ---
     r.raise_for_status()
     data = r.json()
-    return data["choices"][0]["message"]["content"], data.get("usage", {})
+    usage = dict(data.get("usage") or {})  # changed: barissaka, CHUNKY-191. was: data.get("usage", {}) passed on directly
+    usage["llm_attempts"] = attempt  # added: barissaka, CHUNKY-191. 1 = answered at the first try, 2 = after one retry
+    return data["choices"][0]["message"]["content"], usage
 
 
 def answer(question, embedder, index, cfg):
@@ -84,6 +99,7 @@ def answer(question, embedder, index, cfg):
         "model": gen["model"],
         "prompt": gen["prompt"],
         "seconds": round(time.time() - start, 1),  # end-to-end: retrieval + LLM call
+        "llm_attempts": usage.get("llm_attempts"),  # added: barissaka, CHUNKY-191 (US-11). 2 = the first model call got no reply in time and was sent again
         "input_tokens": usage.get("prompt_tokens"),
         "output_tokens": usage.get("completion_tokens"),  # includes the model's reasoning tokens, if any
     }
