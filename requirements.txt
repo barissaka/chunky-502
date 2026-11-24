@@ -9,3 +9,6 @@ transformers==5.23.0
 huggingface-hub==2.4.0
 google-auth==2.62.2
 requests==2.34.2
+anthropic==2.8.0
+deepeval==4.3.4
+pandas==3.1.1
