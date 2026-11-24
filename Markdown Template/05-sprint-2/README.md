@@ -41,8 +41,8 @@ Deliverables of Sprint 2
 **What we achieved:**
 
 - Baseline results (10 in-scope development questions):
-  - Long-context baseline, all six texts at once: judge score 0.80, 8 of 10 answers pass, mean response time 15.28 s.
-  - First RAG pipeline: judge score 0.61, 5 of 10 answers pass, mean response time 38.56 s. Recall@5 is 0.792 and Recall@8 is 0.917.
+  - Long-context baseline, all six texts at once: judge score 0.80, 8 of 10 answers pass, mean response time 13.5 s (median 17.7 s on the in-scope questions) ([E3](../Markdown%20Template/12-experiment-cards/E3-claude-longcontext-baseline.md)).
+  - First RAG pipeline: judge score 0.61, 5 of 10 answers pass, mean response time 29.5 s (median 26.6 s). Recall@5 and Recall@8 are 1.00 (every question gets at least one supporting article); article recall is 0.79 at k = 5 and 0.92 at k = 8 ([E1](../Markdown%20Template/12-experiment-cards/E1-baseline.md)).
   - On these questions the baseline scores higher. The gap is widest for questions that need several articles. The comparison document has the tables by question type, hop type and question.
 - RAG pipeline: the six legal texts are prepared as article chunks, the embedding model runs locally, the LLM is hosted.
 - Planning: the charter is revised after the Sprint 1 feedback, story map v2 has 13 stories (US-12 and US-13 are new), the story requirements of the three epics have test cases for every story, and the backlog is prioritised and estimated with planning poker.

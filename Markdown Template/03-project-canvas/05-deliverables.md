@@ -14,7 +14,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | D2 | Q&A Generation-Dataset v1 | Solution | 26/10/2026 | M2 |
 | D3 | Default-state measurement report | Project management | 26/10/2026 | M2 |
 | D4 | Project Charter v1 | Project management | 27/10/2026 | M3 |
-| D5 | Long-context baseline experiment card | Solution | 11/11/2026 | M4 |
+| D5 | Long-context baseline experiment card | Solution | 13/11/2026 | M4 |
 | D6 | RAG baseline experiment card | Solution | 14/11/2026 | M5, M6 |
 | D7 | Alpha prototype | Solution | 14/11/2026 | M5, M6 |
 | D8 | MVP validation experiment card | Solution | 05/12/2026 | M7, M8 |
@@ -23,6 +23,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | D11 | Release candidate | Solution | 27/12/2026 | M10 |
 | D12 | Final report | Project management | 27/12/2026 | M10 |
 | D13 | Datasheet for Q&A Generation-Dataset v1 | Solution | 14/11/2026 | M5 |
+| D14 | [Project Charter v2](README.md) | Project management | 14/11/2026 | M6 |
 
 ## Sprint 1
 
@@ -52,7 +53,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 
 | Project Deliverable #: | D4: Project Charter v1 |
 |---|---|
-| Description: | Final version of all Project Canvas pages. |
+| Description: | The Sprint 1 sign-off version of all Project Canvas pages: the charter as signed off by the Product Owner after the Sprint 1 review (M3). It is revised in Sprint 2 as D14 Project Charter v2. |
 | Acceptance Criteria: | 1. Every cell marked as required in the canvas templates is filled. 2. Every objective has at least one numeric success criterion. 3. Every milestone in [Milestones](02-milestones.md) has an associated deliverable on this page under the same number and name. 4. The feedback given at the Sprint 0 pitch is listed item by item, each with the page that addresses it or the reason it is not addressed. |
 | Due Date: | 27/10/2026 |
 | Stakeholders: | Project Review Committee; project team |
@@ -62,16 +63,16 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 
 | Project Deliverable #: | D5: Long-context baseline experiment card |
 |---|---|
-| Description: | Results of a long-context model that receives the full document set (D1), with no retrieval, on all 40 questions of D2. It is the comparison point for the RAG results in D6 and D8. |
-| Acceptance Criteria: | 1. All 40 questions are run, and the model name, model version, prompt and settings are recorded. 2. Each in-scope answer is scored correct or incorrect automatically, against the D2 answer key (Architecture AD-12), and each named article is scored as supporting or not supporting the answer. 3. The card reports, by question type: share of correct answers, share of answers that name a supporting article, number of out-of-scope questions declined (of 10), mean cost per question in USD and median response time in seconds. |
-| Due Date: | 11/11/2026 |
+| Description: | Results of a long-context model (Claude Sonnet 5.5 through the Anthropic API) that receives the full document set (D1), with no retrieval, on a 20-question trial subset of D2: 10 in-scope and 10 out-of-scope questions. It is the comparison point for the RAG results in D6 and, on the same questions, in D8; it is not run again (C-15). Experiment card: [E3](../12-experiment-cards/E3-claude-longcontext-baseline.md). |
+| Acceptance Criteria: | 1. All 20 questions of the trial subset are run, and the model ID, prompt and settings are recorded. 2. Each in-scope answer is scored correct or incorrect automatically, against the D2 answer key (Architecture AD-12), and each named article is scored as supporting or not supporting the answer. 3. The card reports, by question type: share of correct answers, share of answers that name a supporting article, number of out-of-scope questions declined (of 10), mean cost per question in USD and median response time in seconds. |
+| Due Date: | 13/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee |
 | Approving Stakeholder(s): | Business Analyst |
 
 | Project Deliverable #: | D6: RAG baseline experiment card |
 |---|---|
-| Description: | Results of the first RAG pipeline (472 chunks over the 550 articles of D1) on all 40 questions of D2, set side by side with D5. It holds the first trial runs against which the Objective 2 levels are checked. |
-| Acceptance Criteria: | 1. All 40 questions are run through the pipeline of D7, and the generation model, embedding model, reranking model (if used), number of retrieved chunks (k), number of chunks kept after reranking (if used) and prompt are recorded. 2. The card reports the five measures of D5, by question type, in one table with the D5 values. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks. 4. At least one run uses the same generation model as D5. 5. For each of the two 80% levels of Objective 2, the card states the measured value next to the level. 6. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification. |
+| Description: | Results of the first RAG pipeline (472 chunks over the 550 articles of D1) on the 10 in-scope questions of the trial subset, set side by side with D5 on the same questions. It holds the first trial runs against which the Objective 2 levels are checked. Experiment cards: [E1](../12-experiment-cards/E1-baseline.md), with the retrieval settings chosen in [E2](../12-experiment-cards/E2-retrieval-mode-and-k.md). The out-of-scope and ambiguous questions are first run on the RAG pipeline in D8. |
+| Acceptance Criteria: | 1. The 10 in-scope questions of the trial subset are run through the pipeline of D7, and the generation model, embedding model, reranking model (if used), number of retrieved chunks (k), number of chunks kept after reranking (if used) and prompt are recorded. 2. The card reports the share of correct answers by question type, and the share of answers that name a supporting article, the median response time and the input tokens per question, next to the D5 values on the same questions. 3. The card reports Recall@k: the share of in-scope questions for which at least one supporting article of the answer key is among the retrieved chunks, and article recall@k: the share of supporting articles retrieved. 4. For each of the two 80% levels of Objective 2, the measured value is stated next to the level. |
 | Due Date: | 14/11/2026 |
 | Stakeholders: | Project team (AI developer role); Project Review Committee; Quality Team |
 | Approving Stakeholder(s): | Business Analyst |
@@ -79,7 +80,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | Project Deliverable #: | D7: Alpha prototype |
 |---|---|
 | Description: | First integrated build of the assistant: a web chat interface connected to the RAG pipeline over the document set of D1. It runs on a team laptop. |
-| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: 40 of 40 D2 questions return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The index holds 472 chunks that together cover all 550 articles reported in D1: every article ID appears in exactly one chunk, not counting the retrieval-only sub-chunks of articles longer than the embedding input limit (Major Activities row 7). 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
+| Acceptance Criteria: | 1. A question typed in Turkish into the web interface returns an answer in Turkish: the 10 in-scope questions of the trial subset return a response without an error. 2. Every answer to an in-scope question shows at least one article reference (name of the text and article number). 3. The index holds 472 chunks that together cover all 550 articles reported in D1: every article ID appears in exactly one chunk, not counting the retrieval-only sub-chunks of articles longer than the embedding input limit (Major Activities row 7). 4. A second team member starts the alpha from a clean copy of the repository by following the README: yes or no. |
 | Due Date: | 14/11/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Product Owner |
@@ -92,19 +93,27 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | Stakeholders: | Project team (AI developer role); Quality Team; Project Review Committee |
 | Approving Stakeholder(s): | Product Owner |
 
+| Project Deliverable #: | D14: [Project Charter v2](README.md) |
+|---|---|
+| Description: | The revised charter: all Project Canvas pages updated to address the feedback given at the Sprint 1 review on D4. The revised charter is the [Project Canvas](README.md) and its subpages. |
+| Acceptance Criteria: | 1. The feedback given at the Sprint 1 review is listed item by item, each with the page that addresses it or the reason it is not addressed. 2. A change log lists every page changed since D4, with what changed. 3. The Objective 2 levels are the same as in D4. 4. Every milestone in [Milestones](02-milestones.md) has an associated deliverable on this page under the same number and name, and every deliverable has the same number, name and sprint in [Release Plan](10-release-plan.md) and the [Project Canvas](README.md). |
+| Due Date: | 14/11/2026 |
+| Stakeholders: | Project Review Committee; Quality Team; project team |
+| Approving Stakeholder(s): | Product Owner |
+
 ## Sprint 3
 
 | Project Deliverable #: | D8: MVP validation experiment card |
 |---|---|
 | Description: | Results of the beta (D9) on the fixed set of 30 in-scope questions and the 10 out-of-scope questions of D2. It holds the measurement of Objective 2. |
-| Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D9, and the settings are recorded. 2. Each in-scope answer is scored automatically against the D2 answer key; the scoring configuration and threshold are recorded. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type, in one table with the D5 and D6 values. 5. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification, next to the D6 values. |
+| Acceptance Criteria: | 1. All 40 questions are run on the build delivered as D9, and the settings are recorded. 2. Each in-scope answer is scored automatically against the D2 answer key by the judge model on Vertex AI; the scoring configuration and threshold are recorded. 3. The card states the share of correct answers and the share of answers that name a supporting article, each next to its Objective 2 target. 4. The card reports the five measures of D5 and Recall@k by question type for the beta; on the 10 in-scope questions of the trial subset, the beta's values stand in one table next to the D5 and D6 values. 5. The card reports the precision and recall of the decision to ask a clarifying question against the ambiguity labels of D2, and answer accuracy after clarification. 6. The card reports how many of the 30 in-scope answers have a judge score of exactly 0.7, the pass threshold (Risk R-17). 7. The 5 follow-up questions are answered without the session history, because follow-up support is built in Sprint 4 (US-03); the card states the two Objective 2 shares on all 30 in-scope questions and, separately, on the 25 questions that are not follow-ups. |
 | Due Date: | 05/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); Project Review Committee; Quality Team |
 | Approving Stakeholder(s): | Business Analyst |
 
 | Project Deliverable #: | D9: Beta release |
 |---|---|
-| Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. |
+| Description: | Build of the assistant that the pilot participants use in the Sprint 4 test. It contains the four features of the Scope Definition: questions in the user's own words, article reference, sanctions for a violation and out-of-scope handling. Follow-up questions within a session are not yet supported: they are built in Sprint 4 (US-03) and delivered with D11. |
 | Acceptance Criteria: | 1. On the 30 in-scope questions of D2, at least 80% of answers are correct and at least 80% of answers name an article that supports the answer (Objective 2; results in D8). 2. Every answer to an in-scope question shows the article reference, the quoted provision and the version date of the text. 3. 40 of 40 D2 questions return a response without an error. 4. Every item recorded in the go/no-go decision of M6 is closed or has a recorded reason for staying open. |
 | Due Date: | 05/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: pilot participants (drivers and driving-licence candidates) |
@@ -123,7 +132,7 @@ The team writes no model card: no model is trained or fine-tuned. The question s
 | Project Deliverable #: | D11: Release candidate |
 |---|---|
 | Description: | Final build of the assistant, with the changes made after the pilot. It is the build shown in the live demo. |
-| Acceptance Criteria: | 1. Re-run after the last change, on the 30 in-scope questions of D2: at least 80% of answers are correct and at least 80% name an article that supports the answer. 2. 10 of 10 out-of-scope questions of D2 are declined with the fixed reply recorded for them in D2 (Objective 4). 3. The question set supplied by the Project Review Committee, not seen by the team before, is run in full and every answer is recorded. 4. In the live demo, every question of the demo script returns a response without an error. |
+| Acceptance Criteria: | 1. Re-run after the last change, on the 30 in-scope questions of D2: at least 80% of answers are correct and at least 80% name an article that supports the answer. 2. 10 of 10 out-of-scope questions of D2 are declined with the fixed reply recorded for them in D2 (Objective 4). 3. The question set supplied by the Project Review Committee, not seen by the team before, is run in full and every answer is recorded. 4. In the live demo, every question of the demo script returns a response without an error. 5. At least 4 of the 5 follow-up questions of D2, each asked after the question it depends on in the same session, are answered correctly (US-03; Risk R-14). |
 | Due Date: | 27/12/2026 |
 | Stakeholders: | AI customer: General Directorate of Security (EGM); AI users: drivers and driving-licence candidates |
 | Approving Stakeholder(s): | Project Review Committee, acting for the AI customer; Product Owner |

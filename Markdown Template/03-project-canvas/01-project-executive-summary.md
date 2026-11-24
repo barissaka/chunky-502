@@ -8,7 +8,7 @@ Road users in Türkiye are bound by the Highway Traffic Law No. 2918 [1], the Hi
 
 Because laws are amended and fine amounts are revalued every year, a driver finds it difficult to tell which rule applies and where it is written. Drivers and driving-licence candidates therefore either read the legal texts themselves or rely on pages that do not show which article they rest on. The project exists to give them one place to ask a question and see the article behind the answer.
 
-**Budget:** $100 of Google Cloud credits for hosted model calls.
+**Budget:** $100 of Google Cloud credits for calls to the baseline language model and, from Sprint 3, the judge model; $5 of prepaid Anthropic API credits for the long-context baseline and the judge calls of Sprint 2 (C-08, C-15).
 **Duration:** 4 sprints.
 **Timeline:** 14 October 2026 to 30 December 2026.
 

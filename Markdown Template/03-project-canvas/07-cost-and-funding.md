@@ -88,7 +88,7 @@ Team capacity: 4 members × 7 hours per week × 11 weeks (14/10/2026 to 30/12/20
 
 | # | Item | Type (One-time/Ongoing) | Estimated Cost | Notes |
 |---|---|---|---|---|
-| 1 | Chartering, sprint planning, reviews and risk tracking ([Major Activities](04-major-activities.md) rows 1 and 18; D4) | Ongoing | 36 person-hours | 4 sprints × 9 h |
+| 1 | Chartering, sprint planning, reviews and risk tracking ([Major Activities](04-major-activities.md) rows 1 and 18; D4, D14) | Ongoing | 36 person-hours | 4 sprints × 9 h; includes the charter revision in Sprint 2 (D14) |
 | 2 | Default-state measurement and pilot test ([Major Activities](04-major-activities.md) rows 3 and 14; D3, D10) | One-time | 30 person-hours | 2 sessions × (10 participants × 0.5 h + 10 h for preparation and report) |
 | 3 | Document set and Dataset Report ([Major Activities](04-major-activities.md) rows 4 and 5; D1) | One-time | 16 person-hours | 6 texts × 2 h for download, extraction and counts, plus 4 h for the report |
 | 4 | Question set v1 and answer key, including keyword search and synthetic questions ([Major Activities](04-major-activities.md) row 6; D2) | One-time | 40 person-hours | 40 questions × 0.5 h for collection and tagging, plus 40 × 0.5 h for the answer key and the second check |
@@ -97,20 +97,21 @@ Team capacity: 4 members × 7 hours per week × 11 weeks (14/10/2026 to 30/12/20
 | 7 | Web interface and builds on the host laptop ([Major Activities](04-major-activities.md) rows 11 and 16; D7, D9, D11) | One-time | 26 person-hours | 3 builds × about 9 h |
 | 8 | Experiments and evaluation, including automated scoring with the judge model ([Major Activities](04-major-activities.md) rows 12, 13 and 15; D5, D6, D8, D11) | One-time | 48 person-hours | 4 evaluation runs with their cards × 10 h, plus 8 h to set up and check the automated scoring |
 | 9 | Query guard and fine-amount notice ([Major Activities](04-major-activities.md) rows 30 and 31) | One-time | 12 person-hours | Row 30 exists because of C-13 |
-| 10 | Disclaimer, answer-report button and logging of reported answers ([Major Activities](04-major-activities.md) row 32) | One-time | 8 person-hours | Team estimate |
+| 10 | Disclaimer on the chat page ([Major Activities](04-major-activities.md) row 32) | One-time | 2 person-hours | Team estimate |
 | 11 | Runtime environment of the AI customer ([Major Activities](04-major-activities.md) row 33) | One-time | 4 person-hours | Review of public documents |
 | 12 | Final report (D12) | One-time | 12 person-hours | Team estimate |
-| 13 | Amendment checks, weekly review of reported answers during the pilot and credit tracking ([Major Activities](04-major-activities.md) rows 5, 16 and 32) | Ongoing | 10 person-hours | 4 amendment checks × 1 h, 2 pilot weeks × 1 h, plus 11 weekly credit checks × about 0.4 h |
-| 14 | Hosted model calls on Google Cloud: answer generation with the baseline model (gpt-oss-120b on Vertex AI), long-context baseline (D5, and the D6 run with the same model), and judge model ([Facilities & Resources](09-facilities-and-resources.md) row 6) | Ongoing | Up to $100 | The long-context baseline alone needs about 20.5 million input tokens; spend is tracked weekly with alerts at 50% and 75% (C-08) |
+| 13 | Amendment checks and credit tracking ([Major Activities](04-major-activities.md) rows 5 and 16) | Ongoing | 8 person-hours | 4 amendment checks × 1 h, plus 11 weekly credit checks × about 0.4 h |
+| 14 | Hosted model calls on Google Cloud: answer generation with the baseline model (gpt-oss-120b on Vertex AI) and, from Sprint 3, the judge model (Claude Opus 5.5 on Vertex AI) ([Facilities & Resources](09-facilities-and-resources.md) row 6) | Ongoing | Up to $100 | About 7,800 input and 920 output tokens per question in the Sprint 2 RAG run (E1); the judge model costs 4 USD per million input and 20 USD per million output tokens at list price; spend is tracked weekly with alerts at 50% and 75% (C-08) |
 | 15 | Host laptop, spare host and development laptops ([Facilities & Resources](09-facilities-and-resources.md) rows 1 to 4) | Ongoing | $0 | Member-owned; local models run at no charge |
 | 16 | Datasheet for question set v1 ([Major Activities](04-major-activities.md) row 34; D13) | One-time | 6 person-hours | Sources, keywords and selection decisions are logged during collection (row 6); 6 h to write them up and check the counts against the D2 file |
-| | **Total effort** | | **308 person-hours** | Equal to the 308 available (C-10); no spare hours |
+| 17 | Anthropic API calls: long-context baseline (D5) and the judge calls of Sprint 2 ([Facilities & Resources](09-facilities-and-resources.md) row 12) | One-time | $5 of prepaid credits | The long-context run cost about 3.3 USD for 20 questions, including the one-off cache write of the corpus and not including the judge calls (E3); not used after Sprint 2 (C-15) |
+| | **Total effort** | | **300 person-hours** | Within the 308 available (C-10); 8 hours spare |
 
 Monitoring and updating the assistant after the project ends is out of scope ([Major Activities](04-major-activities.md) row 27), so it has no row here.
 
 ## 2. Source of Funding
 
-All human-resource effort is contributed in-kind by the four students of the project team (308 person-hours), with no paid labour or external contractors; each member has committed to at most 7 hours per week (C-10). The assistant runs on member-owned laptops at no charge. Hosted model calls are paid from the $100 of Google Cloud credits (C-08). The legal texts and the FAQ and forum questions are public and used at no charge. The test participants take part as unpaid volunteers.
+All human-resource effort is contributed in-kind by the four students of the project team (300 person-hours planned of the 308 available), with no paid labour or external contractors; each member has committed to at most 7 hours per week (C-10). The assistant runs on member-owned laptops at no charge. Calls to the baseline language model and, from Sprint 3, the judge model are paid from the $100 of Google Cloud credits (C-08); the long-context baseline and the judge calls of Sprint 2 were paid from $5 of prepaid Anthropic API credits (C-15). The legal texts and the FAQ and forum questions are public and used at no charge. The test participants take part as unpaid volunteers.
 
 ## Example (illustrative only)
 
