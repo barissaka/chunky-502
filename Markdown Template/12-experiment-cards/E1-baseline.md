@@ -24,7 +24,7 @@ Links only:
 - The prompt files. To change a prompt, add a new file to prompts/ instead of editing the old one.
 -->
 - W&B: not logged in Sprint 2. Run files: [`docs/eval/runs/`](../../docs/eval/runs/) (`2026-11-14_trial10_gpt-oss-120b-maas.jsonl` with its `_summary.json`, `.xlsx` and `_eval.jsonl` for `eval.py`).
-- Evaluation set: [`docs/eval/trial_in_scope_10.csv`](../../docs/eval/trial_in_scope_10.csv) — the 10 in-scope questions of the trial set (23 supporting articles in total).
+- Evaluation set: [`docs/eval/trial_in_scope_10.csv`](../../docs/eval/trial_in_scope_10.csv) — the 10 in-scope questions of the trial set (23 supporting articles in total). These questions are the development set: the pipeline is tuned on them, and they are not counted in the final test score. They were selected from the 40 questions of D2 v1; the formal test runs use the other questions of D2 and 10 new questions added in their place, none of which is used for tuning.
 - Prompt: [`prompts/answer_v1.txt`](../../prompts/answer_v1.txt).
 - Configuration: [`config/rag.yaml`](../../config/rag.yaml) as committed with this card; code: `src/chunky/index.py`, `src/chunky/answer.py`; checks: `notebooks/04_index_check.ipynb`, `notebooks/05_answer_check.ipynb`.
 
@@ -54,7 +54,8 @@ Retrieval, 10 questions (means over questions):
 | Metric | @5 | @8 |
 |---|---|---|
 | Recall@k (hit rate: at least one supporting article retrieved) | 1.00 | 1.00 |
-| Article recall@k (share of supporting articles retrieved) | 0.79 | 0.92 (20 of 23 articles) |
+| Article recall@k (share of a question's supporting articles retrieved, mean over questions) | 0.79 | 0.92 |
+| Supporting articles retrieved (total over the 10 questions) | 16 of 23 | 20 of 23 |
 | Precision@k | 0.32 | 0.25 |
 | MRR@k | 0.76 | 0.76 |
 
@@ -84,7 +85,7 @@ Retrieval failures (supporting articles not in the top 8):
 
 **Discussion and Conclusion:**
 <!-- What the numbers mean and what you will do next. Link the decision they led to (D?), if any. -->
-Every question gets at least one supporting article in the top 5, and 20 of the 23 supporting articles are in the top 8, so retrieval is not the main limit for single-article questions. The misses are in chain questions: the penalty for driving while the licence is suspended (KTK-m36) is never retrieved, because the questions describe the situation (a licence already taken away) rather than the rule, and the article shares few terms with them. Precision@8 is low by design (most questions have one or two supporting articles), which is acceptable because the generator receives whole articles and the context stays small (median about 5k tokens at k = 8). The low MRR for parallel questions shows that the first supporting article is often not ranked first, which a reranker may improve. Next (Sprint 3): retrieval spike with a second embedding model and a reranker (AD-04, AD-05), and one-step cross-reference expansion for chain questions. Decisions: AD-04, AD-05, AD-06, AD-08 in the design document; the choice of hybrid retrieval and k = 8 comes from [E2](E2-retrieval-mode-and-k.md).
+These are scores on the development set, not a check of the Objective 2 target. Every question gets at least one supporting article in the top 5, and 20 of the 23 supporting articles are in the top 8, so retrieval is not the main limit for single-article questions. The misses are in chain questions: the penalty for driving while the licence is suspended (KTK-m36) is never retrieved, because the questions describe the situation (a licence already taken away) rather than the rule, and the article shares few terms with them. Precision@8 is low by design (most questions have one or two supporting articles), which is acceptable because the generator receives whole articles and the context stays small (median about 5k tokens at k = 8). The low MRR for parallel questions shows that the first supporting article is often not ranked first, which a reranker may improve. Next (Sprint 3): retrieval spike with a second embedding model and a reranker (AD-04, AD-05), and one-step cross-reference expansion for chain questions. Decisions: AD-04, AD-05, AD-06, AD-08 in the design document; the choice of hybrid retrieval and k = 8 comes from [E2](E2-retrieval-mode-and-k.md).
 
 **Answer correctness (`eval.py` LLM judge, added 2026-11-14):**
 <!-- Added after the run; the sections above are unchanged. -->
