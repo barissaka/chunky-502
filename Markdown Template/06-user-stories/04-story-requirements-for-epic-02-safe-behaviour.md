@@ -1,6 +1,6 @@
 # Story Requirements for Epic 02 · Safe behaviour
 
-<!-- Exported from Jira on 2026-11-10 (project CHUNKY). Jira is the source of truth for this backlog;
+<!-- Exported from Jira on 2026-11-10 (project CHUNKY); aligned with the Jira export of 2026-11-23. Jira is the source of truth for this backlog;
      this file is a snapshot for the sprint deliverable and is regenerated before each sprint review. -->
 
 | Epic | Safe behaviour |
@@ -15,9 +15,9 @@
 
 | # | User story title | User story description | Priority | Points | Owner | Sprint | Status | Jira |
 |---|---|---|---|---|---|---|---|---|
-| S1 | US-06 Decline when the assistant does not know | As a driver, I want the assistant to say so when my question is outside its documents, so that I am not misled by a made-up answer. |  | 5 |  | Sprint 3 | To Do | [CHUNKY-130](https://chunky-502.atlassian.net/browse/CHUNKY-130) |
-| S2 | US-07 Understand what went wrong | As a driver, I want a clear message when something fails, so that I know whether to wait, retry or rephrase. |  | 5 |  | Sprint 3 | To Do | [CHUNKY-131](https://chunky-502.atlassian.net/browse/CHUNKY-131) |
-| S3 | US-08 Keep my personal data private | As a driver, I want my personal data not to be saved, so that I can ask about my own violations without worry. |  | 3 |  | Sprint 3 | To Do | [CHUNKY-132](https://chunky-502.atlassian.net/browse/CHUNKY-132) |
+| S1 | US-06 Decline when the assistant does not know | As a driver, I want the assistant to say so when my question is outside its documents, so that I am not misled by a made-up answer. | High | 5 | Barış SAKA | Sprint 3 | To Do | [CHUNKY-130](https://chunky-502.atlassian.net/browse/CHUNKY-130) |
+| S2 | US-07 Understand what went wrong | As a driver, I want a clear message when something fails, so that I know whether to wait, retry or rephrase. | Medium | 5 | Zehranur KUTLUYER | Sprint 3 | To Do | [CHUNKY-131](https://chunky-502.atlassian.net/browse/CHUNKY-131) |
+| S3 | US-08 Keep my personal data private | As a driver, I want my personal data not to be saved, so that I can ask about my own violations without worry. | High | 5 | Ekin Deniz Öztürk | Sprint 3 | To Do | [CHUNKY-132](https://chunky-502.atlassian.net/browse/CHUNKY-132) |
 | S4 | US-13 View the interaction log | As an operator at the EGM information technologies unit, I want to view the log of the assistant's interactions, so that I can see which questions users ask and how the assistant answered them. | Medium | 5 |  | Sprint 4 | To Do | [CHUNKY-222](https://chunky-502.atlassian.net/browse/CHUNKY-222) |
 
 ## S1 · US-06 Decline when the assistant does not know
@@ -31,9 +31,14 @@
 
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
-| Design and implement out-of-scope detection with the Turkish decline statement |  |  | To Do | [CHUNKY-181](https://chunky-502.atlassian.net/browse/CHUNKY-181) |
-| Implement the individual-case rule |  |  | To Do | [CHUNKY-182](https://chunky-502.atlassian.net/browse/CHUNKY-182) |
-| Test 10 out-of-scope and 5 individual-case questions |  |  | To Do | [CHUNKY-183](https://chunky-502.atlassian.net/browse/CHUNKY-183) |
+| Design and implement out-of-scope detection with the Turkish decline statement | Barış SAKA |  | To Do | [CHUNKY-181](https://chunky-502.atlassian.net/browse/CHUNKY-181) |
+| Implement the individual-case rule | Barış SAKA |  | To Do | [CHUNKY-182](https://chunky-502.atlassian.net/browse/CHUNKY-182) |
+
+**Tasks (linked to the story)**
+
+| Task | Owner | Points | Status | Jira |
+|---|---|---|---|---|
+| EN-30 Test 10 out-of-scope and 5 individual-case questions | Barış SAKA | 3 | To Do | [CHUNKY-183](https://chunky-502.atlassian.net/browse/CHUNKY-183) |
 
 **Test cases**
 
@@ -56,9 +61,14 @@
 
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
-| List failure cases and write the Turkish message for each |  |  | To Do | [CHUNKY-184](https://chunky-502.atlassian.net/browse/CHUNKY-184) |
-| Implement the error handling, delay notice (60 s) and retry button; keep the typed question |  |  | To Do | [CHUNKY-185](https://chunky-502.atlassian.net/browse/CHUNKY-185) |
-| Simulate each failure |  |  | To Do | [CHUNKY-186](https://chunky-502.atlassian.net/browse/CHUNKY-186) |
+| List failure cases and write the Turkish message for each | Zehranur KUTLUYER |  | To Do | [CHUNKY-184](https://chunky-502.atlassian.net/browse/CHUNKY-184) |
+| Implement the error handling, delay notice (60 s) and retry button; keep the typed question | Zehranur KUTLUYER |  | To Do | [CHUNKY-185](https://chunky-502.atlassian.net/browse/CHUNKY-185) |
+
+**Tasks (linked to the story)**
+
+| Task | Owner | Points | Status | Jira |
+|---|---|---|---|---|
+| EN-31 Simulate each failure | Zehranur KUTLUYER | 3 | To Do | [CHUNKY-186](https://chunky-502.atlassian.net/browse/CHUNKY-186) |
 
 **Test cases**
 
@@ -76,16 +86,21 @@
 - The assistant shall not ask for the user's name, ID number, licence number or plate number.
 - The assistant shall not require an account or login.
 - When the user closes the chat page, the system shall not keep the conversation content linked to the user.
-- Where the user types personal data into a question, the assistant shall not store it beyond the open chat.
+- Where the user types personal data (ID number and plate number) into a question, the assistant shall not store it beyond the open chat.
 - The interface shall show a one-sentence privacy notice that says personal data is not saved.
 
 **Sub-tasks**
 
 | Sub-task | Owner | Estimate | Status | Jira |
 |---|---|---|---|---|
-| Decide what logs may contain and keep the history in the open session only |  |  | To Do | [CHUNKY-187](https://chunky-502.atlassian.net/browse/CHUNKY-187) |
-| Mask personal data before it is logged |  |  | To Do | [CHUNKY-188](https://chunky-502.atlassian.net/browse/CHUNKY-188) |
-| Add the privacy notice and review logs and API calls |  |  | To Do | [CHUNKY-189](https://chunky-502.atlassian.net/browse/CHUNKY-189) |
+| Decide what logs may contain and keep the history in the open session only | Ekin Deniz Öztürk |  | To Do | [CHUNKY-187](https://chunky-502.atlassian.net/browse/CHUNKY-187) |
+| Mask personal data before it is logged | Ekin Deniz Öztürk |  | To Do | [CHUNKY-188](https://chunky-502.atlassian.net/browse/CHUNKY-188) |
+
+**Tasks (linked to the story)**
+
+| Task | Owner | Points | Status | Jira |
+|---|---|---|---|---|
+| EN-32 Add the privacy notice and review logs and API calls | Ekin Deniz Öztürk | 3 | To Do | [CHUNKY-189](https://chunky-502.atlassian.net/browse/CHUNKY-189) |
 
 **Test cases**
 
