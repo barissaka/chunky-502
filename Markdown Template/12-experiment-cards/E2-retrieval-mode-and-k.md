@@ -24,7 +24,7 @@ Links only:
 - The prompt files. To change a prompt, add a new file to prompts/ instead of editing the old one.
 -->
 - W&B: not logged in Sprint 2. Results: cells 5 and 6 of [`notebooks/04_index_check.ipynb`](../../notebooks/04_index_check.ipynb).
-- Evaluation set: [`docs/eval/trial_in_scope_10.csv`](../../docs/eval/trial_in_scope_10.csv) (10 in-scope questions, 23 supporting articles).
+- Evaluation set: [`docs/eval/trial_in_scope_10.csv`](../../docs/eval/trial_in_scope_10.csv) (10 in-scope questions, 23 supporting articles). These questions are the development set: retrieval parameters are tuned on them, and they are not counted in the final test score. They were selected from the 40 questions of D2 v1; the formal test runs use the other questions of D2 and 10 new questions added in their place, none of which is used for tuning.
 - Prompt: none (retrieval only).
 
 **Design:**
@@ -42,7 +42,7 @@ Fixed: `BAAI/bge-m3` (same revision as E1), numpy index of 472 chunks, no rerank
 **Summary of Results:**
 <!-- The main scores go in the results table of the technical summary. Put the breakdown here: scores by question type, and failures by cause. -->
 
-| Combination | Recall@k (hit rate) | Article recall@k | Articles found | MRR@k | Context tokens to the LLM (median / max) |
+| Combination | Recall@k (hit rate) | Article recall@k (mean over questions) | Articles found (total of 23) | MRR@k | Context tokens to the LLM (median / max) |
 |---|---|---|---|---|---|
 | Dense, k = 5 | 0.90 | 0.67 | 14 / 23 | 0.68 | — |
 | Hybrid, k = 5 | 1.00 | 0.79 | 16 / 23 | 0.76 | 3,635 / 9,613 |
@@ -58,4 +58,4 @@ Hybrid retrieval found the expected article where dense retrieval missed it in S
 
 **Discussion and Conclusion:**
 <!-- What the numbers mean and what you will do next. Link the decision they led to (D?), if any. -->
-The sparse score helps where the question shares exact terms with the article (inspection fee, e-scooter definitions, sidewalk riding), and costs nothing extra because bge-m3 produces both vectors in one pass. Raising k from 5 to 8 adds four supporting articles for about 1,300 more context tokens at the median; k = 10 adds none. Hybrid retrieval with k = 8 is used in the baseline (E1) and in `config/rag.yaml`. The result rests on 10 questions; the sparse weight and k are tuned again in the Sprint 3 retrieval spike, on the full in-scope set. Decision: AD-04 in the design document.
+Hybrid retrieval beats dense-only retrieval at k = 5 with a sparse weight of 0.3; dense-only retrieval was not run at k = 8 or 10, so part of the gain from k = 5 to k = 8 may come from the larger k alone, and the comparison does not show that hybrid is better at k = 8. The sparse score helps where the question shares exact terms with the article (inspection fee, e-scooter definitions, sidewalk riding), and costs nothing extra because bge-m3 produces both vectors in one pass. Raising k from 5 to 8 adds four supporting articles for about 1,300 more context tokens at the median; k = 10 adds none. Hybrid retrieval with k = 8 is used in the baseline (E1) and in `config/rag.yaml`. The result rests on 10 questions; the sparse weight and k are tuned again in the Sprint 3 retrieval spike, on the development set only. These are development scores, not a check of the Objective 2 target. Decision: AD-04 in the design document.
