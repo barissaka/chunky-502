@@ -11,15 +11,15 @@
 
 | Team | Sprint | Last updated |
 |---|---|---|
-| Chunky | Sprint 2 | 2026-11-14 |
+| Chunky | Sprint 2 | 2026-11-25 |
 
 ## 1. Summary
 
 <!-- In 3 to 5 sentences: what you tried this sprint, the main result compared with the baseline and the target, and what you will do next. -->
 
-This sprint we built the RAG baseline end to end: the six legal texts are extracted from Word, split into 472 article-level chunks, embedded locally with bge-m3 (dense and sparse vectors) and stored in a numpy index; the top 8 articles go to gpt-oss-120b on Vertex AI, which answers with article citations. On the 10 in-scope trial questions, every question gets at least one supporting article in the retrieved set (Recall@8 = 1.00, target ≥ 0.80), and 20 of the 23 supporting articles are retrieved (article recall@8 = 0.92). Hybrid retrieval beat dense-only retrieval (article recall@5 0.79 vs. 0.67), and k = 8 retrieved four more supporting articles than k = 5 (E2). The misses are articles that apply only as a consequence of another rule (chain questions). Next sprint: the retrieval spike (second embedding model, reranker) on the full in-scope set, cross-reference expansion for chain questions, and the out-of-scope refusal.
+This sprint we built the RAG baseline end to end: the six legal texts are extracted from Word, split into 472 article-level chunks, embedded locally with bge-m3 (dense and sparse vectors) and stored in a numpy index; the top 8 articles go to gpt-oss-120b on Vertex AI, which answers with article citations. The scores below are measured on the 10 in-scope questions of the trial set, which are the development set: the pipeline is tuned on them, so they are development scores and not a check of the Objective 2 targets. Every question gets at least one supporting article in the retrieved set (Recall@8 = 1.00), and 20 of the 23 supporting articles are retrieved (article recall@8, the mean over questions, is 0.92). At k = 5 with a sparse weight of 0.3, hybrid retrieval beat dense-only retrieval (article recall@5 0.79 vs. 0.67), and k = 8 retrieved four more supporting articles than k = 5 (E2). The misses are articles that apply only as a consequence of another rule (chain questions). Next sprint: the retrieval spike (second embedding model, reranker) on the development set, cross-reference expansion for chain questions, and the out-of-scope refusal.
 
-Against the long-context baseline (E3: Claude Sonnet 5.5 with all six texts in context, no retrieval), the RAG pipeline answers 5 of 10 in-scope questions correctly against 8 of 10. Since retrieval finds most supporting articles, most of this gap is in generation, mainly on chain questions.
+Against the long-context baseline (E3: Claude Sonnet 5.5 with all six texts in context, no retrieval), the RAG pipeline answers 5 of 10 in-scope questions correctly against 8 of 10, so it does not yet reach the 80% correctness level of Objective 2 (section 3). The two systems use different generation models (gpt-oss-120b and Claude Sonnet 5.5), and the RAG pipeline is not run with the long-context model (AD-13), so the comparison shows the difference between the two systems and does not separate the effect of retrieval from that of the generation model. The gap is widest on chain questions.
 
 **Decisions this sprint:** [AD-03](../11-system-architecture-design-document.md#ad-03-llm-access--hosted-model-on-google-cloud-vertex-ai-through-an-openai-compatible-gateway) (hosted LLM on Google Cloud Vertex AI; baseline generator gpt-oss-120b), [AD-04](../11-system-architecture-design-document.md#ad-04-embedding-model--bge-m3-for-the-baseline-final-choice-in-the-retrieval-spike) (bge-m3, hybrid retrieval), [AD-05](../11-system-architecture-design-document.md#ad-05-reranker--none-in-the-baseline-chosen-in-the-retrieval-spike) (no reranker in the baseline), [AD-06](../11-system-architecture-design-document.md#ad-06-vector-store--numpy-index-on-disk-qdrant-blocked-on-the-host-laptop) (numpy index instead of Qdrant), [AD-08](../11-system-architecture-design-document.md#ad-08-chunking--one-chunk-per-article-retrieval-only-sub-chunks-for-over-long-articles) (472 units, no sub-chunks), [AD-07](../11-system-architecture-design-document.md#ad-07-local-runtime--withdrawn-no-local-llm) (no local runtime), [AD-10](../11-system-architecture-design-document.md#ad-10-query-guard-and-pii-masking-before-retrieval) (simplified PII masking and rule-based guard, approved by the course assistant), [AD-12](../11-system-architecture-design-document.md#ad-12-evaluation--fully-automated-scored-against-the-d2-answer-key) (DeepEval GEval, Claude Opus 5.5 judge, threshold 0.7), [AD-13](../11-system-architecture-design-document.md#ad-13-baselines--default-state-people-and-long-context-system) (long-context baseline Claude Sonnet 5.5, E3), [AD-14](../11-system-architecture-design-document.md#ad-14-chat-ui--streamlit) (Streamlit).
 
@@ -35,7 +35,7 @@ Against the long-context baseline (E3: Claude Sonnet 5.5 with all six texts in c
 | Judge score: mean `eval.py` judge score (0–1) of the in-scope answers against the answer key (AD-12) | Shows how close answers are to the answer key, not only pass or fail; an answer is counted correct at ≥ 0.7 | none (diagnostic) |
 | Cited-article recall: share of the answer key's supporting articles that the answer cites | The answer-side counterpart of article recall@k: shows whether retrieved articles reach the answer | none (diagnostic) |
 
-Answer correctness, supported article references in the answers, out-of-scope refusal and response time are reported with the RAG–long-context comparison.
+Answer correctness, supported article references in the answers, out-of-scope refusal and response time are reported with the RAG–long-context comparison; the two Objective 2 levels are shown next to the measured values in section 3.
 
 ## 3. Results
 
@@ -49,16 +49,16 @@ Answer correctness, supported article references in the answers, out-of-scope re
 - In Sprint 4, add a row for the product configuration in config/rag.yaml.
 -->
 
-**Evaluation set:** `docs/eval/trial_in_scope_10.csv` (the 10 in-scope questions of the trial set; 23 supporting articles)
+**Evaluation set:** `docs/eval/trial_in_scope_10.csv` (the 10 in-scope questions of the trial set; 23 supporting articles). These questions are the development set: they were selected from the 40 questions of D2 v1 and are used for tuning, so they are not counted in any formal test score. The formal runs use the other questions of D2 and 10 new questions added in their place.
 
-| Experiment | Sprint | Best run (W&B) | Recall@8 (hit rate) | Article recall@8 | MRR@8 | Repeats (n) |
+| Experiment | Sprint | Best run (W&B) | Recall@8 (hit rate) | Article recall@8 (mean over questions) | MRR@8 | Repeats (n) |
 |---|---|---|---|---|---|---|
 | Target (charter) | — | — | ≥ 0.80 | — | — | — |
 | [E1 RAG baseline](../12-experiment-cards/E1-baseline.md) (bge-m3 hybrid, k = 8, gpt-oss-120b) | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
 | [E2 Retrieval mode and k](../12-experiment-cards/E2-retrieval-mode-and-k.md) — best: hybrid, k = 8 | 2 | null | **1.00 ± 0.00** | **0.92 ± 0.00** | **0.76 ± 0.00** | 1 |
 | [E3 Long-context baseline](../12-experiment-cards/E3-claude-longcontext-baseline.md) (claude-sonnet-5-5, all six texts in context, no retrieval) | 2 | null | null | null | null | 1 |
 
-W&B was not set up in Sprint 2, so the run links are null; the run files are in `docs/eval/runs/` and the E2 results in `notebooks/04_index_check.ipynb`. Retrieval is deterministic, so one repeat gives std 0. E2's best combination is the configuration used in E1; its other combinations (dense k = 5: article recall@5 0.67; hybrid k = 5: 0.79; hybrid k = 10: 0.92) are in the card.
+W&B was not set up in Sprint 2, so the run links are null; the run files are in `docs/eval/runs/`. The E2 results come from `notebooks/04_index_check.ipynb`, whose outputs are not committed; they are saved to `docs/eval/runs/` in Sprint 3. Retrieval is deterministic, so one repeat gives std 0. E2's best combination is the configuration used in E1; its other combinations (dense k = 5: article recall@5 0.67; hybrid k = 5: 0.79; hybrid k = 10: 0.92) are in the card.
 
 E3 has no retriever (the whole corpus, 447k tokens, is in the model's context), so the retrieval columns are null for it.
 
@@ -70,6 +70,15 @@ E3 has no retriever (the whole corpus, 447k tokens, is in the model's context), 
 | E3 Long-context baseline (claude-sonnet-5-5) | **8 / 10** | **0.80** | **10 / 10** | **0.92** | 0 | **17.7** | 1 |
 
 Correctness is scored with the team's `eval.py` (judge `claude-opus-5-5`, DeepEval GEval, AD-12) against the gold answers; one run each, so no std. E1's out-of-scope questions were not run. E3 declines 0 of 10 out-of-scope questions under the team's rule (decline only, no related provisions or referral): every answer says the topic is not covered but then adds related provisions. E1's response time is the card's median; the `latency_s` values in E1's `_eval.jsonl` give a median of 18.1 s, to be reconciled. Two limits: E3's in-scope answers were judged before one rubric step was added (D32 in the Q&A Data Report), and the judge is a Claude model, as is E3's generator.
+
+**Objective 2 levels (charter; D6 acceptance criterion 5):**
+
+| Objective 2 level | Target | E1 RAG baseline | E3 long-context baseline | E1 at the level |
+|---|---|---|---|---|
+| Answers judged correct | ≥ 80% of the 30 test questions | 50% (5 of 10) | 80% (8 of 10) | not reached |
+| Answers that name a supporting article | ≥ 80% of the 30 test questions | 100% (10 of 10) | 100% (10 of 10) | reached |
+
+The measured values come from the 10 development questions, not from the fixed set of 30 test questions, so they show where the baseline stands and do not check the target; the target is checked in D8 at the end of Sprint 3. The RAG baseline reaches the article level but not the correctness level.
 
 **Best configuration:** <!-- From Sprint 3 on. Link its W&B run, and say whether config/rag.yaml now uses it. -->
 
@@ -85,5 +94,5 @@ Correctness is scored with the team's `eval.py` (judge `claude-opus-5-5`, DeepEv
 ## Checklist before submitting
 
 - [x] The summary is two pages or shorter.
-- [ ] Every row in Results links to an experiment card. Every card from this sprint either has a row or is marked deprecated. <!-- Open: the row for E3 (long-context baseline) is added with the RAG–long-context comparison. -->
+- [x] Every row in Results links to an experiment card. Every card from this sprint either has a row or is marked deprecated.
 - [x] Every decision in section 1 has a record in the design document.
